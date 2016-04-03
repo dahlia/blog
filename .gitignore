@@ -1,0 +1,4 @@
+.*.swp
+*.pyc
+*.md
+redirects_map.json
