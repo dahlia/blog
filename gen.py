@@ -29,6 +29,7 @@ import re
 import subprocess
 import sys
 import typing
+import urllib.parse
 
 from jinja2 import Environment, FileSystemLoader, Markup, Template
 
@@ -159,8 +160,13 @@ class Post:
         d = self.published_at.strftime
         return base / d('%Y') / d('%m') / d('%d') / self.slug / 'index.html'
 
-    def resolve_object_url(self) -> str:
-        return '{0!s}/'.format(self.resolve_object_path().parent)
+    def resolve_object_url(self, base_url: str=None) -> str:
+        object_path = pathlib.PurePosixPath(self.resolve_object_path())
+        if base_url is None:
+            return str(object_path)  # for local filesystem
+        # for HTTP urls
+        path = '{0!s}/'.format(object_path.parent)
+        return urllib.parse.urljoin(base_url, path)
 
     def __str__(self) -> str:
         return '{!s} -> {!s}'.format(self.path, self.resolve_object_path())
@@ -175,9 +181,11 @@ class Blog:
 
     def __init__(self,
                  pool: multiprocessing.Pool,
-                 post_files: typing.Iterable[pathlib.Path]):
+                 post_files: typing.Iterable[pathlib.Path],
+                 base_url: str=None):
         self.logger = logging.getLogger('Blog')
         self.pool = pool
+        self.base_url = base_url
         self.logger.info('Loading posts...')
         self.posts = list(map(Post, post_files))
         get_published_at = operator.attrgetter('published_at')
@@ -187,7 +195,10 @@ class Blog:
         self.jinja2_env = Environment(loader=FileSystemLoader('templates'),
                                       extensions=['jinja2.ext.with_'],
                                       autoescape=True)
-        self.jinja2_env.globals['blog'] = self
+        self.jinja2_env.globals.update(
+            base_url=base_url,
+            blog=self
+        )
 
     @property
     def annual_archive(self) -> typing.Mapping[int, typing.Sequence[Post]]:
@@ -222,6 +233,8 @@ class Blog:
 
 def main():
     parser = argparse.ArgumentParser()
+    parser.add_argument('-b', '--base-url', metavar='URL',
+                        help='the base url.  if omitted, use relative paths')
     parser.add_argument('-j', '--jobs', metavar='N',
                         type=int, default=multiprocessing.cpu_count(),
                         help='the number of parallel processes [%(default)s]')
@@ -238,7 +251,7 @@ def main():
         format='%(levelname).1s | %(message)s'
     )
     pool = multiprocessing.Pool(args.jobs)
-    blog = Blog(pool, args.files)
+    blog = Blog(pool, args.files, base_url=args.base_url)
     blog.build(args.dest)
 
 

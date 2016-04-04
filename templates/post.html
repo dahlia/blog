@@ -1,5 +1,12 @@
 {% extends 'layout.html' %}
 
+{% block head %}
+  {{ super() }}
+  {% if base_url %}
+    <link rel="canonical" href="{{ post.resolve_object_url(base_url) }}">
+  {% endif %}
+{% endblock %}
+
 {% block body %}
   {{ super() }}
 
