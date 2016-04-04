@@ -1,5 +1,15 @@
 {% extends 'layout.html' %}
 
+{% block title -%}
+  {%- if post.title is none -%}
+    {%- with d = post.published_at -%}
+        {{- d.year }}년 {{ d.month }}월 {{ d.day }}일
+    {%- endwith -%}
+  {%- else -%}
+    {{- post.title -}}
+  {%- endif %} &mdash; {{ super() }}
+{%- endblock %}
+
 {% block head %}
   {{ super() }}
   {% if base_url %}
@@ -11,10 +21,13 @@
   {{ super() }}
 
   <article>
+    {%- if post.title is none -%} <h1> {%- endif -%}
     {% with d = post.published_at %}
       <time datetime="{{ d.isoformat() }}">
         {{- d.year }}년 {{ d.month }}월 {{ d.day }}일</time>
     {% endwith %}
+    {%- if post.title is none -%} </h1> {%- endif -%}
+
     {{ post_body }}
   </article>
 {% endblock %}
