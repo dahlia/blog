@@ -1,0 +1,13 @@
+{% extends 'layout.html' %}
+
+{% block body %}
+  {{ super() }}
+
+  <article>
+    {% with d = post.published_at %}
+      <time datetime="{{ d.isoformat() }}">
+        {{- d.year }}년 {{ d.month }}월 {{ d.day }}일</time>
+    {% endwith %}
+    {{ post_body }}
+  </article>
+{% endblock %}

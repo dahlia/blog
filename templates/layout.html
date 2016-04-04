@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    {% block head %}
+      <meta charset="utf-8">
+      <title>{% block title -%} 洪民憙 블로그 {%- endblock %}</title>
+    {% endblock %}
+  </head>
+  <body>
+    {% block body %}
+      <header>
+        {% block header %}
+          <a href="">
+            <ruby>洪民憙 <rp>(</rp><rt>홍민희</rt><rp>)</rp></ruby>
+            블로그
+          </a>
+          <nav>
+            아카이브:
+            <ul>
+              {% for year in blog.annual_archive %}
+                <li><a href="">{{ year }}</a></li>
+              {% endfor %}
+            </ul>
+          </nav>
+        {% endblock %}
+      </header>
+
+      <ul class="disclaimer">
+        <li>글을 썼을 당시의 주장에 제 스스로가 더이상 동의하지 못하는
+            경우도 있습니다.</li>
+        <li>심지어 몇몇 글은 이제 정 반대의 의견을 가지고 있기도 합니다.</li>
+        <li>지금까지 여러 주제에 대한 의견이 꾸준히 달라졌습니다.
+            앞으로도 그럴 것입니다.</li>
+        <li>따라서 제 생각을 바꾸기 위한 설득도 환영합니다.
+            저는 의견을 바꿀 의향이 있습니다.</li>
+      </ul>
+    {% endblock %}
+  </body>
+</html>
