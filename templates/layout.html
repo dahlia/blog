@@ -5,7 +5,7 @@
     {% block head %}
       <title>{% block title -%} 洪民憙 블로그 {%- endblock %}</title>
       <link rel="alternate" type="application/atom+xml" title="洪民憙 블로그"
-            href="{{ href_for('feed.xml') }}">
+            href="{{ blog.feed_url }}">
     {% endblock %}
   </head>
   <body>

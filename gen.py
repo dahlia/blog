@@ -195,10 +195,12 @@ class Blog:
     def __init__(self,
                  pool: multiprocessing.Pool,
                  post_files: typing.Iterable[pathlib.Path],
-                 base_url: str=None):
+                 base_url: str=None,
+                 feed_url: str=None):
         self.logger = logging.getLogger('Blog')
         self.pool = pool
         self.base_url = base_url
+        self._feed_url = feed_url
         self.logger.info('Loading posts...')
         self.posts = list(map(Post, post_files))
         # Loading published dates
@@ -232,6 +234,12 @@ class Blog:
         self.current_base_path = base_path
         yield
         self.current_base_path = prev_base_path
+
+    @property
+    def feed_url(self):
+        if self._feed_url is None:
+            return self.resolve_relative_url('feed.xml')
+        return self._feed_url
 
     @property
     def annual_archives(self) -> typing.Mapping[int, typing.Sequence[Post]]:
@@ -311,6 +319,8 @@ def main():
     parser = argparse.ArgumentParser()
     parser.add_argument('-b', '--base-url', metavar='URL',
                         help='the base url.  if omitted, use relative paths')
+    parser.add_argument('-f', '--feed-url', metavar='URL',
+                        help='the feed url to override the default feed url')
     parser.add_argument('-j', '--jobs', metavar='N',
                         type=int, default=multiprocessing.cpu_count(),
                         help='the number of parallel processes [%(default)s]')
@@ -327,7 +337,8 @@ def main():
         format='%(levelname).1s | %(message)s'
     )
     pool = multiprocessing.Pool(args.jobs)
-    blog = Blog(pool, args.files, base_url=args.base_url)
+    blog = Blog(pool, args.files,
+                base_url=args.base_url, feed_url=args.feed_url)
     blog.build(args.dest)
 
 
