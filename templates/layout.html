@@ -10,10 +10,12 @@
     {% block body %}
       <header>
         {% block header %}
-          <a href="{{ href_for('index.html') }}">
-            <ruby>洪民憙 <rp>(</rp><rt>홍민희</rt><rp>)</rp></ruby>
-            블로그
-          </a>
+          {% block site_name -%}
+            <a href="{{ href_for('index.html') }}">
+              <ruby>洪民憙 <rp>(</rp><rt>홍민희</rt><rp>)</rp></ruby>
+              블로그
+            </a>
+          {%- endblock %}
           <nav>
             아카이브:
             <ul>

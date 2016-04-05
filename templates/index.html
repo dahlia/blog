@@ -1,0 +1,38 @@
+{% extends 'layout.html' %}
+{% from 'layout.html' import time %}
+
+{% block head %}
+  {% if blog.base_url %}
+    <link rel="canonical" href="{{ blog.base_url }}">
+  {% endif %}
+  {{ super() }}
+{% endblock %}
+
+{% block site_name %}
+  <h1>{{ super() }}</h1>
+{% endblock %}
+
+{% block body %}
+  {{ super() }}
+
+  <div class="home">
+    <ul>
+      {% for post in posts|reverse %}
+        <li><!-- 
+          {{ post|pprint }}
+          --><a href="{{ post.resolve_object_url(blog.base_url or
+                                              blog.current_base_path) }}">
+            {%- if post.title is none -%}
+              {{ time(post.published_at, year=false) }}
+            {%- else -%}
+              {{- post.title -}}
+            {%- endif -%}
+          </a>
+          {%- if post.title is not none %}
+            {{ time(post.published_at, parentheses=true, year=false) }}
+          {%- endif -%}
+        </li>
+      {% endfor %}
+    </ul>
+  </div>
+{% endblock %}

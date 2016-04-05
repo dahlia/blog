@@ -240,8 +240,21 @@ class Blog:
     def build(self, build_path: pathlib.Path):
         if not build_path.is_dir():
             build_path.mkdir()
+        self.build_index(build_path)
         self.build_annual_archives(build_path)
         self.build_posts(build_path)
+
+    def build_index(self, build_path: pathlib.Path):
+        logger = self.logger.getChild('build_index')
+        index_tpl = self.jinja2_env.get_template('index.html')
+        posts = self.posts[:-6:-1]
+        if not build_path.is_dir():
+            build_path.mkdir()
+        stream = index_tpl.stream(posts=posts)
+        index_path = build_path / 'index.html'
+        with index_path.open('wb') as f:
+            stream.dump(f, encoding='utf-8')
+        logger.info('%s', index_path) 
 
     def build_annual_archives(self, build_path: pathlib.Path):
         logger = self.logger.getChild('build_annual_archives')
@@ -267,7 +280,7 @@ class Blog:
                 stream = post_tpl.stream(post=post, post_body=body)
                 with object_path.open('wb') as f:
                     stream.dump(f, encoding='utf-8')
-                logger.info('%s', post)
+                logger.info('%s', object_path)
 
     @staticmethod
     def _build_post_body(post: Post):
