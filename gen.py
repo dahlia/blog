@@ -132,14 +132,15 @@ class Post:
     def published_at(self) -> datetime.date:
         if self._published_at is not None:
             return self._published_at
-        cmd = ['git', 'log', '--follow', '--format=%aI', '-1', '--',
+        cmd = ['git', 'log', '--follow', '--format=%aI', '--reverse', '--',
                str(self.path)]
         try:
             git_log = subprocess.check_output(cmd)
         except OSError:
             git_log = None
         else:
-            git_log = git_log.strip().decode('utf-8')
+            git_log = git_log.lstrip().decode('utf-8')
+            git_log = re.match(r'^[^\n]+', git_log).group(0)
         if git_log:
             dt = datetime.datetime.strptime(git_log[:19], '%Y-%m-%dT%H:%M:%S')
             offset = datetime.timedelta(hours=int(git_log[20:22]),
