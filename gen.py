@@ -16,6 +16,7 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 import argparse
 import collections
+import contextlib
 import datetime
 import enum
 import functools
@@ -31,7 +32,8 @@ import sys
 import typing
 import urllib.parse
 
-from jinja2 import Environment, FileSystemLoader, Markup, Template
+from jinja2 import (Environment, FileSystemLoader, Markup, Template,
+                    contextfunction)
 
 
 PANDOC_OPTIONS = (
@@ -164,6 +166,10 @@ class Post:
         object_path = pathlib.PurePosixPath(self.resolve_object_path())
         if base_url is None:
             return str(object_path)  # for local filesystem
+        elif not base_url.startswith(('http://', 'https://')):
+            # for local file system
+            object_path = pathlib.PurePosixPath(base_url) / object_path
+            return str(object_path)
         # for HTTP urls
         path = '{0!s}/'.format(object_path.parent)
         return urllib.parse.urljoin(base_url, path)
@@ -188,22 +194,43 @@ class Blog:
         self.base_url = base_url
         self.logger.info('Loading posts...')
         self.posts = list(map(Post, post_files))
+        # Loading published dates
         get_published_at = operator.attrgetter('published_at')
-        list(self.pool.imap_unordered(get_published_at, self.posts))
+        list(pool.imap_unordered(get_published_at, self.posts))
+        # Loading titles
+        list(pool.imap_unordered(operator.attrgetter('title'), self.posts))
         self.posts.sort(key=get_published_at)
         self.logger.info('Total %d posts are loaded.', len(self.posts))
+        self.current_base_path = './'
         self.jinja2_env = Environment(loader=FileSystemLoader('templates'),
                                       extensions=['jinja2.ext.with_'],
                                       autoescape=True)
         self.jinja2_env.globals.update(
-            base_url=base_url,
-            blog=self
+            blog=self,
+            href_for=self.resolve_relative_url,
         )
 
+    def resolve_relative_url(self, relative_path: str) -> str:
+        if relative_path.startswith('/'):
+            raise ValueError('only accept relative path')
+        if self.base_url is None:
+            return self.current_base_path + relative_path
+        if relative_path.endswith('/index.html'):
+            relative_path = relative_path.rstrip('index.html')
+        return urllib.parse.urljoin(self.base_url, relative_path)
+
+    @contextlib.contextmanager
+    def base_path_context(self, base_path: str):
+        prev_base_path = self.current_base_path
+        self.current_base_path = base_path
+        yield
+        self.current_base_path = prev_base_path
+
     @property
-    def annual_archive(self) -> typing.Mapping[int, typing.Sequence[Post]]:
+    def annual_archives(self) -> typing.Mapping[int, typing.Sequence[Post]]:
         return collections.OrderedDict(
-            itertools.groupby(
+            (k, list(v))
+            for k, v in itertools.groupby(
                 self.posts,
                 key=lambda post: post.published_at.year
             )
@@ -212,19 +239,34 @@ class Blog:
     def build(self, build_path: pathlib.Path):
         if not build_path.is_dir():
             build_path.mkdir()
+        self.build_annual_archives(build_path)
         self.build_posts(build_path)
+
+    def build_annual_archives(self, build_path: pathlib.Path):
+        logger = self.logger.getChild('build_annual_archives')
+        archive_tpl = self.jinja2_env.get_template('archive.html')
+        with self.base_path_context('../'):
+            for year, posts in self.annual_archives.items():
+                stream = archive_tpl.stream(year=year, posts=posts)
+                archive_dir_path = build_path / str(year)
+                archive_dir_path.mkdir(parents=True, exist_ok=True)
+                archive_path = archive_dir_path / 'index.html'
+                with archive_path.open('wb') as f:
+                    stream.dump(f, encoding='utf-8')
+                logger.info('%s', archive_path)
 
     def build_posts(self, build_path: pathlib.Path):
         logger = self.logger.getChild('build_posts')
         posts = self.pool.imap_unordered(self._build_post_body, self.posts)
         post_tpl = self.jinja2_env.get_template('post.html')
-        for post, body in posts:
-            object_path = post.resolve_object_path(build_path)
-            object_path.parent.mkdir(parents=True, exist_ok=True)
-            with object_path.open('wb') as f:
+        with self.base_path_context('../../../../'):
+            for post, body in posts:
+                object_path = post.resolve_object_path(build_path)
+                object_path.parent.mkdir(parents=True, exist_ok=True)
                 stream = post_tpl.stream(post=post, post_body=body)
-                stream.dump(f, encoding='utf-8')
-            logger.info('%s', post)
+                with object_path.open('wb') as f:
+                    stream.dump(f, encoding='utf-8')
+                logger.info('%s', post)
 
     @staticmethod
     def _build_post_body(post: Post):

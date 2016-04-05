@@ -1,0 +1,40 @@
+{% extends 'layout.html' %}
+{% from 'layout.html' import time %}
+
+{% block title -%}
+  {{ year }}년 아카이브 &mdash; {{ super() }}
+{%- endblock %}
+
+{% block head %}
+  {% if blog.base_url %}
+    <link rel="canonical" href="{{ href_for(year ~ '/index.html') }}">
+  {% endif %}
+  {{ super() }}
+{% endblock %}
+
+{% block body %}
+  {{ super() }}
+
+  <div class="archive">
+    <h1>{{ year }}년 아카이브</h1>
+
+    <ul>
+      {% for post in posts|reverse %}
+        <li><!-- 
+          {{ post|pprint }}
+          --><a href="{{ post.resolve_object_url(blog.base_url or
+                                              blog.current_base_path) }}">
+            {%- if post.title is none -%}
+              {{ time(post.published_at, year=false) }}
+            {%- else -%}
+              {{- post.title -}}
+            {%- endif -%}
+          </a>
+          {%- if post.title is not none %}
+            {{ time(post.published_at, parentheses=true, year=false) }}
+          {%- endif -%}
+        </li>
+      {% endfor %}
+    </ul>
+  </div>
+{% endblock %}

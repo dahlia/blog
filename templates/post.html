@@ -1,32 +1,30 @@
 {% extends 'layout.html' %}
+{% from 'layout.html' import time %}
 
 {% block title -%}
   {%- if post.title is none -%}
-    {%- with d = post.published_at -%}
-        {{- d.year }}년 {{ d.month }}월 {{ d.day }}일
-    {%- endwith -%}
+    {{ time(post.published_at, time_tag=false) }}
   {%- else -%}
     {{- post.title -}}
   {%- endif %} &mdash; {{ super() }}
 {%- endblock %}
 
 {% block head %}
-  {{ super() }}
-  {% if base_url %}
-    <link rel="canonical" href="{{ post.resolve_object_url(base_url) }}">
+  {% if blog.base_url %}
+    <link rel="canonical" href="{{ post.resolve_object_url(blog.base_url) }}">
   {% endif %}
+  {{ super() }}
 {% endblock %}
 
 {% block body %}
   {{ super() }}
 
   <article>
-    {%- if post.title is none -%} <h1> {%- endif -%}
-    {% with d = post.published_at %}
-      <time datetime="{{ d.isoformat() }}">
-        {{- d.year }}년 {{ d.month }}월 {{ d.day }}일</time>
-    {% endwith %}
-    {%- if post.title is none -%} </h1> {%- endif -%}
+    {% if post.title is none %}
+      <h1>{{ time(post.published_at) }}</h1>
+    {% else %}
+      {{ time(post.published_at) }}
+    {% endif %}
 
     {{ post_body }}
   </article>

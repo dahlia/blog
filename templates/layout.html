@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="ko">
   <head>
+    <meta charset="utf-8">
     {% block head %}
-      <meta charset="utf-8">
       <title>{% block title -%} 洪民憙 블로그 {%- endblock %}</title>
     {% endblock %}
   </head>
@@ -10,15 +10,16 @@
     {% block body %}
       <header>
         {% block header %}
-          <a href="">
+          <a href="{{ href_for('index.html') }}">
             <ruby>洪民憙 <rp>(</rp><rt>홍민희</rt><rp>)</rp></ruby>
             블로그
           </a>
           <nav>
             아카이브:
             <ul>
-              {% for year in blog.annual_archive %}
-                <li><a href="">{{ year }}</a></li>
+              {% for year in blog.annual_archives|sort(reverse=true) %}
+                <li><a href="{{ href_for(year ~ '/index.html') }}">
+                    {{- year }}</a></li>
               {% endfor %}
             </ul>
           </nav>
@@ -37,3 +38,12 @@
     {% endblock %}
   </body>
 </html>
+
+{% macro time(date, time_tag=true, parentheses=false, year=true) -%}
+  {%- if time_tag -%} <time datetime="{{ date.isoformat() }}"> {%- endif -%}
+  {%- if parentheses -%} ( {%- endif -%}
+  {%- if year -%} {{- date.year }}년 {% endif -%}
+  {{- date.month }}월 {{ date.day }}일
+  {%- if parentheses -%} ) {%- endif -%}
+  {%- if time_tag -%} </time> {%- endif -%}
+{%- endmacro %}
