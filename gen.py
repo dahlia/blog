@@ -27,6 +27,7 @@ import multiprocessing
 import operator
 import pathlib
 import re
+import shutil
 import subprocess
 import sys
 import typing
@@ -252,12 +253,26 @@ class Blog:
         )
 
     def build(self, build_path: pathlib.Path):
+        logger = self.logger.getChild('build')
         if not build_path.is_dir():
             build_path.mkdir()
         self.build_index(build_path)
         self.build_annual_archives(build_path)
         self.build_posts(build_path)
         self.build_feed(build_path)
+
+        def copy(src: str, dst: str, *, follow_symlinks: bool=True):
+            logger.info(dst)
+            return shutil.copy(src, dst, follow_symlinks=follow_symlinks)
+
+        static_path = build_path / 'static'
+        if static_path.is_dir():
+            shutil.rmtree(str(static_path))
+        shutil.copytree(
+            'static',
+            str(static_path),
+            copy_function=copy
+        )
 
     def build_index(self, build_path: pathlib.Path):
         logger = self.logger.getChild('build_index')

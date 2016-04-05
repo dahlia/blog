@@ -12,17 +12,20 @@
   {{ super() }}
 {% endblock %}
 
+{% block site_name %}
+  <h1>{{ super() }}</h1>
+{% endblock %}
+
 {% block body %}
   {{ super() }}
 
   <div class="archive">
-    <h1>{{ year }}년 아카이브</h1>
+    <h2>{{ year }}년 아카이브</h2>
 
     <ul>
-      {% for post in posts|reverse %}
-        <li><!-- 
-          {{ post|pprint }}
-          --><a href="{{ post.resolve_object_url(blog.base_url or
+      {% for post in posts %}
+        <li>
+          <a href="{{ post.resolve_object_url(blog.base_url or
                                               blog.current_base_path) }}">
             {%- if post.title is none -%}
               {{ time(post.published_at, year=false) }}

@@ -16,24 +16,35 @@
   {{ super() }}
 
   <div class="home">
-    <ul>
-      {% for post in posts|reverse %}
-        <li>
-          <a href="{{ post.resolve_object_url(blog.base_url or
-                                              blog.current_base_path) }}">
-            {%- if post.title is none -%}
-              {{ time(post.published_at, year=false) }}
-            {%- else -%}
-              {{- post.title -}}
+    <div class="recent-posts">
+      <h2>최근 글</h2>
+      <ul>
+        {% for post in posts %}
+          <li>
+            <a href="{{ post.resolve_object_url(blog.base_url or
+                                                blog.current_base_path) }}">
+              {%- if post.title is none -%}
+                {{ time(post.published_at, year=false) }}
+              {%- else -%}
+                {{- post.title -}}
+              {%- endif -%}
+            </a>
+            {%- if post.title is not none %}
+              {{ time(post.published_at, parentheses=true, year=false) }}
             {%- endif -%}
-          </a>
-          {%- if post.title is not none %}
-            {{ time(post.published_at, parentheses=true, year=false) }}
-          {%- endif -%}
-        </li>
-      {% endfor %}
-    </ul>
+          </li>
+        {% endfor %}
+      </ul>
+    </div>
+
+    <div class="archive">
+      <h2>아카이브</h2>
+      <ul>
+        {% for year in blog.annual_archives|sort(reverse=true) %}
+          <li><a href="{{ href_for(year ~ '/index.html') }}">
+            {{- year }}년</a></li>
+        {% endfor %}
+      </ul>
+    </div>
   </div>
 {% endblock %}
-
-{# vim: set filetype=htmljinja ts=2 sw=2 sts=2: #}

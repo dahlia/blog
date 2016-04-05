@@ -6,6 +6,14 @@
       <title>{% block title -%} 洪民憙 블로그 {%- endblock %}</title>
       <link rel="alternate" type="application/atom+xml" title="洪民憙 블로그"
             href="{{ blog.feed_url }}">
+      <meta name="author" content="홍민희">
+      <link rel="stylesheet" media="screen"
+            href="{{ href_for('static/style.css') }}">
+      <link rel="stylesheet" type="text/css"
+        href="https://spoqa.github.io/spoqa-han-sans/css/SpoqaHanSans-kr.css">
+      <link rel="stylesheet" type="text/css"
+        href="https://spoqa.github.io/spoqa-han-sans/css/SpoqaHanSans-jp.css">
+      <meta name="viewport" content="width=device-width, user-scalable=no">
     {% endblock %}
   </head>
   <body>
@@ -13,19 +21,22 @@
       <header>
         {% block header %}
           {% block site_name -%}
-            <a href="{{ href_for('index.html') }}">
+            <a href="{{ href_for('index.html') }}" class="site-name">
               <ruby>洪民憙 <rp>(</rp><rt>홍민희</rt><rp>)</rp></ruby>
               블로그
             </a>
           {%- endblock %}
           <nav>
-            아카이브:
-            <ul>
-              {% for year in blog.annual_archives|sort(reverse=true) %}
-                <li><a href="{{ href_for(year ~ '/index.html') }}">
-                    {{- year }}</a></li>
-              {% endfor %}
-            </ul>
+            <a href="http://hongminhee.org/" rel="author me">본인 소개</a>
+            <div class="archive">
+              아카이브:
+              <ul>
+                {% for year in blog.annual_archives|sort(reverse=true) %}
+                  <li><a href="{{ href_for(year ~ '/index.html') }}">
+                      {{- year }}</a></li>
+                {% endfor %}
+              </ul>
+            </div>
           </nav>
         {% endblock %}
       </header>
@@ -51,5 +62,3 @@
   {%- if parentheses -%} ) {%- endif -%}
   {%- if time_tag -%} </time> {%- endif -%}
 {%- endmacro %}
-
-{# vim: set filetype=htmljinja ts=2 sw=2 sts=2: #}

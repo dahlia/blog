@@ -1,0 +1,160 @@
+body {
+  max-width: 800px;
+  padding: 1em;
+  line-height: 1.5;
+  font-family: 'Spoqa Han Sans', sans-serif;
+  color: #555;
+  font-size: 16px;
+}
+
+@media (max-width: 500px) {
+  body { font-size: 15px; }
+}
+
+header a.site-name {
+  color: #333;
+  font-size: 34px;
+  font-weight: 200;
+  text-decoration: none;
+  border-bottom: none;
+}
+
+@media (max-width: 500px) {
+  header a.site-name { font-size: 30px; }
+}
+
+header h1 { display: inline; }
+
+header h1 a.site-name {
+  color: black;
+  font-size: 40px;
+}
+
+@media (max-width: 500px) {
+  header h1 a.site-name { font-size: 34px; }
+}
+
+a {
+  text-decoration: none;
+  border-bottom: 1px solid;
+  color: #18709c;
+}
+
+a:visited {
+  color: #474072;
+}
+
+a:active {
+  color: #B53B67;
+}
+
+ruby { font-family: 'Spoqa Han Sans JP', sans-serif; }
+rp, rt { font-family: 'Spoqa Han Sans', sans-serif; }
+rt { letter-spacing: 1em; padding-left: 0.6em; color: gray; }
+
+ul { padding-left: 1em; }
+ul li { list-style: '\2219' outside; padding-left: 1em; }
+
+nav {
+  float: right;
+  text-align: right;
+  font-size: 14px;
+}
+
+@media (max-width: 650px) {
+  nav { float: none; text-align: left; }
+}
+
+h1 + nav {
+  font-size: 16px;
+}
+
+@media (max-width: 500px) {
+  nav, h1 + nav { font-size: 13px; }
+}
+
+nav .archive {
+  font-weight: bolder;
+}
+
+nav ul {
+  display: inline;
+  padding: 0;
+  margin: 0;
+}
+
+nav ul li {
+  display: inline;
+  font-weight: normal;
+  padding-left: 0;
+}
+nav ul li:before {
+  content: '\b7';
+  color: gray;
+  padding-right: 2px;
+}
+nav ul li:first-child:before {
+  content: '';
+}
+
+body > .disclaimer {
+  display: block;
+  clear: both;
+  padding: 0;
+  color: gray;
+  font-size: 14px;
+  border-left: 6px solid #eee;
+}
+
+@media (max-width: 500px) {
+  body > .disclaimer { font-size: 13px; }
+}
+
+body > .disclaimer li {
+  display: block;
+}
+
+article {
+  text-align: justify;
+}
+
+article h1 {
+  font-size: 36px;
+  font-weight: 200;
+  color: black;
+}
+
+@media (max-width: 500px) {
+  article h1 { font-size: 30px; }
+}
+
+article section.footnotes hr {
+  margin-left: 0;
+  width: 25%;
+  border: none;
+  border-top: 1px solid silver;
+}
+
+article em {
+  background-color: #eee;
+  font-style: normal;
+  color: black;
+}
+
+article strong {
+  background-color: #eee;
+  font-weight: 700;
+  color: black;
+}
+
+article blockquote {
+  border-left: 8px solid #eee;
+  margin-left: 0;
+  padding-left: 1em;
+}
+
+.recent-posts h2, .archive h2 {
+  font-size: 34px;
+  font-weight: 200;
+  color: black;
+}
