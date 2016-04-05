@@ -18,9 +18,8 @@
   <div class="home">
     <ul>
       {% for post in posts|reverse %}
-        <li><!-- 
-          {{ post|pprint }}
-          --><a href="{{ post.resolve_object_url(blog.base_url or
+        <li>
+          <a href="{{ post.resolve_object_url(blog.base_url or
                                               blog.current_base_path) }}">
             {%- if post.title is none -%}
               {{ time(post.published_at, year=false) }}
@@ -36,3 +35,5 @@
     </ul>
   </div>
 {% endblock %}
+
+{# vim: set filetype=htmljinja ts=2 sw=2 sts=2: #}

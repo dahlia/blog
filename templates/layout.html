@@ -4,6 +4,8 @@
     <meta charset="utf-8">
     {% block head %}
       <title>{% block title -%} 洪民憙 블로그 {%- endblock %}</title>
+      <link rel="alternate" type="application/atom+xml" title="洪民憙 블로그"
+            href="{{ href_for('feed.xml') }}">
     {% endblock %}
   </head>
   <body>
@@ -49,3 +51,5 @@
   {%- if parentheses -%} ) {%- endif -%}
   {%- if time_tag -%} </time> {%- endif -%}
 {%- endmacro %}
+
+{# vim: set filetype=htmljinja ts=2 sw=2 sts=2: #}

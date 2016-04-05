@@ -1,0 +1,57 @@
+{% from 'layout.html' import time -%}
+<?xml version="1.0" encoding="utf-8" ?>
+<feed xmlns="http://www.w3.org/2005/Atom" xml:lang="ko">
+  <title type="xhtml">
+    <div xmlns="http://www.w3.org/1999/xhtml">
+      <ruby>洪民憙<rp>(</rp><rt>홍민희</rt><rp>)</rp></ruby>
+      블로그
+    </div>
+  </title>
+  <updated>{{ updated_at.isoformat() }}</updated>
+  <id>{{ href_for('feed.xml') }}</id>
+  <link rel="alternate" type="text/html" hreflang="ko"
+        href="{{ href_for('index.html') }}" />
+  <link rel="self" type="text/xml" hreflang="ko"
+        href="{{ href_for('feed.xml') }}" />
+  <rights>Copyright &#169; Hong Minhee</rights>
+  <generator uri="https://github.com/dahlia/blog">
+    Hong Minhee&#39;s blog
+  </generator>
+  <subtitle type="xhtml">
+    <div xmlns="http://www.w3.org/1999/xhtml">
+      <ul class="disclaimer">
+        <li>글을 썼을 당시의 주장에 제 스스로가 더이상 동의하지 못하는
+            경우도 있습니다.</li>
+        <li>심지어 몇몇 글은 이제 정 반대의 의견을 가지고 있기도 합니다.</li>
+        <li>지금까지 여러 주제에 대한 의견이 꾸준히 달라졌습니다.
+            앞으로도 그럴 것입니다.</li>
+        <li>따라서 제 생각을 바꾸기 위한 설득도 환영합니다.
+            저는 의견을 바꿀 의향이 있습니다.</li>
+      </ul>
+    </div>
+  </subtitle>
+  {% for post in posts %}
+    <entry>
+      {% with url = post.resolve_object_url(blog.base_url or
+                                            blog.current_base_path) %}
+        {% if post.title is none %}
+          <title>{{- time(post.published_at, time_tag=false) -}}</title>
+        {% else %}
+          <title>{{ post.title }}</title>
+        {% endif %}
+        <id>{{ url }}</id>
+        <link rel="alternate" type="text/html" hreflang="ko"
+              href="{{ url }}" />
+        <published>{{ post.published_at.isoformat() }}</published>
+        <updated>{{ post.published_at.isoformat() }}</updated>
+        <author>
+          <name>홍민희</name>
+          <uri>http://hongminhee.org/</uri>
+          <email>&#104;ongmin&#104;ee&#64;member&#46;fsf&#46;org</email>
+        </author>
+        <content type="html">{{ post.__html__() }}</content>
+      {% endwith %}
+    </entry>
+  {% endfor %}
+</feed>
+{# vim: set filetype=jinja ts=2 sw=2 sts=2: #}

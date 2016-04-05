@@ -57,7 +57,7 @@ class Post:
         r'^(?P<y>\d{4})-(?P<m>\d\d)-(?P<d>\d\d)-(?P<slug>[^.]+)\.(?:md|txt)$'
     )
 
-    __slots__ = 'path', '_title', '_metadata', '_published_at'
+    __slots__ = 'path', '_title', '_metadata', '_published_at', '_html'
 
     def __init__(self, path: pathlib.Path):
         if not path.exists():
@@ -66,6 +66,7 @@ class Post:
         self._title = None
         self._metadata = None
         self._published_at = None
+        self._html = None
 
     def build(self, format: Format=Format.html):
         cmd = list(PANDOC_OPTIONS)
@@ -175,6 +176,11 @@ class Post:
         path = '{0!s}/'.format(object_path.parent)
         return urllib.parse.urljoin(base_url, path)
 
+    def __html__(self) -> str:
+        if self._html is None:
+            self._html = self.build()
+        return self._html
+
     def __str__(self) -> str:
         return '{!s} -> {!s}'.format(self.path, self.resolve_object_path())
 
@@ -243,6 +249,7 @@ class Blog:
         self.build_index(build_path)
         self.build_annual_archives(build_path)
         self.build_posts(build_path)
+        self.build_feed(build_path)
 
     def build_index(self, build_path: pathlib.Path):
         logger = self.logger.getChild('build_index')
@@ -274,17 +281,30 @@ class Blog:
         posts = self.pool.imap_unordered(self._build_post_body, self.posts)
         post_tpl = self.jinja2_env.get_template('post.html')
         with self.base_path_context('../../../../'):
-            for post, body in posts:
+            for post in posts:
                 object_path = post.resolve_object_path(build_path)
                 object_path.parent.mkdir(parents=True, exist_ok=True)
-                stream = post_tpl.stream(post=post, post_body=body)
+                stream = post_tpl.stream(post=post)
                 with object_path.open('wb') as f:
                     stream.dump(f, encoding='utf-8')
                 logger.info('%s', object_path)
 
     @staticmethod
     def _build_post_body(post: Post):
-        return post, Markup(post.build())
+        post.__html__()
+        return post
+
+    def build_feed(self, build_path: pathlib.Path):
+        logger = self.logger.getChild('build_feed')
+        feed_tpl = self.jinja2_env.get_template('feed.xml')
+        posts = self.posts[:-16:-1]
+        if not build_path.is_dir():
+            build_path.mkdir()
+        stream = feed_tpl.stream(posts=posts, updated_at=posts[0].published_at)
+        feed_path = build_path / 'feed.xml'
+        with feed_path.open('wb') as f:
+            stream.dump(f, encoding='utf-8')
+        logger.info('%s', feed_path) 
 
 
 def main():
