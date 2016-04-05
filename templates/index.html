@@ -24,13 +24,13 @@
             <a href="{{ post.resolve_object_url(blog.base_url or
                                                 blog.current_base_path) }}">
               {%- if post.title is none -%}
-                {{ time(post.published_at, year=false) }}
+                {{ time(post.published_at) }}
               {%- else -%}
                 {{- post.title -}}
               {%- endif -%}
             </a>
             {%- if post.title is not none %}
-              {{ time(post.published_at, parentheses=true, year=false) }}
+              {{ time(post.published_at, parentheses=true) }}
             {%- endif -%}
           </li>
         {% endfor %}

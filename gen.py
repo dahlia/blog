@@ -291,7 +291,7 @@ class Blog:
         archive_tpl = self.jinja2_env.get_template('archive.html')
         with self.base_path_context('../'):
             for year, posts in self.annual_archives.items():
-                stream = archive_tpl.stream(year=year, posts=posts)
+                stream = archive_tpl.stream(year=year, posts=posts[::-1])
                 archive_dir_path = build_path / str(year)
                 archive_dir_path.mkdir(parents=True, exist_ok=True)
                 archive_path = archive_dir_path / 'index.html'
