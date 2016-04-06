@@ -124,6 +124,20 @@ article h1 {
   color: black;
 }
 
+article h2 {
+  margin-top: 1.5em;
+  font-size: 24px;
+  font-weight: normal;
+  color: black;
+}
+
+article h3 {
+  margin-top: 1.5em;
+  font-size: 20px;
+  font-weight: normal;
+  color: black;
+}
+
 @media (max-width: 500px) {
   article h1 { font-size: 30px; }
 }
