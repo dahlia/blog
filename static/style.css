@@ -132,6 +132,11 @@ article img {
   max-width: 100%;
 }
 
+article a.footnoteRef {
+  border-bottom: none;
+  font-weight: 700;
+}
+
 article section.footnotes hr {
   margin-left: 0;
   width: 25%;
