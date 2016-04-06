@@ -128,6 +128,10 @@ article h1 {
   article h1 { font-size: 30px; }
 }
 
+article img {
+  max-width: 100%;
+}
+
 article section.footnotes hr {
   margin-left: 0;
   width: 25%;
@@ -151,6 +155,11 @@ article blockquote {
   border-left: 8px solid #eee;
   margin-left: 0;
   padding-left: 1em;
+}
+
+article a > img:only-child {
+  padding-bottom: 0px;
+  margin-bottom: -3px;  /* to make border-bottom invisible */
 }
 
 .recent-posts h2, .archive h2 {
