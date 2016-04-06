@@ -20,6 +20,11 @@ header a.site-name {
   border-bottom: none;
 }
 
+header a.site-name:hover, header a.site-name:hover rt { color: #18709c; }
+header a.site-name:visited:hover,
+header a.site-name:visited:hover rt { color: #474072; }
+header a.site-name:active, header a.site-name:active rt { color: #b53b67; }
+
 @media (max-width: 500px) {
   header a.site-name { font-size: 30px; }
 }
