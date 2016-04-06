@@ -61,6 +61,11 @@ rt { letter-spacing: 1em; padding-left: 0.6em; color: gray; }
 ul { padding-left: 1em; }
 ul li { list-style: '\2219' outside; padding-left: 1em; }
 
+pre, code, tt {
+  font-family: 'Source Code Pro', 'Consolas', 'Courier New', monospace;
+  font-weight: 300;
+}
+
 nav {
   float: right;
   text-align: right;
