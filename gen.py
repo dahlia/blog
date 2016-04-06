@@ -141,8 +141,9 @@ class Post:
         except OSError:
             git_log = None
         else:
-            git_log = git_log.lstrip().decode('utf-8')
-            git_log = re.match(r'^[^\n]+', git_log).group(0)
+            git_log = git_log.lstrip()
+            if git_log:
+                git_log = re.match(r'^[^\n]+', git_log.decode('utf8')).group(0)
         if git_log:
             dt = datetime.datetime.strptime(git_log[:19], '%Y-%m-%dT%H:%M:%S')
             offset = datetime.timedelta(hours=int(git_log[20:22]),
@@ -205,11 +206,10 @@ class Blog:
         self.logger.info('Loading posts...')
         self.posts = list(map(Post, post_files))
         # Loading published dates
-        get_published_at = operator.attrgetter('published_at')
-        list(pool.imap_unordered(get_published_at, self.posts))
+        list(pool.imap_unordered(self._get_published_at, self.posts))
         # Loading titles
         list(pool.imap_unordered(operator.attrgetter('title'), self.posts))
-        self.posts.sort(key=get_published_at)
+        self.posts.sort(key=self._get_published_at)
         self.logger.info('Total %d posts are loaded.', len(self.posts))
         self.current_base_path = './'
         self.jinja2_env = Environment(loader=FileSystemLoader('templates'),
@@ -219,6 +219,14 @@ class Blog:
             blog=self,
             href_for=self.resolve_relative_url,
         )
+
+    @staticmethod
+    def _get_published_at(post: Post) -> datetime.datetime:
+        d = post.published_at
+        if not isinstance(d, datetime.datetime):
+            return datetime.datetime(d.year, d.month, d.day, 12, 0, 0,
+                                     tzinfo=datetime.timezone.utc)
+        return d
 
     def resolve_relative_url(self, relative_path: str) -> str:
         if relative_path.startswith('/'):
