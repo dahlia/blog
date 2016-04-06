@@ -1,6 +1,7 @@
 body {
   max-width: 800px;
-  padding: 1em;
+  margin: 0;
+  padding: 1.5em;
   line-height: 1.5;
   font-family: 'Spoqa Han Sans', sans-serif;
   color: #555;
@@ -170,10 +171,43 @@ article strong {
   color: black;
 }
 
+article code {
+  background-color: #eee;
+  padding: 0 3px;
+}
+
+article a code {
+  border-bottom: 1px solid;
+}
+
+article pre {
+  background-color: #eee;
+  margin-left: -1.5em;
+  padding: 1em 1em 1em 1.5em;
+}
+
 article blockquote {
-  border-left: 8px solid #eee;
-  margin-left: 0;
-  padding-left: 1em;
+  border-left: 0.8em solid #333;
+  margin-left: -1.5em;
+  padding-left: 2.5em;
+}
+
+article blockquote blockquote {
+  margin-left: -2.5em;
+  padding-left: 2.5em;
+  border-left: 1em solid #666;
+}
+
+article blockquote blockquote blockquote {
+  border-left-color: #999;
+}
+
+article blockquote blockquote blockquote blockquote {
+  border-left-color: #bbb;
+}
+
+article blockquote blockquote blockquote blockquote blockquote {
+  border-left-color: #eee;
 }
 
 article a > img:only-child {
