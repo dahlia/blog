@@ -258,6 +258,8 @@ article pre {
   background-color: #eee;
   margin-left: -1.5em;
   padding: 1em 1em 1em 1.5em;
+  word-break: break-word;
+  white-space: pre-wrap;
 }
 
 article pre code {
