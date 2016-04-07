@@ -208,6 +208,43 @@ article strong {
   color: black;
 }
 
+article ins {
+  color: black;
+  text-decoration: none;
+  border-bottom: 1px dashed silver;
+}
+
+article ins[datetime]:before, article del[datetime]:before {
+  display: inline-block;
+  content: '+|' attr(datetime);
+  word-break: keep-all;
+  font-family: 'Courier New', monospace;
+  font-size: x-small;
+  font-weight: bolder;
+  color: white;
+  background-color: silver;
+  border-radius: 0.5em;
+  padding: 0.05em 0.15em;
+  margin: 0 0.3em;
+  vertical-align: top;
+  width: 7.1em;
+  overflow-x: hidden;
+  transition: background-color 0.5s, width 5s ease-in;
+}
+
+article del[datetime]:before {
+  content: '-|' attr(datetime);
+}
+
+article ins[datetime]:hover:before, article del[datetime]:hover:before {
+  background-color: gray;
+  width: 16.1em;
+}
+
+article del {
+  color: gray;
+}
+
 article code {
   background-color: #eee;
   padding: 0 3px;
