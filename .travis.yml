@@ -23,7 +23,7 @@ before_install:
 install:
 - pip install -r requirements.txt
 script:
-- ./gen.py --base-url="http://$BLOG_HOST/" "$BLOG_BUILD_DIR" 2*/**/*.md
+- ./gen.py --base-url="http://$BLOG_HOST/" "$BLOG_BUILD_DIR" 2*/**/*.md 2*/**/*.alias
 after_success:
 - git log -n1 --format="format:%s%n%n$TRAVIS_COMMIT_RANGE" > /tmp/blog-commit
 - git log -n1 --format="format:%an" > /tmp/blog-author

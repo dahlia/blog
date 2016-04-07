@@ -11,7 +11,14 @@
 
 {% block head %}
   {% if blog.base_url %}
-    <link rel="canonical" href="{{ post.resolve_object_url(blog.base_url) }}">
+    <link rel="canonical"
+          href="{{ canonical_post.resolve_object_url(blog.base_url) }}">
+  {% endif %}
+  {% if not post.canon %}
+    <meta http-equiv="refresh" content="0; url={{ 
+      post.canonical_post.resolve_object_url(blog.base_url or
+                                             blog.current_base_path)
+    }}">
   {% endif %}
   {{ super() }}
 {% endblock %}
@@ -20,10 +27,10 @@
   {{ super() }}
 
   <article>
-    {% if post.title is none %}
-      <h1>{{ time(post.published_at) }}</h1>
+    {% if canonical_post.title is none %}
+      <h1>{{ time(canonical_post.published_at) }}</h1>
     {% else %}
-      {{ time(post.published_at) }}
+      {{ time(canonical_post.published_at) }}
     {% endif %}
 
     {{ post }}

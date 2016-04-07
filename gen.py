@@ -22,6 +22,7 @@ import enum
 import functools
 import itertools
 import json
+import json.decoder
 import logging
 import multiprocessing
 import operator
@@ -55,24 +56,55 @@ class Format(enum.Enum):
 class Post:
 
     FILENAME_PATTERN = re.compile(
-        r'^(?P<y>\d{4})-(?P<m>\d\d)-(?P<d>\d\d)-(?P<slug>[^.]+)\.(?:md|txt)$'
+        r'''
+        ^
+            (?P<y> \d{4} ) - (?P<m> \d\d ) - (?P<d> \d\d ) -
+            (?P<slug> [^.]+ ) \.
+            (?: md | txt | alias )
+        $
+        ''',
+        re.VERBOSE
     )
 
-    __slots__ = 'path', '_title', '_metadata', '_published_at', '_html'
+    __slots__ = ('path', 'canonical_path', '_title', '_metadata',
+                 '_published_at', '_html')
 
     def __init__(self, path: pathlib.Path):
         if not path.exists():
             raise FileNotFoundError('file not exists: ' + str(path))
         self.path = path
+        cpath = self.path
+        if self.path.suffix == '.alias':
+            try:
+                with self.path.open() as f:
+                    metadata = json.load(f)
+            except json.decoder.JSONDecodeError:
+                pass
+            else:
+                cpath = self.path.parent / pathlib.Path(metadata['canonical'])
+                if not cpath.exists():
+                    raise FileNotFoundError('file not exists: ' + str(cpath))
+        self.canonical_path = cpath
         self._title = None
         self._metadata = None
         self._published_at = None
         self._html = None
 
+    @property
+    def canon(self) -> bool:
+        return self.canonical_path.resolve() == self.path.resolve()
+
+    @property
+    def canonical_post(self) -> 'Post':
+        path = self.canonical_path
+        if self.canon:
+            return self
+        return type(self)(self.canonical_path)
+
     def build(self, format: Format=Format.html):
         cmd = list(PANDOC_OPTIONS)
         cmd.insert(0, '--to=' + format.value) 
-        cmd.append(str(self.path))
+        cmd.append(str(self.canonical_path))
         cmd.insert(0, 'pandoc')
         output = subprocess.check_output(cmd)
         output = output.decode('utf-8')
@@ -156,8 +188,16 @@ class Post:
         return published_at
 
     @property
+    def canonical_published_at(self) -> datetime.date:
+        return self.canonical_post.published_at
+
+    @property
     def slug(self) -> str:
         return self.metadata[1]
+
+    @property
+    def canonical_slug(self) -> datetime.date:
+        return self.canonical_post.published_at
 
     def resolve_object_path(
         self,
@@ -210,6 +250,7 @@ class Blog:
         # Loading titles
         list(pool.imap_unordered(operator.attrgetter('title'), self.posts))
         self.posts.sort(key=self._get_published_at)
+        self.canon_posts = [p for p in self.posts if p.canon]
         self.logger.info('Total %d posts are loaded.', len(self.posts))
         self.current_base_path = './'
         self.jinja2_env = Environment(loader=FileSystemLoader('templates'),
@@ -255,7 +296,7 @@ class Blog:
         return collections.OrderedDict(
             (k, list(v))
             for k, v in itertools.groupby(
-                self.posts,
+                self.canon_posts,
                 key=lambda post: post.published_at.year
             )
         )
@@ -285,7 +326,7 @@ class Blog:
     def build_index(self, build_path: pathlib.Path):
         logger = self.logger.getChild('build_index')
         index_tpl = self.jinja2_env.get_template('index.html')
-        posts = self.posts[:-6:-1]
+        posts = self.canon_posts[:-6:-1]
         if not build_path.is_dir():
             build_path.mkdir()
         stream = index_tpl.stream(posts=posts)
@@ -315,7 +356,8 @@ class Blog:
             for post in posts:
                 object_path = post.resolve_object_path(build_path)
                 object_path.parent.mkdir(parents=True, exist_ok=True)
-                stream = post_tpl.stream(post=post)
+                stream = post_tpl.stream(post=post,
+                                         canonical_post=post.canonical_post)
                 with object_path.open('wb') as f:
                     stream.dump(f, encoding='utf-8')
                 logger.info('%s', object_path)
@@ -328,7 +370,7 @@ class Blog:
     def build_feed(self, build_path: pathlib.Path):
         logger = self.logger.getChild('build_feed')
         feed_tpl = self.jinja2_env.get_template('feed.xml')
-        posts = self.posts[:-16:-1]
+        posts = self.canon_posts[:-16:-1]
         if not build_path.is_dir():
             build_path.mkdir()
         stream = feed_tpl.stream(posts=posts, updated_at=posts[0].published_at)

@@ -14,4 +14,4 @@
 ----
 
     $ pip install -r requirements.txt
-    $ ./gen.py build/ 2*/**/*.md
+    $ ./gen.py build/ 2*/**/*.md 2*/**/*.alias
