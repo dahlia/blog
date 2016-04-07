@@ -3,6 +3,9 @@ python: 3.5
 sudo: true
 git:
   depth: 9999999
+branches:
+  only:
+  - master
 env:
   global:
     - BLOG_HOST=blog.hongminhee.org
