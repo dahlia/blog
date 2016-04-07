@@ -53,11 +53,15 @@ index.html을 붙이고, 실제로 배포할 때는 뺀 경로로 올리는 방�
 리다이렉션만 해주는 간단한 서버를 작성하고, 기존에는 Tumblr에 물려있던 blog.dahlia.kr 도메인을
 해당 서버로 돌려 물리는 것이었다. [우선 기존 Tumblr의 글 목록과, 각 글의 새 URL을 담고 있는
 테이블을 만들었다.][10] 다행히 Tumblr 글을 마이그레이션하는 스크립트의 출력 결과를 가져다가
-기계적으로 구성할 수 있었다. [그리고 Flask를 써서 간단한 리다이렉션 서버까지 작성했다.][11]
-서버는 Heroku에 공짜 앱으로 배포하고, DNS 레코드를 수정하여 blog.dahlia.kr가 더이상 Tumblr
+기계적으로 구성할 수 있었다. [그리고 Flask를 써서 간단한 리다이렉션 서버까지 작성했다.][11] 서버는
+<del datetime="2016-04-08T02:14:59+09:00">Heroku</del><ins
+datetime="2016-04-08T02:14:59+09:00">Google App Engine</ins>[^3]에 공짜 앱으로
+배포하고, DNS 레코드를 수정하여 blog.dahlia.kr가 더이상 Tumblr
 서버를 바라보지 않게 만들었다.
 
-(공짜 Heroku 서버에 Travis CI, GitHub Pages 등… [돈 한푼 안내고 서버 없이 무전취식하는][15]
+(공짜 <del datetime="2016-04-08T02:14:59+09:00">Heroku</del><ins
+datetime="2016-04-08T02:14:59+09:00">Google App Engine</ins>[^3] 서버에
+Travis CI, GitHub Pages 등… [돈 한푼 안내고 서버 없이 무전취식하는][15]
 잔재주는 날이 갈수록 늘어난다.)
 
 내 블로그는 이제 10년째 운영중이다. 6년 전에 블로그 이사했을 때도 RSS 주소는 유지했다.
@@ -79,6 +83,9 @@ index.html을 붙이고, 실제로 배포할 때는 뺀 경로로 올리는 방�
 [^2]: 저 스크립트가 들어있는 [블로그 저장소][8]의 다른 문서나 스크립트들은 그렇지 않지만,
       [gen.py][7] 스크립트만은 GPLv3이다.
 
+[^3]: [Heroku 무료 앱에는 사용량 제한이 있어서 늦은 시간이 되자 서버 오류가 나기 시작했다.][16]
+      그래서 [Google App Engine으로 교체했다.][17]
+
 [1]: http://blog.hongminhee.org/2010/02/09/379524623/
 [2]: https://jekyllrb.com/
 [3]: https://jekyllrb.com/docs/github-pages/#deploying-jekyll-to-github-pages
@@ -94,3 +101,5 @@ index.html을 붙이고, 실제로 배포할 때는 뺀 경로로 올리는 방�
 [13]: https://github.com/dahlia/blog/blob/redirector/edit.py
 [14]: https://github.com/dahlia/blog/blob/master/.travis.yml
 [15]: http://blog.hongminhee.org/2013/12/21/70680247969/
+[16]: https://twitter.com/hongminhee/status/718059459919020032
+[17]: https://twitter.com/hongminhee/status/718124928243879936
