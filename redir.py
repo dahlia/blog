@@ -1,21 +1,24 @@
-#!/usr/bin/env python3
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
 """Redirect old blog.dahlia.kr urls to new blog.hongminhee.org urls."""
 import os
-import pathlib
+import os.path
+
+from google.appengine.ext import vendor
+vendor.add('lib')
 
 from flask import Flask, Response, json, make_response
 from werkzeug.exceptions import NotFound
 from werkzeug.urls import url_join
 from werkzeug.utils import escape
-from waitress import serve
 
 
 base_url = 'http://blog.hongminhee.org/'
 app = Flask(__name__)
 
 
-def redirect(url: str) -> Response:
-    tpl = '''\
+def redirect(url):
+    tpl = u'''\
 <!DOCTYPE html>
 <html lang="ko">
   <head>
@@ -42,7 +45,7 @@ def redirect(url: str) -> Response:
 @app.route('/page/')
 @app.route('/page/<int:page>')
 @app.route('/page/<int:page>/')
-def index(page: int=0):
+def index(page=0):
     # page is ignored
     return redirect('.')
 
@@ -51,7 +54,7 @@ def index(page: int=0):
 @app.route('/archive/<int:year>/')
 @app.route('/archive/<int:year>/<int:month>')
 @app.route('/archive/<int:year>/<int:month>/')
-def annual_archive(year: int, month: int=0):
+def annual_archive(year, month=0):
     # month is ignored
     return redirect('{0:4d}/'.format(year))
 
@@ -63,7 +66,7 @@ def feed():
     return redirect('feed.xml')
 
 
-with (pathlib.Path(__file__).parent / 'index.json').open() as f:
+with open(os.path.join(os.path.dirname(__file__), 'index.json')) as f:
     post_index = {int(post_id): path for post_id, path in json.load(f).items()}
 
 
@@ -75,7 +78,7 @@ with (pathlib.Path(__file__).parent / 'index.json').open() as f:
 @app.route('/post/<int:post_id>/')
 @app.route('/post/<int:post_id>/<slug>')
 @app.route('/post/<int:post_id>/<slug>/')
-def post(post_id: int, slug: str=''):
+def post(post_id, slug=''):
     # slug is ignored
     try:
         url = post_index[post_id]
@@ -84,10 +87,5 @@ def post(post_id: int, slug: str=''):
     return redirect(url)
 
 
-def main():
-    port = int(os.environ.get('PORT', 5000))
-    serve(app, host='0.0.0.0', port=port)
-
-
 if __name__ == '__main__':
-    main()
+    app.run()

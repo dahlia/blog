@@ -1,0 +1,3 @@
+To vendor third-party libraries into GAE app:
+
+    $ pip install -t lib -r requirements.txt
