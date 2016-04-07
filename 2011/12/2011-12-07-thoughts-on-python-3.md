@@ -18,7 +18,7 @@
 결국 Python 3와 XHTML은 비슷한 운명을 가지고 있다. 대체하려 하는 대상과 호환되지 않는 주제에 더 “올바르길” 요구하면서 제공하는 것은 별로 없다.
 
 > Python is not “too big to fail”. Python can become unpopular very quickly. Pascal and Delphi became niece languages even though they were amazing even after the introduction of the .NET framework and C#. They were ruined by mismanagement more than anything else. People still develop in Pascal, but how many are starting new projects in it? Delphi does not work on the iPhone, it does not run on Android. It's not well integrated into the UNIX market. And if we're honest, in some areas Python is already losing track. Python used to be sufficiently popular in computer games but that ship has sailed a long time ago. In the web community new competitors arrive on a daily basis and if we like it or not, JavaScript is becoming more and more an ubiquitous scripting language that challenges Python.
-
+>
 > Delphi did not adjust quick enough and people just jumped on the next technology. If 2to3 is our upgrade path to Python 3, then py2js is the upgrade path to JavaScript.
 
 Python 3가 현재의 방향을 고수하면 Delphi처럼 될 것이다. 안 쓰이는 것은 아니지만 새로운 프로젝트에서 Python을 선택하는 일은 적어질 것이다.

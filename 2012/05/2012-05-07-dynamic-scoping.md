@@ -4,11 +4,11 @@ Dynamic scoping
 Flask와 Werkzeug에는 [context local proxy][1]가 있다. ([관련 글][2]도 참고.) 이걸 통해 같은 전역 변수지만 실제 내용은 각 요청(즉, 문맥)마다 다른 것을 가리키게 만들어둔 것이다. 이렇게 한 이유는 사실 알고보면 별 게 아니다. Flask의 디자인 문서에 해당 부분을 [그렇게 만든 이유][3]가 나와있다.
 
 > [<del>왜죠.</del>][4] 저거 안 좋은 생각 같은데요.
-
+>
 > Why is that and isn’t that a bad idea?
-
+>
 > 네, 보통 쓰레드 로컬을 쓰는 건 대개 그리 훌륭한 아이디어는 아닙니다. 쓰레드 로컬은 쓰레드 개념에 기초하지 않은 서버 위에서는 문제를 일으키는데다[^1] 큰 규모의 애플리케이션은 유지보수하기 힘들게 만듭니다. 하지만 Flask는 큰 규모의 애플리케이션이나 비동기 서버를 염두하고 디자인되지도 않았습니다. Flask는 전통적인 웹 애플리케이션을 빠르고 쉽게 만들 수 있게 만들고 싶었습니다.
-
+>
 > Yes it is usually not such a bright idea to use thread locals. They cause troubles for servers that are not based on the concept of threads and make large applications harder to maintain. However Flask is just not designed for large applications or asynchronous servers. Flask wants to make it quick and easy to write a traditional web application.
 
 돌려서 말하고 있지만, 사실 Django처럼 매 뷰 함수마다 `request` 인자를 맨 앞에 붙이는 것이 *빠르고 쉽게* 만드는 측면에서는 거추장스러운 존재인 것은 맞다. 아마 그래서 반복되는 인자를 제거하기 위해, 즉 PHP의 초전역(superglobals) 변수 쓰듯이 Python으로 웹 애플리케이션을 만들고 싶었기 때문에 저런 디자인 선택을 한 것으로 보인다.
@@ -69,6 +69,6 @@ Flask와 Werkzeug에는 [context local proxy][1]가 있다. ([관련 글][2]도 
 [^2]: 근데 이건 오히려 더 자주 쓰이는 정적 스코핑을 제공 안해서 뭔가 디자인이 잘못되어 있음.
 
 [1]: http://flask.pocoo.org/docs/reqcontext/
-[2]: http://spoqa.github.com/2012/05/07/about-flask-request.html
+[2]: https://spoqa.github.io/2012/05/07/about-flask-request.html
 [3]: http://flask.pocoo.org/docs/design/#thread-locals
-[4]: http://mirror.enha.kr/wiki/%EC%99%9C%EC%A3%A0
+[4]: https://namu.wiki/w/%EC%99%9C%EC%A3%A0
