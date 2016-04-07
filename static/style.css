@@ -260,6 +260,10 @@ article pre {
   padding: 1em 1em 1em 1.5em;
 }
 
+article pre code {
+  padding: 0;
+}
+
 article blockquote {
   border-left: 0.8em solid #333;
   margin-left: -1.5em;
