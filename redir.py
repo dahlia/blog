@@ -13,7 +13,7 @@ from werkzeug.urls import url_join
 from werkzeug.utils import escape
 
 
-base_url = 'http://blog.hongminhee.org/'
+base_url = 'https://blog.hongminhee.org/'
 app = Flask(__name__)
 
 
