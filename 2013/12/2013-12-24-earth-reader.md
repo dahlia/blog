@@ -45,9 +45,9 @@ Earth Reader for Web
 
 Google Reader 망하기 전에 제가 [Google Reader에 있는 모든 데이터를 다 백업하는 스크립트][14]를 공개한 적이 있습니다. 그때 백업한 데이터를 Earth Reader로 그대로 옮길 수 있습니다. 스크립트 저장소에 있는 [`toearth.py`][15] 스크립트를 쓰면 백업한 데이터를 Earth Reader 저장소로 만들어줍니다.
 
-[1]: http://blog.dahlia.kr/post/51871409701
+[1]: https://blog.hongminhee.org/2013/06/01/51871409701/
 [2]: http://blog.earthreader.org/2013/11/goal/
-[3]: http://blog.dahlia.kr/post/17855554774
+[3]: https://blog.hongminhee.org/2012/02/19/17855554774/
 [Transmission]: http://www.transmissionbt.com/
 [4]: http://cloud.daum.net/
 [5]: http://blog.earthreader.org/2013/12/sync/

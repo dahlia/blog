@@ -32,7 +32,7 @@ PyPI에 올리면 기존에 의존성을 Wand 최신 버전으로 해놓고 있�
 [2]: https://minhee.quora.com/Wand-0-3-0a1-is-available
 [3]: http://librelist.com/browser//wand/2013/1/25/released-wand-0-2-3/
 [4]: http://docs.wand-py.org/en/sequence/roadmap.html#version-0-3
-[5]: http://blog.dahlia.kr/post/34088303362
+[5]: https://blog.hongminhee.org/2012/10/22/seam-carving-using-wand/
 [6]: http://docs.wand-py.org/en/sequence/changes.html#branch-sequence
 [7]: http://docs.wand-py.org/en/sequence/changes.html#version-0-3-0
 [8]: https://github.com/dahlia/wand/issues

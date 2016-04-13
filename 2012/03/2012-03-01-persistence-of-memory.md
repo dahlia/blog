@@ -1,7 +1,7 @@
 [Persistence of Memory][source]
 ===============================
 
-[방금 막 올린 글](http://blog.dahlia.kr/post/18548824137) 때문에 생각난 건데, Persistence of Memory라는 매우 깊은 통찰이 담긴 글이 있으니 일독하기를 추천한다. 개인적인 기준에서의 하이라이트만 인용해보자면…
+[방금 막 올린 글](https://blog.hongminhee.org/2012/03/01/purely-functional-data-structures/) 때문에 생각난 건데, Persistence of Memory라는 매우 깊은 통찰이 담긴 글이 있으니 일독하기를 추천한다. 개인적인 기준에서의 하이라이트만 인용해보자면…
 
 > Most of the arguments about efficiency, though, ignore questions of functionality.  It is senseless to compare the “efficiency” of one data structure that provides different functionality than another.  A persistent data structure does *more for you* than does an ephemeral one.  It allows you to have multiple futures, including those that evolve in parallel with one another.  It makes no sense to insist that some ephemeral approximation of such a data structure is “more efficient” if it does not provide those capabilities!
 

@@ -26,9 +26,9 @@
 [1]: http://en.wikipedia.org/wiki/Compatibilism
 [2]: http://en.wikipedia.org/wiki/Hard_determinism
 [3]: http://en.wikipedia.org/wiki/Libertarianism_%28metaphysics%29
-[4]: http://blog.dahlia.kr/post/11352662412
+[4]: https://blog.hongminhee.org/2011/10/12/11352662412/
 [5]: http://en.wikipedia.org/wiki/Maya_%28illusion%29
-[6]: http://blog.dahlia.kr/post/5377156282
+[6]: https://blog.hongminhee.org/2011/05/11/5377156282/
 
 
 [source]: http://en.wikipedia.org/wiki/Compatibilism

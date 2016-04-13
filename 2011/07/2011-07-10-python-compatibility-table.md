@@ -80,7 +80,7 @@ Stackless Python은 말 그대로 코루틴(coroutine)과 마이크로쓰레드(
 [Twisted]: http://twistedmatrix.com/
 [PyPI]: http://pypi.python.org/
 [1]: https://www.facebook.com/hongminhee/posts/2252486511494
-[2]: http://blog.dahlia.kr/post/5124874464
+[2]: https://blog.hongminhee.org/2011/05/02/5124874464/
 [3]: http://lucumr.pocoo.org/2010/5/25/wsgi-on-python-3/
 
 *[PEP]: Python Enhancement Proposal

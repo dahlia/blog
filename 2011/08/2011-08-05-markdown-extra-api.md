@@ -10,7 +10,7 @@
 
 [Markdown]: http://daringfireball.net/projects/markdown/
 [Markdown Extra]: http://michelf.com/projects/php-markdown/extra/
-[1]: http://blog.dahlia.kr/post/379524623
+[1]: https://blog.hongminhee.org/2010/02/09/379524623/
 
 
 [source]: http://markdownextra.phpfogapp.com/
