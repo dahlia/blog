@@ -19,11 +19,11 @@ StyleShare 만들 때 배포를 신속하게 만들고 싶었지만 실제로는
 
 실제로 이걸 써서 릴리즈하면 PyPI 페이지에는 [이렇게][2] 올라가고:
 
-![PyPI TypeQuery page](http://i.imgur.com/iRH6y.png)
+![PyPI TypeQuery page](https://i.imgur.com/iRH6y.png)
 
 저장소 다운로드 페이지에도 [이렇게][3] 올라간다:
 
-![Bitbucket TypeQuery downloads](http://i.imgur.com/HrIdS.png)
+![Bitbucket TypeQuery downloads](https://i.imgur.com/HrIdS.png)
 
 [1]: http://www.reddit.com/r/Python/comments/tenmz/how_can_pip_be_improved/c4lzu16
 [2]: http://pypi.python.org/pypi/TypeQuery

@@ -12,23 +12,23 @@ Membase Server를 memcached 대신 쓰기로 했다. Membase Server는 memcached
 
 Membase Server는 기본적으로 상용 제품이기 때문에 매우 훌륭한 프론트엔드 콘솔을 제공한다. 설치하고 나서 8091 포트를 웹 브라우저로 접속해보면 설정을 진행할 수 있다.
 
-![Membase Console](http://i.imgur.com/XPNh8.png)
+![Membase Console](https://i.imgur.com/XPNh8.png)
 
 다만 설정을 이런 식으로 해야 하면 디플로이 자동화가 문제인데, 저 프론트엔드는 JavaScript로 구현되어 있고 실제 설정 자체는 [REST API][2]로 제공된다. 일단 대충 둘러보는 용도로는 웹 브라우저에서 프론트엔드 콘솔을 사용하는게 편할 것이다.
 
-![Membase Configure: Step 1/4](http://i.imgur.com/JU85t.png)
+![Membase Configure: Step 1/4](https://i.imgur.com/JU85t.png)
 
 자료를 저장할 파일시스템 상의 경로를 정한 뒤에 이미 존재하는 클러스터에 합류시킬 것인지 아니면 새로운 클러스터를 구성할 것인지 결정할 수 있다. 존재하는 클러스터가 없으므로 일단 만들어야 한다. 만약 클러스터에 합류하려고 한다면 클러스터 마스터의 IP 주소와 로그인 정보를 넣어야 한다.
 
-![Membase Configure: Step 2/4](http://i.imgur.com/4AvIs.png)
+![Membase Configure: Step 2/4](https://i.imgur.com/4AvIs.png)
 
 그 뒤에 버킷 종류를 정해야 하는데 memcached와 Membase 둘이 있다. 짐작할 수 있다시피 둘의 차이는 영속성이다. memcached에 저장되는 자료는 휘발되어도 상관 없으므로 다중화(replication) 설정이 생략된다.
 
-![Membase Configure: Step 3/4](http://i.imgur.com/qxPBT.png)
+![Membase Configure: Step 3/4](https://i.imgur.com/qxPBT.png)
 
 세번째로 나오는 화면에는 별거 없다. 적당히 채우고 진행한다.
 
-![Membase Configure: Step 4/4](http://i.imgur.com/xzAc8.png)
+![Membase Configure: Step 4/4](https://i.imgur.com/xzAc8.png)
 
 마지막으로 클러스터 마스터의 관리자 계정을 만든다. 나중에 클러스터에 참여시킬 다른 노드에서 사용하게 된다.
 

@@ -10,7 +10,7 @@ Tumblr를 떠나게 된 계기는 최근부터 내가 쓴 글에 달린 링크�
 몇년 전부터 정적 사이트 생성기로 블로그 만드는 게 프로그래머 사이의 유행이 되어서 나 역시 옮기고 싶다고 생각했었는데,
 막상 귀찮아서 생각만 하다가 계기가 생겨서 이참에 옮기게 되었다.
 
-새 블로그 주소는 <http://blog.hongminhee.org/>이다. 참고로 이전 블로그의 모든 퍼머링크들은
+새 블로그 주소는 <https://blog.hongminhee.org/>이다. 참고로 이전 블로그의 모든 퍼머링크들은
 내가 오기와 집념으로 거의 다 리다이렉션(`301 Moved Permanently`) 시켰다.
 
 [Jekyll][2] 같은 훌륭한 정적 사이트 생성기도 있고,[^1] 그 외에도 다양하게 존재하지만,
@@ -86,7 +86,7 @@ Travis CI, GitHub Pages 등… [돈 한푼 안내고 서버 없이 무전취식�
 [^3]: [Heroku 무료 앱에는 사용량 제한이 있어서 늦은 시간이 되자 서버 오류가 나기 시작했다.][16]
       그래서 [Google App Engine으로 교체했다.][17]
 
-[1]: http://blog.hongminhee.org/2010/02/09/379524623/
+[1]: https://blog.hongminhee.org/2010/02/09/379524623/
 [2]: https://jekyllrb.com/
 [3]: https://jekyllrb.com/docs/github-pages/#deploying-jekyll-to-github-pages
 [4]: https://michelf.ca/projects/php-markdown/extra/

@@ -1,7 +1,7 @@
 [ROCKET DIVE][0]
 ================
 
-![ROCKET DIVE 창](http://media.tumblr.com/tumblr_l1z9p9ZVzI1qz6t91.png)
+![ROCKET DIVE 창](https://media.tumblr.com/tumblr_l1z9p9ZVzI1qz6t91.png)
 
 Python으로 웹 개발을 하려면 개발용 WSGI[^1] 컨테이너가 필요하다. 하지만 Python을 잘 모르는 사람이 개발 환경을 꾸리기는 쉽지 않다. 이를테면 디자이너는 .html 템플릿 파일을 수정해야 하는데, 그걸 위해서 [Green Unicorn][gunicorn]이니 [Rocket][]이니 하는걸 설치해서 커맨드라인으로 서버를 켜고 끄는 것은 너무 복잡하다. 그래서 GUI로 뭔가 간단하게 켜고 끄는 걸 가능하게 해야겠다 싶어서 하나 만들었다.
 
@@ -16,7 +16,7 @@ Windows를 기준으로 설치 방법을 설명하자면: Python 2.6과 [setupto
 
 설치가 끝나면 `pythonw.exe -m rocketdive`로 단축 아이콘을 만들면 된다.
 
-![단축 아이콘 만드는 화면](http://media.tumblr.com/tumblr_l1zamhay271qz6t91.png)
+![단축 아이콘 만드는 화면](https://media.tumblr.com/tumblr_l1zamhay271qz6t91.png)
 
 [소스 코드는 Bitbucket에 올려뒀으니][1], Mercurial로 받을 수 있다.
 

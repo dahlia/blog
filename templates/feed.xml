@@ -46,7 +46,7 @@
         <updated>{{ post.published_at.isoformat() }}</updated>
         <author>
           <name>홍민희</name>
-          <uri>http://hongminhee.org/</uri>
+          <uri>https://hongminhee.org/</uri>
           <email>&#104;ongmin&#104;ee&#64;member&#46;fsf&#46;org</email>
         </author>
         <content type="html">{{ post.__html__() }}</content>
