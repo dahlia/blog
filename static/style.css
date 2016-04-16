@@ -140,6 +140,11 @@ article h1 {
   font-size: 36px;
   font-weight: 200;
   color: black;
+  text-align: left;
+}
+
+@media (max-width: 500px) {
+  article h1 { letter-spacing: -1px; }
 }
 
 article h1 > a { clear: left; }
