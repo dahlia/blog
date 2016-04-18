@@ -15,6 +15,9 @@
 글자가 무엇이 있나 생각해보니 잘 떠오르지 않아서, 일단 내 이름의 성으로 쓰이는
 ["넓을 **<ruby>洪<rp>(</rp><rt>홍</rt><rp>)</rp></ruby>**(`U+6D2A`)" 문자에 이름을 걸었다.][3]
 
+<blockquote class="twitter-tweet" data-lang="en"><p lang="en" dir="ltr">洪民憙 (Hong Minhee)<a href="https://t.co/6opc4vq4rO">https://t.co/6opc4vq4rO</a> is now a Bronze sponsor of CJK UN/IDEOGRAPH6D2A!<a href="https://t.co/EDmr9Ut4pj">https://t.co/EDmr9Ut4pj</a> <a href="https://t.co/Yzz1gE4twO">pic.twitter.com/Yzz1gE4twO</a></p>&mdash; Unicode Consortium (@unicode) <a href="https://twitter.com/unicode/status/722129698784870400">April 18, 2016</a></blockquote>
+<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+
 
 [1]: http://www.unicode.org/consortium/adopt-a-character.html
 [2]: http://www.unicode.org/consortium/adopted-characters.html
