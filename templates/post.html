@@ -1,5 +1,5 @@
 {% extends 'layout.html' %}
-{% from 'layout.html' import time %}
+{% from 'layout.html' import outdate_disclaimer, time %}
 
 {% block title -%}
   {%- if post.title is none -%}
@@ -23,6 +23,11 @@
   {{ super() }}
 {% endblock %}
 
+{% block body_class -%}
+  {{- super() }} post-page
+  {%- if blog.outdates(canonical_post.published_at) %} outdated {%- endif -%}
+{%- endblock %}
+
 {% block body %}
   {{ super() }}
 
@@ -33,6 +38,39 @@
       {{ time(canonical_post.published_at) }}
     {% endif %}
 
-    {{ post }}
+    {% if blog.outdates(canonical_post.published_at) %}
+      {% call outdate_disclaimer(canonical_post.published_at.year) %}
+        {{ post }}
+        <script>
+        (function () {
+          var ps = document.getElementsByClassName('outdate-disclaimer');
+          if (ps.length < 1) {
+            return;
+          }
+          var p = ps[0], t = document.createElement('span');
+          t.addEventListener('click', function () {
+            this.parentNode.removeChild(this);
+            var gs = document.getElementsByClassName('outdate-gray-out');
+            for (var i = gs.length - 1; i >= 0; --i) {
+              gs[i].className = gs[i].className.replace(
+                /(^|\s)outdate-gray-out(\s|$)/g, '');
+            }
+          });
+          t.className = 'toggler';
+          t.innerText = '읽기';
+          p.appendChild(t);
+          var e = p.nextSibling;
+          while (e !== null && e !== undefined) {
+            if (e.nodeType === 1) {
+              e.className += ' outdate-gray-out';
+            }
+            e = e.nextSibling;
+          }
+        })();
+        </script>
+      {% endcall %}
+    {% else %}
+      {{ post }}
+    {% endif %}
   </article>
 {% endblock %}

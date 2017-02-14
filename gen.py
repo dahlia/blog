@@ -238,7 +238,8 @@ class Blog:
                  pool: multiprocessing.Pool,
                  post_files: typing.Iterable[pathlib.Path],
                  base_url: str=None,
-                 feed_url: str=None):
+                 feed_url: str=None,
+                 outdate_epoch: typing.Optional[datetime.datetime]=None):
         self.logger = logging.getLogger('Blog')
         self.pool = pool
         self.base_url = base_url
@@ -253,12 +254,14 @@ class Blog:
         self.canon_posts = [p for p in self.posts if p.canon]
         self.logger.info('Total %d posts are loaded.', len(self.posts))
         self.current_base_path = './'
+        self.outdate_epoch = outdate_epoch
         self.jinja2_env = Environment(loader=FileSystemLoader('templates'),
                                       extensions=['jinja2.ext.with_'],
                                       autoescape=True)
         self.jinja2_env.globals.update(
             blog=self,
             href_for=self.resolve_relative_url,
+            outdate_epoch=self.outdate_epoch
         )
 
     @staticmethod
@@ -268,6 +271,13 @@ class Blog:
             return datetime.datetime(d.year, d.month, d.day, 12, 0, 0,
                                      tzinfo=datetime.timezone.utc)
         return d
+
+    def outdates(self, time: typing.Union[datetime.datetime, int]):
+        if self.outdate_epoch is None:
+            return False
+        elif isinstance(time, int):  # year
+            return self.outdate_epoch.year >= time
+        return self.outdate_epoch >= time
 
     def resolve_relative_url(self, relative_path: str) -> str:
         if relative_path.startswith('/'):
@@ -386,6 +396,8 @@ def main():
                         help='the base url.  if omitted, use relative paths')
     parser.add_argument('-f', '--feed-url', metavar='URL',
                         help='the feed url to override the default feed url')
+    parser.add_argument('--outdate-years', metavar='YEARS', type=int,
+                        help='fade out articles written the given years ago')
     parser.add_argument('-j', '--jobs', metavar='N',
                         type=int, default=multiprocessing.cpu_count(),
                         help='the number of parallel processes [%(default)s]')
@@ -402,8 +414,19 @@ def main():
         format='%(levelname).1s | %(message)s'
     )
     pool = multiprocessing.Pool(args.jobs)
+    now = datetime.datetime.now(datetime.timezone.utc)
+    if args.outdate_years:
+        try:
+            outdate_epoch = now.replace(year=now.year - args.outdate_years)
+        except ValueError:  # dealing with leap year
+            outdate_epoch = now.replace(year=now.year - args.outdate_years,
+                                        day=max(now.day - 1, 1))
+    else:
+        outdate_epoch = None
     blog = Blog(pool, args.files,
-                base_url=args.base_url, feed_url=args.feed_url)
+                base_url=args.base_url,
+                feed_url=args.feed_url,
+                outdate_epoch=outdate_epoch)
     blog.build(args.dest)
 
 

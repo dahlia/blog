@@ -1,5 +1,5 @@
 {% extends 'layout.html' %}
-{% from 'layout.html' import time %}
+{% from 'layout.html' import outdate_disclaimer, time %}
 
 {% block title -%}
   {{ year }}년 아카이브 &mdash; {{ super() }}
@@ -16,11 +16,20 @@
   <h1>{{ super() }}</h1>
 {% endblock %}
 
+{% block body_class -%}
+  {{- super() }} archive-page
+  {%- if blog.outdates(year) %} outdated {%- endif -%}
+{%- endblock %}
+
 {% block body %}
   {{ super() }}
 
-  <div class="archive">
+  <div class="archive post-list">
     <h2>{{ year }}년 아카이브</h2>
+
+    {% if blog.outdates(year) %}
+      {{ outdate_disclaimer(year) }}
+    {% endif %}
 
     <ul>
       {% for post in posts %}
