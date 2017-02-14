@@ -334,6 +334,17 @@ article a > img:only-child {
   color: black;
 }
 
+.post-list ul {
+  margin: 0;
+  padding: 0;
+}
+
+.post-list ul > li {
+  display: block;
+  margin: 0;
+  padding: 0;
+}
+
 body.outdated .post-list > * {
   opacity: 0.5;
 }
