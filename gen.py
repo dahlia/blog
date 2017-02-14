@@ -343,7 +343,7 @@ class Blog:
         index_path = build_path / 'index.html'
         with index_path.open('wb') as f:
             stream.dump(f, encoding='utf-8')
-        logger.info('%s', index_path) 
+        logger.info('%s', index_path)
 
     def build_annual_archives(self, build_path: pathlib.Path):
         logger = self.logger.getChild('build_annual_archives')
@@ -387,7 +387,7 @@ class Blog:
         feed_path = build_path / 'feed.xml'
         with feed_path.open('wb') as f:
             stream.dump(f, encoding='utf-8')
-        logger.info('%s', feed_path) 
+        logger.info('%s', feed_path)
 
 
 def main():
