@@ -7,3 +7,6 @@ open: build/index.html
 	if [ "`which xdg-open`" ]; then xdg-open build/index.html; \
 	elif [ "`which open`" ]; then open build/index.html; \
 	fi
+
+clean:
+	rm -rf build/

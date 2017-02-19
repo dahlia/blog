@@ -11,8 +11,10 @@
 
 {% block head %}
   {% if blog.base_url %}
-    <link rel="canonical"
-          href="{{ canonical_post.resolve_object_url(blog.base_url) }}">
+    {% with canonical_url = canonical_post.resolve_object_url(blog.base_url) %}
+      <link rel="canonical" href="{{ canonical_url }}">
+      <meta property="og:url" content="{{ canonical_url }}">
+    {% endwith %}
   {% endif %}
   {% if not post.canon %}
     <meta http-equiv="refresh" content="0; url={{ 
@@ -20,6 +22,19 @@
                                              blog.current_base_path)
     }}">
   {% endif %}
+  <meta name="description" value="">
+  <meta name="twitter:card" content="summary">
+  <meta property="og:locale" content="ko_KR">
+  <meta property="og:site_name" content="洪民憙 블로그">
+  <meta property="og:type" content="article">
+  {% if canonical_post.title is not none %}
+    <meta name="twitter:title" content="{{ canonical_post.title }}">
+    <meta property="og:title" content="{{ canonical_post.title }}">
+  {% endif %}
+  <meta name="twitter:description" content="{{ canonical_post.excerpt }}">
+  <meta property="og:description" content="{{ canonical_post.excerpt }}">
+  <meta property="og:updated_time"
+        content="{{ canonical_post.published_at.isoformat() }}">
   {{ super() }}
 {% endblock %}
 

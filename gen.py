@@ -19,7 +19,6 @@ import collections
 import contextlib
 import datetime
 import enum
-import functools
 import itertools
 import json
 import json.decoder
@@ -34,14 +33,13 @@ import sys
 import typing
 import urllib.parse
 
-from jinja2 import (Environment, FileSystemLoader, Markup, Template,
-                    contextfunction)
+from jinja2 import Environment, FileSystemLoader
 
 
 PANDOC_OPTIONS = (
     '--from=markdown_phpextra+auto_identifiers',
-    '--parse-raw', # Allow HTML fragments in Markdown
-    '--smart',     # SmartyPants
+    '--parse-raw',  # Allow HTML fragments in Markdown
+    '--smart',      # SmartyPants
     '--html-q-tags',
     '--email-obfuscation=references',
 )
@@ -66,8 +64,8 @@ class Post:
         re.VERBOSE
     )
 
-    __slots__ = ('path', 'canonical_path', '_title', '_metadata',
-                 '_published_at', '_html')
+    __slots__ = ('path', 'canonical_path', '_title', '_excerpt', '_metadata',
+                 '_published_at', '_html', '_tree')
 
     def __init__(self, path: pathlib.Path):
         if not path.exists():
@@ -85,7 +83,9 @@ class Post:
                 if not cpath.exists():
                     raise FileNotFoundError('file not exists: ' + str(cpath))
         self.canonical_path = cpath
+        self._tree = None
         self._title = None
+        self._excerpt = None
         self._metadata = None
         self._published_at = None
         self._html = None
@@ -96,14 +96,13 @@ class Post:
 
     @property
     def canonical_post(self) -> 'Post':
-        path = self.canonical_path
         if self.canon:
             return self
         return type(self)(self.canonical_path)
 
     def build(self, format: Format=Format.html):
         cmd = list(PANDOC_OPTIONS)
-        cmd.insert(0, '--to=' + format.value) 
+        cmd.insert(0, '--to=' + format.value)
         cmd.append(str(self.canonical_path))
         cmd.insert(0, 'pandoc')
         output = subprocess.check_output(cmd)
@@ -112,39 +111,72 @@ class Post:
             return json.loads(output)
         return output
 
+    _quotes = {
+        'SingleQuote': ('\u2018', '\u2019'),
+        'DoubleQuote': ('\u201c', '\u201d'),
+    }
+
+    @classmethod
+    def _flatten_nodes(cls, nodes):
+        for chunk in nodes:
+            if chunk['t'] in ('Space', 'SoftBreak'):
+                yield ' '
+            elif chunk['t'] in 'Str':
+                yield chunk['c']
+            elif chunk['t'] == 'Link':
+                yield from cls._flatten_nodes(chunk['c'][1])
+            elif chunk['t'] in ('Strong', 'Emph'):
+                yield from cls._flatten_nodes(chunk['c'])
+            elif chunk['t'] == 'Code':
+                yield from chunk['c'][1]
+            elif chunk['t'] == 'Quoted':
+                quote_type = chunk['c'][0]['t']
+                yield cls._quotes[quote_type][0]
+                yield from cls._flatten_nodes(chunk['c'][1])
+                yield cls._quotes[quote_type][1]
+            elif chunk['t'] == 'Image':
+                pass
+            elif chunk['t'] == 'RawInline' and chunk['c'][0] == 'html':
+                pass
+            elif chunk['t'] == 'Note':
+                pass
+            else:
+                raise ValueError('unexpected node: ' + repr(chunk))
+
     @property
     def title(self) -> str:
-        quotes = {
-            'SingleQuote': ('\u2018', '\u2019'),
-            'DoubleQuote': ('\u201c', '\u201d'),
-        }
-
-        def flatten_nodes(nodes):
-            for chunk in nodes:
-                if chunk['t'] == 'Space':
-                    yield ' '
-                elif chunk['t'] == 'Str':
-                    yield chunk['c']
-                elif chunk['t'] == 'Link':
-                    yield from flatten_nodes(chunk['c'][1])
-                elif chunk['t'] == 'Quoted':
-                    quote_type = chunk['c'][0]['t']
-                    yield quotes[quote_type][0]
-                    yield from flatten_nodes(chunk['c'][1])
-                    yield quotes[quote_type][1]
-                else:
-                    raise ValueError('unexpected node: ' + repr(chunk))
-
         if self._title is not None:
             return self._title[0]
-        tree = self.build(Format.ast)
-        for nodes in tree[1:]:
+        if self._tree is None:
+            self._tree = self.build(Format.ast)
+        for nodes in self._tree[1:]:
             for node in nodes:
                 if node.get('t') == 'Header' and node['c'][0] == 1:
-                    title = ''.join(flatten_nodes(node['c'][2]))
+                    title = ''.join(self._flatten_nodes(node['c'][2]))
                     self._title = title,
                     return title
         self._title = None,
+
+    @property
+    def excerpt(self) -> str:
+        if self._excerpt is not None:
+            excerpt = self._excerpt
+        else:
+            if self._tree is None:
+                self._tree = self.build(Format.ast)
+            for nodes in self._tree[1:]:
+                for node in nodes:
+                    if node.get('t') == 'Para':
+                        excerpt = ''.join(self._flatten_nodes(node['c']))
+                        if excerpt:
+                            break
+                else:
+                    continue
+                break
+            else:
+                excerpt = ''
+            self._excerpt = excerpt
+        return excerpt + ' \N{HORIZONTAL ELLIPSIS}'
 
     @property
     def metadata(self) -> typing.Tuple[datetime.date, str]:
