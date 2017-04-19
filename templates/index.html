@@ -40,7 +40,8 @@
     <div class="archive">
       <h2>아카이브</h2>
       <ul>
-        {% for year in blog.annual_archives|sort(reverse=true) %}
+        {% for year in blog.annual_archives|sort(reverse=true)
+           if not blog.outdates(year) %}
           <li><a href="{{ href_for(year ~ '/index.html') }}">
             {{- year }}년</a></li>
         {% endfor %}
