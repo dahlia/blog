@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8">
+    
+  
+    
+      <link rel="canonical" href="https://blog.hongminhee.org/2011/11/24/13207732865/">
+      <meta property="og:url" content="https://blog.hongminhee.org/2011/11/24/13207732865/">
+    
+  
+  
+  <meta name="description" value="">
+  <meta name="twitter:card" content="summary">
+  <meta property="og:locale" content="ko_KR">
+  <meta property="og:site_name" content="洪民憙 블로그">
+  <meta property="og:type" content="article">
+  
+    <meta name="twitter:title" content="신생 언어 홍보 아이디어">
+    <meta property="og:title" content="신생 언어 홍보 아이디어">
+  
+  <meta name="twitter:description" content="밤 늦게 불현듯 떠오른 아이디어. IRC 봇 프레임워크를 아주 사용하기 좋게 만든 다음 Google App Engine처럼 PaaS로 제공하면 어떨까? 대신 그 프레임워크는 홍보하려는 언어로 만들어져 있고, 해당 PaaS에 자신이 원하는 봇을 올려서 운영하려면, 그 봇을 해당 언어로 스크립팅해야 한다. …">
+  <meta property="og:description" content="밤 늦게 불현듯 떠오른 아이디어. IRC 봇 프레임워크를 아주 사용하기 좋게 만든 다음 Google App Engine처럼 PaaS로 제공하면 어떨까? 대신 그 프레임워크는 홍보하려는 언어로 만들어져 있고, 해당 PaaS에 자신이 원하는 봇을 올려서 운영하려면, 그 봇을 해당 언어로 스크립팅해야 한다. …">
+  <meta property="og:updated_time"
+        content="2011-11-24T01:33:00+09:00">
+  
+      <title>신생 언어 홍보 아이디어 &mdash; 洪民憙 블로그</title>
+      <link rel="alternate" type="application/atom+xml" title="洪民憙 블로그"
+            href="https://blog.hongminhee.org/feed.xml">
+      <meta name="author" content="홍민희">
+      <link rel="stylesheet" media="screen"
+            href="https://blog.hongminhee.org/static/style.css">
+      <link rel="stylesheet" type="text/css"
+        href="https://spoqa.github.io/spoqa-han-sans/css/SpoqaHanSans-kr.css">
+      <link rel="stylesheet" type="text/css"
+        href="https://spoqa.github.io/spoqa-han-sans/css/SpoqaHanSans-jp.css">
+      <meta name="viewport" content="width=device-width, user-scalable=no">
+      <meta name="twitter:creator" content="@hongminhee">
+      <meta name="twitter:site" content="@hongminhee">
+      <meta property="article:author"
+            content="https://www.facebook.com/hongminhee">
+    
+
+  </head>
+  <body class=" post-page outdated">
+    
+  
+      <header>
+        
+          <a href="https://blog.hongminhee.org/index.html" class="site-name">
+              <ruby>洪民憙 <rp>(</rp><rt>홍민희</rt><rp>)</rp></ruby>
+              블로그
+            </a>
+          <nav>
+            <a href="https://hongminhee.org/" rel="author me">본인 소개</a>
+            <div class="archive">
+              아카이브:
+              <ul>
+                
+                  <li><a href="https://blog.hongminhee.org/2017/">2017</a></li>
+                
+                  <li><a href="https://blog.hongminhee.org/2016/">2016</a></li>
+                
+                  <li><a href="https://blog.hongminhee.org/2015/">2015</a></li>
+                
+                  <li><a href="https://blog.hongminhee.org/2014/">2014</a></li>
+                
+                  <li><a href="https://blog.hongminhee.org/2013/">2013</a></li>
+                
+              </ul>
+            </div>
+          </nav>
+        
+      </header>
+
+      <ul class="disclaimer">
+        <li>글을 썼을 당시의 주장에 제 스스로가 더이상 동의하지 못하는
+            경우도 있습니다.</li>
+        <li>심지어 몇몇 글은 이제 정 반대의 의견을 가지고 있기도 합니다.</li>
+        <li>지금까지 여러 주제에 대한 의견이 꾸준히 달라졌습니다.
+            앞으로도 그럴 것입니다.</li>
+        <li>따라서 제 생각을 바꾸기 위한 설득도 환영합니다.
+            저는 의견을 바꿀 의향이 있습니다.</li>
+      </ul>
+    
+
+  <article>
+    
+      <time datetime="2011-11-24T01:33:00+09:00">2011년 11월 24일</time>
+    
+
+    
+      
+  <p class="outdate-disclaimer">
+    이하의 글은 2011년에 쓴 것입니다. 오래된 글인 만큼, 현재의
+    생각과 전혀 다른 내용도 많이 포함되어 있고, 당시와는 상황이 많이 달라진
+    점도 있습니다. 또한, 그 당시에 잘못 알려졌던 정보도 포함되어 있을 수
+    있습니다. <em>어찌됐든 저는 제 오래된 글이 회자되는 것을 저어합니다.</em>
+    읽기에 앞서 양해를 부탁드립니다.
+  <p>
+        <h1 id="신생-언어-홍보-아이디어">신생 언어 홍보 아이디어</h1>
+<p>밤 늦게 불현듯 떠오른 아이디어. IRC 봇 프레임워크를 아주 사용하기 좋게 만든 다음 Google App Engine처럼 PaaS로 제공하면 어떨까? 대신 그 프레임워크는 홍보하려는 언어로 만들어져 있고, 해당 PaaS에 자신이 원하는 봇을 올려서 운영하려면, 그 봇을 해당 언어로 스크립팅해야 한다.</p>
+<p>미션 크리티컬한 서비스의 경우 이렇게 하면 PaaS가 망하겠지만, IRC 봇은 대부분 있으면 재밌고 좋지만 없어도 그만인 물건이기 때문에 오히려 직접 호스팅하는 쪽이 번거롭고 신경도 쓰이게 된다. 그런 것들을 그냥 PaaS에 올려서 디플로이도 쉽고 라이브에서 디버깅도 쉽게 해주면 각자 채널에서 소규모로 특수 목적 봇을 만드는 비용을 낮춰주기 때문에 많이 쓰이지 않을까? 설사 생소한 언어로 스크립팅해야 한다고 하더라도 <em>하찮은</em> IRC 봇 하나 만드는데 관리 비용이 지속적으로 나가는 것보다는 낫기 때문에 쓸 동기가 충분할 것이라고 생각한다. 게다가 언어가 매우 편하면서 강력하고<a href="#fn1" class="footnoteRef" id="fnref1"><sup>1</sup></a> PaaS 위에서 쓸 수 있는 IRC 봇 제작 프레임워크 역시 훌륭하다면 더욱 그렇다.</p>
+<p>물론 이걸로 홍보하고자 하는 언어를 세상에 널리 알리기는 한참 부족하겠지만, 초기 사용자를 모으는 데는 꽤 괜찮지 않을까 싶다. IRC 봇은 그냥 한 가지 아이디어일 뿐이고, IRC 봇처럼 잉여한 것이라면 뭐든 PaaS로 홍보할 수 있지 않을까 싶다.</p>
+<p>뭐, 이런 저런 소리를 길게 쓰긴 했지만, 새로운 생각이라고 생각하진 않는다. 이미 10년 전에 Paul Graham이 <a href="http://www.paulgraham.com/popular.html">Being Popular</a>라는 글을 쓴 적 있는 바, 내가 쓴 내용은 그 글의 응용 중 하나일 따름이다.</p>
+<section class="footnotes">
+<hr />
+<ol>
+<li id="fn1"><p>뭐, 농담 반 진담 반으로 하는 소리지만, 불편하고 기능이 부족한 언어는 널리 퍼지지 않고 일찌감치 망하는 편이 세상을 위해 이롭다. ㅋㅋ 사실 Google 공동 창업자 Larry Page도 사업 초창기에 마케팅 담당한테 <q>우리의 검색 품질이 좋지 않다면, 우리는 (세상을 위해서) 승리해서는 안된다</q>고 <a href="http://online.wsj.com/article/SB10001424052702304066504576351650017002270.html">얘기했다고 한다.</a><a href="#fnref1">↩</a></p></li>
+</ol>
+</section>
+
+        <script>
+        (function () {
+          var ps = document.getElementsByClassName('outdate-disclaimer');
+          if (ps.length < 1) {
+            return;
+          }
+          var p = ps[0], t = document.createElement('span');
+          t.addEventListener('click', function () {
+            this.parentNode.removeChild(this);
+            var gs = document.getElementsByClassName('outdate-gray-out');
+            for (var i = gs.length - 1; i >= 0; --i) {
+              gs[i].className = gs[i].className.replace(
+                /(^|\s)outdate-gray-out(\s|$)/g, '');
+            }
+          });
+          t.className = 'toggler';
+          t.innerText = '읽기';
+          p.appendChild(t);
+          var e = p.nextSibling;
+          while (e !== null && e !== undefined) {
+            if (e.nodeType === 1) {
+              e.className += ' outdate-gray-out';
+            }
+            e = e.nextSibling;
+          }
+        })();
+        </script>
+      
+    
+  </article>
+
+
+    <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-54324071-2', 'auto');
+    ga('send', 'pageview');
+    </script>
+  </body>
+</html>
+
+
+

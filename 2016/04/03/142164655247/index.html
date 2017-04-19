@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8">
+    
+  
+    
+      <link rel="canonical" href="https://blog.hongminhee.org/2016/04/03/142164655247/">
+      <meta property="og:url" content="https://blog.hongminhee.org/2016/04/03/142164655247/">
+    
+  
+  
+  <meta name="description" value="">
+  <meta name="twitter:card" content="summary">
+  <meta property="og:locale" content="ko_KR">
+  <meta property="og:site_name" content="洪民憙 블로그">
+  <meta property="og:type" content="article">
+  
+  <meta name="twitter:description" content="1Password 쓰게 된 계기는 5년 전쯤 국내 모 대형 사이트가 개인정보를 해킹당하게 되면서였다. 나는 여러 사이트에서 거의 같은 암호 서너 개를 돌려가며 사용하고 있었고, 기껏해야 사이트마다 암호에 살짝의 변형을 주는 것이 전부였다. 가령 평소 사용하는 암호가 asdf이고 가입하려는 사이트가 abc.com이면 대충 abc_asdf 같은 식으로 변형을 하는 정도였다. 그런데 그 사이트가 털렸단다. …">
+  <meta property="og:description" content="1Password 쓰게 된 계기는 5년 전쯤 국내 모 대형 사이트가 개인정보를 해킹당하게 되면서였다. 나는 여러 사이트에서 거의 같은 암호 서너 개를 돌려가며 사용하고 있었고, 기껏해야 사이트마다 암호에 살짝의 변형을 주는 것이 전부였다. 가령 평소 사용하는 암호가 asdf이고 가입하려는 사이트가 abc.com이면 대충 abc_asdf 같은 식으로 변형을 하는 정도였다. 그런데 그 사이트가 털렸단다. …">
+  <meta property="og:updated_time"
+        content="2016-04-03T15:53:59+09:00">
+  
+      <title>2016년 4월 3일 &mdash; 洪民憙 블로그</title>
+      <link rel="alternate" type="application/atom+xml" title="洪民憙 블로그"
+            href="https://blog.hongminhee.org/feed.xml">
+      <meta name="author" content="홍민희">
+      <link rel="stylesheet" media="screen"
+            href="https://blog.hongminhee.org/static/style.css">
+      <link rel="stylesheet" type="text/css"
+        href="https://spoqa.github.io/spoqa-han-sans/css/SpoqaHanSans-kr.css">
+      <link rel="stylesheet" type="text/css"
+        href="https://spoqa.github.io/spoqa-han-sans/css/SpoqaHanSans-jp.css">
+      <meta name="viewport" content="width=device-width, user-scalable=no">
+      <meta name="twitter:creator" content="@hongminhee">
+      <meta name="twitter:site" content="@hongminhee">
+      <meta property="article:author"
+            content="https://www.facebook.com/hongminhee">
+    
+
+  </head>
+  <body class=" post-page">
+    
+  
+      <header>
+        
+          <a href="https://blog.hongminhee.org/index.html" class="site-name">
+              <ruby>洪民憙 <rp>(</rp><rt>홍민희</rt><rp>)</rp></ruby>
+              블로그
+            </a>
+          <nav>
+            <a href="https://hongminhee.org/" rel="author me">본인 소개</a>
+            <div class="archive">
+              아카이브:
+              <ul>
+                
+                  <li><a href="https://blog.hongminhee.org/2017/">2017</a></li>
+                
+                  <li><a href="https://blog.hongminhee.org/2016/">2016</a></li>
+                
+                  <li><a href="https://blog.hongminhee.org/2015/">2015</a></li>
+                
+                  <li><a href="https://blog.hongminhee.org/2014/">2014</a></li>
+                
+                  <li><a href="https://blog.hongminhee.org/2013/">2013</a></li>
+                
+              </ul>
+            </div>
+          </nav>
+        
+      </header>
+
+      <ul class="disclaimer">
+        <li>글을 썼을 당시의 주장에 제 스스로가 더이상 동의하지 못하는
+            경우도 있습니다.</li>
+        <li>심지어 몇몇 글은 이제 정 반대의 의견을 가지고 있기도 합니다.</li>
+        <li>지금까지 여러 주제에 대한 의견이 꾸준히 달라졌습니다.
+            앞으로도 그럴 것입니다.</li>
+        <li>따라서 제 생각을 바꾸기 위한 설득도 환영합니다.
+            저는 의견을 바꿀 의향이 있습니다.</li>
+      </ul>
+    
+
+  <article>
+    
+      <h1><time datetime="2016-04-03T15:53:59+09:00">2016년 4월 3일</time></h1>
+    
+
+    
+      <p>1Password 쓰게 된 계기는 5년 전쯤 국내 모 대형 사이트가 개인정보를 해킹당하게 되면서였다. 나는 여러 사이트에서 거의 같은 암호 서너 개를 돌려가며 사용하고 있었고, 기껏해야 사이트마다 암호에 살짝의 변형을 주는 것이 전부였다. 가령 평소 사용하는 암호가 <code>asdf</code>이고 가입하려는 사이트가 abc.com이면 대충 <code>abc_asdf</code> 같은 식으로 변형을 하는 정도였다. 그런데 그 사이트가 털렸단다.</p>
+<p>그 사이트는 그때도, 그리고 사실 지금까지도 암호의 최대 길이나 사용할 수 있는 기호에 제한을 두고 있었다. 적절한 암호학적 해시를 하고 있다면 왜 구태여 그런 제한을 둔단 말인가? 그 사이트가 내 암호에 어떠한 종류의 암호학적 조치도 하지 않는다는 심증은 매우 강했다. 나는 프로그래머이면서도, 국내의 아주 많은 사이트에 가입할 때마다, 내 암호의 허용 범위에 대한 말도 안되는 안내 문구를 읽을 때마다, 그런 심증을 느껴왔으면서도 별 생각 없이 그렇게 살고 있었던 것이다. 그 사이트를 비롯해 매우 많은 웹 사이트는, 아마 그것을 구현하는 프로그래머의 배움에 대한 나태와 무지에 의해, 의도치 않게 대한민국 국민 대부분의 자주 쓰는 암호들을 평문으로 보존하고 있을 것이다. 그리고 보안 수준을 높이기 위한 명목으로 회원들에게 3개월마다 암호를 바꾸라고 강요하고 있는 것이다.</p>
+<p>내가 5년 전에 자주 쓰던 서너 개의 암호 중 최소한 하나는 공개된 정보가 되어버렸을 것이다. 그래도 찝찝함을 덜겠다고 암호 앞에 사이트 이름을 붙여놨지만, 누가 보든 암호 앞에 붙은 사이트 이름을 떼고 나면 그게 내 즐겨 쓰는 암호 중 하나라는 것을 알 수 있을 것이다.</p>
+<p>그날 바로 1Password를 구입하고 내가 기억하는 모든 로그인 암호를 무작위로 만들어서 바꿨다. 무작위 암호는 매번 그 사이트가 허용하는 최대 길이로 꽉꽉 채워서 생성했다. 더이상 사용하지 않는 서비스는, 우선 암호를 무작위로 변경하고 나서, 다시 탈퇴했다. 그들 사이트가 내가 탈퇴를 했다고 해서 내가 쓰던 암호를 평문으로 보존하는 것을 중단할 거라는 보장은 할 수 없었다. 이 작업은 하루아침에 끝나진 않았지만 꾸준히 하고 보니, 나는 내가 가입한 모든 서비스에서 서로 아주 다른 암호를 사용하게 되었다. 이제는 어느 사이트 하나가 크게 털려도, 나의 다른 계정까지 탈취하는 것은 막을 수 있게 되었다.</p>
+<p>현실적인 이유에서, 적어도 대한민국의 웹 서비스들에서는 암호를 암호라고 인식해서는 안되게 됐다. 그 항목에 담겨야 할 것은 내가 직접 기억할 수 있는 암호가 아니라 나의 인증을 대리해주는 소프트웨어가 기계적으로 생성해주는 토큰 문자열이다. 현실적인 이유에서 그러해야 한다.</p>
+
+    
+  </article>
+
+
+    <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-54324071-2', 'auto');
+    ga('send', 'pageview');
+    </script>
+  </body>
+</html>
+
+
+

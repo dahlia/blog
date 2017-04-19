@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8">
+    
+  
+    
+      <link rel="canonical" href="https://blog.hongminhee.org/2013/04/18/oauth-1-v-oauth-2/">
+      <meta property="og:url" content="https://blog.hongminhee.org/2013/04/18/oauth-1-v-oauth-2/">
+    
+  
+  
+  <meta name="description" value="">
+  <meta name="twitter:card" content="summary">
+  <meta property="og:locale" content="ko_KR">
+  <meta property="og:site_name" content="洪民憙 블로그">
+  <meta property="og:type" content="article">
+  
+    <meta name="twitter:title" content="OAuth 1 v. OAuth 2">
+    <meta property="og:title" content="OAuth 1 v. OAuth 2">
+  
+  <meta name="twitter:description" content="지난해 Daniel Greenfeld가 Python OAuth 구현체들의 유감스러운 상태에 대해 글을 쓰고난 뒤, 이 문제가 중요하다고 여긴 Idan Gazit는 OAuth를 철저히 표준에 의거하여 “제대로” 구현하는 oauthlib 라이브러리를 만들었다. 이 라이브러리는 앞서 링크한 글의 문제를 해결하려면 기존 Python 커뮤니티에 혼란을 주었던 각종 OAuth 1 및 OAuth 2 라이브러리로부터 승리해야 했기 때문에 그 모든 것들의 기능을 총망라하고 있다. OAuth 1 및 OAuth 2 구현을 모두 제공하고 있을 뿐 아니라, 클라이언트와 프로바이더 구현 모두 제공한다. 따라서 2013년 4월 현재 Python에서 OAuth를 쓴다고 하면 OAuth 1을 쓰든 OAuth 2를 쓰든 간에 oauthlib을 선택하는 것이 정답이다. …">
+  <meta property="og:description" content="지난해 Daniel Greenfeld가 Python OAuth 구현체들의 유감스러운 상태에 대해 글을 쓰고난 뒤, 이 문제가 중요하다고 여긴 Idan Gazit는 OAuth를 철저히 표준에 의거하여 “제대로” 구현하는 oauthlib 라이브러리를 만들었다. 이 라이브러리는 앞서 링크한 글의 문제를 해결하려면 기존 Python 커뮤니티에 혼란을 주었던 각종 OAuth 1 및 OAuth 2 라이브러리로부터 승리해야 했기 때문에 그 모든 것들의 기능을 총망라하고 있다. OAuth 1 및 OAuth 2 구현을 모두 제공하고 있을 뿐 아니라, 클라이언트와 프로바이더 구현 모두 제공한다. 따라서 2013년 4월 현재 Python에서 OAuth를 쓴다고 하면 OAuth 1을 쓰든 OAuth 2를 쓰든 간에 oauthlib을 선택하는 것이 정답이다. …">
+  <meta property="og:updated_time"
+        content="2013-04-18T19:08:00+09:00">
+  
+      <title>OAuth 1 v. OAuth 2 &mdash; 洪民憙 블로그</title>
+      <link rel="alternate" type="application/atom+xml" title="洪民憙 블로그"
+            href="https://blog.hongminhee.org/feed.xml">
+      <meta name="author" content="홍민희">
+      <link rel="stylesheet" media="screen"
+            href="https://blog.hongminhee.org/static/style.css">
+      <link rel="stylesheet" type="text/css"
+        href="https://spoqa.github.io/spoqa-han-sans/css/SpoqaHanSans-kr.css">
+      <link rel="stylesheet" type="text/css"
+        href="https://spoqa.github.io/spoqa-han-sans/css/SpoqaHanSans-jp.css">
+      <meta name="viewport" content="width=device-width, user-scalable=no">
+      <meta name="twitter:creator" content="@hongminhee">
+      <meta name="twitter:site" content="@hongminhee">
+      <meta property="article:author"
+            content="https://www.facebook.com/hongminhee">
+    
+
+  </head>
+  <body class=" post-page">
+    
+  
+      <header>
+        
+          <a href="https://blog.hongminhee.org/index.html" class="site-name">
+              <ruby>洪民憙 <rp>(</rp><rt>홍민희</rt><rp>)</rp></ruby>
+              블로그
+            </a>
+          <nav>
+            <a href="https://hongminhee.org/" rel="author me">본인 소개</a>
+            <div class="archive">
+              아카이브:
+              <ul>
+                
+                  <li><a href="https://blog.hongminhee.org/2017/">2017</a></li>
+                
+                  <li><a href="https://blog.hongminhee.org/2016/">2016</a></li>
+                
+                  <li><a href="https://blog.hongminhee.org/2015/">2015</a></li>
+                
+                  <li><a href="https://blog.hongminhee.org/2014/">2014</a></li>
+                
+                  <li><a href="https://blog.hongminhee.org/2013/">2013</a></li>
+                
+              </ul>
+            </div>
+          </nav>
+        
+      </header>
+
+      <ul class="disclaimer">
+        <li>글을 썼을 당시의 주장에 제 스스로가 더이상 동의하지 못하는
+            경우도 있습니다.</li>
+        <li>심지어 몇몇 글은 이제 정 반대의 의견을 가지고 있기도 합니다.</li>
+        <li>지금까지 여러 주제에 대한 의견이 꾸준히 달라졌습니다.
+            앞으로도 그럴 것입니다.</li>
+        <li>따라서 제 생각을 바꾸기 위한 설득도 환영합니다.
+            저는 의견을 바꿀 의향이 있습니다.</li>
+      </ul>
+    
+
+  <article>
+    
+      <time datetime="2013-04-18T19:08:00+09:00">2013년 4월 18일</time>
+    
+
+    
+      <h1 id="oauth-1-v.-oauth-2source"><a href="https://oauthlib.readthedocs.org/en/latest/oauth_1_versus_oauth_2.html">OAuth 1 v. OAuth 2</a></h1>
+<p>지난해 Daniel Greenfeld가 <a href="http://pydanny.com/the-sorry-state-of-python-oauth-providers.html">Python OAuth 구현체들의 유감스러운 상태</a>에 대해 글을 쓰고난 뒤, 이 문제가 중요하다고 여긴 Idan Gazit는 OAuth를 철저히 표준에 의거하여 <q>제대로</q> 구현하는 <a href="https://github.com/idan/oauthlib">oauthlib</a> 라이브러리를 만들었다. 이 라이브러리는 앞서 링크한 글의 문제를 해결하려면 기존 Python 커뮤니티에 혼란을 주었던 각종 OAuth 1 및 OAuth 2 라이브러리로부터 승리해야 했기 때문에 그 모든 것들의 기능을 총망라하고 있다. OAuth 1 및 OAuth 2 구현을 모두 제공하고 있을 뿐 아니라, 클라이언트와 프로바이더 구현 모두 제공한다. 따라서 2013년 4월 현재 Python에서 OAuth를 쓴다고 하면 OAuth 1을 쓰든 OAuth 2를 쓰든 간에 <a href="https://github.com/idan/oauthlib">oauthlib</a>을 선택하는 것이 정답이다.</p>
+<p>이 oauthlib의 문서 앞쪽에는 어떤 인증 수단을 선택해야 할지에 대한 친절한 가이드라인을 <a href="https://oauthlib.readthedocs.org/en/latest/oauth_1_versus_oauth_2.html">별도 장</a>을 할애해서 다루고 있는데 oauthlib 자체와 독립적으로 설명하고 있기 때문에 <em>Python을 쓰고 있지 않더라도</em> 인증 수단이 필요한 모든 클라이언트/서버 프로그래머에게 도움이 된다고 생각해서 링크한다. 분량도 간결하고 내용도 매우 훌륭하다. 추천!</p>
+<p>덧. oauthlib은 이름도 그렇고 어쩐지 Python 표준 라이브러리에 포함되는 것을 염두한 것 같기도 하다.</p>
+
+    
+  </article>
+
+
+    <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-54324071-2', 'auto');
+    ga('send', 'pageview');
+    </script>
+  </body>
+</html>
+
+
+

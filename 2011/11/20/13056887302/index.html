@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8">
+    
+  
+    
+      <link rel="canonical" href="https://blog.hongminhee.org/2011/11/20/13056887302/">
+      <meta property="og:url" content="https://blog.hongminhee.org/2011/11/20/13056887302/">
+    
+  
+  
+  <meta name="description" value="">
+  <meta name="twitter:card" content="summary">
+  <meta property="og:locale" content="ko_KR">
+  <meta property="og:site_name" content="洪民憙 블로그">
+  <meta property="og:type" content="article">
+  
+    <meta name="twitter:title" content="Celery + Amazon SQS 실패기">
+    <meta property="og:title" content="Celery + Amazon SQS 실패기">
+  
+  <meta name="twitter:description" content="StyleShare에서는 우선순위 큐(priority queue)가 필요해서 초기에 Celery를 쓰지 않고 직접 구현한 큐와 워커를 사용했다. 하지만 큐의 안정성이 떨어져서 우선순위 기능을 포기하고 RabbitMQ와 Celery를 쓰기로 결정했다. …">
+  <meta property="og:description" content="StyleShare에서는 우선순위 큐(priority queue)가 필요해서 초기에 Celery를 쓰지 않고 직접 구현한 큐와 워커를 사용했다. 하지만 큐의 안정성이 떨어져서 우선순위 기능을 포기하고 RabbitMQ와 Celery를 쓰기로 결정했다. …">
+  <meta property="og:updated_time"
+        content="2011-11-20T20:33:00+09:00">
+  
+      <title>Celery + Amazon SQS 실패기 &mdash; 洪民憙 블로그</title>
+      <link rel="alternate" type="application/atom+xml" title="洪民憙 블로그"
+            href="https://blog.hongminhee.org/feed.xml">
+      <meta name="author" content="홍민희">
+      <link rel="stylesheet" media="screen"
+            href="https://blog.hongminhee.org/static/style.css">
+      <link rel="stylesheet" type="text/css"
+        href="https://spoqa.github.io/spoqa-han-sans/css/SpoqaHanSans-kr.css">
+      <link rel="stylesheet" type="text/css"
+        href="https://spoqa.github.io/spoqa-han-sans/css/SpoqaHanSans-jp.css">
+      <meta name="viewport" content="width=device-width, user-scalable=no">
+      <meta name="twitter:creator" content="@hongminhee">
+      <meta name="twitter:site" content="@hongminhee">
+      <meta property="article:author"
+            content="https://www.facebook.com/hongminhee">
+    
+
+  </head>
+  <body class=" post-page outdated">
+    
+  
+      <header>
+        
+          <a href="https://blog.hongminhee.org/index.html" class="site-name">
+              <ruby>洪民憙 <rp>(</rp><rt>홍민희</rt><rp>)</rp></ruby>
+              블로그
+            </a>
+          <nav>
+            <a href="https://hongminhee.org/" rel="author me">본인 소개</a>
+            <div class="archive">
+              아카이브:
+              <ul>
+                
+                  <li><a href="https://blog.hongminhee.org/2017/">2017</a></li>
+                
+                  <li><a href="https://blog.hongminhee.org/2016/">2016</a></li>
+                
+                  <li><a href="https://blog.hongminhee.org/2015/">2015</a></li>
+                
+                  <li><a href="https://blog.hongminhee.org/2014/">2014</a></li>
+                
+                  <li><a href="https://blog.hongminhee.org/2013/">2013</a></li>
+                
+              </ul>
+            </div>
+          </nav>
+        
+      </header>
+
+      <ul class="disclaimer">
+        <li>글을 썼을 당시의 주장에 제 스스로가 더이상 동의하지 못하는
+            경우도 있습니다.</li>
+        <li>심지어 몇몇 글은 이제 정 반대의 의견을 가지고 있기도 합니다.</li>
+        <li>지금까지 여러 주제에 대한 의견이 꾸준히 달라졌습니다.
+            앞으로도 그럴 것입니다.</li>
+        <li>따라서 제 생각을 바꾸기 위한 설득도 환영합니다.
+            저는 의견을 바꿀 의향이 있습니다.</li>
+      </ul>
+    
+
+  <article>
+    
+      <time datetime="2011-11-20T20:33:00+09:00">2011년 11월 20일</time>
+    
+
+    
+      
+  <p class="outdate-disclaimer">
+    이하의 글은 2011년에 쓴 것입니다. 오래된 글인 만큼, 현재의
+    생각과 전혀 다른 내용도 많이 포함되어 있고, 당시와는 상황이 많이 달라진
+    점도 있습니다. 또한, 그 당시에 잘못 알려졌던 정보도 포함되어 있을 수
+    있습니다. <em>어찌됐든 저는 제 오래된 글이 회자되는 것을 저어합니다.</em>
+    읽기에 앞서 양해를 부탁드립니다.
+  <p>
+        <h1 id="celery-amazon-sqs-실패기">Celery + Amazon SQS 실패기</h1>
+<p><a href="https://stylesha.re/">StyleShare</a><a href="#fn1" class="footnoteRef" id="fnref1"><sup>1</sup></a>에서는 우선순위 큐(priority queue)가 필요해서 초기에 <a href="http://www.celeryproject.org/">Celery</a>를 쓰지 않고 직접 구현한 큐와 워커를 사용했다. 하지만 큐의 안정성이 떨어져서 우선순위 기능을 포기하고 <a href="http://www.rabbitmq.com/">RabbitMQ</a>와 Celery를 쓰기로 결정했다.</p>
+<p>사실 처음에는 Celery와 Amazon <a href="http://aws.amazon.com/sqs/">SQS</a>를 쓸 예정이었다. StyleShare 인프라는 현재 <a href="http://aws.amazon.com/">Amazon Web Services</a> 위에 구축되어 있고, AWS에 해당 용도의 서비스가 존재한다면 그걸 우선적으로 쓰는 걸 고려하고 있다. 예를 들어 우리는 L4를 직접 구축할 생각을 버리고 <a href="http://aws.amazon.com/elasticloadbalancing/">ELB</a>를 쓰고 있고, 3개월 정도 지난 현재, 결과적으로는 좋은 선택이었다. 그런 의미에서 큐 역시 직접 구현하지 않고 SQS를 사용하는 쪽을 먼저 고려했던 것이다.</p>
+<p>하지만 Celery의 SQS 지원은 현재 좋지 않았다. Celery가 의존하는 AMQP 메세징 라이브러리인 <a href="https://pypi.python.org/pypi/kombu">Kombu</a>는 Celery 작성자가 직접 만든 물건인데 AMQP만 구현하는 것 뿐만 아니라 가상 트랜스포트(virtual transport)라는 개념으로 RDBMS나 Redis 등으로 AMQP의 기본적인 기능들을 에뮬레이션해서 똑같은 인터페이스로 사용할 수 있게 해준다. 따라서 Kombu 덕분에 Celery를 쓰게 되면 실제 서버에서는 RabbitMQ를 쓰면서, 로컬 개발 환경에서는 별도의 데몬을 돌리는 대신 간편하게 SQLite를 큐처럼 쓸 수 있는 것이다. 비효율적이고 안정적이지 못하지만 개발 환경을 간소화하는 데는 무척 도움이 된다. 이와 마찬가지로 SQS 역시 Kombu에서 같은 인터페이스로 다룰 수 있게 되어 있긴 하다. 하지만 몇가지 문제가 있어서 패치가 필요한데, <a href="https://github.com/celery/kombu/pull/82">내가 제출한 패치</a>는 <del datetime="2011-11-27T08:48:41-08:00">이 시각까지는 아직 업스트림에 합쳐지지 못했다</del> <ins datetime="2011-11-27T08:48:41-08:00">이제 업스트림에 반영되었다</ins>.</p>
+<p>가까스로 문제를 해결하여 커넥션까지 성공했다. 하지만 생각처럼 매끄럽게 돌아가지는 않았다. 일단 큐에 던지는 것은 문제 없이 되었다. 하지만 SQS에 메세지가 몇십만개 쌓이도록 워커는 늑장을 부리는게 아닌가. SQS 자체는 안정적이긴 했으나 RabbitMQ만큼 날쌔다는 느낌은 없었다. 게다가 Kombu의 SQS 지원이 미흡하여 커넥션이 오래될수록 큐에서 새로운 메세지를 받는 것이 느려졌다. 아직도 원인은 정확히 파악하지 못했다.</p>
+<p>그래서 도중에 방향을 바꾸고 RabbitMQ를 직접 설치해서 운영하기로 했다. 명성대로 잘 동작해주었고, 애초에 Celery는 RabbitMQ를 최우선 백엔드로 지원하고 있기 때문에 궁합도 완벽했다. SQS를 쓸 때처럼 내가 패치를 해줘야 하는 부분은 단 하나도 없었고 시도한지 3시간 안에 모든 전환을 마칠 수 있었다.</p>
+<p>내 생각에는 SQS 자체의 문제라기 보다는 Kombu의 SQS 지원 미흡이 가장 큰 실패 요인이었다고 생각한다. 차라리 이쪽 부분은 AWS 직원들 중 SQS 개발하는 쪽에서 시간이 날때 패치를 제출하면 모든 문제가 <q>올바르게</q> 풀릴 것 같은데, 실무에서 적용하는 입장에서는 시간을 내서 패치를 직접 했음에도 불구하고 매끄럽게 돌아가지 않는다면 굳이 안되는 걸 고집하고 씨름할 수 없기 때문에 결국 RabbitMQ를 쓰게 되었다.</p>
+<p>만약 Celery를 SQS 백엔드로 쓰고 싶은 사람이 있다면 아직은 말리고 싶다. 꼭 SQS를 특별히 얘기하는 것은 아니고, Celery와 Kombu 자체가 아직까지 RabbitMQ 중심으로 구현되어 있기 때문이다. 다중 백엔드를 지원하기 위해 인터페이스가 잘 디자인되어 있긴 하지만, 실제로 사용되는 구현만이 버그도 많이 밟혀서 안정적으로 될 수밖에 없는 것이다. 따라서 아직은 RabbitMQ 말고는 추천할 만한 백엔드가 없다. AMQP 구현체 다른 것도 상황은 마찬가지다. Celery에서는 아직 RabbitMQ만 안심하고 쓸 수 있다.</p>
+<section class="footnotes">
+<hr />
+<ol>
+<li id="fn1"><p>생각해보니 블로그에서는 처음 말하는 것 같은데, 나는 올해 초부터 <a href="https://stylesha.re/">StyleShare</a>라는 스타트업을 하고 있다. 패션 소셜 네트워크 서비스라고 생각하면 된다.<a href="#fnref1">↩</a></p></li>
+</ol>
+</section>
+
+        <script>
+        (function () {
+          var ps = document.getElementsByClassName('outdate-disclaimer');
+          if (ps.length < 1) {
+            return;
+          }
+          var p = ps[0], t = document.createElement('span');
+          t.addEventListener('click', function () {
+            this.parentNode.removeChild(this);
+            var gs = document.getElementsByClassName('outdate-gray-out');
+            for (var i = gs.length - 1; i >= 0; --i) {
+              gs[i].className = gs[i].className.replace(
+                /(^|\s)outdate-gray-out(\s|$)/g, '');
+            }
+          });
+          t.className = 'toggler';
+          t.innerText = '읽기';
+          p.appendChild(t);
+          var e = p.nextSibling;
+          while (e !== null && e !== undefined) {
+            if (e.nodeType === 1) {
+              e.className += ' outdate-gray-out';
+            }
+            e = e.nextSibling;
+          }
+        })();
+        </script>
+      
+    
+  </article>
+
+
+    <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-54324071-2', 'auto');
+    ga('send', 'pageview');
+    </script>
+  </body>
+</html>
+
+
+

@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8">
+    
+  
+    
+      <link rel="canonical" href="https://blog.hongminhee.org/2012/12/04/libsass-python-024/">
+      <meta property="og:url" content="https://blog.hongminhee.org/2012/12/04/libsass-python-024/">
+    
+  
+  
+  <meta name="description" value="">
+  <meta name="twitter:card" content="summary">
+  <meta property="og:locale" content="ko_KR">
+  <meta property="og:site_name" content="洪民憙 블로그">
+  <meta property="og:type" content="article">
+  
+    <meta name="twitter:title" content="libsass-python 0.2.4">
+    <meta property="og:title" content="libsass-python 0.2.4">
+  
+  <meta name="twitter:description" content="libsass-python 0.2.4 버전을 릴리즈했습니다. (CSS의 수퍼셋 언어인 SASS/SCSS의 Python 바인딩입니다.) 이번 버전에 크게 바뀐 것은 다음 두 가지입니다. …">
+  <meta property="og:description" content="libsass-python 0.2.4 버전을 릴리즈했습니다. (CSS의 수퍼셋 언어인 SASS/SCSS의 Python 바인딩입니다.) 이번 버전에 크게 바뀐 것은 다음 두 가지입니다. …">
+  <meta property="og:updated_time"
+        content="2012-12-04T01:05:00+09:00">
+  
+      <title>libsass-python 0.2.4 &mdash; 洪民憙 블로그</title>
+      <link rel="alternate" type="application/atom+xml" title="洪民憙 블로그"
+            href="https://blog.hongminhee.org/feed.xml">
+      <meta name="author" content="홍민희">
+      <link rel="stylesheet" media="screen"
+            href="https://blog.hongminhee.org/static/style.css">
+      <link rel="stylesheet" type="text/css"
+        href="https://spoqa.github.io/spoqa-han-sans/css/SpoqaHanSans-kr.css">
+      <link rel="stylesheet" type="text/css"
+        href="https://spoqa.github.io/spoqa-han-sans/css/SpoqaHanSans-jp.css">
+      <meta name="viewport" content="width=device-width, user-scalable=no">
+      <meta name="twitter:creator" content="@hongminhee">
+      <meta name="twitter:site" content="@hongminhee">
+      <meta property="article:author"
+            content="https://www.facebook.com/hongminhee">
+    
+
+  </head>
+  <body class=" post-page">
+    
+  
+      <header>
+        
+          <a href="https://blog.hongminhee.org/index.html" class="site-name">
+              <ruby>洪民憙 <rp>(</rp><rt>홍민희</rt><rp>)</rp></ruby>
+              블로그
+            </a>
+          <nav>
+            <a href="https://hongminhee.org/" rel="author me">본인 소개</a>
+            <div class="archive">
+              아카이브:
+              <ul>
+                
+                  <li><a href="https://blog.hongminhee.org/2017/">2017</a></li>
+                
+                  <li><a href="https://blog.hongminhee.org/2016/">2016</a></li>
+                
+                  <li><a href="https://blog.hongminhee.org/2015/">2015</a></li>
+                
+                  <li><a href="https://blog.hongminhee.org/2014/">2014</a></li>
+                
+                  <li><a href="https://blog.hongminhee.org/2013/">2013</a></li>
+                
+              </ul>
+            </div>
+          </nav>
+        
+      </header>
+
+      <ul class="disclaimer">
+        <li>글을 썼을 당시의 주장에 제 스스로가 더이상 동의하지 못하는
+            경우도 있습니다.</li>
+        <li>심지어 몇몇 글은 이제 정 반대의 의견을 가지고 있기도 합니다.</li>
+        <li>지금까지 여러 주제에 대한 의견이 꾸준히 달라졌습니다.
+            앞으로도 그럴 것입니다.</li>
+        <li>따라서 제 생각을 바꾸기 위한 설득도 환영합니다.
+            저는 의견을 바꿀 의향이 있습니다.</li>
+      </ul>
+    
+
+  <article>
+    
+      <time datetime="2012-12-04T01:05:00+09:00">2012년 12월 4일</time>
+    
+
+    
+      <h1 id="libsass-python-0.2.4source"><a href="http://pypi.python.org/pypi/libsass/0.2.4">libsass-python 0.2.4</a></h1>
+<p><a href="http://pypi.python.org/pypi/libsass/0.2.4">libsass-python 0.2.4</a> 버전을 릴리즈했습니다. (CSS의 수퍼셋 언어인 <a href="http://sass-lang.com/">SASS/SCSS</a>의 Python 바인딩입니다.) 이번 버전에 크게 바뀐 것은 다음 두 가지입니다.</p>
+<ul>
+<li>이번 버전부터 <a href="http://dahlia.github.com/libsass-python/sassc.html"><code>sassc</code></a>라는 명령행 도구가 제공됩니다.</li>
+<li><a href="https://github.com/hcatlin/libsass">libsass</a> 업스트림의 그동안 변화(<a href="https://github.com/hcatlin/libsass/compare/e9971023785dabd41aa44f431f603f62b15e6017...a84b181a6e59463c0ac9796ca7fdaf4864f0ad84"><code>e997102</code>–<code>a84b181</code></a>)를 머지했습니다. 그 사이에 바뀐 것 중에서 가장 눈에 띄는 것은 <a href="http://sass-lang.com/docs/yardoc/file.SASS_REFERENCE.html#mixin-content">content block을 mixin에 전달할 수 있는 기능</a>이 추가된 것입니다.</li>
+</ul>
+<p>설치는 <code>pip</code>나 <code>easy_install</code>로 할 수 있습니다. PyPI 패키지 네임은 <code>libsass</code>입니다(<code>libsass-python</code>이 아님).</p>
+<pre><code>$ pip install libsass
+$ easy_install libsass</code></pre>
+<p>참고로 <code>pip</code>는 egg를 설치하지 못합니다. libsass는 C 확장이므로 컴파일을 해야 하는데 Windows에서 컴파일을 하려면 Visual Studio가 필요합니다.그래서 PyPI에 Windows용 64비트 바이너리 egg도 올려뒀습니다. 근데 <code>pip</code>로 설치하려고 하면 그걸 쓰지 않고 소스코드를 빌드하려고 하다가 Visual Studio 없다고 에러가 날 겁니다. 그런고로 Windows 쓰시는 분들은 <code>easy_install</code>로 설치해주세요.</p>
+
+    
+  </article>
+
+
+    <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-54324071-2', 'auto');
+    ga('send', 'pageview');
+    </script>
+  </body>
+</html>
+
+
+

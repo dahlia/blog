@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8">
+    
+  
+    
+      <link rel="canonical" href="https://blog.hongminhee.org/2011/05/02/5124874464/">
+      <meta property="og:url" content="https://blog.hongminhee.org/2011/05/02/5124874464/">
+    
+  
+  
+  <meta name="description" value="">
+  <meta name="twitter:card" content="summary">
+  <meta property="og:locale" content="ko_KR">
+  <meta property="og:site_name" content="洪民憙 블로그">
+  <meta property="og:type" content="article">
+  
+    <meta name="twitter:title" content="PyPy가 CPython보다 빠를 수 있는 이유">
+    <meta property="og:title" content="PyPy가 CPython보다 빠를 수 있는 이유">
+  
+  <meta name="twitter:description" content="PyPy 1.5가 나왔다. Python 프로그래머에게 있어서 이번 릴리즈의 가장 큰 의의는 아마 Python 2.7.1 호환성을 제공한다는 데에 있을 것이다. (이전 버전은 2.5 호환성을 제공했다. 반년도 안되어서 2.5 → 2.7.1로 호환성을 올린 것이니 참으로 괴물 같은 개발 속도라 할 수 있다.) …">
+  <meta property="og:description" content="PyPy 1.5가 나왔다. Python 프로그래머에게 있어서 이번 릴리즈의 가장 큰 의의는 아마 Python 2.7.1 호환성을 제공한다는 데에 있을 것이다. (이전 버전은 2.5 호환성을 제공했다. 반년도 안되어서 2.5 → 2.7.1로 호환성을 올린 것이니 참으로 괴물 같은 개발 속도라 할 수 있다.) …">
+  <meta property="og:updated_time"
+        content="2011-05-02T14:13:00+09:00">
+  
+      <title>PyPy가 CPython보다 빠를 수 있는 이유 &mdash; 洪民憙 블로그</title>
+      <link rel="alternate" type="application/atom+xml" title="洪民憙 블로그"
+            href="https://blog.hongminhee.org/feed.xml">
+      <meta name="author" content="홍민희">
+      <link rel="stylesheet" media="screen"
+            href="https://blog.hongminhee.org/static/style.css">
+      <link rel="stylesheet" type="text/css"
+        href="https://spoqa.github.io/spoqa-han-sans/css/SpoqaHanSans-kr.css">
+      <link rel="stylesheet" type="text/css"
+        href="https://spoqa.github.io/spoqa-han-sans/css/SpoqaHanSans-jp.css">
+      <meta name="viewport" content="width=device-width, user-scalable=no">
+      <meta name="twitter:creator" content="@hongminhee">
+      <meta name="twitter:site" content="@hongminhee">
+      <meta property="article:author"
+            content="https://www.facebook.com/hongminhee">
+    
+
+  </head>
+  <body class=" post-page outdated">
+    
+  
+      <header>
+        
+          <a href="https://blog.hongminhee.org/index.html" class="site-name">
+              <ruby>洪民憙 <rp>(</rp><rt>홍민희</rt><rp>)</rp></ruby>
+              블로그
+            </a>
+          <nav>
+            <a href="https://hongminhee.org/" rel="author me">본인 소개</a>
+            <div class="archive">
+              아카이브:
+              <ul>
+                
+                  <li><a href="https://blog.hongminhee.org/2017/">2017</a></li>
+                
+                  <li><a href="https://blog.hongminhee.org/2016/">2016</a></li>
+                
+                  <li><a href="https://blog.hongminhee.org/2015/">2015</a></li>
+                
+                  <li><a href="https://blog.hongminhee.org/2014/">2014</a></li>
+                
+                  <li><a href="https://blog.hongminhee.org/2013/">2013</a></li>
+                
+              </ul>
+            </div>
+          </nav>
+        
+      </header>
+
+      <ul class="disclaimer">
+        <li>글을 썼을 당시의 주장에 제 스스로가 더이상 동의하지 못하는
+            경우도 있습니다.</li>
+        <li>심지어 몇몇 글은 이제 정 반대의 의견을 가지고 있기도 합니다.</li>
+        <li>지금까지 여러 주제에 대한 의견이 꾸준히 달라졌습니다.
+            앞으로도 그럴 것입니다.</li>
+        <li>따라서 제 생각을 바꾸기 위한 설득도 환영합니다.
+            저는 의견을 바꿀 의향이 있습니다.</li>
+      </ul>
+    
+
+  <article>
+    
+      <time datetime="2011-05-02T14:13:00+09:00">2011년 5월 2일</time>
+    
+
+    
+      
+  <p class="outdate-disclaimer">
+    이하의 글은 2011년에 쓴 것입니다. 오래된 글인 만큼, 현재의
+    생각과 전혀 다른 내용도 많이 포함되어 있고, 당시와는 상황이 많이 달라진
+    점도 있습니다. 또한, 그 당시에 잘못 알려졌던 정보도 포함되어 있을 수
+    있습니다. <em>어찌됐든 저는 제 오래된 글이 회자되는 것을 저어합니다.</em>
+    읽기에 앞서 양해를 부탁드립니다.
+  <p>
+        <h1 id="pypy가-cpython보다-빠를-수-있는-이유">PyPy가 CPython보다 빠를 수 있는 이유</h1>
+<p><a href="http://morepypy.blogspot.com/2011/04/pypy-15-released-catching-up.html">PyPy 1.5가 나왔다.</a> Python 프로그래머에게 있어서 이번 릴리즈의 가장 큰 의의는 아마 Python 2.7.1 호환성을 제공한다는 데에 있을 것이다. (이전 버전은 2.5 호환성을 제공했다. 반년도 안되어서 2.5 → 2.7.1로 호환성을 올린 것이니 참으로 괴물 같은 개발 속도라 할 수 있다.)</p>
+<p>해외에서도 그렇고 LangDev 채널에서도 그렇고 <a href="http://pypy.org/">PyPy</a>에 관한 가장 흔한 질문은 이것이다: <strong>PyPy는 Python으로 Python을 구현한 건데 어떻게 CPython보다 빠르다는 겁니까?</strong></p>
+<p>이것은 매우 자연스러운 질문이다. 비유하자면 가상 머신 안에서 돌아가는 프로그램이 실제 물리적인 컴퓨터에서 바로 실행되는 프로그램보다 빠르다는 얘기와 비슷한 소리 아닌가? 쉽게 생각하면 말이 안되는 이야기다. 하지만 C 컴파일러는 C로 작성되며, C 컴파일러를 컴파일하는 데에 사용한 컴파일러보다 컴파일된 C 컴파일러가 빠를 수 있다는 것을 생각해보면 PyPy가 CPython보다 빠른 것도 가능한 이야기다.</p>
+<p>PyPy는 단순히 <q>Python으로 구현한 Python</q>으로 널리 알려져 있지만, 실제로 PyPy가 하는 일은 크게 두 가지이다.</p>
+<ol>
+<li><a href="ftp://ftp.disi.unige.it/pub/person/AnconaD/DLS08.pdf">RPython</a> 언어로 동적 언어의 인터프리터를 구현할 수 있게 해주는 프레임워크</li>
+<li>RPython으로 구현된 Python</li>
+</ol>
+<p>1은 Python으로 구현되었고 따라서 CPython이나 PyPy로 실행 가능하다. 2는 말 그대로 RPython으로 구현되어 있다.</p>
+<p><a href="ftp://ftp.disi.unige.it/pub/person/AnconaD/DLS08.pdf">RPython</a>이 무엇이냐? 정적 컴파일이 가능하도록 Python 언어에 제약을 가한 Python의 부분 집합 언어이다. 컴파일하는 데에 장애가 되는 Python의 동적인 기능을 제거한 것으로 생각하면 된다. 그리고 PyPy는 RPython을 C나 JVM 바이트 코드, CLI IL로 번역하는 컴파일러(<code>translate.py</code>)를 구현하고 있다. 이게 1번이다.</p>
+<p>그리고 RPython으로 Python 언어의 인터프리터를 구현했다. 이 인터프리터는 <code>translate.py</code>를 이용해 C나 JVM 바이트코드 등으로 번역된다. 백엔드를 JVM으로 하면 Jython 같은 것이 나오고 CLI IL로 하면 .NET에서 돌아가는 IronPython 같은 것이 떨어지며, C로 하면 CPython 같은 것이 떨어진다는 이야기다. 그리고 <code>--withmod-_stackless</code> 옵션을 주면 Stackless Python 같은 것이 떨어진다. 그야말로 인터프리터 찍어내는 프로그램이라고 생각하면 정확히 이해하는 거다. (여기서 중요한 것은 인터프리터 구현 소스는 백엔드 타겟과 중립적으로 하나만 존재한다는 점이다.)</p>
+<p>여기까지 이해했다면 PyPy가 Python에 비해 심각할 정도로 느리지는 않을 거라고 예상할 수 있다. 인터프리터로 인터프리터를 돌리는 것이 아니라 인터프리터를 정적으로 컴파일하는 것이기 때문이다. 그렇다면 PyPy는 어떻게 실질적인 스피드업을 해낼까?</p>
+<p>바로 여기에 PyPy의 외계 기술이 들어간다. <code>translate.py</code>는 RPython으로 구현한 인터프리터 소스 코드에 루프가 어디에서 시작해서 어디에서 끝나는지 정도만 annotation을 추가하면 <q>알아서</q> <strong>그냥</strong> <a href="http://morepypy.blogspot.com/2009/03/applying-tracing-jit-to-interpreter.html">Tracing JIT</a>를 인터프리터에 끼워준다!!! 즉 RPython으로 Lua 인터프리터를 구현하면 LuaJIT 같은 것이 나오는 것이고 JavaScript 인터프리터를 구현하면 TraceMonkey 같은 것이 나오는 것이다! 이것은 굉장히 놀라운 기술인데, JIT를 추가하기 위해서는 언어 구현에 <strong>전역적으로 JIT 관련 코드가 침투해야 한다</strong>는 점을 생각해보면 공짜도 이런 공짜가 없는 것이다.<a href="#fn1" class="footnoteRef" id="fnref1"><sup>1</sup></a></p>
+<p>자, 이론적으로는 빠르지만 실제로는 얼마나 빠를까? 궁금하다면 <a href="http://speed.pypy.org/">PyPy Speed Center</a>를 확인하면 된다. PyPy는 매 릴리즈 성능을 올리고 있으며, 아직도 더 올라갈 여지가 많다. 물론 이미 CPython보다 대부분의 벤치마크에서 빠른 상태다.</p>
+<p>성능만 좋으면 대수냐? 원래 CPython에서 돌아가던 Python 소프트웨어가 잘 돌아가야 의미가 있지 않느냐? 물론 잘 돌아간다. 어제도 내가 만들었던 Flask, Werkzeug, Jinja2, SQLAlchemy 등에 의존하는 웹 애플리케이션 하나를 PyPy에서 코드를 전혀 수정하지 않고 돌려봤다. 모두 잘 돌아간다. :)</p>
+<p>호환성 이슈는 PyPy에게 매우 중요하다. CPython을 대체해야 하기 때문이다(!). 레거시 코드를 수정 없이 제대로 동작시킬 수 있어야 한다. 그래서 PyPy의 호환성 정책은 애초에 이렇다: <strong>CPython에서 돌아가던 게 PyPy에서 안 돌아가면 PyPy의 버그다.</strong> 그런 게 있다면 주저없이 PyPy 이슈트래커에 신고하면 된다.</p>
+<p>호환성의 큰 장애가 되던 것은 C 확장들인데 그것마저 <a href="http://morepypy.blogspot.com/2010/04/using-cpython-extension-modules-with.html">CPyExt</a> 덕분에 대부분 해결된 상태이다. 몇몇 많이 사용되는 소프트웨어는 PyPy 팀이 아예 나서서 호환성 패치를 작성하기도 한다.</p>
+<p>이렇게 훌륭한 프로젝트가 어디 있을까! PyPy는 놀라운 외계 기술을 선보이고 있지만 물론 하루아침에 이루어진 게 아니다. 지금은 GvR조차 Python의 차세대 레퍼런스 구현으로 PyPy를 지목하고 있을 정도이지만, 사실 이 프로젝트는 거의 10년 가까이 진행된 끝에 최근에 와서야 그 결실을 보고 있는 것이다. 이와 관련해서는 작년 말 PyPy 블로그에 올라온 <a href="http://morepypy.blogspot.com/2010/12/we-are-not-heroes-just-very-patient.html"><q>우리는 영웅이 아니라 그저 인내력이 매우 강했을 뿐</q></a>이라는 글을 읽어보면 된다.</p>
+<p>그래서 이 글의 요점은? 당장 <a href="http://pypy.org/download.html">PyPy를 받아서</a><a href="#fn2" class="footnoteRef" id="fnref2"><sup>2</sup></a> CPython 대신 써보자는 얘기이다. :-)</p>
+<p>추가. <a href="http://mearie.org/">강성훈</a> 씨가 이 글과 관련해 <a href="http://j.mearie.org/post/5125952364/why-is-pypy-faster-than-cpython">meta-tracing JIT에 대해 좀더 자세한 글</a>을 썼으니 읽어보면 좋다.</p>
+<section class="footnotes">
+<hr />
+<ol>
+<li id="fn1"><p>물론 아직까지는 이러한 meta-tracing이 일반적으로 손으로 구현되는 tracing에 비해 효율이 좀 떨어지기는 한다. 하지만 구현의 복잡도를 생각한다면 장기적으로는 meta-tacing이 더 나은 방향일 수 있다. <a href="http://mearie.org/">강성훈</a> 씨의 의견 감사.<a href="#fnref1">↩</a></p></li>
+<li id="fn2"><p>궁금한 사람은 RPython으로 작성된 Python 인터프리터를 <code>translate.py</code>로 번역해서 직접 빌드하고 싶겠지만, 매우 time-consuming + memory-hungry한 절차이므로 그냥 바이너리를 받아서 쓰길 추천한다.<a href="#fnref2">↩</a></p></li>
+</ol>
+</section>
+
+        <script>
+        (function () {
+          var ps = document.getElementsByClassName('outdate-disclaimer');
+          if (ps.length < 1) {
+            return;
+          }
+          var p = ps[0], t = document.createElement('span');
+          t.addEventListener('click', function () {
+            this.parentNode.removeChild(this);
+            var gs = document.getElementsByClassName('outdate-gray-out');
+            for (var i = gs.length - 1; i >= 0; --i) {
+              gs[i].className = gs[i].className.replace(
+                /(^|\s)outdate-gray-out(\s|$)/g, '');
+            }
+          });
+          t.className = 'toggler';
+          t.innerText = '읽기';
+          p.appendChild(t);
+          var e = p.nextSibling;
+          while (e !== null && e !== undefined) {
+            if (e.nodeType === 1) {
+              e.className += ' outdate-gray-out';
+            }
+            e = e.nextSibling;
+          }
+        })();
+        </script>
+      
+    
+  </article>
+
+
+    <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-54324071-2', 'auto');
+    ga('send', 'pageview');
+    </script>
+  </body>
+</html>
+
+
+

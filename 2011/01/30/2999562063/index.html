@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8">
+    
+  
+    
+      <link rel="canonical" href="https://blog.hongminhee.org/2011/01/30/2999562063/">
+      <meta property="og:url" content="https://blog.hongminhee.org/2011/01/30/2999562063/">
+    
+  
+  
+  <meta name="description" value="">
+  <meta name="twitter:card" content="summary">
+  <meta property="og:locale" content="ko_KR">
+  <meta property="og:site_name" content="洪民憙 블로그">
+  <meta property="og:type" content="article">
+  
+    <meta name="twitter:title" content="엔티티 중복과 동기화">
+    <meta property="og:title" content="엔티티 중복과 동기화">
+  
+  <meta name="twitter:description" content="엔티티 중복(entity duplication)을 좋아하지 않는다. 어느 한쪽의 엔티티를 다른 한쪽으로 복제해야 할 때가 있다. 예를 들자면 트윗을 Facebook으로, iPhoto 사진을 Flickr로 복제한다. 문제는 현존하는 거의 대부분의 소프트웨어들이 엔티티 복제를 아주 나이브하게 구현했다는 데에 있다. 구체적으로는, 거의 모든 소프트웨어가 동기화(synchronization)에는 전혀 관심이 없는듯 보인다. 동기화가 되지 않으면 엔티티 복제는 엔티티 중복이 된다. …">
+  <meta property="og:description" content="엔티티 중복(entity duplication)을 좋아하지 않는다. 어느 한쪽의 엔티티를 다른 한쪽으로 복제해야 할 때가 있다. 예를 들자면 트윗을 Facebook으로, iPhoto 사진을 Flickr로 복제한다. 문제는 현존하는 거의 대부분의 소프트웨어들이 엔티티 복제를 아주 나이브하게 구현했다는 데에 있다. 구체적으로는, 거의 모든 소프트웨어가 동기화(synchronization)에는 전혀 관심이 없는듯 보인다. 동기화가 되지 않으면 엔티티 복제는 엔티티 중복이 된다. …">
+  <meta property="og:updated_time"
+        content="2011-01-30T06:56:00+09:00">
+  
+      <title>엔티티 중복과 동기화 &mdash; 洪民憙 블로그</title>
+      <link rel="alternate" type="application/atom+xml" title="洪民憙 블로그"
+            href="https://blog.hongminhee.org/feed.xml">
+      <meta name="author" content="홍민희">
+      <link rel="stylesheet" media="screen"
+            href="https://blog.hongminhee.org/static/style.css">
+      <link rel="stylesheet" type="text/css"
+        href="https://spoqa.github.io/spoqa-han-sans/css/SpoqaHanSans-kr.css">
+      <link rel="stylesheet" type="text/css"
+        href="https://spoqa.github.io/spoqa-han-sans/css/SpoqaHanSans-jp.css">
+      <meta name="viewport" content="width=device-width, user-scalable=no">
+      <meta name="twitter:creator" content="@hongminhee">
+      <meta name="twitter:site" content="@hongminhee">
+      <meta property="article:author"
+            content="https://www.facebook.com/hongminhee">
+    
+
+  </head>
+  <body class=" post-page outdated">
+    
+  
+      <header>
+        
+          <a href="https://blog.hongminhee.org/index.html" class="site-name">
+              <ruby>洪民憙 <rp>(</rp><rt>홍민희</rt><rp>)</rp></ruby>
+              블로그
+            </a>
+          <nav>
+            <a href="https://hongminhee.org/" rel="author me">본인 소개</a>
+            <div class="archive">
+              아카이브:
+              <ul>
+                
+                  <li><a href="https://blog.hongminhee.org/2017/">2017</a></li>
+                
+                  <li><a href="https://blog.hongminhee.org/2016/">2016</a></li>
+                
+                  <li><a href="https://blog.hongminhee.org/2015/">2015</a></li>
+                
+                  <li><a href="https://blog.hongminhee.org/2014/">2014</a></li>
+                
+                  <li><a href="https://blog.hongminhee.org/2013/">2013</a></li>
+                
+              </ul>
+            </div>
+          </nav>
+        
+      </header>
+
+      <ul class="disclaimer">
+        <li>글을 썼을 당시의 주장에 제 스스로가 더이상 동의하지 못하는
+            경우도 있습니다.</li>
+        <li>심지어 몇몇 글은 이제 정 반대의 의견을 가지고 있기도 합니다.</li>
+        <li>지금까지 여러 주제에 대한 의견이 꾸준히 달라졌습니다.
+            앞으로도 그럴 것입니다.</li>
+        <li>따라서 제 생각을 바꾸기 위한 설득도 환영합니다.
+            저는 의견을 바꿀 의향이 있습니다.</li>
+      </ul>
+    
+
+  <article>
+    
+      <time datetime="2011-01-30T06:56:00+09:00">2011년 1월 30일</time>
+    
+
+    
+      
+  <p class="outdate-disclaimer">
+    이하의 글은 2011년에 쓴 것입니다. 오래된 글인 만큼, 현재의
+    생각과 전혀 다른 내용도 많이 포함되어 있고, 당시와는 상황이 많이 달라진
+    점도 있습니다. 또한, 그 당시에 잘못 알려졌던 정보도 포함되어 있을 수
+    있습니다. <em>어찌됐든 저는 제 오래된 글이 회자되는 것을 저어합니다.</em>
+    읽기에 앞서 양해를 부탁드립니다.
+  <p>
+        <h1 id="엔티티-중복과-동기화">엔티티 중복과 동기화</h1>
+<p>엔티티 중복(entity duplication)을 좋아하지 않는다. 어느 한쪽의 엔티티를 다른 한쪽으로 복제해야 할 때가 있다. 예를 들자면 트윗을 Facebook으로, iPhoto 사진을 Flickr로 복제한다. 문제는 현존하는 거의 대부분의 소프트웨어들이 엔티티 복제를 아주 나이브하게 구현했다는 데에 있다. 구체적으로는, 거의 모든 소프트웨어가 동기화(synchronization)에는 전혀 관심이 없는듯 보인다. 동기화가 되지 않으면 엔티티 복제는 엔티티 중복이 된다.</p>
+<p>어떤 것들이 보장되어야 동기화가 된다고 말할 수 있을까?</p>
+<ul>
+<li>원본 엔티티가 수정되면 복제된 엔티티도 함께 수정되어야 한다.</li>
+<li>원본 엔티티가 삭제되면 복제된 엔티티도 함께 삭제되어야 한다.</li>
+<li>복제된 엔티티가 수정되면 원본 엔티티도 함께 수정되어야 한다.<a href="#fn1" class="footnoteRef" id="fnref1"><sup>1</sup></a></li>
+</ul>
+<p>위와 같은 것들이 보장되면 동기화가 된다고 볼 수 있다. 동기화가 되지 않을 경우 엔티티에 대한 통제가 힘들어진다. 나는 그래서 기술적으로 동기화를 구현하기 매우 힘든 반면 동기화를 구현해서 얻는 이득이 거의 없거나 아예 원본 엔티티가 수정/삭제될 가능성이 없는 경우<a href="#fn2" class="footnoteRef" id="fnref2"><sup>2</sup></a>가 아니면 동기화를 꼭 구현해야 한다고 생각한다. 아니면 비동기적이라고 하더라도 최소한 eventually-consistent할 필요는 있다고 생각한다.</p>
+<p>자, 여기까지는 정리된 생각. 이후로는 요즘 고민하는 내용들.</p>
+<ul>
+<li><p>그렇다면 우리가 사용하고 있는 소프트웨어 중에서 엔티티 동기화를 구현하는 것들이 얼마나 있을까? 얼른 생각이 나지는 않는다. 엔티티 동기화를 구현해두면 사용자는 엔티티가 복제되더라도 그것을 하나의 엔티티로 취급하면 되기 때문에 신경을 쓰지 않게 되는 경우가 많다. 그래서 얼른 생각이 나지 않는 것 같다.</p></li>
+<li><p>그렇다면 반대로 엔티티 동기화를 구현하지 않는 것들이 얼마나 있을까? 꽤 많이 있는 것 같다.</p></li>
+<li><p>엔티티 복제는 과연 소프트웨어적으로만 이루어질까? 그렇지 않다. 예를 들어 나는 Google Reader에서 Like를 찍었으면, 그 페이지를 들어가서 Facebook Like 버튼이 있는지 확인해보고 있으면 그것도 클릭해둔다. 그 페이지가 Tumblr 페이지면 거기서도 Like를 찍는다. 손으로 엔티티를 복제하고 있는 것이다. 당연히 손으로 엔티티를 복제했으므로 동기화도 되지 않는다. 자, 이걸 어떻게 동기화해야 할 것인가?</p></li>
+</ul>
+<section class="footnotes">
+<hr />
+<ol>
+<li id="fn1"><p>복제된 엔티티가 삭제되면 그냥 엔티티 복제가 취소된다.<a href="#fnref1">↩</a></p></li>
+<li id="fn2"><p>아주 예전 <a href="http://me2day.net/">미투데이</a>가 그랬었다.<a href="#fnref2">↩</a></p></li>
+</ol>
+</section>
+
+        <script>
+        (function () {
+          var ps = document.getElementsByClassName('outdate-disclaimer');
+          if (ps.length < 1) {
+            return;
+          }
+          var p = ps[0], t = document.createElement('span');
+          t.addEventListener('click', function () {
+            this.parentNode.removeChild(this);
+            var gs = document.getElementsByClassName('outdate-gray-out');
+            for (var i = gs.length - 1; i >= 0; --i) {
+              gs[i].className = gs[i].className.replace(
+                /(^|\s)outdate-gray-out(\s|$)/g, '');
+            }
+          });
+          t.className = 'toggler';
+          t.innerText = '읽기';
+          p.appendChild(t);
+          var e = p.nextSibling;
+          while (e !== null && e !== undefined) {
+            if (e.nodeType === 1) {
+              e.className += ' outdate-gray-out';
+            }
+            e = e.nextSibling;
+          }
+        })();
+        </script>
+      
+    
+  </article>
+
+
+    <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-54324071-2', 'auto');
+    ga('send', 'pageview');
+    </script>
+  </body>
+</html>
+
+
+

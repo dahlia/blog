@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8">
+    
+  
+    
+      <link rel="canonical" href="https://blog.hongminhee.org/2012/05/06/22505660254/">
+      <meta property="og:url" content="https://blog.hongminhee.org/2012/05/06/22505660254/">
+    
+  
+  
+  <meta name="description" value="">
+  <meta name="twitter:card" content="summary">
+  <meta property="og:locale" content="ko_KR">
+  <meta property="og:site_name" content="洪民憙 블로그">
+  <meta property="og:type" content="article">
+  
+  <meta name="twitter:description" content="가끔 Unicode 처리가 짜증난다고, 혹은 어렵다고 하는 사람들이 있는데 잘 이해가 안된다. JPEG, PNG 같은 이미지 포맷으로 저장된 파일을 열 때 디코드해서 메모리에 비트맵을 올리고, 다시 저장할 때는 인코딩한다. 동영상도 마찬가지다. 사운드도 그렇다. 쿼리 스트링을 바이트열로 받아서 파싱해서 multiple hash로 다루고, 다시 쿼리 스트링으로 만들어낸다. 숫자 입력을 받을 때는 ASCII로 인코딩된 10진수를 바이트열로 받고, atoi()해서 메모리에 올린 뒤에, 출력을 할 때는 다시 itoa()를 통해 바이트열로 바꿔서 보낸다. …">
+  <meta property="og:description" content="가끔 Unicode 처리가 짜증난다고, 혹은 어렵다고 하는 사람들이 있는데 잘 이해가 안된다. JPEG, PNG 같은 이미지 포맷으로 저장된 파일을 열 때 디코드해서 메모리에 비트맵을 올리고, 다시 저장할 때는 인코딩한다. 동영상도 마찬가지다. 사운드도 그렇다. 쿼리 스트링을 바이트열로 받아서 파싱해서 multiple hash로 다루고, 다시 쿼리 스트링으로 만들어낸다. 숫자 입력을 받을 때는 ASCII로 인코딩된 10진수를 바이트열로 받고, atoi()해서 메모리에 올린 뒤에, 출력을 할 때는 다시 itoa()를 통해 바이트열로 바꿔서 보낸다. …">
+  <meta property="og:updated_time"
+        content="2012-05-06T17:26:49+09:00">
+  
+      <title>2012년 5월 6일 &mdash; 洪民憙 블로그</title>
+      <link rel="alternate" type="application/atom+xml" title="洪民憙 블로그"
+            href="https://blog.hongminhee.org/feed.xml">
+      <meta name="author" content="홍민희">
+      <link rel="stylesheet" media="screen"
+            href="https://blog.hongminhee.org/static/style.css">
+      <link rel="stylesheet" type="text/css"
+        href="https://spoqa.github.io/spoqa-han-sans/css/SpoqaHanSans-kr.css">
+      <link rel="stylesheet" type="text/css"
+        href="https://spoqa.github.io/spoqa-han-sans/css/SpoqaHanSans-jp.css">
+      <meta name="viewport" content="width=device-width, user-scalable=no">
+      <meta name="twitter:creator" content="@hongminhee">
+      <meta name="twitter:site" content="@hongminhee">
+      <meta property="article:author"
+            content="https://www.facebook.com/hongminhee">
+    
+
+  </head>
+  <body class=" post-page">
+    
+  
+      <header>
+        
+          <a href="https://blog.hongminhee.org/index.html" class="site-name">
+              <ruby>洪民憙 <rp>(</rp><rt>홍민희</rt><rp>)</rp></ruby>
+              블로그
+            </a>
+          <nav>
+            <a href="https://hongminhee.org/" rel="author me">본인 소개</a>
+            <div class="archive">
+              아카이브:
+              <ul>
+                
+                  <li><a href="https://blog.hongminhee.org/2017/">2017</a></li>
+                
+                  <li><a href="https://blog.hongminhee.org/2016/">2016</a></li>
+                
+                  <li><a href="https://blog.hongminhee.org/2015/">2015</a></li>
+                
+                  <li><a href="https://blog.hongminhee.org/2014/">2014</a></li>
+                
+                  <li><a href="https://blog.hongminhee.org/2013/">2013</a></li>
+                
+              </ul>
+            </div>
+          </nav>
+        
+      </header>
+
+      <ul class="disclaimer">
+        <li>글을 썼을 당시의 주장에 제 스스로가 더이상 동의하지 못하는
+            경우도 있습니다.</li>
+        <li>심지어 몇몇 글은 이제 정 반대의 의견을 가지고 있기도 합니다.</li>
+        <li>지금까지 여러 주제에 대한 의견이 꾸준히 달라졌습니다.
+            앞으로도 그럴 것입니다.</li>
+        <li>따라서 제 생각을 바꾸기 위한 설득도 환영합니다.
+            저는 의견을 바꿀 의향이 있습니다.</li>
+      </ul>
+    
+
+  <article>
+    
+      <h1><time datetime="2012-05-06T17:26:49+09:00">2012년 5월 6일</time></h1>
+    
+
+    
+      <p>가끔 Unicode 처리가 짜증난다고, 혹은 어렵다고 하는 사람들이 있는데 잘 이해가 안된다. JPEG, PNG 같은 이미지 포맷으로 저장된 파일을 열 때 디코드해서 메모리에 비트맵을 올리고, 다시 저장할 때는 인코딩한다. 동영상도 마찬가지다. 사운드도 그렇다. 쿼리 스트링을 바이트열로 받아서 파싱해서 multiple hash로 다루고, 다시 쿼리 스트링으로 만들어낸다. 숫자 입력을 받을 때는 ASCII로 인코딩된 10진수를 바이트열로 받고, <code>atoi()</code>해서 메모리에 올린 뒤에, 출력을 할 때는 다시 <code>itoa()</code>를 통해 바이트열로 바꿔서 보낸다.</p>
+<p>마찬가지로 문자열 입력을 받을 때는 어떤 인코딩(예를 들어 UTF-8, EUC-KR 등)으로 가공된 바이트열을 받아서 Unicode로 디코드한다. 쓸 때는 상대방이 알아들을 수 있는 인코딩으로 다시 인코드한다. 입력받을 때는 디코드, 출력할 때는 인코드. 열 때는 디코드, 저장할 때는 인코드. 어렵나?</p>
+<p>외부 세계의 표현(representation)과 내부 표현이 다를 때는 인코딩/디코딩이 필요하다. 프로그래밍 조금 해봤으면 누구나 아는 것 아닌가? 왜 다른 비슷한 패턴은 잘들 하면서 Unicode 문자열 처리에 대해서만 그렇게 짜증나는 일이라고 여길까?</p>
+<p>예전에 <a href="https://blog.hongminhee.org/2010/10/08/1268041887/">Unicode 이해의 다양한 단계들</a>에 대해 글을 쓴 적 있는데, Unicode 인코딩/디코딩에서 헤매는 사람들은 저 글 기준으로 3번째 수준(UTF-8을 쓰니 Unicode 완비되었다고 생각하는 사람) 혹은 4번째 수준(세상에는 여러 종류의 인코딩이 존재하고 있다는 것을 아는 사람. iconv도 사용할 줄 안다)에 머물고 있지 않을까 짐작해본다.</p>
+
+    
+  </article>
+
+
+    <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-54324071-2', 'auto');
+    ga('send', 'pageview');
+    </script>
+  </body>
+</html>
+
+
+

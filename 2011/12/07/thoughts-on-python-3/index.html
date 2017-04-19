@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8">
+    
+  
+    
+      <link rel="canonical" href="https://blog.hongminhee.org/2011/12/07/thoughts-on-python-3/">
+      <meta property="og:url" content="https://blog.hongminhee.org/2011/12/07/thoughts-on-python-3/">
+    
+  
+  
+  <meta name="description" value="">
+  <meta name="twitter:card" content="summary">
+  <meta property="og:locale" content="ko_KR">
+  <meta property="og:site_name" content="洪民憙 블로그">
+  <meta property="og:type" content="article">
+  
+    <meta name="twitter:title" content="Thoughts on Python 3">
+    <meta property="og:title" content="Thoughts on Python 3">
+  
+  <meta name="twitter:description" content="Flask, Werkzeug, Jinja2 등을 만든 Armin Ronacher가 블로그에 Python 3에 대한 생각을 올렸다. 급진적인 주장은 별로 없고 뭐 다들 알만한 사람들은 아는 내용이지만 전체적으로 잘 정리되어 있으니 관심 있는 사람들은 전문을 읽어보면 되겠다. 여기에는 개인적으로 인상깊었던 부분만 인용해보겠다. …">
+  <meta property="og:description" content="Flask, Werkzeug, Jinja2 등을 만든 Armin Ronacher가 블로그에 Python 3에 대한 생각을 올렸다. 급진적인 주장은 별로 없고 뭐 다들 알만한 사람들은 아는 내용이지만 전체적으로 잘 정리되어 있으니 관심 있는 사람들은 전문을 읽어보면 되겠다. 여기에는 개인적으로 인상깊었던 부분만 인용해보겠다. …">
+  <meta property="og:updated_time"
+        content="2011-12-07T17:52:00+09:00">
+  
+      <title>Thoughts on Python 3 &mdash; 洪民憙 블로그</title>
+      <link rel="alternate" type="application/atom+xml" title="洪民憙 블로그"
+            href="https://blog.hongminhee.org/feed.xml">
+      <meta name="author" content="홍민희">
+      <link rel="stylesheet" media="screen"
+            href="https://blog.hongminhee.org/static/style.css">
+      <link rel="stylesheet" type="text/css"
+        href="https://spoqa.github.io/spoqa-han-sans/css/SpoqaHanSans-kr.css">
+      <link rel="stylesheet" type="text/css"
+        href="https://spoqa.github.io/spoqa-han-sans/css/SpoqaHanSans-jp.css">
+      <meta name="viewport" content="width=device-width, user-scalable=no">
+      <meta name="twitter:creator" content="@hongminhee">
+      <meta name="twitter:site" content="@hongminhee">
+      <meta property="article:author"
+            content="https://www.facebook.com/hongminhee">
+    
+
+  </head>
+  <body class=" post-page outdated">
+    
+  
+      <header>
+        
+          <a href="https://blog.hongminhee.org/index.html" class="site-name">
+              <ruby>洪民憙 <rp>(</rp><rt>홍민희</rt><rp>)</rp></ruby>
+              블로그
+            </a>
+          <nav>
+            <a href="https://hongminhee.org/" rel="author me">본인 소개</a>
+            <div class="archive">
+              아카이브:
+              <ul>
+                
+                  <li><a href="https://blog.hongminhee.org/2017/">2017</a></li>
+                
+                  <li><a href="https://blog.hongminhee.org/2016/">2016</a></li>
+                
+                  <li><a href="https://blog.hongminhee.org/2015/">2015</a></li>
+                
+                  <li><a href="https://blog.hongminhee.org/2014/">2014</a></li>
+                
+                  <li><a href="https://blog.hongminhee.org/2013/">2013</a></li>
+                
+              </ul>
+            </div>
+          </nav>
+        
+      </header>
+
+      <ul class="disclaimer">
+        <li>글을 썼을 당시의 주장에 제 스스로가 더이상 동의하지 못하는
+            경우도 있습니다.</li>
+        <li>심지어 몇몇 글은 이제 정 반대의 의견을 가지고 있기도 합니다.</li>
+        <li>지금까지 여러 주제에 대한 의견이 꾸준히 달라졌습니다.
+            앞으로도 그럴 것입니다.</li>
+        <li>따라서 제 생각을 바꾸기 위한 설득도 환영합니다.
+            저는 의견을 바꿀 의향이 있습니다.</li>
+      </ul>
+    
+
+  <article>
+    
+      <time datetime="2011-12-07T17:52:00+09:00">2011년 12월 7일</time>
+    
+
+    
+      
+  <p class="outdate-disclaimer">
+    이하의 글은 2011년에 쓴 것입니다. 오래된 글인 만큼, 현재의
+    생각과 전혀 다른 내용도 많이 포함되어 있고, 당시와는 상황이 많이 달라진
+    점도 있습니다. 또한, 그 당시에 잘못 알려졌던 정보도 포함되어 있을 수
+    있습니다. <em>어찌됐든 저는 제 오래된 글이 회자되는 것을 저어합니다.</em>
+    읽기에 앞서 양해를 부탁드립니다.
+  <p>
+        <h1 id="thoughts-on-python-3source"><a href="http://lucumr.pocoo.org/2011/12/7/thoughts-on-python3/">Thoughts on Python 3</a></h1>
+<p><a href="http://flask.pocoo.org/">Flask</a>, <a href="http://werkzeug.pocoo.org/">Werkzeug</a>, <a href="http://jinja.pocoo.org/">Jinja2</a> 등을 만든 <a href="http://lucumr.pocoo.org/">Armin Ronacher</a>가 블로그에 <a href="http://lucumr.pocoo.org/2011/12/7/thoughts-on-python3/">Python 3에 대한 생각</a>을 올렸다. 급진적인 주장은 별로 없고 뭐 다들 알만한 사람들은 아는 내용이지만 전체적으로 잘 정리되어 있으니 관심 있는 사람들은 전문을 읽어보면 되겠다. 여기에는 개인적으로 인상깊었던 부분만 인용해보겠다.</p>
+<blockquote>
+<p><q>Always complaining, not doing anything</q>. There is just so much stuff I would love to see Python go but at the end of the day, I’m a user of Python more than a developer.</p>
+</blockquote>
+<p>세상에 Python 사용자는 많지만 Python 언어 구현을 해킹하는 사람은 매우 드물다. Python 사용자는 항상 Python 언어의 디자인에 대해 이러쿵 저러쿵 떠들지만 세상을 위해 실질적으로 코드를 기여하지는 못한다.</p>
+<blockquote>
+<p>But the real reason why I loved and adored Python was the fact that I was looking forward to each new release like a child to Christmas. The small things and improvements blew my mind. Even benign things like the fact that you can now specify a starting index for the enumerate function made me appreciate a new release of Python. And all that with a strong focus of backwards compatibility.</p>
+</blockquote>
+<p>지금까지의 Python은 어느 정도 하위 호환성을 지키면서 점진적으로 진화해 왔다. 초기 디자인은 나쁠지 몰라도, 시간이 지나면서 <q>잘못된 결정들</q>은 하나 둘 고쳐져 나간다. Python 언어의 가장 중요한 부분은 언어 자체가 아니라 PEP 같은 언어 개선 프로세스이다. 나도 강하게 동의하는 부분.</p>
+<p>조금 더 내 생각을 적자면…, 세상에는 C++나 Java와 같은 위원회 언어라는 것이 존재한다. 하지만 그 반대편에는 Perl이나 Python과 같이 <q>언어를 쓰는 사람이 곧 언어의 디자인에 기여하는</q> 커뮤니티 언어들도 존재한다. 어떤 언어가 더 좋은지 얘기하기는 힘들다. 하지만 어떤 언어 디자인 프로세스가 더 좋은지는 명백하다. 1995년 첫 Java의 디자인은 1991년 첫 Python의 디자인보다 전체적인 면에서 대체로 더 훌륭했다(고 생각한다). 2011년 12월 현재, 일반적인 Java 코드는 IoC로 점철되어 있으며 Python은 제너레이터와 코루틴을 사용한다.</p>
+<blockquote>
+<p>Python 3 is in the spot where it changed just too much that it broke all our code and not nearly enough that it would warrant upgrading immediately. And in my absolutely personal opinion Python 3.3/3.4 should be more like Python 3 and Python 2.8 should happen and be a bit more like Python 3. Because as it stands, Python 3 is the XHTML of the programming language world. It’s incompatible to what it tries to replace but does not offer much besides being more <q>correct</q>.</p>
+</blockquote>
+<p>결국 Python 3와 XHTML은 비슷한 운명을 가지고 있다. 대체하려 하는 대상과 호환되지 않는 주제에 더 <q>올바르길</q> 요구하면서 제공하는 것은 별로 없다.</p>
+<blockquote>
+<p>Python is not <q>too big to fail</q>. Python can become unpopular very quickly. Pascal and Delphi became niece languages even though they were amazing even after the introduction of the .NET framework and C#. They were ruined by mismanagement more than anything else. People still develop in Pascal, but how many are starting new projects in it? Delphi does not work on the iPhone, it does not run on Android. It’s not well integrated into the UNIX market. And if we’re honest, in some areas Python is already losing track. Python used to be sufficiently popular in computer games but that ship has sailed a long time ago. In the web community new competitors arrive on a daily basis and if we like it or not, JavaScript is becoming more and more an ubiquitous scripting language that challenges Python.</p>
+<p>Delphi did not adjust quick enough and people just jumped on the next technology. If 2to3 is our upgrade path to Python 3, then py2js is the upgrade path to JavaScript.</p>
+</blockquote>
+<p>Python 3가 현재의 방향을 고수하면 Delphi처럼 될 것이다. 안 쓰이는 것은 아니지만 새로운 프로젝트에서 Python을 선택하는 일은 적어질 것이다.</p>
+
+        <script>
+        (function () {
+          var ps = document.getElementsByClassName('outdate-disclaimer');
+          if (ps.length < 1) {
+            return;
+          }
+          var p = ps[0], t = document.createElement('span');
+          t.addEventListener('click', function () {
+            this.parentNode.removeChild(this);
+            var gs = document.getElementsByClassName('outdate-gray-out');
+            for (var i = gs.length - 1; i >= 0; --i) {
+              gs[i].className = gs[i].className.replace(
+                /(^|\s)outdate-gray-out(\s|$)/g, '');
+            }
+          });
+          t.className = 'toggler';
+          t.innerText = '읽기';
+          p.appendChild(t);
+          var e = p.nextSibling;
+          while (e !== null && e !== undefined) {
+            if (e.nodeType === 1) {
+              e.className += ' outdate-gray-out';
+            }
+            e = e.nextSibling;
+          }
+        })();
+        </script>
+      
+    
+  </article>
+
+
+    <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-54324071-2', 'auto');
+    ga('send', 'pageview');
+    </script>
+  </body>
+</html>
+
+
+

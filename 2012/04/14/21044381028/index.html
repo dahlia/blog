@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8">
+    
+  
+    
+      <link rel="canonical" href="https://blog.hongminhee.org/2012/04/14/21044381028/">
+      <meta property="og:url" content="https://blog.hongminhee.org/2012/04/14/21044381028/">
+    
+  
+  
+  <meta name="description" value="">
+  <meta name="twitter:card" content="summary">
+  <meta property="og:locale" content="ko_KR">
+  <meta property="og:site_name" content="洪民憙 블로그">
+  <meta property="og:type" content="article">
+  
+    <meta name="twitter:title" content="언어 커뮤니티의 문제">
+    <meta property="og:title" content="언어 커뮤니티의 문제">
+  
+  <meta name="twitter:description" content="최근 며칠 전에 HN에 올라와서 한창 히트했던 글 중에 PHP의 잘못된 디자인의 프랙탈에 대한 거대하고 상세한 목록을 정리한 것이 있었다. 약간의 내용이 빠져있지만 거의 모든 부분을 박준규 님이 고생해서 번역해둔 것도 있으니 읽어보자. 어차피 전체 목록의 항목들이 중요한 게 아니라, 제목 그대로 잘못된 디자인이 여러 겹으로 쌓여있는 그 거대한 악의 프랙탈을 몸으로(!) 느끼는(!) 게 중요하다. …">
+  <meta property="og:description" content="최근 며칠 전에 HN에 올라와서 한창 히트했던 글 중에 PHP의 잘못된 디자인의 프랙탈에 대한 거대하고 상세한 목록을 정리한 것이 있었다. 약간의 내용이 빠져있지만 거의 모든 부분을 박준규 님이 고생해서 번역해둔 것도 있으니 읽어보자. 어차피 전체 목록의 항목들이 중요한 게 아니라, 제목 그대로 잘못된 디자인이 여러 겹으로 쌓여있는 그 거대한 악의 프랙탈을 몸으로(!) 느끼는(!) 게 중요하다. …">
+  <meta property="og:updated_time"
+        content="2012-04-14T06:57:00+09:00">
+  
+      <title>언어 커뮤니티의 문제 &mdash; 洪民憙 블로그</title>
+      <link rel="alternate" type="application/atom+xml" title="洪民憙 블로그"
+            href="https://blog.hongminhee.org/feed.xml">
+      <meta name="author" content="홍민희">
+      <link rel="stylesheet" media="screen"
+            href="https://blog.hongminhee.org/static/style.css">
+      <link rel="stylesheet" type="text/css"
+        href="https://spoqa.github.io/spoqa-han-sans/css/SpoqaHanSans-kr.css">
+      <link rel="stylesheet" type="text/css"
+        href="https://spoqa.github.io/spoqa-han-sans/css/SpoqaHanSans-jp.css">
+      <meta name="viewport" content="width=device-width, user-scalable=no">
+      <meta name="twitter:creator" content="@hongminhee">
+      <meta name="twitter:site" content="@hongminhee">
+      <meta property="article:author"
+            content="https://www.facebook.com/hongminhee">
+    
+
+  </head>
+  <body class=" post-page outdated">
+    
+  
+      <header>
+        
+          <a href="https://blog.hongminhee.org/index.html" class="site-name">
+              <ruby>洪民憙 <rp>(</rp><rt>홍민희</rt><rp>)</rp></ruby>
+              블로그
+            </a>
+          <nav>
+            <a href="https://hongminhee.org/" rel="author me">본인 소개</a>
+            <div class="archive">
+              아카이브:
+              <ul>
+                
+                  <li><a href="https://blog.hongminhee.org/2017/">2017</a></li>
+                
+                  <li><a href="https://blog.hongminhee.org/2016/">2016</a></li>
+                
+                  <li><a href="https://blog.hongminhee.org/2015/">2015</a></li>
+                
+                  <li><a href="https://blog.hongminhee.org/2014/">2014</a></li>
+                
+                  <li><a href="https://blog.hongminhee.org/2013/">2013</a></li>
+                
+              </ul>
+            </div>
+          </nav>
+        
+      </header>
+
+      <ul class="disclaimer">
+        <li>글을 썼을 당시의 주장에 제 스스로가 더이상 동의하지 못하는
+            경우도 있습니다.</li>
+        <li>심지어 몇몇 글은 이제 정 반대의 의견을 가지고 있기도 합니다.</li>
+        <li>지금까지 여러 주제에 대한 의견이 꾸준히 달라졌습니다.
+            앞으로도 그럴 것입니다.</li>
+        <li>따라서 제 생각을 바꾸기 위한 설득도 환영합니다.
+            저는 의견을 바꿀 의향이 있습니다.</li>
+      </ul>
+    
+
+  <article>
+    
+      <time datetime="2012-04-14T06:57:00+09:00">2012년 4월 14일</time>
+    
+
+    
+      
+  <p class="outdate-disclaimer">
+    이하의 글은 2012년에 쓴 것입니다. 오래된 글인 만큼, 현재의
+    생각과 전혀 다른 내용도 많이 포함되어 있고, 당시와는 상황이 많이 달라진
+    점도 있습니다. 또한, 그 당시에 잘못 알려졌던 정보도 포함되어 있을 수
+    있습니다. <em>어찌됐든 저는 제 오래된 글이 회자되는 것을 저어합니다.</em>
+    읽기에 앞서 양해를 부탁드립니다.
+  <p>
+        <h1 id="언어-커뮤니티의-문제">언어 커뮤니티의 문제</h1>
+<p>최근 며칠 전에 HN에 올라와서 한창 히트했던 글 중에 PHP의 잘못된 디자인의 프랙탈에 대한 거대하고 상세한 목록을 정리한 것이 있었다. 약간의 내용이 빠져있지만 거의 모든 부분을 박준규 님이 고생해서 <a href="http://ko.blog.influx.kr/2012/04/php.html">번역해둔 것</a>도 있으니 읽어보자. 어차피 전체 목록의 항목들이 중요한 게 아니라, 제목 그대로 잘못된 디자인이 여러 겹으로 쌓여있는 그 거대한 악의 프랙탈을 몸으로(!) 느끼는(!) 게 중요하다.</p>
+<p>저 글은 언어 자체의 잘못된 디자인에 대해서 주로 다루는데, 나는 PHP의 문제점은 크게 두 부분으로 이루어져 있다고 생각한다. 하나는, 저 글에서 매우 잘 보여주고 있듯, 언어 디자인이 잘못되어도 한참 잘못되어 있다는 점이다.</p>
+<p>다른 하나는 커뮤니티의 문제이다. 그리고 나는 이게 PHP의 진짜 문제라고 생각한다. 현실적으로는 저렇게 막나가는 언어는 쓰고 있자면 견딜 수가 없다. 제대로 된 상식과 교양이 있는 사람이라면 PHP를 쓰면서 엄청난 스트레스를 받게 된다. 그 스트레스는 또다시 PHP의 두 가지 문제에 의한 것인데, 한 가지 문제는 PHP가 잘못 만들어져 있기 때문에 기대하는 대로 작동하지 않는다는 것이고, 다른 하나는 <strong>PHP를 쓰고 있으면 주면에서 같이 일하는 사람들이 다들 제정신이 아니라고 느껴지기 때문이다.</strong> 커뮤니티의 문제가 바로 이것이다.</p>
+<p>제정신이라면 애초에 이미 PHP에서 도망쳤어야 한다. 세상에 여러 언어가 있고, 각 커뮤니티끼리 저마다 자기네 언어가 더 좋다고 종교 전쟁을 벌이기도 하지만, PHP는 언제나 공공의 적이다. Perl을 쓰든 Python을 쓰든 C++를 쓰든 Java를 쓰든 Haskell을 쓰든, 어떤 커뮤니티에서도 PHP는 제정신이 아닌 사람들만 쓰는 언어로 취급된다. 여러 세월에 걸쳐 전업 PHP 프로그래머라는 타이틀은 그 사람이 프로그래머로서의 소양이 부족하지 않을까 하는 의심부터 하게 하는 문화적 편견까지 낳았다. (편견은, 항상 그렇지는 않지만 들어 맞을 때가 많은, 판단 비용이 적게 드는 잣대이다.) 많은 프로그래머들이 PHP 프로그래머를 조롱한다.</p>
+<p>그도 그럴것이 제정신인 프로그래머는 PHP 자체에도, PHP 커뮤니티에서도 오래 버티지 못하기 때문이다. 나는 PHP 커뮤니티에는 두 종류의 사람이 있다고 생각한다. 잠재적으로 PHP에서 도망칠 사람과 프로그래머로서는 제정신이 아닌 사람. PHP를 오랫동안 쓰려면 어떤 함수가 쿼리 스트링을 해석하는데 결과를 반환하는 대신 <code>$_GET</code> 초전역(superglobals) 변수를 덮어씌울 수 있으며, 그런 일을 하는 함수의 이름이 <code>parse_query_string()</code> 같은 것이 아닌 <code>parse_str()</code>라는 사실에 놀라워하지 않으며 오히려 그렇게 만드는 것이 적절한 디자인이라고 여길 수 있어야 한다. (저 함수 하나만 꼬집는게 아니라 PHP 커뮤니티에서 매일 같이 만들어지는 코드가 저딴 식이다.) 즉, 제정신으로는 오래 못쓴다. 그리고 제정신이 아닌 프로그래머와 협업하는 것은 매우 큰 스트레스를 동반한다. 그래서 제정신 박힌 프로그래머들은 PHP를 오래 버티지 못하고 길어도 몇년 안에 도망친다.</p>
+<p>결과적으로 새로운 프로그래머들이 계속해서 PHP 커뮤니티에 들어오긴 하지만, 제대로 된 프로그래머는 빠져나오고 이상한 프로그래머들만 그 커뮤니티에서 버티게 된다. 사실 이런 생태계의 문제는 언어의 문제는 훨씬 덜하지만 Visual Basic이나 MFC 같은 프레임워크에도 거의 비슷하게 일어난다. (2012년에 MFC를 쓰고 있다니? 십중팔구 컴파일러는 VC6를 쓰고 있을 것이다.) PHP스쿨과 데브피아는 다루는 언어만 다를뿐 수준은 서로 비슷하다.</p>
+<p>나도 한 때는 주어진 도구(PHP)를 잘 써보는 데에 관심을 보이고 노력도 해봤지만 지금은 매우 회의적이다. 몇년 전 KLDP에서 어떤 PHP 프레임워크를 선택해야 하냐는 <a href="http://kldp.org/node/107440">주제</a>가 올라온 적 있었다. 그 때 내가 달았던 <a href="http://kldp.org/node/107440#comment-498386">댓글</a> 내용의 일부를 인용하자면,</p>
+<blockquote>
+<p>아무튼 사실 PHP의 장점을 얘기할 때 언급되는 <q>값싸고 구하기 쉬운 PHP 개발자</q> 중에선 프레임워크 도입해도 따라오지 못하거나 않을 사람들이 많습니다. 제 생각에는 이게 PHP 웹 프레임워크 도입의 딜레마가 아닐까 합니다.</p>
+</blockquote>
+<p>내가 도구 무용론이 잘못됐다고 생각하는 이유가 이런 점에서다. PHP도 잘 쓰면 훌륭한 도구라고? <strong>PHP를 잘 쓸 수 있는 능력이 있는 사람은 더이상 PHP를 쓰지 않는다. PHP로 똥을 싸는 사람만이 똥 냄새를 맡지 못하니까 PHP에 눌러앉아 있을 뿐이다.</strong> (인권 영화 찾아가서 굳이 보는 사람들은 인권 영화를 볼 필요가 없고, 봐야할 사람들은 인권 영화를 결코 안 본다는 얘기랑 완전히 똑같다.)</p>
+<p>Facebook이 PHP를 쓴다는 얘기가 무의미한 것도 이런 관점에서다. Facebook은 PHP의 두 가지 문제 중 커뮤니티의 문제를 제거했다. PHP 문제의 가장 큰 부분은 PHP 사용자들이 프로그래밍을 못한다는 점인데, 이 문제를 해결했으니 PHP를 써도 문제가 상대적으로 적다. 게다가 Facebook은 PHP를 쓰지 않는다. Facebook에서 쓰는 PHP는 C++ 중간 코드를 거쳐 정적인 FastCGI 바이너리로 컴파일되는 PHP와 비슷하게 생겼지만 사실은 다른 어떤 언어다. 자기들이 쓰는 언어를 직접 디자인하고 구현하기 시작했다는 것은, 언어의 나쁜 부분들을 차근차근 없애 나갈 수 있다는 뜻이다. 따라서 PHP의 두 문제 모두 Facebook에게는 해당 사항이 아니다.</p>
+<p>어쨌든 PHP라도 잘 써보자고 프레임워크 열심히 찾는 사람들이 지금 이순간에도 있을텐데, 다 포기하라고 조언하고 싶다. 당신이 아무리 프레임워크 잘 골라놔도 당신의 동료들은 제대로 쓰지 못한다. 나도 한때는 잘해보려고 애썼지만, 다행히 중간에 매우 큰 깨달음을 얻었다. 애초에 PHP를 쓸 수밖에 없는 상황 자체가 그렇게 실력이 좋지만은 않은 프로그래머들 사이에 껴서 프로젝트를 하게 될 거라는 불길한 징조였던 것이다.</p>
+
+        <script>
+        (function () {
+          var ps = document.getElementsByClassName('outdate-disclaimer');
+          if (ps.length < 1) {
+            return;
+          }
+          var p = ps[0], t = document.createElement('span');
+          t.addEventListener('click', function () {
+            this.parentNode.removeChild(this);
+            var gs = document.getElementsByClassName('outdate-gray-out');
+            for (var i = gs.length - 1; i >= 0; --i) {
+              gs[i].className = gs[i].className.replace(
+                /(^|\s)outdate-gray-out(\s|$)/g, '');
+            }
+          });
+          t.className = 'toggler';
+          t.innerText = '읽기';
+          p.appendChild(t);
+          var e = p.nextSibling;
+          while (e !== null && e !== undefined) {
+            if (e.nodeType === 1) {
+              e.className += ' outdate-gray-out';
+            }
+            e = e.nextSibling;
+          }
+        })();
+        </script>
+      
+    
+  </article>
+
+
+    <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-54324071-2', 'auto');
+    ga('send', 'pageview');
+    </script>
+  </body>
+</html>
+
+
+

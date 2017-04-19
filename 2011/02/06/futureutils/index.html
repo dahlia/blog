@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8">
+    
+  
+    
+      <link rel="canonical" href="https://blog.hongminhee.org/2011/02/06/futureutils/">
+      <meta property="og:url" content="https://blog.hongminhee.org/2011/02/06/futureutils/">
+    
+  
+  
+  <meta name="description" value="">
+  <meta name="twitter:card" content="summary">
+  <meta property="og:locale" content="ko_KR">
+  <meta property="og:site_name" content="洪民憙 블로그">
+  <meta property="og:type" content="article">
+  
+    <meta name="twitter:title" content="futureutils">
+    <meta property="og:title" content="futureutils">
+  
+  <meta name="twitter:description" content="요즘 혼자서 만들고 있는 프로그램이 하나 있는데, 성능을 위해 병렬화를 해야하는 부분이 생겼다. 마침 병렬화할 수 있는 부분이 많았는데 죄다 제너레이터 함수(generator function)로 생성되는 반복자들이었다. 이걸 일반적으로 병렬화할 수 있을 거라는 생각이 들어 간단하게 퓨쳐(future)를 구현하게 되었는데, 나의 썩 좋지 못한 코딩 습관 중 하나가 하나 있어서… 바로 과하게 일반화한다는 것이다. 게다가 내 블로그를 계속 읽어온 사람은 알겠지만 나는 문서화를 강조하는 편이고, 당연히 내가 개발하는 것들을 문서화하는 습관이 있다. 그래서 이 간단한 퓨쳐 구현은 과하게 일반화된데다 문서화까지 되어서 급기야 “이것만 따로 패키지로 만들어서 올려도 되지 않을까”하는 생각을 하게 만들었다. …">
+  <meta property="og:description" content="요즘 혼자서 만들고 있는 프로그램이 하나 있는데, 성능을 위해 병렬화를 해야하는 부분이 생겼다. 마침 병렬화할 수 있는 부분이 많았는데 죄다 제너레이터 함수(generator function)로 생성되는 반복자들이었다. 이걸 일반적으로 병렬화할 수 있을 거라는 생각이 들어 간단하게 퓨쳐(future)를 구현하게 되었는데, 나의 썩 좋지 못한 코딩 습관 중 하나가 하나 있어서… 바로 과하게 일반화한다는 것이다. 게다가 내 블로그를 계속 읽어온 사람은 알겠지만 나는 문서화를 강조하는 편이고, 당연히 내가 개발하는 것들을 문서화하는 습관이 있다. 그래서 이 간단한 퓨쳐 구현은 과하게 일반화된데다 문서화까지 되어서 급기야 “이것만 따로 패키지로 만들어서 올려도 되지 않을까”하는 생각을 하게 만들었다. …">
+  <meta property="og:updated_time"
+        content="2011-02-06T04:00:14+09:00">
+  
+      <title>futureutils &mdash; 洪民憙 블로그</title>
+      <link rel="alternate" type="application/atom+xml" title="洪民憙 블로그"
+            href="https://blog.hongminhee.org/feed.xml">
+      <meta name="author" content="홍민희">
+      <link rel="stylesheet" media="screen"
+            href="https://blog.hongminhee.org/static/style.css">
+      <link rel="stylesheet" type="text/css"
+        href="https://spoqa.github.io/spoqa-han-sans/css/SpoqaHanSans-kr.css">
+      <link rel="stylesheet" type="text/css"
+        href="https://spoqa.github.io/spoqa-han-sans/css/SpoqaHanSans-jp.css">
+      <meta name="viewport" content="width=device-width, user-scalable=no">
+      <meta name="twitter:creator" content="@hongminhee">
+      <meta name="twitter:site" content="@hongminhee">
+      <meta property="article:author"
+            content="https://www.facebook.com/hongminhee">
+    
+
+  </head>
+  <body class=" post-page outdated">
+    
+  
+      <header>
+        
+          <a href="https://blog.hongminhee.org/index.html" class="site-name">
+              <ruby>洪民憙 <rp>(</rp><rt>홍민희</rt><rp>)</rp></ruby>
+              블로그
+            </a>
+          <nav>
+            <a href="https://hongminhee.org/" rel="author me">본인 소개</a>
+            <div class="archive">
+              아카이브:
+              <ul>
+                
+                  <li><a href="https://blog.hongminhee.org/2017/">2017</a></li>
+                
+                  <li><a href="https://blog.hongminhee.org/2016/">2016</a></li>
+                
+                  <li><a href="https://blog.hongminhee.org/2015/">2015</a></li>
+                
+                  <li><a href="https://blog.hongminhee.org/2014/">2014</a></li>
+                
+                  <li><a href="https://blog.hongminhee.org/2013/">2013</a></li>
+                
+              </ul>
+            </div>
+          </nav>
+        
+      </header>
+
+      <ul class="disclaimer">
+        <li>글을 썼을 당시의 주장에 제 스스로가 더이상 동의하지 못하는
+            경우도 있습니다.</li>
+        <li>심지어 몇몇 글은 이제 정 반대의 의견을 가지고 있기도 합니다.</li>
+        <li>지금까지 여러 주제에 대한 의견이 꾸준히 달라졌습니다.
+            앞으로도 그럴 것입니다.</li>
+        <li>따라서 제 생각을 바꾸기 위한 설득도 환영합니다.
+            저는 의견을 바꿀 의향이 있습니다.</li>
+      </ul>
+    
+
+  <article>
+    
+      <time datetime="2011-02-06T04:00:14+09:00">2011년 2월 6일</time>
+    
+
+    
+      
+  <p class="outdate-disclaimer">
+    이하의 글은 2011년에 쓴 것입니다. 오래된 글인 만큼, 현재의
+    생각과 전혀 다른 내용도 많이 포함되어 있고, 당시와는 상황이 많이 달라진
+    점도 있습니다. 또한, 그 당시에 잘못 알려졌던 정보도 포함되어 있을 수
+    있습니다. <em>어찌됐든 저는 제 오래된 글이 회자되는 것을 저어합니다.</em>
+    읽기에 앞서 양해를 부탁드립니다.
+  <p>
+        <h1 id="futureutilssource"><a href="http://dahlia.bitbucket.org/futureutils/">futureutils</a></h1>
+<p>요즘 혼자서 만들고 있는 프로그램이 하나 있는데, 성능을 위해 병렬화를 해야하는 부분이 생겼다. 마침 병렬화할 수 있는 부분이 많았는데 죄다 제너레이터 함수(generator function)로 생성되는 반복자들이었다. 이걸 일반적으로 병렬화할 수 있을 거라는 생각이 들어 간단하게 퓨쳐(future)를 구현하게 되었는데, 나의 썩 좋지 못한 코딩 습관 중 하나가 하나 있어서… 바로 과하게 일반화한다는 것이다. 게다가 내 블로그를 계속 읽어온 사람은 알겠지만 나는 문서화를 강조하는 편이고, 당연히 내가 개발하는 것들을 문서화하는 습관이 있다. 그래서 이 간단한 퓨쳐 구현은 과하게 일반화된데다 문서화까지 되어서 급기야 <q>이것만 따로 패키지로 만들어서 올려도 되지 않을까</q>하는 생각을 하게 만들었다.</p>
+<p>그래서 내친 김에 문서를 아예 좀더 보강하고 Python 2.5와 PyPy 1.4 호환성까지 곁들여서 패키징한 다음 <a href="http://pypi.python.org/pypi/futureutils">PyPI에 올렸다.</a> 이름은 <strong><code>futureutils</code></strong>라고 지었다. pip나 easy_install로 설치 가능하다.</p>
+<pre><code>$ pip install futureutils  # 또는
+$ easy_install futureutils</code></pre>
+<p>사용법은 간단하다. 일반 함수 하나 — <a href="http://dahlia.bitbucket.org/futureutils/#futureutils.promise"><code>futureutils.promise()</code></a> — 와 데코레이터 함수 — <a href="http://dahlia.bitbucket.org/futureutils/#futureutils.future_generator"><code>futureutils.future_generator()</code></a> — 하나가 있는데, 전자는 좀더 일반적으로 사용 가능한 약간 저수준의 인터페이스고, 후자는 제너레이터 함수에 대해 데코레이터로 사용 가능한 조금 고수준의 인터페이스다. 병렬화할 반복자가 제너레이터 함수에 의해 만들어진다면, 제너레이터 함수에 <code>future_generator()</code>를 적용하기만 하면 된다.</p>
+<pre><code>import lxml.html
+from futureutils import *
+
+@future_generator
+def list_hrefs(url):
+    html = lxml.html.parse(url)
+    for href in html.xpath(&#39;//a[@href]/@href&#39;):
+        href = href.strip()
+        if href and not href.startswith(&#39;#&#39;):
+            yield href</code></pre>
+<p>어차피 이 데코레이터를 적용하든 그렇지 않든 제너레이터 함수의 작동은 동등하다. 함수의 의미는 바꾸지 않고 병렬화만 해서 효율을 늘리는 방식이기 때문이다.<a href="#fn1" class="footnoteRef" id="fnref1"><sup>1</sup></a></p>
+<p>좀더 일반적으로, 제너레이터 함수에 의한 반복자 뿐만 아니라, 모든 반복자에 대해서도 <code>promise()</code> 함수를 써서 병렬화가 가능하다. 위 예를 조금 고치면 다음과 같이 바꿀 수도 있다.</p>
+<pre><code>import lxml.html
+from futureutils import *
+
+def list_hrefs(url):
+    html = lxml.html.parse(url)
+    for href in html.xpath(&#39;//a[@href]/@href&#39;):
+        href = href.strip()
+        if href and not href.startswith(&#39;#&#39;):
+            yield href
+
+iterator = list_hrefs(&#39;http://dahlia.kr/&#39;)
+parallelized_iterator = promise(iterator)</code></pre>
+<p>보다시피 <code>promise()</code> 함수는 반복자 하나를 받아서 새로운 반복자 랩퍼(wrapper)를 반환하는데, 이 녀석이 원본 반복자를 안쪽에서 병렬화해서 돌리고 결과 자체는 일반 반복자와 같은 방식으로 전달해준다. 따라서 이것 역시 반복자의 의미에 변경을 가하지 않는다.</p>
+<p>뭐, 함수 두 개밖에 없는 모듈이긴 하지만 자세한 것은 <a href="http://dahlia.bitbucket.org/futureutils/#api">API 레퍼런스 문서</a>를 참고하시면 되겠다.</p>
+<p>소스 코드는 Bitbucket 저장소에서 Mercurial을 통해 받을 수 있다. <a href="https://bitbucket.org/dahlia/futureutils" class="uri">https://bitbucket.org/dahlia/futureutils</a></p>
+<pre><code>$ hg clone https://bitbucket.org/dahlia/futureutils</code></pre>
+<p>이 패키지는 MIT 라이센스로 배포된다.</p>
+<p>덧. Reddit에도 올려봤다. <a href="http://www.reddit.com/r/Python/comments/ffw7a/futureutils_introduces_futures_and_promises_into/" class="uri">http://www.reddit.com/r/Python/comments/ffw7a/futureutils_introduces_futures_and_promises_into/</a> 괜찮다고 생각하시는 분들은 upvote해주시면 감사.</p>
+<section class="footnotes">
+<hr />
+<ol>
+<li id="fn1"><p>물론 제너레이터 함수 안쪽에서 뭔가 병렬화를 고려하고 무슨 짓을 하고 있다면 의미가 바뀔 수도 있으니 조심해야 한다. 이런 경우 그냥 쓰지 않는게 상책.<a href="#fnref1">↩</a></p></li>
+</ol>
+</section>
+
+        <script>
+        (function () {
+          var ps = document.getElementsByClassName('outdate-disclaimer');
+          if (ps.length < 1) {
+            return;
+          }
+          var p = ps[0], t = document.createElement('span');
+          t.addEventListener('click', function () {
+            this.parentNode.removeChild(this);
+            var gs = document.getElementsByClassName('outdate-gray-out');
+            for (var i = gs.length - 1; i >= 0; --i) {
+              gs[i].className = gs[i].className.replace(
+                /(^|\s)outdate-gray-out(\s|$)/g, '');
+            }
+          });
+          t.className = 'toggler';
+          t.innerText = '읽기';
+          p.appendChild(t);
+          var e = p.nextSibling;
+          while (e !== null && e !== undefined) {
+            if (e.nodeType === 1) {
+              e.className += ' outdate-gray-out';
+            }
+            e = e.nextSibling;
+          }
+        })();
+        </script>
+      
+    
+  </article>
+
+
+    <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-54324071-2', 'auto');
+    ga('send', 'pageview');
+    </script>
+  </body>
+</html>
+
+
+

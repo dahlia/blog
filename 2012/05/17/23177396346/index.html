@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8">
+    
+  
+    
+      <link rel="canonical" href="https://blog.hongminhee.org/2012/05/17/23177396346/">
+      <meta property="og:url" content="https://blog.hongminhee.org/2012/05/17/23177396346/">
+    
+  
+  
+  <meta name="description" value="">
+  <meta name="twitter:card" content="summary">
+  <meta property="og:locale" content="ko_KR">
+  <meta property="og:site_name" content="洪民憙 블로그">
+  <meta property="og:type" content="article">
+  
+    <meta name="twitter:title" content="WSGI 테스팅 유틸리티">
+    <meta property="og:title" content="WSGI 테스팅 유틸리티">
+  
+  <meta name="twitter:description" content="Werkzeug은 프레임워크와 무관한(framework-agnostic) WSGI 테스팅 도구를 제공한다. Werkzeug을 쓰지 않더라도, Python으로 웹 프레임워크를 만든다면 이걸 이용해서 쉽게 테스트해볼 수 있다. WSGI 환경 변수를 테스트 용도로 만들어주는 도구를 따로 만들어야 하나 고민하고 있었는데 이걸로 해결. …">
+  <meta property="og:description" content="Werkzeug은 프레임워크와 무관한(framework-agnostic) WSGI 테스팅 도구를 제공한다. Werkzeug을 쓰지 않더라도, Python으로 웹 프레임워크를 만든다면 이걸 이용해서 쉽게 테스트해볼 수 있다. WSGI 환경 변수를 테스트 용도로 만들어주는 도구를 따로 만들어야 하나 고민하고 있었는데 이걸로 해결. …">
+  <meta property="og:updated_time"
+        content="2012-05-17T04:32:45+09:00">
+  
+      <title>WSGI 테스팅 유틸리티 &mdash; 洪民憙 블로그</title>
+      <link rel="alternate" type="application/atom+xml" title="洪民憙 블로그"
+            href="https://blog.hongminhee.org/feed.xml">
+      <meta name="author" content="홍민희">
+      <link rel="stylesheet" media="screen"
+            href="https://blog.hongminhee.org/static/style.css">
+      <link rel="stylesheet" type="text/css"
+        href="https://spoqa.github.io/spoqa-han-sans/css/SpoqaHanSans-kr.css">
+      <link rel="stylesheet" type="text/css"
+        href="https://spoqa.github.io/spoqa-han-sans/css/SpoqaHanSans-jp.css">
+      <meta name="viewport" content="width=device-width, user-scalable=no">
+      <meta name="twitter:creator" content="@hongminhee">
+      <meta name="twitter:site" content="@hongminhee">
+      <meta property="article:author"
+            content="https://www.facebook.com/hongminhee">
+    
+
+  </head>
+  <body class=" post-page">
+    
+  
+      <header>
+        
+          <a href="https://blog.hongminhee.org/index.html" class="site-name">
+              <ruby>洪民憙 <rp>(</rp><rt>홍민희</rt><rp>)</rp></ruby>
+              블로그
+            </a>
+          <nav>
+            <a href="https://hongminhee.org/" rel="author me">본인 소개</a>
+            <div class="archive">
+              아카이브:
+              <ul>
+                
+                  <li><a href="https://blog.hongminhee.org/2017/">2017</a></li>
+                
+                  <li><a href="https://blog.hongminhee.org/2016/">2016</a></li>
+                
+                  <li><a href="https://blog.hongminhee.org/2015/">2015</a></li>
+                
+                  <li><a href="https://blog.hongminhee.org/2014/">2014</a></li>
+                
+                  <li><a href="https://blog.hongminhee.org/2013/">2013</a></li>
+                
+              </ul>
+            </div>
+          </nav>
+        
+      </header>
+
+      <ul class="disclaimer">
+        <li>글을 썼을 당시의 주장에 제 스스로가 더이상 동의하지 못하는
+            경우도 있습니다.</li>
+        <li>심지어 몇몇 글은 이제 정 반대의 의견을 가지고 있기도 합니다.</li>
+        <li>지금까지 여러 주제에 대한 의견이 꾸준히 달라졌습니다.
+            앞으로도 그럴 것입니다.</li>
+        <li>따라서 제 생각을 바꾸기 위한 설득도 환영합니다.
+            저는 의견을 바꿀 의향이 있습니다.</li>
+      </ul>
+    
+
+  <article>
+    
+      <time datetime="2012-05-17T04:32:45+09:00">2012년 5월 17일</time>
+    
+
+    
+      <h1 id="wsgi-테스팅-유틸리티source"><a href="http://werkzeug.pocoo.org/docs/test/">WSGI 테스팅 유틸리티</a></h1>
+<p>Werkzeug은 프레임워크와 무관한(framework-agnostic) WSGI 테스팅 도구를 제공한다. Werkzeug을 쓰지 않더라도, Python으로 웹 프레임워크를 만든다면 이걸 이용해서 쉽게 테스트해볼 수 있다. WSGI 환경 변수를 테스트 용도로 만들어주는 도구를 따로 만들어야 하나 고민하고 있었는데 이걸로 해결.</p>
+
+    
+  </article>
+
+
+    <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-54324071-2', 'auto');
+    ga('send', 'pageview');
+    </script>
+  </body>
+</html>
+
+
+

@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8">
+    
+  
+    
+      <link rel="canonical" href="https://blog.hongminhee.org/2010/03/08/universal-namespace/">
+      <meta property="og:url" content="https://blog.hongminhee.org/2010/03/08/universal-namespace/">
+    
+  
+  
+  <meta name="description" value="">
+  <meta name="twitter:card" content="summary">
+  <meta property="og:locale" content="ko_KR">
+  <meta property="og:site_name" content="洪民憙 블로그">
+  <meta property="og:type" content="article">
+  
+    <meta name="twitter:title" content="Universal Namespace">
+    <meta property="og:title" content="Universal Namespace">
+  
+  <meta name="twitter:description" content="유니버설 네임스페이스(universal namespace)를 만들고 관리하는 것은 매우 어렵다. 하지만 유니버설 네임스페이스가 필요한 경우는 많다. 이를테면 도서를 위한 ISBN이나 우리가 인터넷을 하면서 흔히 접하는 도메인 네임, URI 따위가 바로 유니버설 네임스페이스인데, 이걸 개인이나 소규모 표준 위원회가 정의하고 관리하는 것은 거의 불가능하다. …">
+  <meta property="og:description" content="유니버설 네임스페이스(universal namespace)를 만들고 관리하는 것은 매우 어렵다. 하지만 유니버설 네임스페이스가 필요한 경우는 많다. 이를테면 도서를 위한 ISBN이나 우리가 인터넷을 하면서 흔히 접하는 도메인 네임, URI 따위가 바로 유니버설 네임스페이스인데, 이걸 개인이나 소규모 표준 위원회가 정의하고 관리하는 것은 거의 불가능하다. …">
+  <meta property="og:updated_time"
+        content="2010-03-08T13:19:00+09:00">
+  
+      <title>Universal Namespace &mdash; 洪民憙 블로그</title>
+      <link rel="alternate" type="application/atom+xml" title="洪民憙 블로그"
+            href="https://blog.hongminhee.org/feed.xml">
+      <meta name="author" content="홍민희">
+      <link rel="stylesheet" media="screen"
+            href="https://blog.hongminhee.org/static/style.css">
+      <link rel="stylesheet" type="text/css"
+        href="https://spoqa.github.io/spoqa-han-sans/css/SpoqaHanSans-kr.css">
+      <link rel="stylesheet" type="text/css"
+        href="https://spoqa.github.io/spoqa-han-sans/css/SpoqaHanSans-jp.css">
+      <meta name="viewport" content="width=device-width, user-scalable=no">
+      <meta name="twitter:creator" content="@hongminhee">
+      <meta name="twitter:site" content="@hongminhee">
+      <meta property="article:author"
+            content="https://www.facebook.com/hongminhee">
+    
+
+  </head>
+  <body class=" post-page outdated">
+    
+  
+      <header>
+        
+          <a href="https://blog.hongminhee.org/index.html" class="site-name">
+              <ruby>洪民憙 <rp>(</rp><rt>홍민희</rt><rp>)</rp></ruby>
+              블로그
+            </a>
+          <nav>
+            <a href="https://hongminhee.org/" rel="author me">본인 소개</a>
+            <div class="archive">
+              아카이브:
+              <ul>
+                
+                  <li><a href="https://blog.hongminhee.org/2017/">2017</a></li>
+                
+                  <li><a href="https://blog.hongminhee.org/2016/">2016</a></li>
+                
+                  <li><a href="https://blog.hongminhee.org/2015/">2015</a></li>
+                
+                  <li><a href="https://blog.hongminhee.org/2014/">2014</a></li>
+                
+                  <li><a href="https://blog.hongminhee.org/2013/">2013</a></li>
+                
+              </ul>
+            </div>
+          </nav>
+        
+      </header>
+
+      <ul class="disclaimer">
+        <li>글을 썼을 당시의 주장에 제 스스로가 더이상 동의하지 못하는
+            경우도 있습니다.</li>
+        <li>심지어 몇몇 글은 이제 정 반대의 의견을 가지고 있기도 합니다.</li>
+        <li>지금까지 여러 주제에 대한 의견이 꾸준히 달라졌습니다.
+            앞으로도 그럴 것입니다.</li>
+        <li>따라서 제 생각을 바꾸기 위한 설득도 환영합니다.
+            저는 의견을 바꿀 의향이 있습니다.</li>
+      </ul>
+    
+
+  <article>
+    
+      <time datetime="2010-03-08T13:19:00+09:00">2010년 3월 8일</time>
+    
+
+    
+      
+  <p class="outdate-disclaimer">
+    이하의 글은 2010년에 쓴 것입니다. 오래된 글인 만큼, 현재의
+    생각과 전혀 다른 내용도 많이 포함되어 있고, 당시와는 상황이 많이 달라진
+    점도 있습니다. 또한, 그 당시에 잘못 알려졌던 정보도 포함되어 있을 수
+    있습니다. <em>어찌됐든 저는 제 오래된 글이 회자되는 것을 저어합니다.</em>
+    읽기에 앞서 양해를 부탁드립니다.
+  <p>
+        <h1 id="universal-namespace">Universal Namespace</h1>
+<p><strong>유니버설 네임스페이스</strong>(universal namespace)<a href="#fn1" class="footnoteRef" id="fnref1"><sup>1</sup></a>를 만들고 관리하는 것은 매우 어렵다. 하지만 유니버설 네임스페이스가 필요한 경우는 많다. 이를테면 도서를 위한 ISBN이나 우리가 인터넷을 하면서 흔히 접하는 도메인 네임, URI 따위가 바로 유니버설 네임스페이스인데, 이걸 개인이나 소규모 표준 위원회가 정의하고 관리하는 것은 거의 불가능하다.</p>
+<p>특히 숫자 등의 코드로 된 식별자가 아닌, 사람이 비교적 쉽게 알아볼 수 있으면서도 정규화(normalization)가 용이하게 알파누메릭컬(alphanumerical)한 네임스페이스를 정의하고 관리하는 것은 더욱 힘들다. 왜냐하면 사람이 알아볼 수 있게 하는 것이 네임스페이스 디자인의 의도 중 하나라면, 모든 이름이 똑같이 사람에게 알아보기 쉬울 수는 없기 때문에<a href="#fn2" class="footnoteRef" id="fnref2"><sup>2</sup></a> 충분히 권위적인 사람이나 자원에 더 알아보기 쉬운 이름을 우선적으로 할당해주는 관리 작업이 들어가야 하기 때문이다. 도메인 네임은 그것을 꽤 잘 정의하고 관리한 편인데, 이를테면 마침표(<code>.</code>)로 구분하는 위계(hierarchy)를 만들고 국가 등의 공인된 기관에 그 관리 구역을 위임하는 식으로 이루어졌기 때문이다. 이렇게 되면 관리 비용의 총량이 변하는 것은 아니지만, 관리 비용은 전체적으로 분산되기 때문에 어느 누가 크게 부담하는 일은 피할 수 있다. 그럼에도 대부분의 도메인 네임은 현금에 의해 거래되기 때문에 권위를 측정하는 일을 경제 시스템에 위임했다고 볼 수 있다. 현존하는 가장 잘 정의되고 관리되는 유니버설 네임스페이스라고 할 수 있는 도메인 네임도 현실적으로 모든 것을 통제하지는 못하고 있다는 뜻이다.</p>
+<p>URI나 이메일 주소 같은 경우도 유니버설 네임스페이스라고 할 수 있지만, 사실은 둘 모두 도메인 네임에 이미 크게 위임을 한 상태이기 때문에, 도메인 네임 안쪽에서의 네임스페이스를 관리하는 정도의 부담이다.</p>
+<p>글을 읽으면서 느낀 사람도 있겠지만, 이 네임스페이스라는 것은 관리 책임을 위임할 수 있다는 특징이 있다. 이것은 굉장히 중요한 특성인데, 이 위임이라는 것을 잘 엮으면 적은 비용(혹은 분산된 비용)으로 충분히 쓸만한 유니버설 네임스페이스를 누구나 얻을 수 있기 때문이다.</p>
+<p>예를 들면 Java 언어의 경우 패키지의 고유성을 위해 유니버설 네임스페이스가 필요했는데, 이를 위해 패키지 네임을 도메인 네임의 역순으로 정의하길 권고하는 것으로 어느 정도 해결했다. 이를테면 내가 어떤 패키지를 만든다면 <code>kr.dahlia.xxx</code>와 같은 이름을 쓰면 되는 것이다. 하지만 도메인 네임의 규칙과 Java 식별자의 규칙은 서로 다르기 때문에<a href="#fn3" class="footnoteRef" id="fnref3"><sup>3</sup></a> 개인적으로는 썩 좋은 위임이라고 생각하지 않는 사례이다.</p>
+<p>또 예를 들자면 <a href="http://openid.net/">OpenID</a> 표준은 개인 식별자의 고유성을 확보하기 위해 URL을 그대로 위임한 바 있다. 그 외에도 많은 웹 서비스들이 사용자 계정 이름으로 이메일 주소를 사용하는 것으로 서비스 내에서의 이름 중복 문제를 위임해버리는 경우는 흔히 찾아볼 수 있다.</p>
+<p>사실 내가 갑자기 유니버설 네임스페이스에 대해 썰을 푼 이유는, 내가 만드는 언어의 패키지 네임스페이스를 어떻게 관리할지 고민하고 있기 때문이다. <q>방금 네가 말했잖아. 네임스페이스는 위임하면 된다며</q>라고 말할 수 있겠지만, 그게 말처럼 쉬운 문제는 또 아니다. 앞서 말했다시피 도메인 자체는 권위를 평가하고 높은 권위에 좋은 이름을 주는 관리 책임을 자본에 어느 정도 위임하여 회피했기 때문에, 도메인 네임을 사용할 경우 그러한 문제도 고스란히 가져오게 된다. 즉 좋은 라이브러리 이름을 얻기 위해서는 돈이 필요해지는 것이다. 또한 Java의 사례를 보면 알 수 있는 것인데, 애초에 도메인 네임은 특정 언어로 작성된 라이브러리 패키지를 위해 디자인된 네임스페이스가 아니기 때문에 필요 이상으로 이름이 길어지게 된다. 웬만하면 <code>xxx</code>라고 할 수 있는 것을 <code>kr.dahlia.xxx</code>라는 식으로 늘려 써야 하는 경우가 많다.</p>
+<p>Perl의 <a href="http://www.cpan.org/">CPAN</a>의 경우 프로그래밍 언어 중에서는 그러한 문제를 가장 열심히 해결하려고 시도한 경운데, 대신 CPAN 모듈들은 재치있고 특이한 이름을 가지지 못하는 경우가 많다. 또한 CPAN 같은 방식으로 가려면 공동체의 관리 비용이 든다.</p>
+<p>그래서 결론이 뭐냐하면, 사실 결론은 없고 그냥 내가 요즘 이런 고민을 하고 있다는 얘기를 써보고 싶었다.</p>
+<section class="footnotes">
+<hr />
+<ol>
+<li id="fn1"><p>한국어로 뭐라고 해야할지 고민했으나 결국 찾지를 못했다.<a href="#fnref1">↩</a></p></li>
+<li id="fn2"><p>이를테면 <code>apple</code>과 <code>a8jkd</code>은 글자수는 같지만 전자는 사람이 알아보기 쉬운 반면, 후자는 알아보기도 어렵고 읽거나 외우기도 힘들다. 읽기 힘들기 때문에 음성 통화 등으로 다른 사람에게 전달하는 것도 힘들다.<a href="#fnref2">↩</a></p></li>
+<li id="fn3"><p>이를테면 <code>1st-name.com</code>을 Java 식별자로는 표현할 수 없다. 하이픈도 포함되어 있고, 숫자로 시작하기 때문이다.<a href="#fnref3">↩</a></p></li>
+</ol>
+</section>
+
+        <script>
+        (function () {
+          var ps = document.getElementsByClassName('outdate-disclaimer');
+          if (ps.length < 1) {
+            return;
+          }
+          var p = ps[0], t = document.createElement('span');
+          t.addEventListener('click', function () {
+            this.parentNode.removeChild(this);
+            var gs = document.getElementsByClassName('outdate-gray-out');
+            for (var i = gs.length - 1; i >= 0; --i) {
+              gs[i].className = gs[i].className.replace(
+                /(^|\s)outdate-gray-out(\s|$)/g, '');
+            }
+          });
+          t.className = 'toggler';
+          t.innerText = '읽기';
+          p.appendChild(t);
+          var e = p.nextSibling;
+          while (e !== null && e !== undefined) {
+            if (e.nodeType === 1) {
+              e.className += ' outdate-gray-out';
+            }
+            e = e.nextSibling;
+          }
+        })();
+        </script>
+      
+    
+  </article>
+
+
+    <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-54324071-2', 'auto');
+    ga('send', 'pageview');
+    </script>
+  </body>
+</html>
+
+
+

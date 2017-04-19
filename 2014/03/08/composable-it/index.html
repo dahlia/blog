@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8">
+    
+  
+    
+      <link rel="canonical" href="https://blog.hongminhee.org/2014/03/08/composable-it/">
+      <meta property="og:url" content="https://blog.hongminhee.org/2014/03/08/composable-it/">
+    
+  
+  
+  <meta name="description" value="">
+  <meta name="twitter:card" content="summary">
+  <meta property="og:locale" content="ko_KR">
+  <meta property="og:site_name" content="洪民憙 블로그">
+  <meta property="og:type" content="article">
+  
+    <meta name="twitter:title" content="Composable IT">
+    <meta property="og:title" content="Composable IT">
+  
+  <meta name="twitter:description" content="어째서 Atom이나 Sublime Text가 (Emacs는 몰라도) Vim을 대체할 수는 없는지에 대한 글을 페이스북에 링크했다가 우연히 매우 좋은 발표 자료를 알게 되었다. 2007년 이맘때에 신재호(netj) 님이 발표한 자료이다. 5년도 지난 자료이지만 내용의 탁월함은 어디로 가지 않는다. (2007년 3월은 Chrome도 iPhone도 세상에 나오기 전이다.) 링크로 때우는 글은 블로그에 잘 안 쓰고 페이스북에 올리는데, 이 자료는 꼭 여러 사람들에게 보여주고 싶다는 마음에 여기에 올린다. …">
+  <meta property="og:description" content="어째서 Atom이나 Sublime Text가 (Emacs는 몰라도) Vim을 대체할 수는 없는지에 대한 글을 페이스북에 링크했다가 우연히 매우 좋은 발표 자료를 알게 되었다. 2007년 이맘때에 신재호(netj) 님이 발표한 자료이다. 5년도 지난 자료이지만 내용의 탁월함은 어디로 가지 않는다. (2007년 3월은 Chrome도 iPhone도 세상에 나오기 전이다.) 링크로 때우는 글은 블로그에 잘 안 쓰고 페이스북에 올리는데, 이 자료는 꼭 여러 사람들에게 보여주고 싶다는 마음에 여기에 올린다. …">
+  <meta property="og:updated_time"
+        content="2014-03-08T20:58:00+09:00">
+  
+      <title>Composable IT &mdash; 洪民憙 블로그</title>
+      <link rel="alternate" type="application/atom+xml" title="洪民憙 블로그"
+            href="https://blog.hongminhee.org/feed.xml">
+      <meta name="author" content="홍민희">
+      <link rel="stylesheet" media="screen"
+            href="https://blog.hongminhee.org/static/style.css">
+      <link rel="stylesheet" type="text/css"
+        href="https://spoqa.github.io/spoqa-han-sans/css/SpoqaHanSans-kr.css">
+      <link rel="stylesheet" type="text/css"
+        href="https://spoqa.github.io/spoqa-han-sans/css/SpoqaHanSans-jp.css">
+      <meta name="viewport" content="width=device-width, user-scalable=no">
+      <meta name="twitter:creator" content="@hongminhee">
+      <meta name="twitter:site" content="@hongminhee">
+      <meta property="article:author"
+            content="https://www.facebook.com/hongminhee">
+    
+
+  </head>
+  <body class=" post-page">
+    
+  
+      <header>
+        
+          <a href="https://blog.hongminhee.org/index.html" class="site-name">
+              <ruby>洪民憙 <rp>(</rp><rt>홍민희</rt><rp>)</rp></ruby>
+              블로그
+            </a>
+          <nav>
+            <a href="https://hongminhee.org/" rel="author me">본인 소개</a>
+            <div class="archive">
+              아카이브:
+              <ul>
+                
+                  <li><a href="https://blog.hongminhee.org/2017/">2017</a></li>
+                
+                  <li><a href="https://blog.hongminhee.org/2016/">2016</a></li>
+                
+                  <li><a href="https://blog.hongminhee.org/2015/">2015</a></li>
+                
+                  <li><a href="https://blog.hongminhee.org/2014/">2014</a></li>
+                
+                  <li><a href="https://blog.hongminhee.org/2013/">2013</a></li>
+                
+              </ul>
+            </div>
+          </nav>
+        
+      </header>
+
+      <ul class="disclaimer">
+        <li>글을 썼을 당시의 주장에 제 스스로가 더이상 동의하지 못하는
+            경우도 있습니다.</li>
+        <li>심지어 몇몇 글은 이제 정 반대의 의견을 가지고 있기도 합니다.</li>
+        <li>지금까지 여러 주제에 대한 의견이 꾸준히 달라졌습니다.
+            앞으로도 그럴 것입니다.</li>
+        <li>따라서 제 생각을 바꾸기 위한 설득도 환영합니다.
+            저는 의견을 바꿀 의향이 있습니다.</li>
+      </ul>
+    
+
+  <article>
+    
+      <time datetime="2014-03-08T20:58:00+09:00">2014년 3월 8일</time>
+    
+
+    
+      <h1 id="composable-itsource"><a href="http://sparcs.org/seminar/attachment/netj-20070323-1.pdf">Composable IT</a></h1>
+<p><a href="https://medium.com/p/433852f4b4d1">어째서 Atom이나 Sublime Text가 (Emacs는 몰라도) Vim을 대체할 수는 없는지에 대한 글</a>을 페이스북에 링크했다가 우연히 매우 좋은 발표 자료를 알게 되었다. 2007년 이맘때에 <a href="http://netj.org/">신재호</a>(netj) 님이 발표한 자료이다. 5년도 지난 자료이지만 내용의 탁월함은 어디로 가지 않는다. (2007년 3월은 Chrome도 iPhone도 세상에 나오기 전이다.) 링크로 때우는 글은 블로그에 잘 안 쓰고 페이스북에 올리는데, 이 자료는 꼭 여러 사람들에게 보여주고 싶다는 마음에 여기에 올린다.</p>
+<p style="text-align: center;"><a href="http://sparcs.org/seminar/attachment/netj-20070323-1.pdf"><em style="font-size: x-large; font-style: normal;">Composable IT</em><br>“netj와 함께 고민해보는 우리 IT의 미래”</a></p>
+<p>IT 업계에 있는 사람들이라면 모두들 한번씩 보고 음미해 보았으면 좋겠다.</p>
+<p>우리가 만드려고 하는 놀라운 아이폰 앱은 과연 composable한가? 1년 뒤에는 사람들이 그 앱을 훨씬 더 능숙하게 쓸 수 있게 해주는가(<em>learning curve</em> v. <em>learning gap</em>)? 이 바닥에서 우리가 만드는 것들이 함께 쓰이기보다는 서로 충돌하고 경쟁하게 되는 이유가 무엇일까?</p>
+
+    
+  </article>
+
+
+    <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-54324071-2', 'auto');
+    ga('send', 'pageview');
+    </script>
+  </body>
+</html>
+
+
+

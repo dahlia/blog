@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8">
+    
+  
+    
+      <link rel="canonical" href="https://blog.hongminhee.org/2012/06/06/24522452884/">
+      <meta property="og:url" content="https://blog.hongminhee.org/2012/06/06/24522452884/">
+    
+  
+  
+  <meta name="description" value="">
+  <meta name="twitter:card" content="summary">
+  <meta property="og:locale" content="ko_KR">
+  <meta property="og:site_name" content="洪民憙 블로그">
+  <meta property="og:type" content="article">
+  
+    <meta name="twitter:title" content="Windows에서 PuTTY, SSH 사용 팁">
+    <meta property="og:title" content="Windows에서 PuTTY, SSH 사용 팁">
+  
+  <meta name="twitter:description" content="몇년 전부터 Windows에서 내가 SSH를 사용하는 방법이 있다. 근데 주변을 보니까 다들 그냥 putty.exe 파일 하나 받아놓고 쓰는 경우가 많길래 내가 쓰는 방법을 정리해본다. …">
+  <meta property="og:description" content="몇년 전부터 Windows에서 내가 SSH를 사용하는 방법이 있다. 근데 주변을 보니까 다들 그냥 putty.exe 파일 하나 받아놓고 쓰는 경우가 많길래 내가 쓰는 방법을 정리해본다. …">
+  <meta property="og:updated_time"
+        content="2012-06-06T13:43:00+09:00">
+  
+      <title>Windows에서 PuTTY, SSH 사용 팁 &mdash; 洪民憙 블로그</title>
+      <link rel="alternate" type="application/atom+xml" title="洪民憙 블로그"
+            href="https://blog.hongminhee.org/feed.xml">
+      <meta name="author" content="홍민희">
+      <link rel="stylesheet" media="screen"
+            href="https://blog.hongminhee.org/static/style.css">
+      <link rel="stylesheet" type="text/css"
+        href="https://spoqa.github.io/spoqa-han-sans/css/SpoqaHanSans-kr.css">
+      <link rel="stylesheet" type="text/css"
+        href="https://spoqa.github.io/spoqa-han-sans/css/SpoqaHanSans-jp.css">
+      <meta name="viewport" content="width=device-width, user-scalable=no">
+      <meta name="twitter:creator" content="@hongminhee">
+      <meta name="twitter:site" content="@hongminhee">
+      <meta property="article:author"
+            content="https://www.facebook.com/hongminhee">
+    
+
+  </head>
+  <body class=" post-page">
+    
+  
+      <header>
+        
+          <a href="https://blog.hongminhee.org/index.html" class="site-name">
+              <ruby>洪民憙 <rp>(</rp><rt>홍민희</rt><rp>)</rp></ruby>
+              블로그
+            </a>
+          <nav>
+            <a href="https://hongminhee.org/" rel="author me">본인 소개</a>
+            <div class="archive">
+              아카이브:
+              <ul>
+                
+                  <li><a href="https://blog.hongminhee.org/2017/">2017</a></li>
+                
+                  <li><a href="https://blog.hongminhee.org/2016/">2016</a></li>
+                
+                  <li><a href="https://blog.hongminhee.org/2015/">2015</a></li>
+                
+                  <li><a href="https://blog.hongminhee.org/2014/">2014</a></li>
+                
+                  <li><a href="https://blog.hongminhee.org/2013/">2013</a></li>
+                
+              </ul>
+            </div>
+          </nav>
+        
+      </header>
+
+      <ul class="disclaimer">
+        <li>글을 썼을 당시의 주장에 제 스스로가 더이상 동의하지 못하는
+            경우도 있습니다.</li>
+        <li>심지어 몇몇 글은 이제 정 반대의 의견을 가지고 있기도 합니다.</li>
+        <li>지금까지 여러 주제에 대한 의견이 꾸준히 달라졌습니다.
+            앞으로도 그럴 것입니다.</li>
+        <li>따라서 제 생각을 바꾸기 위한 설득도 환영합니다.
+            저는 의견을 바꿀 의향이 있습니다.</li>
+      </ul>
+    
+
+  <article>
+    
+      <time datetime="2012-06-06T13:43:00+09:00">2012년 6월 6일</time>
+    
+
+    
+      <h1 id="windows에서-putty-ssh-사용-팁">Windows에서 PuTTY, SSH 사용 팁</h1>
+<p>몇년 전부터 Windows에서 내가 SSH를 사용하는 방법이 있다. 근데 주변을 보니까 다들 그냥 <code>putty.exe</code> 파일 하나 받아놓고 쓰는 경우가 많길래 내가 쓰는 방법을 정리해본다.</p>
+<p><a href="https://i.imgur.com/TmVBn.jpg"><img src="https://i.imgur.com/TmVBnl.jpg" alt="dPuTTY" /></a></p>
+<p>먼저 나는 공식 웹사이트에서 배포되는 <code>putty.exe</code> 대신 <a href="http://daybreaker.info/">아침놀</a> 님이 각종 패치를 적용한 <a href="https://dev.daybreaker.info/dputty">dPuTTY</a>를 사용한다. 몇가지 추가적인 기능이 있는데, 내가 dPuTTY를 쓰는 이유는 주로 투명도를 설정할 수 있다는 점과 ASCII 영역 밖에 있는 유니코드 문자들에 대해서 별도의 글꼴을 설정할 수 있다는 점 때문이다. 나는 ASCII 영역 안쪽은 Consolas를, 그 밖의 문자들에 대해서는 돋움체를 쓰고 있다.</p>
+<p><img src="https://i.imgur.com/OXTSS.png" alt="Use separated Unicode font" /></p>
+<p>나는 비밀번호를 쓰지 않고 비밀키를 쓴다. 실제로 이렇게 쓰는 사람은 별로 없는 것 같지만 <a href="http://www.chiark.greenend.org.uk/~sgtatham/putty/">PuTTY</a>는 풀 패키지를 설치하면 Pageant나 PLink, PScp 같은 다른 도구를 함께 제공한다.<a href="#fn1" class="footnoteRef" id="fnref1"><sup>1</sup></a> Pageant는 정해진 비밀키의 passphrase를 입력해두면 그 이후의 SSH 인증에 해당 세션(Pageant 프로세스 켜진 동안 내내)에서 PuTTY 내 유틸리티에서 일어나는 SSH 인증은 모두 그 비밀키를 통해 passphrase 입력 없이 할 수 있게 해준다. 컴퓨터 켜고 passphrase 딱 한번만 입력하면 그 뒤로는 아무것도 입력할 필요 없이 비밀키로 자동적으로 인증이 된다.</p>
+<p>Pageant를 쓰려면 일단 비밀키가 필요하다. 정확히는 PuTTY에서 사용하는 형식인 PPK 비밀키가 필요하다. 풀 패키지 안에 PuttyGen (PuTTY Key Generator) 유틸리티가 들어있으니 이걸 쓰면 새로운 비밀키 생성도 되고, 기존에 <code>ssh-keygen</code> 프로그램으로 생성해준 키가 있으면 그걸 PuTTY 형식으로 변환하는 것도 할 수 있다.</p>
+<p><img src="https://i.imgur.com/ygvyw.png" alt="PuTTY Key Generator" /></p>
+<p>만들거나 변환한 비밀키 PPK 파일을 어딘가에 저장해둔다. 나 같은 경우 그냥 홈 디렉토리 바로 안쪽에 <code>.ssh</code> 폴더를 만들어서 그 안에 둔다. (그리고 해당 폴더는 숨김 표시 해둠.) 참고로 이 파일은 인스톨러를 통해 설치한 경우 자동으로 Pageant에 연결되어 있다. 그래서 이걸 실행하면 알아서 Pageant가 이걸 불러오고 passphrase를 묻게 된다. 이것을 이용해 컴퓨터가 켜졌을 때 알아서 Pageant가 실행되도록, 해당 PPK 파일의 바로가기(shortcut)을 만들어 Startup 안에 넣어둔다.</p>
+<p><img src="https://i.imgur.com/MCEMw.png" alt="PPK Passphrase Prompt" /></p>
+<p>일반적으로 SSH를 쓰는 경우 여기까지만 해두면 되는데, 버전 관리 시스템에서도 SSH를 통해 통신을 하는 경우 비밀키 인증을 해야 한다. 그런 경우에는 어떻게 할까? 내가 주로 사용하는 Git과 Mercurial에 대해서만 좀더 정리를 해보겠다. (Git과 Mercurial을 Windows에서 설치하는 방법은 따로 다루지 않는다.)</p>
+<p>Git은 <code>GIT_SSH</code>라는 환경 변수가 설정되어 있을 경우 단순히 <code>ssh</code> 명령을 실행하는 대신 해당 환경 변수에 들어 있는 명령을 대신 사용한다. 단, 인자는 <code>ssh</code>가 받는 형식대로 넘겨주도록 되어 있기 때문에 <code>ssh</code>가 받는 형식의 인자를 처리할 수 있는 프로그램을 지정해야 한다. 쉽게 말해, 저기에 들어가는 명령어는 <code>ssh</code>의 drop-in replacement여야 한다.</p>
+<p>PuTTY 패키지 안에 들어있는 <code>plink.exe</code>가 그런 용도이다. 따라서 <code>GIT_SSH</code> 환경 변수를 <code>C:\Program Files\PuTTY\plink.exe</code>와 같이 설정하면 된다(경로가 다를 경우 알아서). 참고로 Windows에서의 환경 변수 설정은 System Properties → Advanced → Environment Variables… 메뉴로 들어가서 고칠 수 있다.</p>
+<p>이렇게 하고 나면 이후 Git에서 SSH를 사용하는 경우 Pageant를 통해 비밀키 인증을 하게 된다. SSH 통신도 PuTTY가 하게 된다.</p>
+<p>마찬가지 역할을 하는 옵션이 Mercruial에도 있다. 이쪽은 환경변수 대신에 설정 파일의 <code>[ui]</code> 섹션에 있는 <code>ssh</code> 항목을 따른다. Windows에서는 <code>~/.hgrc</code> 대신 홈 아래의 <code>Mercurial.ini</code>가 설정 파일이다. (나는 이것도 숨김 표시를 해두었다.) 이 파일에 <code>ssh</code> 항목을 다음과 같이 설정하면 된다. 마찬가지로 경로가 다를 경우엔 알아서.</p>
+<pre><code>[ui]
+ssh = &quot;C:\Program Files\PuTTY\plink.exe&quot;</code></pre>
+<p>마지막으로 64비트 환경을 사용하는 사람들을 위한 추가 팁. PuTTY 공식 웹사이트에서 구할 수 있는 패키지는 32비트 바이너리이다. 직접 소스 코드를 받아 64비트 바이너리를 빌드하는 방법도 있지만 너무 수고스럽다. 나는 <a href="https://splunk.net/w/PuTTy64bit" class="uri">https://splunk.net/w/PuTTy64bit</a>에서 다른 사람이 빌드해둔 패키지를 구해서 설치했다. 근데 아침놀 님께 여쭤보니 dPuTTY는 32비트 바이너리만 있다고 한다. 그래서 나는 <code>putty.exe</code>만 32비트 바이너리를 쓰고 있다. 음;;</p>
+<blockquote class="twitter-tweet"><p>@<a href="https://twitter.com/achimnol">achimnol</a> 혹시 dPuTTY 64비트 바이너리도 있나요? 어쩐지 예전에도 정확히 똑같은 질문을 했던 것 같기도 한데;;</p>&mdash; Hong Minhee (@hongminhee) <a href="https://twitter.com/hongminhee/status/209918850844725248" data-datetime="2012-06-05T08:05:28+00:00">June 5, 2012</a></blockquote>
+<blockquote class="twitter-tweet" data-in-reply-to="209918850844725248"><p>@<a href="https://twitter.com/hongminhee">hongminhee</a> 없습니다;;</p>&mdash; Joongi Kim (@achimnol) <a href="https://twitter.com/achimnol/status/209973790791307264" data-datetime="2012-06-05T11:43:47+00:00">June 5, 2012</a></blockquote>
+<script src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+<section class="footnotes">
+<hr />
+<ol>
+<li id="fn1"><p>각각 <code>plink.exe</code>는 <code>ssh</code>의, <code>pscp.exe</code>는 <code>scp</code>의 drop-in replacement다.<a href="#fnref1">↩</a></p></li>
+</ol>
+</section>
+
+    
+  </article>
+
+
+    <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-54324071-2', 'auto');
+    ga('send', 'pageview');
+    </script>
+  </body>
+</html>
+
+
+

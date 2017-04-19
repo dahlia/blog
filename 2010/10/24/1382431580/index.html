@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8">
+    
+  
+    
+      <link rel="canonical" href="https://blog.hongminhee.org/2010/10/24/1382431580/">
+      <meta property="og:url" content="https://blog.hongminhee.org/2010/10/24/1382431580/">
+    
+  
+  
+  <meta name="description" value="">
+  <meta name="twitter:card" content="summary">
+  <meta property="og:locale" content="ko_KR">
+  <meta property="og:site_name" content="洪民憙 블로그">
+  <meta property="og:type" content="article">
+  
+    <meta name="twitter:title" content="Python의 datetime.datetime 병신 같은 두 가지">
+    <meta property="og:title" content="Python의 datetime.datetime 병신 같은 두 가지">
+  
+  <meta name="twitter:description" content="Python 표준 라이브러리에 있는 datetime.datetime 클래스의 잘못 설계된 부분: …">
+  <meta property="og:description" content="Python 표준 라이브러리에 있는 datetime.datetime 클래스의 잘못 설계된 부분: …">
+  <meta property="og:updated_time"
+        content="2010-10-24T02:45:00+09:00">
+  
+      <title>Python의 datetime.datetime 병신 같은 두 가지 &mdash; 洪民憙 블로그</title>
+      <link rel="alternate" type="application/atom+xml" title="洪民憙 블로그"
+            href="https://blog.hongminhee.org/feed.xml">
+      <meta name="author" content="홍민희">
+      <link rel="stylesheet" media="screen"
+            href="https://blog.hongminhee.org/static/style.css">
+      <link rel="stylesheet" type="text/css"
+        href="https://spoqa.github.io/spoqa-han-sans/css/SpoqaHanSans-kr.css">
+      <link rel="stylesheet" type="text/css"
+        href="https://spoqa.github.io/spoqa-han-sans/css/SpoqaHanSans-jp.css">
+      <meta name="viewport" content="width=device-width, user-scalable=no">
+      <meta name="twitter:creator" content="@hongminhee">
+      <meta name="twitter:site" content="@hongminhee">
+      <meta property="article:author"
+            content="https://www.facebook.com/hongminhee">
+    
+
+  </head>
+  <body class=" post-page outdated">
+    
+  
+      <header>
+        
+          <a href="https://blog.hongminhee.org/index.html" class="site-name">
+              <ruby>洪民憙 <rp>(</rp><rt>홍민희</rt><rp>)</rp></ruby>
+              블로그
+            </a>
+          <nav>
+            <a href="https://hongminhee.org/" rel="author me">본인 소개</a>
+            <div class="archive">
+              아카이브:
+              <ul>
+                
+                  <li><a href="https://blog.hongminhee.org/2017/">2017</a></li>
+                
+                  <li><a href="https://blog.hongminhee.org/2016/">2016</a></li>
+                
+                  <li><a href="https://blog.hongminhee.org/2015/">2015</a></li>
+                
+                  <li><a href="https://blog.hongminhee.org/2014/">2014</a></li>
+                
+                  <li><a href="https://blog.hongminhee.org/2013/">2013</a></li>
+                
+              </ul>
+            </div>
+          </nav>
+        
+      </header>
+
+      <ul class="disclaimer">
+        <li>글을 썼을 당시의 주장에 제 스스로가 더이상 동의하지 못하는
+            경우도 있습니다.</li>
+        <li>심지어 몇몇 글은 이제 정 반대의 의견을 가지고 있기도 합니다.</li>
+        <li>지금까지 여러 주제에 대한 의견이 꾸준히 달라졌습니다.
+            앞으로도 그럴 것입니다.</li>
+        <li>따라서 제 생각을 바꾸기 위한 설득도 환영합니다.
+            저는 의견을 바꿀 의향이 있습니다.</li>
+      </ul>
+    
+
+  <article>
+    
+      <time datetime="2010-10-24T02:45:00+09:00">2010년 10월 24일</time>
+    
+
+    
+      
+  <p class="outdate-disclaimer">
+    이하의 글은 2010년에 쓴 것입니다. 오래된 글인 만큼, 현재의
+    생각과 전혀 다른 내용도 많이 포함되어 있고, 당시와는 상황이 많이 달라진
+    점도 있습니다. 또한, 그 당시에 잘못 알려졌던 정보도 포함되어 있을 수
+    있습니다. <em>어찌됐든 저는 제 오래된 글이 회자되는 것을 저어합니다.</em>
+    읽기에 앞서 양해를 부탁드립니다.
+  <p>
+        <h1 id="python의-datetime.datetime-병신-같은-두-가지">Python의 datetime.datetime 병신 같은 두 가지</h1>
+<p>Python 표준 라이브러리에 있는 <a href="http://docs.python.org/library/datetime.html#datetime-objects"><code>datetime.datetime</code></a> 클래스의 잘못 설계된 부분:</p>
+<ul>
+<li><p>두 개념이 하나의 자료형에서 공존하고 있다:</p>
+<ul>
+<li>시간대(time zone) 없는 시각 정보를 담는 <strong>naive datetime</strong>와</li>
+<li>시간대 정보가 함께 있는 <strong>tz-aware datetime</strong></li>
+</ul>
+<p>예상할 수 있듯 이 클래스는 저 두 가지가 <strong>하나의 자료형에서</strong> 공존하기 때문에 다형적으로 작동하지 않는다.</p></li>
+<li><p>기본 시간대(<a href="http://docs.python.org/library/datetime.html#datetime.tzinfo"><code>datetime.tzinfo</code></a>) 구현이 전혀 없다. <em>심지어 UTC조차!</em> UTC 시간대의 tz-aware datetime 인스턴스를 만들고 싶다면, 먼저 <a href="http://docs.python.org/library/datetime.html#datetime.tzinfo"><code>datetime.tzinfo</code></a>를 상속받는 UTC 클래스를 손수 작성해야 한다.<a href="#fn1" class="footnoteRef" id="fnref1"><sup>1</sup></a></p></li>
+</ul>
+<section class="footnotes">
+<hr />
+<ol>
+<li id="fn1"><p><del>뭐 어차피 시간대를 고려해야 하는 경우라면 <a href="http://pytz.sourceforge.net/">pytz</a>는 거의 필수고, <code>pytz.utc</code>를 쓰면 되지만 그래도 영 짜증나는 부분이 아닐 수 없다.</del> <ins>Python 3.2부터는 <a href="https://docs.python.org/3/library/datetime.html#timezone-objects"><code>datetime.timezone</code></a>이 추가됐다. UTC나 고정 오프셋만 필요하다면 그걸 쓰면 된다.</ins><a href="#fnref1">↩</a></p></li>
+</ol>
+</section>
+
+        <script>
+        (function () {
+          var ps = document.getElementsByClassName('outdate-disclaimer');
+          if (ps.length < 1) {
+            return;
+          }
+          var p = ps[0], t = document.createElement('span');
+          t.addEventListener('click', function () {
+            this.parentNode.removeChild(this);
+            var gs = document.getElementsByClassName('outdate-gray-out');
+            for (var i = gs.length - 1; i >= 0; --i) {
+              gs[i].className = gs[i].className.replace(
+                /(^|\s)outdate-gray-out(\s|$)/g, '');
+            }
+          });
+          t.className = 'toggler';
+          t.innerText = '읽기';
+          p.appendChild(t);
+          var e = p.nextSibling;
+          while (e !== null && e !== undefined) {
+            if (e.nodeType === 1) {
+              e.className += ' outdate-gray-out';
+            }
+            e = e.nextSibling;
+          }
+        })();
+        </script>
+      
+    
+  </article>
+
+
+    <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-54324071-2', 'auto');
+    ga('send', 'pageview');
+    </script>
+  </body>
+</html>
+
+
+

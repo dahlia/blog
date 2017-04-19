@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8">
+    
+  
+    
+      <link rel="canonical" href="https://blog.hongminhee.org/2012/03/14/19288294738/">
+      <meta property="og:url" content="https://blog.hongminhee.org/2012/03/14/19288294738/">
+    
+  
+  
+  <meta name="description" value="">
+  <meta name="twitter:card" content="summary">
+  <meta property="og:locale" content="ko_KR">
+  <meta property="og:site_name" content="洪民憙 블로그">
+  <meta property="og:type" content="article">
+  
+    <meta name="twitter:title" content="프로그램의 규모">
+    <meta property="og:title" content="프로그램의 규모">
+  
+  <meta name="twitter:description" content="규모가 큰 프로그램이란 무엇일까? …">
+  <meta property="og:description" content="규모가 큰 프로그램이란 무엇일까? …">
+  <meta property="og:updated_time"
+        content="2012-03-14T22:06:36+09:00">
+  
+      <title>프로그램의 규모 &mdash; 洪民憙 블로그</title>
+      <link rel="alternate" type="application/atom+xml" title="洪民憙 블로그"
+            href="https://blog.hongminhee.org/feed.xml">
+      <meta name="author" content="홍민희">
+      <link rel="stylesheet" media="screen"
+            href="https://blog.hongminhee.org/static/style.css">
+      <link rel="stylesheet" type="text/css"
+        href="https://spoqa.github.io/spoqa-han-sans/css/SpoqaHanSans-kr.css">
+      <link rel="stylesheet" type="text/css"
+        href="https://spoqa.github.io/spoqa-han-sans/css/SpoqaHanSans-jp.css">
+      <meta name="viewport" content="width=device-width, user-scalable=no">
+      <meta name="twitter:creator" content="@hongminhee">
+      <meta name="twitter:site" content="@hongminhee">
+      <meta property="article:author"
+            content="https://www.facebook.com/hongminhee">
+    
+
+  </head>
+  <body class=" post-page outdated">
+    
+  
+      <header>
+        
+          <a href="https://blog.hongminhee.org/index.html" class="site-name">
+              <ruby>洪民憙 <rp>(</rp><rt>홍민희</rt><rp>)</rp></ruby>
+              블로그
+            </a>
+          <nav>
+            <a href="https://hongminhee.org/" rel="author me">본인 소개</a>
+            <div class="archive">
+              아카이브:
+              <ul>
+                
+                  <li><a href="https://blog.hongminhee.org/2017/">2017</a></li>
+                
+                  <li><a href="https://blog.hongminhee.org/2016/">2016</a></li>
+                
+                  <li><a href="https://blog.hongminhee.org/2015/">2015</a></li>
+                
+                  <li><a href="https://blog.hongminhee.org/2014/">2014</a></li>
+                
+                  <li><a href="https://blog.hongminhee.org/2013/">2013</a></li>
+                
+              </ul>
+            </div>
+          </nav>
+        
+      </header>
+
+      <ul class="disclaimer">
+        <li>글을 썼을 당시의 주장에 제 스스로가 더이상 동의하지 못하는
+            경우도 있습니다.</li>
+        <li>심지어 몇몇 글은 이제 정 반대의 의견을 가지고 있기도 합니다.</li>
+        <li>지금까지 여러 주제에 대한 의견이 꾸준히 달라졌습니다.
+            앞으로도 그럴 것입니다.</li>
+        <li>따라서 제 생각을 바꾸기 위한 설득도 환영합니다.
+            저는 의견을 바꿀 의향이 있습니다.</li>
+      </ul>
+    
+
+  <article>
+    
+      <time datetime="2012-03-14T22:06:36+09:00">2012년 3월 14일</time>
+    
+
+    
+      
+  <p class="outdate-disclaimer">
+    이하의 글은 2012년에 쓴 것입니다. 오래된 글인 만큼, 현재의
+    생각과 전혀 다른 내용도 많이 포함되어 있고, 당시와는 상황이 많이 달라진
+    점도 있습니다. 또한, 그 당시에 잘못 알려졌던 정보도 포함되어 있을 수
+    있습니다. <em>어찌됐든 저는 제 오래된 글이 회자되는 것을 저어합니다.</em>
+    읽기에 앞서 양해를 부탁드립니다.
+  <p>
+        <h1 id="프로그램의-규모">프로그램의 규모</h1>
+<p>규모가 큰 프로그램이란 무엇일까?</p>
+<p>기능(function)이 많으면 큰 프로그램이라고 할 수 있다. Adobe Photoshop은 그림판보다 큰 프로그램이다. 그렇다면 Lua는 PHP보다 작은 프로그램인가? (Lua는 언어 표준 라이브러리에서 제공하는 함수가 PHP보다 훨씬 적다.) 프로그램이 제공하는 기능을 모두 구현하는데 드는 시간이 많거나 어려우면 큰 프로그램이라고 볼 수도 있다. 즉, 그 프로그램이 해결하려는 문제의 최소 복잡도(complexity)가 프로그램의 규모를 결정하기도 한다.</p>
+<p>기능의 수도 적고 구현 복잡도도 낮지만 가능성(capability)가 높으면 큰 프로그램이라고 볼 수도 있다. Ant는 매우 잘 구현된 빌드 스크립팅 도구이지만, 완전히 범용적인 Rhino 같은 스크립팅 언어 구현체에 비해서는 가능성이 떨어진다. 비슷하게 Lisp 매크로(macro)는 fexpr보다 효율적으로 컴파일되며 쓰기도 쉽지만 가능성은 더 떨어진다.</p>
+<p>때로는 프로그램의 규모는 그 프로그램이 한번에 처리할 수 있는 대상의 규모를 뜻하는 말로도 쓰인다. Apache는 Nginx보다 많은 기능을 제공한다는 점에서 더 큰 프로그램이지만, 같은 자원을 소모하여 처리할 수 있는 연결의 수가 적다는 점에서 더 작은 프로그램이기도 하다. 그렇다면 Membase는 다른 데이터베이스에 대해서 유틸라이제이션(utilization)이 낮으므로 더 작은 프로그램인가? 때로는 단일 처리량보다 규모가변성(scalability)이 프로그램의 규모를 더 잘 대변하기도 하다. Membase는 단일 유틸라이제이션은 낮지만 쉽게 여러 노드가 붙거나 떨어져서 규모가 매우 가변적이다. 그런 관점에서 보자면 Membase는 큰 프로그램이다.</p>
+<p>프로그램의 규모는 그것을 획득하기 위한 비용을 대변하기도 한다. Visual Studio는 Emacs보다 비싸므로 규모가 크다. 하지만 여기에는 잘못된 판단도 포함되어 있다. Visual Studio는 그것을 Microsoft에서 개발하는 데에 지불한 비용이 큰 것이며, 가격은 그것을 반영했을 뿐이다. 만약 오픈소스로 개발된 Visual Studio보다 더 달성하기 힘든 수준의 IDE 소프트웨어가 존재하고 그것이 무료로 배포된다고 하더라도 가격이 그 프로그램의 규모를 대변해주지는 않는다. 하지만 이것은 원론적인 이야기이고 우리는 보통 가격이 비싸면 규모가 큰 프로그램이라고 짐작한다. (자주 발생되어 관습적으로 떠오르는 고정 관념이다.)</p>
+<p>프로그램의 규모는 매우 많은 것을 중의적으로 의미하는 단어이다. 우리는 종종 프로그램의 규모에 대해 이야기하지만 실제로는 매번 다른 것을 뜻하며, 심지어 같은 대화 안에서도 화자마다 다른 생각을 하고 이야기하다가 말이 겉돌기도 한다.</p>
+
+        <script>
+        (function () {
+          var ps = document.getElementsByClassName('outdate-disclaimer');
+          if (ps.length < 1) {
+            return;
+          }
+          var p = ps[0], t = document.createElement('span');
+          t.addEventListener('click', function () {
+            this.parentNode.removeChild(this);
+            var gs = document.getElementsByClassName('outdate-gray-out');
+            for (var i = gs.length - 1; i >= 0; --i) {
+              gs[i].className = gs[i].className.replace(
+                /(^|\s)outdate-gray-out(\s|$)/g, '');
+            }
+          });
+          t.className = 'toggler';
+          t.innerText = '읽기';
+          p.appendChild(t);
+          var e = p.nextSibling;
+          while (e !== null && e !== undefined) {
+            if (e.nodeType === 1) {
+              e.className += ' outdate-gray-out';
+            }
+            e = e.nextSibling;
+          }
+        })();
+        </script>
+      
+    
+  </article>
+
+
+    <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-54324071-2', 'auto');
+    ga('send', 'pageview');
+    </script>
+  </body>
+</html>
+
+
+

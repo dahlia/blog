@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8">
+    
+  
+    
+      <link rel="canonical" href="https://blog.hongminhee.org/2012/06/08/24616620822/">
+      <meta property="og:url" content="https://blog.hongminhee.org/2012/06/08/24616620822/">
+    
+  
+  
+  <meta name="description" value="">
+  <meta name="twitter:card" content="summary">
+  <meta property="og:locale" content="ko_KR">
+  <meta property="og:site_name" content="洪民憙 블로그">
+  <meta property="og:type" content="article">
+  
+    <meta name="twitter:title" content="Windows에서 VBoxVmService로 Linux 돌리기">
+    <meta property="og:title" content="Windows에서 VBoxVmService로 Linux 돌리기">
+  
+  <meta name="twitter:description" content="원래 Windows를 안쓰지만 요즘 좀 쓰고 있다. 예전에 회사 다닐 때도 회사에서는 주로 Windows를 썼다. 하여간 Windows를 쓰긴 하지만 개발 환경은 Linux가 편해서 VirtualBox에 설치해서 쓰는 편이다. 개발만 하려는 거고 나는 주로 네트워크 프로그래밍과 서버 개발을 하기 때문에 X는 쓰지 않는다. 그래서 PuTTY로 접속만 가능하면 OK다. …">
+  <meta property="og:description" content="원래 Windows를 안쓰지만 요즘 좀 쓰고 있다. 예전에 회사 다닐 때도 회사에서는 주로 Windows를 썼다. 하여간 Windows를 쓰긴 하지만 개발 환경은 Linux가 편해서 VirtualBox에 설치해서 쓰는 편이다. 개발만 하려는 거고 나는 주로 네트워크 프로그래밍과 서버 개발을 하기 때문에 X는 쓰지 않는다. 그래서 PuTTY로 접속만 가능하면 OK다. …">
+  <meta property="og:updated_time"
+        content="2012-06-08T02:01:20+09:00">
+  
+      <title>Windows에서 VBoxVmService로 Linux 돌리기 &mdash; 洪民憙 블로그</title>
+      <link rel="alternate" type="application/atom+xml" title="洪民憙 블로그"
+            href="https://blog.hongminhee.org/feed.xml">
+      <meta name="author" content="홍민희">
+      <link rel="stylesheet" media="screen"
+            href="https://blog.hongminhee.org/static/style.css">
+      <link rel="stylesheet" type="text/css"
+        href="https://spoqa.github.io/spoqa-han-sans/css/SpoqaHanSans-kr.css">
+      <link rel="stylesheet" type="text/css"
+        href="https://spoqa.github.io/spoqa-han-sans/css/SpoqaHanSans-jp.css">
+      <meta name="viewport" content="width=device-width, user-scalable=no">
+      <meta name="twitter:creator" content="@hongminhee">
+      <meta name="twitter:site" content="@hongminhee">
+      <meta property="article:author"
+            content="https://www.facebook.com/hongminhee">
+    
+
+  </head>
+  <body class=" post-page">
+    
+  
+      <header>
+        
+          <a href="https://blog.hongminhee.org/index.html" class="site-name">
+              <ruby>洪民憙 <rp>(</rp><rt>홍민희</rt><rp>)</rp></ruby>
+              블로그
+            </a>
+          <nav>
+            <a href="https://hongminhee.org/" rel="author me">본인 소개</a>
+            <div class="archive">
+              아카이브:
+              <ul>
+                
+                  <li><a href="https://blog.hongminhee.org/2017/">2017</a></li>
+                
+                  <li><a href="https://blog.hongminhee.org/2016/">2016</a></li>
+                
+                  <li><a href="https://blog.hongminhee.org/2015/">2015</a></li>
+                
+                  <li><a href="https://blog.hongminhee.org/2014/">2014</a></li>
+                
+                  <li><a href="https://blog.hongminhee.org/2013/">2013</a></li>
+                
+              </ul>
+            </div>
+          </nav>
+        
+      </header>
+
+      <ul class="disclaimer">
+        <li>글을 썼을 당시의 주장에 제 스스로가 더이상 동의하지 못하는
+            경우도 있습니다.</li>
+        <li>심지어 몇몇 글은 이제 정 반대의 의견을 가지고 있기도 합니다.</li>
+        <li>지금까지 여러 주제에 대한 의견이 꾸준히 달라졌습니다.
+            앞으로도 그럴 것입니다.</li>
+        <li>따라서 제 생각을 바꾸기 위한 설득도 환영합니다.
+            저는 의견을 바꿀 의향이 있습니다.</li>
+      </ul>
+    
+
+  <article>
+    
+      <time datetime="2012-06-08T02:01:20+09:00">2012년 6월 8일</time>
+    
+
+    
+      <h1 id="windows에서-vboxvmservice로-linux-돌리기">Windows에서 VBoxVmService로 Linux 돌리기</h1>
+<p>원래 Windows를 안쓰지만 요즘 좀 쓰고 있다. 예전에 회사 다닐 때도 회사에서는 주로 Windows를 썼다. 하여간 Windows를 쓰긴 하지만 개발 환경은 Linux가 편해서 VirtualBox에 설치해서 쓰는 편이다. 개발만 하려는 거고 나는 주로 네트워크 프로그래밍과 서버 개발을 하기 때문에 X는 쓰지 않는다. 그래서 PuTTY로 접속만 가능하면 OK다.</p>
+<p>어차피 화면을 볼 필요가 없으면 이걸 어떻게 할까? 창을 최소화해놔도 되지만 좀더 근사한 해결책이 있다. VirtualBox는 (당연하지만) 실제 가상화 부분이 있고 프론트엔드가 따로 있다. 여러 프론트엔드 중에서는 원격 데스크탑 프로토콜 같은 것도 있고, <a href="http://www.virtualbox.org/manual/ch07.html#vboxheadless">VBoxHeadless</a> 같은 것도 있다. 둘을 동시에 쓰기도 한다. VBoxHeadless는 이름에서 짐작 가능하듯 화면 없이 실행만 시키는 프론트엔드이다. 만약 X를 쓰지 않는다면 어차피 SSH를 쓰면 되기 때문에 VBoxHeadless가 매우 유용하다.</p>
+<p>근데 여기에 한술 더떠서, 이걸 Windows의 서비스로 등록하는 도구도 있다. 지금 소개하려는 <a href="http://vboxvmservice.sourceforge.net/">VBoxVmService</a>이다. 이걸 쓰면 백그라운드 서비스로 VBoxHeadless가 실행된다. 나는 컴퓨터 켜질 때 아예 정해진 Linux 머신이 같이 켜지도록 설정해놨다.</p>
+<p>VM을 쓰면 불편한 점이 여러가지가 있는데, 그 중 많은 부분은 VM은 프론트엔드가 필연적으로 복잡해질 수밖에 없기 때문에 (창 안에 컴퓨터 화면이 또 보이는데 입력 장치는 한벌만 있으니 그걸 어떻게든 공유해서 써야 한다) 일어나는 불편함이라고 생각한다. 하지만 이런 식으로 설정해두면 내가 VM을 의식하지 않아도 별도의 Linux 서버가 있는 것처럼 사용할 수 있어서 매우 편하다.</p>
+<p>Windows 기준으로 설명했지만 다른 OS에서도 VBoxHeadless를 잘 쓰면 비슷하게 설정할 수 있다.</p>
+
+    
+  </article>
+
+
+    <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-54324071-2', 'auto');
+    ga('send', 'pageview');
+    </script>
+  </body>
+</html>
+
+
+

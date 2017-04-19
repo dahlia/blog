@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8">
+    
+  
+    
+      <link rel="canonical" href="https://blog.hongminhee.org/2010/05/06/rocket-dive/">
+      <meta property="og:url" content="https://blog.hongminhee.org/2010/05/06/rocket-dive/">
+    
+  
+  
+  <meta name="description" value="">
+  <meta name="twitter:card" content="summary">
+  <meta property="og:locale" content="ko_KR">
+  <meta property="og:site_name" content="洪民憙 블로그">
+  <meta property="og:type" content="article">
+  
+    <meta name="twitter:title" content="ROCKET DIVE">
+    <meta property="og:title" content="ROCKET DIVE">
+  
+  <meta name="twitter:description" content="Python으로 웹 개발을 하려면 개발용 WSGI 컨테이너가 필요하다. 하지만 Python을 잘 모르는 사람이 개발 환경을 꾸리기는 쉽지 않다. 이를테면 디자이너는 .html 템플릿 파일을 수정해야 하는데, 그걸 위해서 Green Unicorn이니 Rocket이니 하는걸 설치해서 커맨드라인으로 서버를 켜고 끄는 것은 너무 복잡하다. 그래서 GUI로 뭔가 간단하게 켜고 끄는 걸 가능하게 해야겠다 싶어서 하나 만들었다. …">
+  <meta property="og:description" content="Python으로 웹 개발을 하려면 개발용 WSGI 컨테이너가 필요하다. 하지만 Python을 잘 모르는 사람이 개발 환경을 꾸리기는 쉽지 않다. 이를테면 디자이너는 .html 템플릿 파일을 수정해야 하는데, 그걸 위해서 Green Unicorn이니 Rocket이니 하는걸 설치해서 커맨드라인으로 서버를 켜고 끄는 것은 너무 복잡하다. 그래서 GUI로 뭔가 간단하게 켜고 끄는 걸 가능하게 해야겠다 싶어서 하나 만들었다. …">
+  <meta property="og:updated_time"
+        content="2010-05-06T12:24:00+09:00">
+  
+      <title>ROCKET DIVE &mdash; 洪民憙 블로그</title>
+      <link rel="alternate" type="application/atom+xml" title="洪民憙 블로그"
+            href="https://blog.hongminhee.org/feed.xml">
+      <meta name="author" content="홍민희">
+      <link rel="stylesheet" media="screen"
+            href="https://blog.hongminhee.org/static/style.css">
+      <link rel="stylesheet" type="text/css"
+        href="https://spoqa.github.io/spoqa-han-sans/css/SpoqaHanSans-kr.css">
+      <link rel="stylesheet" type="text/css"
+        href="https://spoqa.github.io/spoqa-han-sans/css/SpoqaHanSans-jp.css">
+      <meta name="viewport" content="width=device-width, user-scalable=no">
+      <meta name="twitter:creator" content="@hongminhee">
+      <meta name="twitter:site" content="@hongminhee">
+      <meta property="article:author"
+            content="https://www.facebook.com/hongminhee">
+    
+
+  </head>
+  <body class=" post-page outdated">
+    
+  
+      <header>
+        
+          <a href="https://blog.hongminhee.org/index.html" class="site-name">
+              <ruby>洪民憙 <rp>(</rp><rt>홍민희</rt><rp>)</rp></ruby>
+              블로그
+            </a>
+          <nav>
+            <a href="https://hongminhee.org/" rel="author me">본인 소개</a>
+            <div class="archive">
+              아카이브:
+              <ul>
+                
+                  <li><a href="https://blog.hongminhee.org/2017/">2017</a></li>
+                
+                  <li><a href="https://blog.hongminhee.org/2016/">2016</a></li>
+                
+                  <li><a href="https://blog.hongminhee.org/2015/">2015</a></li>
+                
+                  <li><a href="https://blog.hongminhee.org/2014/">2014</a></li>
+                
+                  <li><a href="https://blog.hongminhee.org/2013/">2013</a></li>
+                
+              </ul>
+            </div>
+          </nav>
+        
+      </header>
+
+      <ul class="disclaimer">
+        <li>글을 썼을 당시의 주장에 제 스스로가 더이상 동의하지 못하는
+            경우도 있습니다.</li>
+        <li>심지어 몇몇 글은 이제 정 반대의 의견을 가지고 있기도 합니다.</li>
+        <li>지금까지 여러 주제에 대한 의견이 꾸준히 달라졌습니다.
+            앞으로도 그럴 것입니다.</li>
+        <li>따라서 제 생각을 바꾸기 위한 설득도 환영합니다.
+            저는 의견을 바꿀 의향이 있습니다.</li>
+      </ul>
+    
+
+  <article>
+    
+      <time datetime="2010-05-06T12:24:00+09:00">2010년 5월 6일</time>
+    
+
+    
+      
+  <p class="outdate-disclaimer">
+    이하의 글은 2010년에 쓴 것입니다. 오래된 글인 만큼, 현재의
+    생각과 전혀 다른 내용도 많이 포함되어 있고, 당시와는 상황이 많이 달라진
+    점도 있습니다. 또한, 그 당시에 잘못 알려졌던 정보도 포함되어 있을 수
+    있습니다. <em>어찌됐든 저는 제 오래된 글이 회자되는 것을 저어합니다.</em>
+    읽기에 앞서 양해를 부탁드립니다.
+  <p>
+        <h1 id="rocket-dive0"><a href="https://pypi.python.org/pypi/rocketdive">ROCKET DIVE</a></h1>
+<p><img src="https://media.tumblr.com/tumblr_l1z9p9ZVzI1qz6t91.png" alt="ROCKET DIVE 창" /></p>
+<p>Python으로 웹 개발을 하려면 개발용 WSGI<a href="#fn1" class="footnoteRef" id="fnref1"><sup>1</sup></a> 컨테이너가 필요하다. 하지만 Python을 잘 모르는 사람이 개발 환경을 꾸리기는 쉽지 않다. 이를테면 디자이너는 .html 템플릿 파일을 수정해야 하는데, 그걸 위해서 <a href="http://gunicorn.org/">Green Unicorn</a>이니 <a href="https://pypi.python.org/pypi/rocket">Rocket</a>이니 하는걸 설치해서 커맨드라인으로 서버를 켜고 끄는 것은 너무 복잡하다. 그래서 GUI로 뭔가 간단하게 켜고 끄는 걸 가능하게 해야겠다 싶어서 하나 만들었다.</p>
+<p>Rocket의 GUI 프론트엔드고, 이름은 그래서 <strong>ROCKET DIVE</strong>다.<a href="#fn2" class="footnoteRef" id="fnref2"><sup>2</sup></a> Tkinter를 써서 인터페이스가 구린데, Rocket 외의 다른 라이브러리에 의존성을 만들고 싶지 않았기 때문에 어쩔 수 없었다. 참고로 Tkinter는 Python 표준 라이브러리에 들어있다.</p>
+<p>Windows를 기준으로 설치 방법을 설명하자면: Python 2.6과 <a href="https://pypi.python.org/pypi/setuptools">setuptools</a>(<code>easy_install</code> 명령어를 위해)를 먼저 설치하고 커맨드 프롬프트에서 <code>easy_install</code>로 다음과 같이 설치한다. 이때 Windows Vista 이상일 경우 커맨드 프롬프트를 관리자 권한으로 실행해야 한다.</p>
+<pre><code>C:\&gt; easy_install distribute
+C:\&gt; easy_install rocketdive</code></pre>
+<p>(<a href="https://pypi.python.org/pypi/distribute">Distribute</a>는 Rocket이 의존하고 있는데, setuptools의 대안으로 등장한 물건이다. 이게 setuptools를 덮어쓰다보니 그냥 <code>easy_install rocketdive</code>로 설치해버리면 중간에 스스로를 갈아치우려다가 오류가 나버린다. 그래서 먼저 Distribute를 설치해야 한다.)</p>
+<p>설치가 끝나면 <code>pythonw.exe -m rocketdive</code>로 단축 아이콘을 만들면 된다.</p>
+<p><img src="https://media.tumblr.com/tumblr_l1zamhay271qz6t91.png" alt="단축 아이콘 만드는 화면" /></p>
+<p><a href="https://bitbucket.org/dahlia/rocketdive">소스 코드는 Bitbucket에 올려뒀으니</a>, Mercurial로 받을 수 있다.</p>
+<pre><code>$ hg clone https://dahlia@bitbucket.org/dahlia/rocketdive</code></pre>
+<section class="footnotes">
+<hr />
+<ol>
+<li id="fn1"><p>Python과 웹 서버 사이의 통신 규약. Java의 Servlet이나 Ruby의 Rack 같은 것이라고 보면 된다. <a href="http://www.python.org/dev/peps/pep-0333/">PEP 333</a> 참고.<a href="#fnref1">↩</a></p></li>
+<li id="fn2"><p>아는 사람은 알겠지만 hide의 노래 제목인데, 음악과의 연관성은 딱히 없고 Rocket의 프론트엔드니 이름을 로켓 어쩌고로 해야겠네 해서 생각나서 썼다.<a href="#fnref2">↩</a></p></li>
+</ol>
+</section>
+
+        <script>
+        (function () {
+          var ps = document.getElementsByClassName('outdate-disclaimer');
+          if (ps.length < 1) {
+            return;
+          }
+          var p = ps[0], t = document.createElement('span');
+          t.addEventListener('click', function () {
+            this.parentNode.removeChild(this);
+            var gs = document.getElementsByClassName('outdate-gray-out');
+            for (var i = gs.length - 1; i >= 0; --i) {
+              gs[i].className = gs[i].className.replace(
+                /(^|\s)outdate-gray-out(\s|$)/g, '');
+            }
+          });
+          t.className = 'toggler';
+          t.innerText = '읽기';
+          p.appendChild(t);
+          var e = p.nextSibling;
+          while (e !== null && e !== undefined) {
+            if (e.nodeType === 1) {
+              e.className += ' outdate-gray-out';
+            }
+            e = e.nextSibling;
+          }
+        })();
+        </script>
+      
+    
+  </article>
+
+
+    <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-54324071-2', 'auto');
+    ga('send', 'pageview');
+    </script>
+  </body>
+</html>
+
+
+

@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8">
+    
+  
+    
+      <link rel="canonical" href="https://blog.hongminhee.org/2011/08/02/from-celery-to-gevent/">
+      <meta property="og:url" content="https://blog.hongminhee.org/2011/08/02/from-celery-to-gevent/">
+    
+  
+  
+  <meta name="description" value="">
+  <meta name="twitter:card" content="summary">
+  <meta property="og:locale" content="ko_KR">
+  <meta property="og:site_name" content="洪民憙 블로그">
+  <meta property="og:type" content="article">
+  
+    <meta name="twitter:title" content="From Celery to gevent">
+    <meta property="og:title" content="From Celery to gevent">
+  
+  <meta name="twitter:description" content="내부적으로 만들어서 사용하는 빌드봇이 있다. Bitbucket 커밋 훅에 걸어놓고 쓰는 건데, 커밋했을 때마다 IRC 채널에 알려주는 일과 커밋 로그에 이슈 번호가 언급되었을 경우 해당 이슈에 코멘트로 커밋 로그를 링크해주는 일을 한다. …">
+  <meta property="og:description" content="내부적으로 만들어서 사용하는 빌드봇이 있다. Bitbucket 커밋 훅에 걸어놓고 쓰는 건데, 커밋했을 때마다 IRC 채널에 알려주는 일과 커밋 로그에 이슈 번호가 언급되었을 경우 해당 이슈에 코멘트로 커밋 로그를 링크해주는 일을 한다. …">
+  <meta property="og:updated_time"
+        content="2011-08-02T05:47:00+09:00">
+  
+      <title>From Celery to gevent &mdash; 洪民憙 블로그</title>
+      <link rel="alternate" type="application/atom+xml" title="洪民憙 블로그"
+            href="https://blog.hongminhee.org/feed.xml">
+      <meta name="author" content="홍민희">
+      <link rel="stylesheet" media="screen"
+            href="https://blog.hongminhee.org/static/style.css">
+      <link rel="stylesheet" type="text/css"
+        href="https://spoqa.github.io/spoqa-han-sans/css/SpoqaHanSans-kr.css">
+      <link rel="stylesheet" type="text/css"
+        href="https://spoqa.github.io/spoqa-han-sans/css/SpoqaHanSans-jp.css">
+      <meta name="viewport" content="width=device-width, user-scalable=no">
+      <meta name="twitter:creator" content="@hongminhee">
+      <meta name="twitter:site" content="@hongminhee">
+      <meta property="article:author"
+            content="https://www.facebook.com/hongminhee">
+    
+
+  </head>
+  <body class=" post-page outdated">
+    
+  
+      <header>
+        
+          <a href="https://blog.hongminhee.org/index.html" class="site-name">
+              <ruby>洪民憙 <rp>(</rp><rt>홍민희</rt><rp>)</rp></ruby>
+              블로그
+            </a>
+          <nav>
+            <a href="https://hongminhee.org/" rel="author me">본인 소개</a>
+            <div class="archive">
+              아카이브:
+              <ul>
+                
+                  <li><a href="https://blog.hongminhee.org/2017/">2017</a></li>
+                
+                  <li><a href="https://blog.hongminhee.org/2016/">2016</a></li>
+                
+                  <li><a href="https://blog.hongminhee.org/2015/">2015</a></li>
+                
+                  <li><a href="https://blog.hongminhee.org/2014/">2014</a></li>
+                
+                  <li><a href="https://blog.hongminhee.org/2013/">2013</a></li>
+                
+              </ul>
+            </div>
+          </nav>
+        
+      </header>
+
+      <ul class="disclaimer">
+        <li>글을 썼을 당시의 주장에 제 스스로가 더이상 동의하지 못하는
+            경우도 있습니다.</li>
+        <li>심지어 몇몇 글은 이제 정 반대의 의견을 가지고 있기도 합니다.</li>
+        <li>지금까지 여러 주제에 대한 의견이 꾸준히 달라졌습니다.
+            앞으로도 그럴 것입니다.</li>
+        <li>따라서 제 생각을 바꾸기 위한 설득도 환영합니다.
+            저는 의견을 바꿀 의향이 있습니다.</li>
+      </ul>
+    
+
+  <article>
+    
+      <time datetime="2011-08-02T05:47:00+09:00">2011년 8월 2일</time>
+    
+
+    
+      
+  <p class="outdate-disclaimer">
+    이하의 글은 2011년에 쓴 것입니다. 오래된 글인 만큼, 현재의
+    생각과 전혀 다른 내용도 많이 포함되어 있고, 당시와는 상황이 많이 달라진
+    점도 있습니다. 또한, 그 당시에 잘못 알려졌던 정보도 포함되어 있을 수
+    있습니다. <em>어찌됐든 저는 제 오래된 글이 회자되는 것을 저어합니다.</em>
+    읽기에 앞서 양해를 부탁드립니다.
+  <p>
+        <h1 id="from-celery-to-gevent">From Celery to gevent</h1>
+<p>내부적으로 만들어서 사용하는 빌드봇이 있다. Bitbucket 커밋 훅에 걸어놓고 쓰는 건데, 커밋했을 때마다 IRC 채널에 알려주는 일과 커밋 로그에 이슈 번호가 언급되었을 경우 해당 이슈에 코멘트로 커밋 로그를 링크해주는 일을 한다.</p>
+<p>커밋 훅 인터페이스가 HTTP <code>POST</code>로 작동하는 일반적인 <a href="http://webhooks.org/">WebHook</a>인데 지금까지는 요청을 받으면 <a href="http://celeryproject.org/">Celery</a>에 태스크를 던져놓고 Celery가 백그라운드에서 IRC에도 노티하고 이슈트래커에도 코멘트를 남기는 식으로 만들어뒀었다. 이 빌드봇은 <a href="http://ep.io/">ep.io</a>에 올려놓고 있는데, 이상하게 어제부터 ep.io에서 Celery beat 프로세스가 작동하지 않길래 삽질하다가 그냥 Celery 쓰는 것을 포기하고 <a href="http://gevent.org/">gevent</a>로 <a href="http://gevent.org/gevent.html#gevent.spawn"><code>spawn</code></a>하도록 바꿨다. 간단한 프로그램이라 그랬겠지만, 생각보다 변경이 어렵지는 않았다.</p>
+<pre><code>from celery import task</code></pre>
+<p>대신</p>
+<pre><code>import gevent.monkey
+gevent.monkey.patch_all()</code></pre>
+<p>이라고 쓰고, 태스크 함수에 붙은 <code>@task</code> 데코레이터를 다 지운 다음,</p>
+<pre><code>func.delay(arg, arg)</code></pre>
+<p>로 호출하던 것을</p>
+<pre><code>gevent.spawn(func, arg, arg)</code></pre>
+<p>로 고치면 모든 것이 잘 작동한다. HTTP 응답을 바로 주기 위해서 <code>spawn</code>된 프로세스를 <a href="http://gevent.org/gevent.html#gevent.Greenlet.join"><code>join</code></a>할 필요는 없다.</p>
+
+        <script>
+        (function () {
+          var ps = document.getElementsByClassName('outdate-disclaimer');
+          if (ps.length < 1) {
+            return;
+          }
+          var p = ps[0], t = document.createElement('span');
+          t.addEventListener('click', function () {
+            this.parentNode.removeChild(this);
+            var gs = document.getElementsByClassName('outdate-gray-out');
+            for (var i = gs.length - 1; i >= 0; --i) {
+              gs[i].className = gs[i].className.replace(
+                /(^|\s)outdate-gray-out(\s|$)/g, '');
+            }
+          });
+          t.className = 'toggler';
+          t.innerText = '읽기';
+          p.appendChild(t);
+          var e = p.nextSibling;
+          while (e !== null && e !== undefined) {
+            if (e.nodeType === 1) {
+              e.className += ' outdate-gray-out';
+            }
+            e = e.nextSibling;
+          }
+        })();
+        </script>
+      
+    
+  </article>
+
+
+    <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-54324071-2', 'auto');
+    ga('send', 'pageview');
+    </script>
+  </body>
+</html>
+
+
+

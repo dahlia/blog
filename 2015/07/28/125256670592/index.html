@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8">
+    
+  
+    
+      <link rel="canonical" href="https://blog.hongminhee.org/2015/07/28/125256670592/">
+      <meta property="og:url" content="https://blog.hongminhee.org/2015/07/28/125256670592/">
+    
+  
+  
+  <meta name="description" value="">
+  <meta name="twitter:card" content="summary">
+  <meta property="og:locale" content="ko_KR">
+  <meta property="og:site_name" content="洪民憙 블로그">
+  <meta property="og:type" content="article">
+  
+  <meta name="twitter:description" content="Flask나 Celery를 쓸 때마다, 두 프로젝트가 최초 사용성을 높이기 위해 장기적으로 손해가 될만한 부분을 감수하고서 도입한 전역 앱 인스턴스 개념과 씨름하게 된다. 두 프로젝트 모두, 전역 앱 인스턴스를 도입해놓고, 또 그것의 한계를 극복 혹은 완화하기 위해 다시 컨텍스트 로컬(context locals) 같은 개념을 끌고 들어왔다. …">
+  <meta property="og:description" content="Flask나 Celery를 쓸 때마다, 두 프로젝트가 최초 사용성을 높이기 위해 장기적으로 손해가 될만한 부분을 감수하고서 도입한 전역 앱 인스턴스 개념과 씨름하게 된다. 두 프로젝트 모두, 전역 앱 인스턴스를 도입해놓고, 또 그것의 한계를 극복 혹은 완화하기 위해 다시 컨텍스트 로컬(context locals) 같은 개념을 끌고 들어왔다. …">
+  <meta property="og:updated_time"
+        content="2015-07-28T22:40:28+09:00">
+  
+      <title>2015년 7월 28일 &mdash; 洪民憙 블로그</title>
+      <link rel="alternate" type="application/atom+xml" title="洪民憙 블로그"
+            href="https://blog.hongminhee.org/feed.xml">
+      <meta name="author" content="홍민희">
+      <link rel="stylesheet" media="screen"
+            href="https://blog.hongminhee.org/static/style.css">
+      <link rel="stylesheet" type="text/css"
+        href="https://spoqa.github.io/spoqa-han-sans/css/SpoqaHanSans-kr.css">
+      <link rel="stylesheet" type="text/css"
+        href="https://spoqa.github.io/spoqa-han-sans/css/SpoqaHanSans-jp.css">
+      <meta name="viewport" content="width=device-width, user-scalable=no">
+      <meta name="twitter:creator" content="@hongminhee">
+      <meta name="twitter:site" content="@hongminhee">
+      <meta property="article:author"
+            content="https://www.facebook.com/hongminhee">
+    
+
+  </head>
+  <body class=" post-page">
+    
+  
+      <header>
+        
+          <a href="https://blog.hongminhee.org/index.html" class="site-name">
+              <ruby>洪民憙 <rp>(</rp><rt>홍민희</rt><rp>)</rp></ruby>
+              블로그
+            </a>
+          <nav>
+            <a href="https://hongminhee.org/" rel="author me">본인 소개</a>
+            <div class="archive">
+              아카이브:
+              <ul>
+                
+                  <li><a href="https://blog.hongminhee.org/2017/">2017</a></li>
+                
+                  <li><a href="https://blog.hongminhee.org/2016/">2016</a></li>
+                
+                  <li><a href="https://blog.hongminhee.org/2015/">2015</a></li>
+                
+                  <li><a href="https://blog.hongminhee.org/2014/">2014</a></li>
+                
+                  <li><a href="https://blog.hongminhee.org/2013/">2013</a></li>
+                
+              </ul>
+            </div>
+          </nav>
+        
+      </header>
+
+      <ul class="disclaimer">
+        <li>글을 썼을 당시의 주장에 제 스스로가 더이상 동의하지 못하는
+            경우도 있습니다.</li>
+        <li>심지어 몇몇 글은 이제 정 반대의 의견을 가지고 있기도 합니다.</li>
+        <li>지금까지 여러 주제에 대한 의견이 꾸준히 달라졌습니다.
+            앞으로도 그럴 것입니다.</li>
+        <li>따라서 제 생각을 바꾸기 위한 설득도 환영합니다.
+            저는 의견을 바꿀 의향이 있습니다.</li>
+      </ul>
+    
+
+  <article>
+    
+      <h1><time datetime="2015-07-28T22:40:28+09:00">2015년 7월 28일</time></h1>
+    
+
+    
+      <p>Flask나 Celery를 쓸 때마다, 두 프로젝트가 최초 사용성을 높이기 위해 장기적으로 손해가 될만한 부분을 감수하고서 도입한 전역 앱 인스턴스 개념과 씨름하게 된다. 두 프로젝트 모두, 전역 앱 인스턴스를 도입해놓고, 또 그것의 한계를 극복 혹은 완화하기 위해 다시 컨텍스트 로컬(context locals) 같은 개념을 끌고 들어왔다.</p>
+<p>그렇다면 그렇게까지 해서 전역 앱 인스턴스 개념을 도입했을 때 얻는 장점이란 무엇인가? 내 생각에는 아마도 최초의 사용성을 극대화하기 위함이 아닐까 한다. Flask 웹 사이트에 가면 대여섯 줄의 예제 코드가 있어서, 그걸 죽 긁어 파일 하나에 붙여서 실행하면 바로 웹 서버 하나 띄울 수 있게 해놨다. 최초 사용에서 만날 수 있는 다양한 어려움을 최대한 없애려고 한 노력이 느껴진다.</p>
+<p>이런 생각을 하다보니 하나의 문제 의식이 떠올랐다. GitHub 이후의 오픈 소스 세상은, GitHub이 발명한 초기의 두 가지 혁신<a href="#fn1" class="footnoteRef" id="fnref1"><sup>1</sup></a> 중 하나인 README 표시 기능 덕분에, <em>README 주도 개발</em>, 내지는 <em>예제 주도 개발</em>이라고 부를 수 있을 법한 문화를 정착시켰다. 이는 당장 몇 시간 뒤에 퇴근해야 하는 대부분의 프로그래머들이 처음 보는 물건을 살펴보며 받아야 하는 인지 부하(cognitive load)를 상당 부분 줄이게 해주었기 때문에, 그렇게 개발되지 않은 라이브러리/프레임워크에 비해서 더 잘 선택되는 경향이 생기게 됐다.</p>
+<p>이는 곧 신세대 오픈 소스 해커들 사이에 널리 퍼진 미덕이 되었고, 처음 라이브러리를 써보는 사람이 ‘골치 아픈 기분’이나 겁을 느끼지 않고 금방 <q>이걸 써야겠다</q>하고 생각하도록 최적화를 하는 것도 아주 당연하게 되었다. 달리 말하자면 이건 오픈 소스 세상에서의 마케팅 원칙<a href="#fn2" class="footnoteRef" id="fnref2"><sup>2</sup></a> 같은 것이 된 것이다.</p>
+<p>몇년이 지난 지금, 우리는 이 미덕의 단점도 슬슬 마주하기 시작했다고 생각한다. 어떤 라이브러리들은 선택받기 위해 ‘첫 경험’을 최적화하다보니, 장기적으로는 큰 짐을 지게 하는 API를 만들기 시작했다. 이 중 심한 것들은 overfitting이 분명하다고 여겨진다. Flask나 Celery의 전역 앱 인스턴스 개념과, 해당 개념이 불러오는 불편함을 해결하기 위해 또다시 끌고 온 컨텍스트 로컬 같은 것들이 대표적인 예라고 느꼈다.</p>
+<p>심각성의 정도는 아주 다르긴 해도, 이는 우리 모두가 아무래도 선정적인 것에 큰 호기심을 느끼고, 그래서 기자들도 제목 낚시(clickbait)를 경쟁적으로 하게 되는 것과 비슷한 현상이라고 느낀다. 둘 모두 기사와 라이브러리를 ‘선택’하게 하려는 노력의 극단적인 형태이고, 선택한 당사자들도 얼마 후 그로부터 괴로움을 얻게 된다는 점에서 유사하다.<a href="#fn3" class="footnoteRef" id="fnref3"><sup>3</sup></a></p>
+<p>가장 좋은 것은 장기적으로도 유연하게 대응할 수 있는 API를 만들고, 그 위에다 첫 경험도 좋게 만들 수 있는 파사드(façade) API를 얹는 것일 게다. 하지만 너무 뻔한 소리고, 이건 누구나 따라할 수 있는 ‘절차’도 아닌 것 같다.</p>
+<section class="footnotes">
+<hr />
+<ol>
+<li id="fn1"><p>다른 하나는 풀 리퀘스트.<a href="#fnref1">↩</a></p></li>
+<li id="fn2"><p>심지어 Flask를 만든 Armin Ronacher는 Flask 개발 초기에 <a href="http://mitsuhiko.pocoo.org/flask-pycon-2011.pdf"><q>marketing beats quality</q>라는 소리</a>까지 했다.<a href="#fnref2">↩</a></p></li>
+<li id="fn3"><p>물론 둘 사이에는 엄청나게 차이점이 많다. 일부의 특성을 들어 비유했을 뿐이다.<a href="#fnref3">↩</a></p></li>
+</ol>
+</section>
+
+    
+  </article>
+
+
+    <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-54324071-2', 'auto');
+    ga('send', 'pageview');
+    </script>
+  </body>
+</html>
+
+
+

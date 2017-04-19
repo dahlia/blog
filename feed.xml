@@ -1,0 +1,536 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<feed xmlns="http://www.w3.org/2005/Atom" xml:lang="ko">
+  <title type="xhtml">
+    <div xmlns="http://www.w3.org/1999/xhtml">
+      <ruby>洪民憙<rp>(</rp><rt>홍민희</rt><rp>)</rp></ruby>
+      블로그
+    </div>
+  </title>
+  <updated>2017-01-27T16:16:40+09:00</updated>
+  <id>https://blog.hongminhee.org/feed.xml</id>
+  <link rel="alternate" type="text/html" hreflang="ko"
+        href="https://blog.hongminhee.org/index.html" />
+  <link rel="self" type="text/xml" hreflang="ko"
+        href="https://blog.hongminhee.org/feed.xml" />
+  <rights>Copyright &#169; Hong Minhee</rights>
+  <generator uri="https://github.com/dahlia/blog">
+    Hong Minhee&#39;s blog
+  </generator>
+  <subtitle type="xhtml">
+    <div xmlns="http://www.w3.org/1999/xhtml">
+      <ul class="disclaimer">
+        <li>글을 썼을 당시의 주장에 제 스스로가 더이상 동의하지 못하는
+            경우도 있습니다.</li>
+        <li>심지어 몇몇 글은 이제 정 반대의 의견을 가지고 있기도 합니다.</li>
+        <li>지금까지 여러 주제에 대한 의견이 꾸준히 달라졌습니다.
+            앞으로도 그럴 것입니다.</li>
+        <li>따라서 제 생각을 바꾸기 위한 설득도 환영합니다.
+            저는 의견을 바꿀 의향이 있습니다.</li>
+      </ul>
+    </div>
+  </subtitle>
+  
+    <entry>
+      
+        
+          <title>입문용 프로그래밍 언어</title>
+        
+        <id>https://blog.hongminhee.org/2017/01/27/programming-language-for-beginners/</id>
+        <link rel="alternate" type="text/html" hreflang="ko"
+              href="https://blog.hongminhee.org/2017/01/27/programming-language-for-beginners/" />
+        <published>2017-01-27T16:16:40+09:00</published>
+        <updated>2017-01-27T16:16:40+09:00</updated>
+        <author>
+          <name>홍민희</name>
+          <uri>https://hongminhee.org/</uri>
+          <email>&#104;ongmin&#104;ee&#64;member&#46;fsf&#46;org</email>
+        </author>
+        <content type="html">&lt;h1 id=&#34;입문용-프로그래밍-언어&#34;&gt;입문용 프로그래밍 언어&lt;/h1&gt;
+&lt;p&gt;&lt;q&gt;프로그래밍 입문하려고 하는데 어떤 언어로 시작해야 좋습니까?&lt;/q&gt;라는 질문을 자주 본다. 최근 교양으로서의 프로그래밍이 주목받기 때문인 것 같다.&lt;/p&gt;
+&lt;p&gt;그런데, 저런 질문이 나오는 상황이 프로그래밍 입문의 시작으로서는 불길한 게 아닌가 싶다. 프로그래밍에 자연스럽게 입문해서 오랫동안 취미로 혹은 나아가 직업으로 삼는 분들의 경우를 보면, 프로그래밍을 하려고 입문하는 것이 아니라 어떤 특정한 프로그램을 만드는 게 목표였을 뿐, 프로그래밍 자체에 처음부터 흥미가 있는 경우는 적기 때문이다.&lt;/p&gt;
+&lt;p&gt;처음에는 단순히 워크래프트 III의 맵에 복잡한 규칙을 활용해보고 싶거나, 개인 홈페이지 게시판에서 사용자 계정 옆에 사진이 뜨게 하고 싶었을 뿐인데, 그걸 하려면 튜링 완전한 언어(그게 통상의 평문 코드이든, 스크래치 스타일의 그래피컬 코드이든)를 다뤄야 했기 때문에 수단으로 어쩌다 배우게 되는 것이다.&lt;/p&gt;
+&lt;p&gt;그런 식으로 프로그래밍에 입문하는 것이 성공할 개연성이 높은 이유가 무엇일까? 아마도 저절로 목표 지향적 학습을 하게 되기 때문이 아닐까? 또, 목표를 어떻게든 달성한 다음에 얻는 교훈이 굉장히 많고, 특히 입문 초기에는 그것이 정말 귀중한데, 목표 지향적인 학습을 하지 않을 경우 첫 완성품을 만들기까지 시간이 너무 오래 걸리는 경우도 허다하다. 무엇을 만드려고 하는 공부가 아니기 때문에, 어떤 완성품이 없이 책만 읽어나가는 경우도 많다. 그래서는 실제 코딩을 해봐야 익힐 수 있는 프로그래밍의 가장 중요한 부분들, 가령 디버깅을 하기 위해 변인을 통제하는 방법, 디버깅을 할 때 원인의 후보 범위를 좁혀나가는 방법, 처음 보는 오류와 마주했을 때 다른 사람의 트러블슈팅 경험을 검색하여 자신의 경우에 적용해보는 방법, 프로그램을 완성하는데 필요한 부분 문제(subproblems)를 나의 노력을 최소화하여 푸는 방법(라이브러리 활용) 등을 익힐 기회가 별로 없다.&lt;/p&gt;
+&lt;p&gt;또한, 문제를 풀 때 우선 순위를 결정하는 것과 같이, 프로그래밍의 고유의 문제는 아니지만 꼭 필요한 요령을 배울 수 있는 기회도 놓친다. 그런 요령들은 뭘 하든 필요하지만, 그렇다고 뭘 해도 배울 수 있는 요령인 것은 또 아니다. 게다가, 우선 순위 결정을 못하면 프로그래밍을 능숙하게 해낼 수 없는 정도가 아니라, 프로그래밍을 거의 할 수 없기도 하다. 우선 순위를 결정을 물 밑에서 해야 하는 대부분의 다른 활동과 달리, 목표 지향적 프로그래밍은 우선 순위 결정을 명시적·의시적으로, 훤히 드러나게 하게 마련이다. 의식적 결정의 반복은 반복 숙달의 왕도이기도 하다. 그러한데 &lt;q&gt;어쨌든 프로그래밍을 배운다&lt;/q&gt;와 같이 추상적 목표 하에서 우선 순위 결정을 의식적으로 할 기회가 있을까?&lt;/p&gt;
+&lt;p&gt;처음으로 돌아와서, &lt;em&gt;&lt;q&gt;프로그래밍 입문하려고 하는데 어떤 언어로 시작해야 좋습니까?&lt;/q&gt;&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;프로그래밍에 성공적으로 입문하는 사람들은 대체로 입문용 언어를 결정하는 과정을 거치지 않는다. 이미 결정되어 있기 때문에, 그것은 자발적 결정이라기 보다는 주어진 제약 조건을 인식하는 것에 더 가깝다. RPG 게임을 만들고 싶고 나는 프로그래밍을 모른다. 그렇다면 가능한 선택지는 &lt;a href=&#34;https://ko.wikipedia.org/wiki/RPG_%EB%A7%8C%EB%93%A4%EA%B8%B0&#34;&gt;RPG 만들기&lt;/a&gt; 같은 것이다. 게시판에 대댓글 기능을 만들고 싶은데 내가 설치한 게시판은 &lt;a href=&#34;https://ko.wikipedia.org/wiki/%EC%A0%9C%EB%A1%9C%EB%B3%B4%EB%93%9C&#34;&gt;제로보드&lt;/a&gt;이다. 그럼 가능한 선택지는 PHP 뿐이다.&lt;/p&gt;
+&lt;p&gt;반면, 그런 질문에 대답해야 하는 상황은 내가 프로그래밍을 통해 하고 싶은 일이 아직 구체적으로 없는 경우이다. 구체적이고 단기적인 목표가 있는 경우에는 프로그래밍 언어를 결정해야 할 때 다르게 질문한다.&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;&lt;q&gt;제가 …를 만드려고 하는데요.&lt;/q&gt;&lt;/em&gt;&lt;/p&gt;
+</content>
+      
+    </entry>
+  
+    <entry>
+      
+        
+          <title>고대의 문제</title>
+        
+        <id>https://blog.hongminhee.org/2016/08/26/curses/</id>
+        <link rel="alternate" type="text/html" hreflang="ko"
+              href="https://blog.hongminhee.org/2016/08/26/curses/" />
+        <published>2016-08-26T02:19:56+09:00</published>
+        <updated>2016-08-26T02:19:56+09:00</updated>
+        <author>
+          <name>홍민희</name>
+          <uri>https://hongminhee.org/</uri>
+          <email>&#104;ongmin&#104;ee&#64;member&#46;fsf&#46;org</email>
+        </author>
+        <content type="html">&lt;h1 id=&#34;고대의-문제&#34;&gt;고대의 문제&lt;/h1&gt;
+&lt;blockquote&gt;
+&lt;p&gt;대부분의 TUI 라이브러리는 터미널 화면 관리를 위해 curses를 기반으로 한다. 이는 화면을 갱신하면 최소한의 바뀐 영역만 다시 그리도록 해준다. 300&lt;a href=&#34;https://ko.wikipedia.org/wiki/%EB%B3%B4_(%ED%86%B5%EC%8B%A0_%EB%8B%A8%EC%9C%84)&#34;&gt;보&lt;/a&gt; 직렬 통신 시절에는 그런 게 매우 중요했는데, 300&lt;a href=&#34;https://ko.wikipedia.org/wiki/%EB%B3%B4_(%ED%86%B5%EC%8B%A0_%EB%8B%A8%EC%9C%84)&#34;&gt;보&lt;/a&gt;면 대충 30바이트/초 정도고, 표준 VT100 화면은 폭 80 × 높이 24 ≒ 2천정도이기 때문이다. 거기에 속성까지 끼면 2배가 된다. 따라서 전체 화면을 전송하려면 사용자가 보기까지 2분이 걸린다. 내용 변화 없이 같은 화면을 두번 그리면 4분이 걸린다. curses는 이를 2분으로 줄여준다는 것이다.&lt;/p&gt;
+&lt;p&gt;&lt;cite&gt;&lt;a href=&#34;https://github.com/pfalcon/picotui&#34;&gt;picotui&lt;/a&gt;&lt;/cite&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&lt;a href=&#34;https://github.com/pfalcon/picotui&#34;&gt;picotui&lt;/a&gt;라는 대안 파이썬 TUI 라이브러리 제작자가 말하는, picotui를 curses 기반으로 하지 않은 이유. 널리 쓰이는 라이브러리는 널리 퍼지게 된 그 시대에는 누구나 겪는 문제를 잘 해결했기 때문에 사랑받게 된 것이다. 하지만 그 시대가 지나고도 계속 쓰이게 되는데 그 이유는 인지도, 도서나 교육 자료, 재평가의 기회 없이 구전으로 이어지는 권유 등에 의한다. 물론 그 중에서는 다른 시스템과의 궁합과 같이 시간을 들여야만 축적되는 자산도 있다는 점은 무시할 수 없다.&lt;/p&gt;
+&lt;p&gt;jQuery를 생각해보자. jQuery는 여전히 현역이고, 최첨단의 웹 개발을 제외하면 여전히 가장 사랑받는 라이브러리이다. 이는 jQuery가 적절히 DOM 조작을 적은 학습 시간으로 편하게 할 수 있도록 도와주면서도, 구형이라기보다는 차라리 고대라고 해도 될 정도로 오래된 브라우저와 최신 브라우저 모두에서 최대한 같은 방식으로 동작하는 API를 제공했기 때문이다. 하지만 모바일 시대가 오고 웹 브라우저 사용도 Internet Explorer를 Google Chrome이 앞지르게 되면서 그러한 문제는 점차 모두가 겪는 문제에서 일부의 환경에서만 겪는 문제로 축소되고 있다. 하지만 아마도 그런 문제가 거의 없어지다시피 하더라도 jQuery를 꾸준히 쓰는 신규 프로젝트는 좀더 오랫동안 모습을 보일 것이다.&lt;/p&gt;
+&lt;p&gt;하지만 이제는 문제가 아니게 된 것을 잘 풀었기 때문에 널리 쓰이기 시작한 라이브러리를 &lt;q&gt;좋은 게 좋은&lt;/q&gt; 식으로 계속 쓰는 것에 대해, 종종 재평가를 해볼 여유도 우리에게 필요하지 않을까.&lt;/p&gt;
+</content>
+      
+    </entry>
+  
+    <entry>
+      
+        
+          <title>전기세 유래</title>
+        
+        <id>https://blog.hongminhee.org/2016/08/09/electronic-tax/</id>
+        <link rel="alternate" type="text/html" hreflang="ko"
+              href="https://blog.hongminhee.org/2016/08/09/electronic-tax/" />
+        <published>2016-08-09T01:23:45+09:00</published>
+        <updated>2016-08-09T01:23:45+09:00</updated>
+        <author>
+          <name>홍민희</name>
+          <uri>https://hongminhee.org/</uri>
+          <email>&#104;ongmin&#104;ee&#64;member&#46;fsf&#46;org</email>
+        </author>
+        <content type="html">&lt;h1 id=&#34;전기세-유래&#34;&gt;전기세 유래&lt;/h1&gt;
+&lt;p&gt;오늘 한 고등학교 선배가 왜 전기료는 세금이 아닌데 전기세(電氣稅)라고 부르냐는 &lt;a href=&#34;https://www.facebook.com/suminb/posts/10105126684654752&#34;&gt;의문을 제기&lt;/a&gt;했다.&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;전기요금은 엄밀히 말하자면 세금이 아닌데 왜 ‘전기세’라는 말이 널리 통용되게 되었을까? 영어로도 utility 또는 electric/electricity bill 정도의 표현을 쓰지 tax 라는 말이 들어간 것은 한번도 보지 못했다. 혹시 ‘월세(月貰)’의 ‘세’자와 동일한 용법으로 쓰이는건가 해서 찾아봤는데, 여기서의 ‘세’는 &lt;q&gt;남의 건물이나 물건 따위를 빌려 쓰고 그 값으로 내는 돈&lt;/q&gt; 이라는 의미를 담고 있다. 국어사전을 열어둔 김에 ‘전기세’를 검색해봤더니 한자 표현이 電氣稅이다. 세금의 ‘세’자와 동일한 문자이다. 오늘도 해결해야 할 의문 목록에 한가지 항목이 추가되었다.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;나도 궁금해져서 찾아보았다. &lt;a href=&#34;http://newslibrary.naver.com/&#34;&gt;네이버 뉴스 라이브러리&lt;/a&gt;는 전문 연구자가 아닌 사람들이 비교적 쉽게 과거의 어휘 사용에 대해 조사해볼 수 있는 좋은 한국어 &lt;a href=&#34;https://ko.wikipedia.org/wiki/%EB%A7%90%EB%AD%89%EC%B9%98&#34;&gt;코퍼스&lt;/a&gt;(corpus)이다. 조사해본 결과 해당 서비스(1920년 이후의 기사들을 보존한다)로 찾을 수 있는 가장 오래된 기사는 일제강점기인 &lt;a href=&#34;http://newslibrary.naver.com/viewer/index.nhn?articleId=1925082700209204034&amp;amp;editNo=1&amp;amp;printCount=1&amp;amp;publishDate=1925-08-27&amp;amp;officeId=00020&amp;amp;pageNo=4&amp;amp;printNo=1825&amp;amp;publishType=00020&#34;&gt;&lt;time datetime=&#34;1925-08-27&#34;&gt;1925년 8월 27일&lt;/time&gt;자 동아일보 사회면 기사&lt;/a&gt;이다. 아마도 보도자료로 보인다. (&lt;em&gt;강조&lt;/em&gt;는 인용자 붙임.)&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;ruby&gt;電氣&lt;em&gt;會社&lt;/em&gt;五圓&lt;rp&gt;(&lt;/rp&gt;&lt;rt&gt;전기회사오원&lt;/rt&gt;&lt;rp&gt;)&lt;/rp&gt;&lt;/ruby&gt; (&lt;ruby&gt;當夜&lt;em&gt;電氣稅&lt;/em&gt;全部無料&lt;rp&gt;(&lt;/rp&gt;&lt;rt&gt;당야전기세전부무료&lt;/rt&gt;&lt;rp&gt;)&lt;/rp&gt;&lt;/ruby&gt;)&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;분명 전기 &lt;em&gt;회사&lt;/em&gt;라고 하는데 전기세라는 표현을 쓰고 있다. 이때부터 전기 요금을 전기세라고 불렀던 걸까? 좀더 찾아보았다.&lt;/p&gt;
+&lt;p&gt;찾을 수 있는 그 다음으로 오래된 전기세 언급은 &lt;a href=&#34;http://newslibrary.naver.com/viewer/index.nhn?articleId=1935051600209203001&amp;amp;editNo=2&amp;amp;printCount=1&amp;amp;publishDate=1935-05-16&amp;amp;officeId=00020&amp;amp;pageNo=3&amp;amp;printNo=5191&amp;amp;publishType=00020&#34;&gt;&lt;time datetime=&#34;1935-05-15&#34;&gt;1935년 5월 15일&lt;/time&gt;자 동아일보 문화면 기사&lt;/a&gt;에 있다. 당시 &lt;a href=&#34;https://en.wikipedia.org/wiki/Shingeki&#34;&gt;신게키&lt;/a&gt;(&lt;ruby&gt;新劇&lt;rp&gt;(&lt;/rp&gt;&lt;rt&gt;しんげき&lt;/rt&gt;&lt;rp&gt;)&lt;/rp&gt;&lt;/ruby&gt;)가 이해하기 어렵고 고지식해서 대중들이 외면하는 탓에 도쿄의 신게키 극장들이 경영난에 시달렸다는 내용이다. (&lt;em&gt;강조&lt;/em&gt;는 인용자 붙임.)&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;여기에서 &lt;ruby&gt;小劇場&lt;rp&gt;(&lt;/rp&gt;&lt;rt&gt;소극장&lt;/rt&gt;&lt;rp&gt;)&lt;/rp&gt;&lt;/ruby&gt; &lt;ruby&gt;管理者&lt;rp&gt;(&lt;/rp&gt;&lt;rt&gt;관리자&lt;/rt&gt;&lt;rp&gt;&lt;/ruby&gt;는 &lt;ruby&gt;劇場&lt;rp&gt;(&lt;/rp&gt;&lt;rt&gt;극장&lt;/rt&gt;&lt;rp&gt;&lt;/ruby&gt;에쓰는&lt;ruby&gt;費用&lt;rp&gt;(&lt;/rp&gt;&lt;rt&gt;비용&lt;/rt&gt;&lt;rp&gt;&lt;/ruby&gt;—&lt;ruby&gt;&lt;em&gt;電氣稅&lt;/em&gt;&lt;rp&gt;(&lt;/rp&gt;&lt;rt&gt;전기세&lt;/rt&gt;&lt;rp&gt;&lt;/ruby&gt;、&lt;ruby&gt;&lt;em&gt;稅金&lt;/em&gt;&lt;rp&gt;(&lt;/rp&gt;&lt;rt&gt;세금&lt;/rt&gt;&lt;rp&gt;&lt;/ruby&gt;、&lt;ruby&gt;暖房費&lt;rp&gt;(&lt;/rp&gt;&lt;rt&gt;난방비&lt;/rt&gt;&lt;rp&gt;&lt;/ruby&gt;、&lt;ruby&gt;人件費&lt;rp&gt;(&lt;/rp&gt;&lt;rt&gt;인건비&lt;/rt&gt;&lt;rp&gt;&lt;/ruby&gt;&lt;ruby&gt;等&lt;rp&gt;(&lt;/rp&gt;&lt;rt&gt;등&lt;/rt&gt;&lt;rp&gt;&lt;/ruby&gt;—을 &lt;ruby&gt;支拂&lt;rp&gt;(&lt;/rp&gt;&lt;rt&gt;지불&lt;/rt&gt;&lt;rp&gt;&lt;/ruby&gt;할수 없게된다。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;분명히 세금과 전기세를 구분하고 있다. 전기세는 세금으로 보지 않는 것이다.&lt;/p&gt;
+&lt;p&gt;사실 전기료(電氣料)라는 말과 비교해보면 전기세는 원래부터 많이 쓰이는 말은 아닌 것을 알 수 있다. 다음은 &lt;a href=&#34;http://newslibrary.naver.com/search/searchByKeyword.nhn#%7B%22mode%22%3A1%2C%22sort%22%3A0%2C%22trans%22%3A%221%22%2C%22pageSize%22%3A10%2C%22keyword%22%3A%22%E9%9B%BB%E6%B0%A3%E7%A8%85%22%2C%22status%22%3A%22success%22%2C%22startIndex%22%3A1%2C%22page%22%3A1%2C%22startDate%22%3A%221920-04-01%22%2C%22endDate%22%3A%221999-12-31%22%7D&#34;&gt;&lt;em&gt;전기료&lt;/em&gt;로 검색했을 때&lt;/a&gt;의 기사의 양이다.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://i.imgur.com/m4JH4eY.png&#34; alt=&#34;네이버 뉴스 라이브러리 전기료 검색 결과&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;반면 &lt;a href=&#34;http://newslibrary.naver.com/search/searchByKeyword.nhn#%7B%22mode%22%3A1%2C%22sort%22%3A0%2C%22trans%22%3A%221%22%2C%22pageSize%22%3A10%2C%22keyword%22%3A%22%E9%9B%BB%E6%B0%A3%E7%A8%85%22%2C%22status%22%3A%22success%22%2C%22startIndex%22%3A1%2C%22page%22%3A1%2C%22startDate%22%3A%221920-04-01%22%2C%22endDate%22%3A%221999-12-31%22%7D&#34;&gt;&lt;em&gt;전기세&lt;/em&gt;로 검색했을 때&lt;/a&gt;의 기사의 양은 다음과 같다.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://i.imgur.com/sbZlTAO.png&#34; alt=&#34;네이버 뉴스 라이브러리 전기세 검색 결과&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;보다시피 일제강점기 때의 경우 &lt;em&gt;전기세&lt;/em&gt;라는 말은 거의 쓰이지 않았고 보통은 &lt;em&gt;전기료&lt;/em&gt;라는 말을 썼다. &lt;em&gt;전기세&lt;/em&gt;라는 말은 거의 쓰이지 않다가 광복 이후부터 서서히 쓰이기 시작한다.&lt;a href=&#34;#fn1&#34; class=&#34;footnoteRef&#34; id=&#34;fnref1&#34;&gt;&lt;sup&gt;1&lt;/sup&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;광복 이후인 &lt;a href=&#34;http://newslibrary.naver.com/viewer/index.nhn?articleId=1971101100209202007&amp;amp;editNo=2&amp;amp;printCount=1&amp;amp;publishDate=1971-10-11&amp;amp;officeId=00020&amp;amp;pageNo=2&amp;amp;printNo=15389&amp;amp;publishType=00020&#34;&gt;1971년 10월 11일자 동아일보의 경제면 아래 기사&lt;/a&gt;는 왜 전기세라는 말이 광복 이후에 점차 많이 쓰이게 되었는지 짐작하는 데에 도움이 된다. (&lt;em&gt;강조&lt;/em&gt;는 인용자 붙임.)&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;h3 id=&#34;國稅廳국세청-電氣稅전기세직접徵收징수&#34;&gt;&lt;ruby&gt;國稅廳&lt;rp&gt;(&lt;/rp&gt;&lt;rt&gt;국세청&lt;/rt&gt;&lt;rp&gt;)&lt;/rp&gt;&lt;/ruby&gt; &lt;ruby&gt;電氣稅&lt;rp&gt;(&lt;/rp&gt;&lt;rt&gt;전기세&lt;/rt&gt;&lt;rp&gt;)&lt;/rp&gt;&lt;/ruby&gt;직접&lt;ruby&gt;徵收&lt;rp&gt;(&lt;/rp&gt;&lt;rt&gt;징수&lt;/rt&gt;&lt;rp&gt;)&lt;/rp&gt;&lt;/ruby&gt;&lt;/h3&gt;
+&lt;p&gt;&lt;ruby&gt;國稅廳&lt;rp&gt;(&lt;/rp&gt;&lt;rt&gt;국세청&lt;/rt&gt;&lt;rp&gt;)&lt;/rp&gt;&lt;/ruby&gt;은 올해 &lt;ruby&gt;稅收&lt;rp&gt;(&lt;/rp&gt;&lt;rt&gt;세수&lt;/rt&gt;&lt;rp&gt;)&lt;/rp&gt;&lt;/ruby&gt;확보책의일환으로 지금까지 &lt;ruby&gt;韓電&lt;rp&gt;(&lt;/rp&gt;&lt;rt&gt;한전&lt;/rt&gt;&lt;rp&gt;)&lt;/rp&gt;&lt;/ruby&gt;을 통해 &lt;ruby&gt;源泉&lt;rp&gt;(&lt;/rp&gt;&lt;rt&gt;원천&lt;/rt&gt;&lt;rp&gt;)&lt;/rp&gt;&lt;/ruby&gt;징수하던 전기세를 연말까지 사용자들로부터 직접징수할 방침이다。&lt;/p&gt;
+&lt;p&gt;&lt;ruby&gt;十一日&lt;rp&gt;(&lt;/rp&gt;&lt;rt&gt;11일&lt;/rt&gt;&lt;rp&gt;)&lt;/rp&gt;&lt;/ruby&gt; 국세청 당국자는 전기稅의 직접징수는 특히 전기를 대량소비하는 대기업체를 대상으로 할것이라고 밝혔는데 이같은 방침은 &lt;ruby&gt;韓電&lt;rp&gt;(&lt;/rp&gt;&lt;rt&gt;한전&lt;/rt&gt;&lt;rp&gt;)&lt;/rp&gt;&lt;/ruby&gt;이 전기 사용자자들로부터 &lt;em&gt;전기세가 포함된전기사용료&lt;/em&gt;를 제대로 받아들이지 못함에 따라 자동적으로 체납되는 전기稅의 징수를 촉진하기 위한것으로 알려졌다。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&lt;q&gt;전기세가 포함된 전기 사용료&lt;/q&gt;라고 한다. 그렇다. 1971년 즈음의 한전은 전기료도 받았지만 국가를 대신해 전기세도 징수했던 것이다. 전기세라고 불리는 간접세가 실제로 존재했다는 것일까?&lt;/p&gt;
+&lt;p&gt;그로부터 약 20년이 지난 &lt;a href=&#34;http://newslibrary.naver.com/viewer/index.nhn?articleId=1992122500329116009&amp;amp;editNo=15&amp;amp;printCount=1&amp;amp;publishDate=1992-12-25&amp;amp;officeId=00032&amp;amp;pageNo=16&amp;amp;printNo=14625&amp;amp;publishType=00010&#34;&gt;1992년 성탄절의 경향신문을 보면 사회면에 다음과 같은 기사&lt;/a&gt;가 나왔다.&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;h3 id=&#34;전기세표현은-잘못-전기요금이라-해야&#34;&gt;전기세표현은 잘못&lt;br&gt;전기요금이라 해야&lt;/h3&gt;
+&lt;p&gt;(…)&lt;/p&gt;
+&lt;p&gt;전기료는 가정에서 전기를 필요한 만큼 사용하고 사용량에 따라 한국전력에 사용료를 지불하는 것이다。이를 전기세라고 표현하는 것은 국가나 지방 자치단체에서 징수하는 세금이라는 이미지를 주어 시청자들이 은연중 전기사업에 부정적 인식을 갖게 할 수 있을 것이다。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;20년 사이에 전기세는 간접세에서 직접세로 바뀌었다가, 또 어느 순간 사라진 것이다.&lt;/p&gt;
+&lt;p&gt;하지만 잘 생각해보면 전기세라는 것이 부르는 것은 전기 사용과 함께 납부하는 소비세를 특별히 부르는 말에 불과할지도 모른다. 나는 저 20년 사이에 전기세라는 것이 사라졌다는 소식의 기사 같은 것은 아무리 찾아도 발견할 수 없었다. 실제로 국어사전에는 국립국어원 표준국어대사전에는 전기세를 다음과 같이 설명하고 있다.&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;‘전기료’를 일상적으로 이르는 말.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;여기서부터는 순전히 나의 상상이다.&lt;/p&gt;
+&lt;p&gt;내 짐작에는 전기세는 한전에 전기료를 납부할 때 함께 포함된 소비세를, 다른 소비세와 구분하여 오직 전기료에 대한 소비세만을 부를 때 전기세라고 불렀던 것이 아닐까 싶다. 혹은 한전에서 인쇄한 전기료 고지서 같은 문서에서 소비세 부분을 전기세라고 표현했던 것일지도 모른다. 아니면 중간에 직접세로 바뀌었다고 하니, 그때 생긴 표현일 수도 있다. (그 전기세가 언제 어떤 식으로 사라진 것인지는 알 수 없다.) 어찌되었든 지금의 전기세는 딱히 전기료에 포함된 소비세만을 뜻하지도 않는다. 전기세와 전기료는 같은 말이 되었다.&lt;/p&gt;
+&lt;p&gt;어쨌거나 앞서 인용한 경향신문 기사에서 말하는 것과 같이, 전기료는 국가 혹은 지방자치단체에 납부하는 세금이 아니므로, 전기세라고 부르지 않는 것이 좋다.&lt;/p&gt;
+&lt;p&gt;혹시나 해서 중국어나 일본어로는 전기료를 뭐라고 부르나 찾아봤다.&lt;/p&gt;
+&lt;p&gt;중국어로는 띠앤페이(&lt;ruby&gt;电费&lt;rp&gt;(&lt;/rp&gt;&lt;rt&gt;diàn fèi&lt;/rt&gt;&lt;rp&gt;)&lt;/rp&gt;&lt;/ruby&gt;), 즉 전기비라고 한다. 일본어로는 덴키료(&lt;ruby&gt;電気料&lt;rp&gt;(&lt;/rp&gt;&lt;rt&gt;でんきりょう&lt;/rt&gt;&lt;rp&gt;)&lt;/rp&gt;), 즉 전기료라고 한다.&lt;/p&gt;
+&lt;section class=&#34;footnotes&#34;&gt;
+&lt;hr /&gt;
+&lt;ol&gt;
+&lt;li id=&#34;fn1&#34;&gt;&lt;p&gt;한자 사용이 줄어든 시대에는 실제보다 검색 결과가 적을 수 있다. 그러나 한글로 검색했을 경우 일제강점기에 다른 한자의 동음이의어가 너무 많이 잡혀서 한자로 검색했다.&lt;a href=&#34;#fnref1&#34;&gt;↩&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/section&gt;
+</content>
+      
+    </entry>
+  
+    <entry>
+      
+        
+          <title>오픈 소스 제품의 고객 서비스</title>
+        
+        <id>https://blog.hongminhee.org/2016/05/23/foss-customer-service/</id>
+        <link rel="alternate" type="text/html" hreflang="ko"
+              href="https://blog.hongminhee.org/2016/05/23/foss-customer-service/" />
+        <published>2016-05-23T02:30:40+09:00</published>
+        <updated>2016-05-23T02:30:40+09:00</updated>
+        <author>
+          <name>홍민희</name>
+          <uri>https://hongminhee.org/</uri>
+          <email>&#104;ongmin&#104;ee&#64;member&#46;fsf&#46;org</email>
+        </author>
+        <content type="html">&lt;h1 id=&#34;오픈-소스-제품의-고객-서비스&#34;&gt;오픈 소스 제품의 고객 서비스&lt;/h1&gt;
+&lt;p&gt;오픈 소스 제품의 고객 서비스는 일반적인 제품의 고객 서비스와는 아주 다른 양상을 띈다.&lt;/p&gt;
+&lt;p&gt;첫째로, 오픈 소스의 특성상 제품 생산자와 소비자의 이분법이 분명치 않다. 소비자가 제품에 마음에 안 드는 점이 있으면 생산 일부에 기여한다는 개념이기 때문이다. 따라서 &lt;q&gt;그럼 기여해주세요&lt;/q&gt;라는 식의 말도 종종 나온다.&lt;/p&gt;
+&lt;p&gt;둘째로, 공정이 투명한 관계로 부분 시스템 (전문 용어로 &lt;q&gt;의존성&lt;/q&gt;) 공정의 문제를 최종 공정에서 떠앉는 책임 구조가 없다. A 제품을 만드는데 그 부품으로 B 제품을 사용하게 되어 있고, 또 그 B 제품을 만드는데 C 제품이 들어간다고 치자. A, B, C 제품들 모두가 오픈 소스 프로젝트라면 A 제품의 최종 소비자는 동시에 B 제품과 C 제품의 간접 소비자가 되는 구조다. C 제품의 어떤 결함이 B 제품의 결함에 전적으로 기여하고 또다시 B 제품의 그러한 결함이 A 제품의 결함을 만들었을 때, 그러한 결함에 대해 A 제품 생산자가 문의를 받으면 A 제품 생산자는 &lt;q&gt;그 결함은 B 제품의 결함이므로 그쪽에서 수정해야 한다&lt;/q&gt;라고 말하는 경우는 매우 흔하다. B 제품에서도 같은 문의에 대해 비슷하게 대처할 수 있다.&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://en.wikipedia.org/wiki/App_store#Apple_and_the_App_Store&#34;&gt;iPhone이 어떠한 네이티브 앱 개발 API도 제공하지 않겠다고 주장하던 시절에 탈옥 소프트웨어 해커들에 의해 데비안 리눅스의 APT &lt;em&gt;패키지 시스템&lt;/em&gt;을 iPhone에 포팅했고, 그것이 되려 &lt;em&gt;앱 스토어&lt;/em&gt; 개념의 효과적인 데모가 되면서 생겨났다는 이야기&lt;/a&gt;는 이미 어느 정도 알려져 있다. 하지만 그럼에도 오픈 소스 세계의 &lt;a href=&#34;https://en.wikipedia.org/wiki/Package_manager&#34;&gt;&lt;em&gt;패키지 시스템&lt;/em&gt;&lt;/a&gt;과 &lt;a href=&#34;https://en.wikipedia.org/wiki/App_store&#34;&gt;&lt;em&gt;앱 스토어&lt;/em&gt;&lt;/a&gt;에는 아주 큰 차이가 존재하는데, 그 중 하나가 바로 앞서 이야기한 부분 시스템 공정의 투명성 문제이다. 앱 스토어에서 A 제품을 받아서 설치하면 나는 A 제품을 쓴다는 사실만이 드러나게 된다. 하지만 오픈 소스 세계의 패키지 시스템은 A 제품을 쓰게 될 때 B 제품과 C 제품까지 함께 쓴다는 사실이 드러나게 된다. 패키지 시스템은 이를 &lt;em&gt;의존성&lt;/em&gt; 구조라고 부르며, A 제품을 설치하기 전에 심지어 B 제품과 C 제품을 함께 설치하겠냐는 확인까지 받아낸다. 이러한 배포 시스템이 부분 시스템 공정에서의 책임 구조를 아주 다르게 한다. 소비자에게는 좀더 불편한 점이 많은 반면, 잠재적인 생산자(오픈 소스에서는 보통 &lt;q&gt;기여자&lt;/q&gt;라고 부른다)인 소비자와 이미 프로젝트를 주도하고 있는 생산자에게는 편한 점이 많은 방식이다. 무엇보다 생산자가 프로젝트가 풀려는 문제에만 집중하게 도우며, 상용 제품과는 다른 관점에서 소프트웨어 품질의 척도를 제시한다.&lt;/p&gt;
+&lt;p&gt;마지막으로, 이는 오픈 소스의 본질적인 특성에서 비롯된 것은 아니지만 거의 모든 오픈 소스 제품이 무료라는 점에서 기인하는데, 소비자는 일반적인 소비자의 권리가 없다. 만약 오픈 소스 제품을 썼는데 일반적인 상용 제품에서 받는 것과 같은 고객 서비스를 받고 있다면 이는 전적으로 해당 프로젝트의 고유한 특징이거나, 1인 생산자의 개인적인 인품에 의존하여 돌아가는 것이다. 소비자는 대가를 지불하고 제품을 사용하는 것이 아니기 때문에 제품에 대한 문의를 해도 상당히 높은 빈도로 침묵을 듣는다.&lt;/p&gt;
+&lt;p&gt;이외에도 여러 특이한 양상이 존재하는데 대체로 위에서 나열한 양상의 변주에 가깝다. 전반적으로 살펴보면 이러한 양상은 대체로 소비자를 &lt;q&gt;고객은 왕이다&lt;/q&gt; 관점이 아닌 &lt;q&gt;고객은 잠재적인 기여자이다&lt;/q&gt;라는 관점에서 보기 때문에 일어나는 것으로 보인다. 오픈 소스가 왜 생겨난 개념인지 떠올려보면 이는 별로 대수로울 것 없는 해석일 것이다.&lt;/p&gt;
+</content>
+      
+    </entry>
+  
+    <entry>
+      
+        
+          <title>특별한 지적에는 특별한 해명이 필요하다</title>
+        
+        <id>https://blog.hongminhee.org/2016/05/23/special-opinions-need-a-special-effort-to-justify/</id>
+        <link rel="alternate" type="text/html" hreflang="ko"
+              href="https://blog.hongminhee.org/2016/05/23/special-opinions-need-a-special-effort-to-justify/" />
+        <published>2016-05-23T01:17:12+09:00</published>
+        <updated>2016-05-23T01:17:12+09:00</updated>
+        <author>
+          <name>홍민희</name>
+          <uri>https://hongminhee.org/</uri>
+          <email>&#104;ongmin&#104;ee&#64;member&#46;fsf&#46;org</email>
+        </author>
+        <content type="html">&lt;h1 id=&#34;특별한-지적에는-특별한-해명이-필요하다&#34;&gt;특별한 지적에는 특별한 해명이 필요하다&lt;/h1&gt;
+&lt;p&gt;&lt;time datetime=&#34;2016-05-21T12:22:00+09:00&#34;&gt;어제&lt;/time&gt; &lt;a href=&#34;https://www.facebook.com/hongminhee/posts/10209392646352955&#34;&gt;페이스북&lt;/a&gt;과 &lt;a href=&#34;https://twitter.com/hongminhee/status/733862166743257088&#34;&gt;트위터&lt;/a&gt;에 올린 글. 트위터에는 여러 조각으로 쪼개서 올리기까지 했는데 (게다가 트위터는 글 수정도 못해서 지저분하게 정정 트윗까지 올려야 했다) 그럴 거면 그냥 블로그에 올리는 것이 낫지 않나 하는 생각이 이제서야 들어서 올린다.&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;차별에 대해 이야기하는 사람들이 때때로 역차별을 없는 것처럼 넘어가거나, 혹은 역차별은 무시해도 괜찮다고 얘기하는 것이 거슬리게 여겨질 수도 있다. 차별에 대해 이야기하는 사람들이 어떨 때에는 논리적 비약을 하거나 고통과 위험에 대해 초과 평가하는 것이 느껴질 때도 있을 것이다. 그래서 한마디 보탤 수도 있다. 여론이 거세다면 반대의 편에서 한마디 보태는 것도 용기가 필요하다는 것도 인정한다. 그렇기 때문에 &lt;q&gt;그러한 고통과 위험이 있다는 것에 동의하지 않는 것이 아니고, 다만…&lt;/q&gt;하고 덧붙이며 어렵게 주장을 펴는 것의 어려움도 나는 공감할 수 있다. 그리고 그의 지적이 논리 내적으로 아주 타당하다는 것도 받아들일 수 있다.&lt;/p&gt;
+&lt;p&gt;하지만 사람들이 그것에 반발하는 이유는 그것의 논리가 타당하지 않다고 여겨져서라기 보다는, 그러한 지적 한마디가 그 사람의 지난 발언 맥락 속에서 매우 선택적이라고 여겨지기 때문이다. 사람들은 그러한 지적 한마디에 자꾸 이상한 의도를 읽게 되는데, 다만 그런 지적을 나쁜 의도로 읽게 되는 자신의 직관을 논리적으로는 설명하지 못하기 때문에 이런 저런 딴소리를 하는 것 뿐이다. 한마디 보탤 능력이 있다면 왜 지금까지는 고통과 위험에 시달리는 약자를 위해서는 일언반구도 없었는가. 어째서 약자들이 시달리는 강자들의 잘못된 논리에는 지금껏 대꾸하지 않았는가. 어째서 약자들이 고통에 겨워 소리지르는 와중에 삑싸리난 몇가지 논리만 날카롭게 비판하는가.&lt;/p&gt;
+&lt;p&gt;물론, 다시 강조하지만, 발화자의 지난 발언의 맥락과 독립적으로 그러한 지적 자체도 우리는 소중하게 받아들일 필요가 있다. 어쨌거나 논리적 &lt;em&gt;보안&lt;/em&gt;을 견고히 하는 것은 도움이 되는 일이다. 세세한 논리적 세부 사항은 얼마든지 수정하더라도 우리는 충분히 약자의 편에서 큰 논리를 주장할 수 있다. 그러한 지적들에 대해 &lt;q&gt;모든 것이 논리로 설명되지는 않는다&lt;/q&gt;는 식의 지고 들어가는 말을 할 필요도 없다. 작은 논리 한 둘이 잘못됐다고 해서 큰 수준의 담론이 곧바로 부정되는 것은 아니기 때문이다.&lt;/p&gt;
+&lt;p&gt;사람들의 logical fallacy에 대해 지적하고 싶은가? 그렇다면 자신의 좋은 의도를 설명하는 데에도 큰 공을 들여야 할 것이다. 그리고 자신의 의도를 잘 설명하는 가장 좋은 방법은, 평소에도 꾸준히 약자의 편에 서서 발언해주는 것이다. 평소에 약자의 편에서 꾸준히 발언하던 사람은 가끔 반대편의 주장으로 여겨질 수도 있는 지적을 하더라도 사람들이 그 의도를 크게 의심하지는 않을 것이다.&lt;/p&gt;
+&lt;/blockquote&gt;
+</content>
+      
+    </entry>
+  
+    <entry>
+      
+        
+          <title>도덕적 실력주의</title>
+        
+        <id>https://blog.hongminhee.org/2016/05/08/moral-meritocracy/</id>
+        <link rel="alternate" type="text/html" hreflang="ko"
+              href="https://blog.hongminhee.org/2016/05/08/moral-meritocracy/" />
+        <published>2016-05-08T13:31:53+09:00</published>
+        <updated>2016-05-08T13:31:53+09:00</updated>
+        <author>
+          <name>홍민희</name>
+          <uri>https://hongminhee.org/</uri>
+          <email>&#104;ongmin&#104;ee&#64;member&#46;fsf&#46;org</email>
+        </author>
+        <content type="html">&lt;h1 id=&#34;도덕적-실력주의&#34;&gt;도덕적 실력주의&lt;/h1&gt;
+&lt;p&gt;예전에 트위터에 썼던 글을 정리해두는 차원에서 올려본다. 다음은 두 달 전에 올렸던 트윗이다&lt;a href=&#34;#fn1&#34; class=&#34;footnoteRef&#34; id=&#34;fnref1&#34;&gt;&lt;sup&gt;1&lt;/sup&gt;&lt;/a&gt;:&lt;/p&gt;
+&lt;blockquote class=&#34;twitter-tweet&#34; data-lang=&#34;en&#34;&gt;&lt;p lang=&#34;ko&#34; dir=&#34;ltr&#34;&gt;실력주의가 도덕·가치에 결합하면 어떤 일이 일어날까? 내가 맞고 상대가 틀리면 상대를 모욕하고 상처줘도 괜찮다고 믿게 된다. 도덕적 비판의 과정에서 의도치 않게 모욕을 동방할 수도 있는 것이 아니라, 모욕 자체가 아주 괜찮고 훌륭한 것이 된다.&lt;/p&gt;&amp;mdash; Hong Minhee ・ 洪 民憙 (@hongminhee) &lt;a href=&#34;https://twitter.com/hongminhee/status/706918864894885888&#34;&gt;March 7, 2016&lt;/a&gt;&lt;/blockquote&gt;
+&lt;blockquote class=&#34;twitter-tweet&#34; data-lang=&#34;en&#34;&gt;&lt;p lang=&#34;ko&#34; dir=&#34;ltr&#34;&gt;나는 이러한 “실력주의적 도덕”이 똑똑하고 말 싸움 잘하고 달변인 사람들 사이에서 흔하게 나타난다고 생각한다. 힘쎄고 덩치 큰  친구들이 까부는 애들은 한대 팰 수도 있다고 믿는 것과 같이, 똑똑한 사람들 사이에서 아주 자연스럽게 나타나는 믿음이다.&lt;/p&gt;&amp;mdash; Hong Minhee ・ 洪 民憙 (@hongminhee) &lt;a href=&#34;https://twitter.com/hongminhee/status/706921152547917824&#34;&gt;March 7, 2016&lt;/a&gt;&lt;/blockquote&gt;
+&lt;script async src=&#34;//platform.twitter.com/widgets.js&#34; charset=&#34;utf-8&#34;&gt;&lt;/script&gt;
+&lt;p&gt;그때는 저렇게 쓰고 잊어버렸는데, 어제자 한국일보 기사 &lt;a href=&#34;http://hankookilbo.com/v/7001f428b24d4d9d8225ed43d8177ead&#34;&gt;&lt;q&gt;누가 한강을 헬강으로 만드나&lt;/q&gt;&lt;/a&gt;를 읽고 다시 떠오르게 됐다. 우선 트윗을 쓸 당시에는 &lt;q&gt;&lt;em&gt;실력주의 도덕&lt;/em&gt;&lt;/q&gt;이라고 했지만 좀더 생각해보니 &lt;q&gt;&lt;em&gt;도덕적 실력주의&lt;/em&gt;&lt;/q&gt;라고 부르는 게 더 적절할지도 모른다는 생각이 든다. 뭐, 내가 지어낸 말이고, 분명 같은 것을 뜻하는 용어가 있을 법한데, 내가 과문해서 아직 모르는 것 같다.&lt;/p&gt;
+&lt;p&gt;참고로 이 블로그의 예전 글들 중에도 도덕적 실력주의가 엿보이는 글이 많다. 창피해서 굳이 링크는 안 하겠다.&lt;/p&gt;
+&lt;section class=&#34;footnotes&#34;&gt;
+&lt;hr /&gt;
+&lt;ol&gt;
+&lt;li id=&#34;fn1&#34;&gt;&lt;p&gt;첫번째 트윗에서 &lt;q&gt;모욕을 동방&lt;/q&gt;은 물론 &lt;q&gt;모욕을 동반&lt;/q&gt;의 오타이다.&lt;a href=&#34;#fnref1&#34;&gt;↩&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/section&gt;
+</content>
+      
+    </entry>
+  
+    <entry>
+      
+        
+          <title>Unicode Adopt-a-Character</title>
+        
+        <id>https://blog.hongminhee.org/2016/04/17/unicode-adopt-a-character/</id>
+        <link rel="alternate" type="text/html" hreflang="ko"
+              href="https://blog.hongminhee.org/2016/04/17/unicode-adopt-a-character/" />
+        <published>2016-04-17T00:07:12+09:00</published>
+        <updated>2016-04-17T00:07:12+09:00</updated>
+        <author>
+          <name>홍민희</name>
+          <uri>https://hongminhee.org/</uri>
+          <email>&#104;ongmin&#104;ee&#64;member&#46;fsf&#46;org</email>
+        </author>
+        <content type="html">&lt;h1 id=&#34;unicode-adopt-a-character1&#34;&gt;&lt;a href=&#34;http://www.unicode.org/consortium/adopt-a-character.html&#34;&gt;Unicode Adopt-a-Character&lt;/a&gt;&lt;/h1&gt;
+&lt;p&gt;최근 유니코드 컨소시엄은 &lt;a href=&#34;http://www.unicode.org/consortium/adopt-a-character.html&#34;&gt;Adopt-a-Character&lt;/a&gt;라는 후원 프로그램을 시작했다. 십만 개가 넘는 유니코드 문자들 중 마음에 드는 글자를 골라서 후원금을 내면 해당 글자에 &lt;a href=&#34;http://www.unicode.org/consortium/adopted-characters.html&#34;&gt;후원한 사람의 이름을 걸어주는 것&lt;/a&gt;으로, 다양한 소프트웨어의 국제화를 쉽게 할 수 있도록 지난 약 25년간 힘써온 유니코드 컨소시엄에 대한 고마움을 기업이 아닌 개인 수준에서도 표시할 수 있는 기회이기도 하다. (물론 해당 프로그램은 기업 단위 후원도 가능하다.) 특별히 마음에 들거나 사적으로 뜻깊다고 생각하는 유니코드 문자가 있다면, 해당 문자와 후원자 자신을 연결지을 수 있어서 흥미롭다.&lt;/p&gt;
+&lt;p&gt;나 역시 그간 유니코드 덕분에 소프트웨어의 국제화를 하는데 큰 도움을 받았으므로 가장 적은 금액인 브론즈 스폰서 정도로 후원을 하기로 하였다. 막상 내게 뜻깊은 글자가 무엇이 있나 생각해보니 잘 떠오르지 않아서, 일단 내 이름의 성으로 쓰이는 &lt;a href=&#34;http://www.unicode.org/consortium/adopted-characters.html#b6D2A&#34;&gt;&lt;q&gt;넓을 &lt;strong&gt;&lt;ruby&gt;洪&lt;rp&gt;(&lt;/rp&gt;&lt;rt&gt;홍&lt;/rt&gt;&lt;rp&gt;)&lt;/rp&gt;&lt;/ruby&gt;&lt;/strong&gt;(&lt;code&gt;U+6D2A&lt;/code&gt;)&lt;/q&gt; 문자에 이름을 걸었다.&lt;/a&gt;&lt;/p&gt;
+&lt;blockquote class=&#34;twitter-tweet&#34; data-lang=&#34;en&#34;&gt;&lt;p lang=&#34;en&#34; dir=&#34;ltr&#34;&gt;洪民憙 (Hong Minhee)&lt;a href=&#34;https://t.co/6opc4vq4rO&#34;&gt;https://t.co/6opc4vq4rO&lt;/a&gt; is now a Bronze sponsor of CJK UN/IDEOGRAPH6D2A!&lt;a href=&#34;https://t.co/EDmr9Ut4pj&#34;&gt;https://t.co/EDmr9Ut4pj&lt;/a&gt; &lt;a href=&#34;https://t.co/Yzz1gE4twO&#34;&gt;pic.twitter.com/Yzz1gE4twO&lt;/a&gt;&lt;/p&gt;&amp;mdash; Unicode Consortium (@unicode) &lt;a href=&#34;https://twitter.com/unicode/status/722129698784870400&#34;&gt;April 18, 2016&lt;/a&gt;&lt;/blockquote&gt;
+&lt;script async src=&#34;//platform.twitter.com/widgets.js&#34; charset=&#34;utf-8&#34;&gt;&lt;/script&gt;
+</content>
+      
+    </entry>
+  
+    <entry>
+      
+        
+          <title>6년만의 블로그 이전</title>
+        
+        <id>https://blog.hongminhee.org/2016/04/07/new-blog-url/</id>
+        <link rel="alternate" type="text/html" hreflang="ko"
+              href="https://blog.hongminhee.org/2016/04/07/new-blog-url/" />
+        <published>2016-04-07T05:43:40+09:00</published>
+        <updated>2016-04-07T05:43:40+09:00</updated>
+        <author>
+          <name>홍민희</name>
+          <uri>https://hongminhee.org/</uri>
+          <email>&#104;ongmin&#104;ee&#64;member&#46;fsf&#46;org</email>
+        </author>
+        <content type="html">&lt;h1 id=&#34;년만의-블로그-이전&#34;&gt;6년만의 블로그 이전&lt;/h1&gt;
+&lt;p&gt;원래 Tumblr에서 호스팅하던 블로그를 옮겼다. &lt;a href=&#34;https://blog.hongminhee.org/2010/02/09/379524623/&#34;&gt;2010년 초에 Tumblr로 옮긴&lt;/a&gt; 뒤 6년만의 블로그 이사이다. Tumblr를 떠나게 된 계기는 최근부터 내가 쓴 글에 달린 링크를 가로채서 다른 URL로 바꿔치기 하도록 업데이트됐기 때문이다.&lt;/p&gt;
+&lt;blockquote class=&#34;twitter-tweet&#34; data-lang=&#34;en&#34;&gt;&lt;p lang=&#34;ko&#34; dir=&#34;ltr&#34;&gt;방금 알았는데 Tumblr가 언제부터인가 내가 글에서 링크한 URL을 가로채서 자기네 중간 리다이렉션 페이지를 거치도록 바뀐 URL을 삽입해놨다. 옵션을 찾아봐도 끄는 방법을 찾을 수 없다. 지금까지는 떠날 이유도 없고 귀찮아 냅뒀지만, 슬슬 옮겨야.&lt;/p&gt;&amp;mdash; Hong Minhee ・ 洪 民憙 (@hongminhee) &lt;a href=&#34;https://twitter.com/hongminhee/status/716599931432140801&#34;&gt;April 3, 2016&lt;/a&gt;&lt;/blockquote&gt;
+&lt;script async src=&#34;//platform.twitter.com/widgets.js&#34; charset=&#34;utf-8&#34;&gt;&lt;/script&gt;
+&lt;p&gt;몇년 전부터 정적 사이트 생성기로 블로그 만드는 게 프로그래머 사이의 유행이 되어서 나 역시 옮기고 싶다고 생각했었는데, 막상 귀찮아서 생각만 하다가 계기가 생겨서 이참에 옮기게 되었다.&lt;/p&gt;
+&lt;p&gt;새 블로그 주소는 &lt;a href=&#34;https://blog.hongminhee.org/&#34; class=&#34;uri&#34;&gt;https://blog.hongminhee.org/&lt;/a&gt;이다. 참고로 이전 블로그의 모든 퍼머링크들은 내가 오기와 집념으로 거의 다 리다이렉션(&lt;code&gt;301 Moved Permanently&lt;/code&gt;) 시켰다.&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://jekyllrb.com/&#34;&gt;Jekyll&lt;/a&gt; 같은 훌륭한 정적 사이트 생성기도 있고,&lt;a href=&#34;#fn1&#34; class=&#34;footnoteRef&#34; id=&#34;fnref1&#34;&gt;&lt;sup&gt;1&lt;/sup&gt;&lt;/a&gt; 그 외에도 다양하게 존재하지만, 예전부터 내가 원하는 정적 사이트 생성기의 조건은 어느 정도 확립되어 있었다. 그 중 가장 중요한 조건은 &lt;a href=&#34;https://blog.hongminhee.org/2010/02/09/379524623/&#34;&gt;2010년에 Tumblr로 블로그를 이사했을 때&lt;/a&gt;나 지금이나 같은데, Markdown을 어떤 식으로 지원하느냐다. 지금까지 6년동안 블로그에 올렸던 모든 글을 제대로 빌드할 수 있어야 하기 때문이다. 10년 전부터 Markdown Extra 문법을 사용해왔고, 이 문법의 제대로 된 구현은 현재까지 내가 알기로는 레퍼런스 구현인 &lt;a href=&#34;https://michelf.ca/projects/php-markdown/extra/&#34;&gt;PHP Markdown Extra&lt;/a&gt;와 &lt;a href=&#34;http://pandoc.org/&#34;&gt;Pandoc&lt;/a&gt; 정도밖에 없다. 그래서 Pandoc을 Markdown 구현 백엔드로 사용하는 것들만 추리니 얼마 안 남았다. &lt;a href=&#34;https://jaspervdj.be/hakyll/&#34;&gt;Hakyll&lt;/a&gt; 같은 것들이 나왔는데, 처음 조금 시도해 보다가 포기하고 그냥 직접 만들기로 했다.&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://jaspervdj.be/hakyll/&#34;&gt;Hakyll&lt;/a&gt;에서 아쉬웠던 것은 자체 템플릿 엔진이 반복문을 두겹 이상으로 사용할 수 없다는 점이었다. 두 단계 이상으로 접혀 들어가는 내용을 다루기가 아주 까다로웠다. 사실 설정이 그냥 Haskell 코드라서 유연하다는 장점이 있었고, 분명 내가 좀더 파고들었으면 어떻게든 해결 가능했을 것이라는 생각이 든다. 실제로 해결 비슷하게 하긴 했는데, 다 하고 보니 상당양의 로직 코드를 만든 뒤라 허탈감이 왔다. 그 뒤에 &lt;code&gt;href&lt;/code&gt; 끝에 index.html 같은 것을 없애는 방법이라던가, 로컬 빌드에서는 &lt;code&gt;href&lt;/code&gt;를 만들 때 index.html을 붙이고, 실제로 배포할 때는 뺀 경로로 올리는 방법 같은 것을 찾아봤지만 그런 것은 별도 기능으로 있지 않았고, 모두 다 내가 직접 구현을 해야 했다. RSS 등 몇가지 더 원하는 기능이 있었는데, 하루 종일 코딩해서 일요일 하루를 날리고 보니 인내심이 사라져서 Hakyll은 버리기로 했다.&lt;/p&gt;
+&lt;p&gt;내게 남은 휴일이 얼마 없다보니 조급해졌는데, 그래서 대충 쉘 스크립트로 Pandoc을 엮어서 결과물을 얼른 내놓기로 했다. 첫 구현은 썩 잘 돌아갔는데, 아카이브 페이지나 첫 페이지 등을 만드려면 템플릿 엔진 비슷한 게 필요해졌다. 쉘 스크립트의 단순 문자열 치환으로는 HTML 중간에 반복되는 내용을 넣기가 어려웠기 때문이다. 아니, 넣을 수는 있었는데 나중에 수정할 수 없을 것 같은 코드가 나온다.&lt;/p&gt;
+&lt;p&gt;그래서 쉘 스크립트를 대충 Python으로 옮겨 적기 시작했다. 하다보니 bash로는 쉽게 할 수 없는 추상화가 가능해져서, 하는 김에 일반화를 조금 하기도 했다. 이 정도까지 하니 졸린데다 주말이 다 사라져서 아쉽지만 다음날 이어서 작업하기로 했다. (다행히 휴가 하루 냈었다.)&lt;/p&gt;
+&lt;p&gt;최종적으로 만든 정적 사이트 생성기는 전적으로 내 블로그에서만 쓸 수 있도록 일반화가 거의 안 되어 있는 &lt;a href=&#34;https://github.com/dahlia/blog/blob/master/gen.py&#34;&gt;gen.py&lt;/a&gt; 스크립트다.&lt;a href=&#34;#fn2&#34; class=&#34;footnoteRef&#34; id=&#34;fnref2&#34;&gt;&lt;sup&gt;2&lt;/sup&gt;&lt;/a&gt; 이걸 GitHub 저장소에 푸시할 때마다 자동으로 빌드되게 하고 싶어서 &lt;a href=&#34;https://github.com/dahlia/blog/blob/master/.travis.yml&#34;&gt;Travis CI를 활용했다.&lt;/a&gt; 그리고 빌드된 결과는 다시 GitHub Pages로 푸시된다. 결과적으로 새 블로그는 딱히 오픈 소스도 아니건만 오픈 소스를 위한 공공 인프라를 무전취식하고 있다.&lt;/p&gt;
+&lt;p&gt;하여간, 그리고 Tumblr에 올라가 있던 글을 다 옮겨와야 했다. 사실은 이 작업을 더 먼저 했다. &lt;a href=&#34;https://github.com/dahlia/blog/tree/migrate&#34;&gt;이쪽도 Tumblr API를 써서 평범하게 Python 스크립팅으로 끝냈다.&lt;/a&gt; 한번 쓰고 버릴 스크립트다보니 더더욱 오늘만 사는 심정으로 얼렁뚱땅 짰지만, 그럭저럭 잘 돌아갔다.&lt;/p&gt;
+&lt;p&gt;마지막으로 기존 URL을 새 URL로 리다이렉션시키는 작업에 착수했다. 내가 생각한 방법은, 리다이렉션만 해주는 간단한 서버를 작성하고, 기존에는 Tumblr에 물려있던 blog.dahlia.kr 도메인을 해당 서버로 돌려 물리는 것이었다. &lt;a href=&#34;https://github.com/dahlia/blog/blob/redirector/index.json&#34;&gt;우선 기존 Tumblr의 글 목록과, 각 글의 새 URL을 담고 있는 테이블을 만들었다.&lt;/a&gt; 다행히 Tumblr 글을 마이그레이션하는 스크립트의 출력 결과를 가져다가 기계적으로 구성할 수 있었다. &lt;a href=&#34;https://github.com/dahlia/blog/blob/redirector/redir.py&#34;&gt;그리고 Flask를 써서 간단한 리다이렉션 서버까지 작성했다.&lt;/a&gt; 서버는 &lt;del datetime=&#34;2016-04-08T02:14:59+09:00&#34;&gt;Heroku&lt;/del&gt;&lt;ins
+datetime=&#34;2016-04-08T02:14:59+09:00&#34;&gt;Google App Engine&lt;/ins&gt;&lt;a href=&#34;#fn3&#34; class=&#34;footnoteRef&#34; id=&#34;fnref3&#34;&gt;&lt;sup&gt;3&lt;/sup&gt;&lt;/a&gt;에 공짜 앱으로 배포하고, DNS 레코드를 수정하여 blog.dahlia.kr가 더이상 Tumblr 서버를 바라보지 않게 만들었다.&lt;/p&gt;
+&lt;p&gt;(공짜 &lt;del datetime=&#34;2016-04-08T02:14:59+09:00&#34;&gt;Heroku&lt;/del&gt;&lt;ins
+datetime=&#34;2016-04-08T02:14:59+09:00&#34;&gt;Google App Engine&lt;/ins&gt;&lt;a href=&#34;#fn4&#34; class=&#34;footnoteRef&#34; id=&#34;fnref4&#34;&gt;&lt;sup&gt;4&lt;/sup&gt;&lt;/a&gt; 서버에 Travis CI, GitHub Pages 등… &lt;a href=&#34;http://blog.hongminhee.org/2013/12/21/70680247969/&#34;&gt;돈 한푼 안내고 서버 없이 무전취식하는&lt;/a&gt; 잔재주는 날이 갈수록 늘어난다.)&lt;/p&gt;
+&lt;p&gt;내 블로그는 이제 10년째 운영중이다. 6년 전에 블로그 이사했을 때도 RSS 주소는 유지했다. 이제는 살아있는 시체가 되어버린 &lt;a href=&#34;http://feedburner.com/&#34;&gt;FeedBurner&lt;/a&gt;를 쓰고 있었기 때문이다. 하여간 아직 운영은 되고 있으니 들어가서 소스 URL을 Tumblr에서 제공하는 RSS에서 새 블로그의 RSS로 옮겼다. 아마 RSS 리더로 구독해서 보고 있던 분들은 (이미 읽었던 글이 새 글로 좀 뜰 수도 있겠지만) 그대로 이어서 구독할 수 있을 것이다.&lt;/p&gt;
+&lt;p&gt;이렇게 하면 거의 다 한 것 같았는데, 생각해보니 내 기존 블로그는 Tumblr 팔로워도 상당히 많았다. (사실 그것도 Tumblr 탈출을 망설이게 한 요인이다.) 어쩔까 하다가 기존에 올라온 글 내용을 몽땅 수정해서, 각 글의 새 URL로 링크해주기로 했다. &lt;a href=&#34;https://github.com/dahlia/blog/blob/redirector/edit.py&#34;&gt;이것 역시 손으로 할 수는 없으니 스크립트를 짰다.&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;여기까지 해보니 블로그 하나 옮기겠다고 온갖 삽질을 한 것 같아 보인다. 맨 처음 이사는 3년 블로깅 후에 한 것이었고, 이번 이사는 그 뒤로 6년 블로깅한 후에 옮긴 것이니, 귀찮아서 앞으로 12년간은 블로그 이사는 하지 않으련다.&lt;/p&gt;
+&lt;section class=&#34;footnotes&#34;&gt;
+&lt;hr /&gt;
+&lt;ol&gt;
+&lt;li id=&#34;fn1&#34;&gt;&lt;p&gt;더구나 &lt;a href=&#34;https://jekyllrb.com/&#34;&gt;Jekyll&lt;/a&gt;을 쓰면 GitHub Pages에서 빌드까지 돌려준다.&lt;a href=&#34;#fnref1&#34;&gt;↩&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;li id=&#34;fn2&#34;&gt;&lt;p&gt;저 스크립트가 들어있는 &lt;a href=&#34;https://github.com/dahlia/blog/tree/master&#34;&gt;블로그 저장소&lt;/a&gt;의 다른 문서나 스크립트들은 그렇지 않지만, &lt;a href=&#34;https://github.com/dahlia/blog/blob/master/gen.py&#34;&gt;gen.py&lt;/a&gt; 스크립트만은 GPLv3이다.&lt;a href=&#34;#fnref2&#34;&gt;↩&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;li id=&#34;fn3&#34;&gt;&lt;p&gt;&lt;a href=&#34;https://twitter.com/hongminhee/status/718059459919020032&#34;&gt;Heroku 무료 앱에는 사용량 제한이 있어서 늦은 시간이 되자 서버 오류가 나기 시작했다.&lt;/a&gt; 그래서 &lt;a href=&#34;https://twitter.com/hongminhee/status/718124928243879936&#34;&gt;Google App Engine으로 교체했다.&lt;/a&gt;&lt;a href=&#34;#fnref3&#34;&gt;↩&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;li id=&#34;fn4&#34;&gt;&lt;p&gt;&lt;a href=&#34;https://twitter.com/hongminhee/status/718059459919020032&#34;&gt;Heroku 무료 앱에는 사용량 제한이 있어서 늦은 시간이 되자 서버 오류가 나기 시작했다.&lt;/a&gt; 그래서 &lt;a href=&#34;https://twitter.com/hongminhee/status/718124928243879936&#34;&gt;Google App Engine으로 교체했다.&lt;/a&gt;&lt;a href=&#34;#fnref4&#34;&gt;↩&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/section&gt;
+</content>
+      
+    </entry>
+  
+    <entry>
+      
+        
+          <title>2016년 4월 3일</title>
+        
+        <id>https://blog.hongminhee.org/2016/04/03/142164655247/</id>
+        <link rel="alternate" type="text/html" hreflang="ko"
+              href="https://blog.hongminhee.org/2016/04/03/142164655247/" />
+        <published>2016-04-03T15:53:59+09:00</published>
+        <updated>2016-04-03T15:53:59+09:00</updated>
+        <author>
+          <name>홍민희</name>
+          <uri>https://hongminhee.org/</uri>
+          <email>&#104;ongmin&#104;ee&#64;member&#46;fsf&#46;org</email>
+        </author>
+        <content type="html">&lt;p&gt;1Password 쓰게 된 계기는 5년 전쯤 국내 모 대형 사이트가 개인정보를 해킹당하게 되면서였다. 나는 여러 사이트에서 거의 같은 암호 서너 개를 돌려가며 사용하고 있었고, 기껏해야 사이트마다 암호에 살짝의 변형을 주는 것이 전부였다. 가령 평소 사용하는 암호가 &lt;code&gt;asdf&lt;/code&gt;이고 가입하려는 사이트가 abc.com이면 대충 &lt;code&gt;abc_asdf&lt;/code&gt; 같은 식으로 변형을 하는 정도였다. 그런데 그 사이트가 털렸단다.&lt;/p&gt;
+&lt;p&gt;그 사이트는 그때도, 그리고 사실 지금까지도 암호의 최대 길이나 사용할 수 있는 기호에 제한을 두고 있었다. 적절한 암호학적 해시를 하고 있다면 왜 구태여 그런 제한을 둔단 말인가? 그 사이트가 내 암호에 어떠한 종류의 암호학적 조치도 하지 않는다는 심증은 매우 강했다. 나는 프로그래머이면서도, 국내의 아주 많은 사이트에 가입할 때마다, 내 암호의 허용 범위에 대한 말도 안되는 안내 문구를 읽을 때마다, 그런 심증을 느껴왔으면서도 별 생각 없이 그렇게 살고 있었던 것이다. 그 사이트를 비롯해 매우 많은 웹 사이트는, 아마 그것을 구현하는 프로그래머의 배움에 대한 나태와 무지에 의해, 의도치 않게 대한민국 국민 대부분의 자주 쓰는 암호들을 평문으로 보존하고 있을 것이다. 그리고 보안 수준을 높이기 위한 명목으로 회원들에게 3개월마다 암호를 바꾸라고 강요하고 있는 것이다.&lt;/p&gt;
+&lt;p&gt;내가 5년 전에 자주 쓰던 서너 개의 암호 중 최소한 하나는 공개된 정보가 되어버렸을 것이다. 그래도 찝찝함을 덜겠다고 암호 앞에 사이트 이름을 붙여놨지만, 누가 보든 암호 앞에 붙은 사이트 이름을 떼고 나면 그게 내 즐겨 쓰는 암호 중 하나라는 것을 알 수 있을 것이다.&lt;/p&gt;
+&lt;p&gt;그날 바로 1Password를 구입하고 내가 기억하는 모든 로그인 암호를 무작위로 만들어서 바꿨다. 무작위 암호는 매번 그 사이트가 허용하는 최대 길이로 꽉꽉 채워서 생성했다. 더이상 사용하지 않는 서비스는, 우선 암호를 무작위로 변경하고 나서, 다시 탈퇴했다. 그들 사이트가 내가 탈퇴를 했다고 해서 내가 쓰던 암호를 평문으로 보존하는 것을 중단할 거라는 보장은 할 수 없었다. 이 작업은 하루아침에 끝나진 않았지만 꾸준히 하고 보니, 나는 내가 가입한 모든 서비스에서 서로 아주 다른 암호를 사용하게 되었다. 이제는 어느 사이트 하나가 크게 털려도, 나의 다른 계정까지 탈취하는 것은 막을 수 있게 되었다.&lt;/p&gt;
+&lt;p&gt;현실적인 이유에서, 적어도 대한민국의 웹 서비스들에서는 암호를 암호라고 인식해서는 안되게 됐다. 그 항목에 담겨야 할 것은 내가 직접 기억할 수 있는 암호가 아니라 나의 인증을 대리해주는 소프트웨어가 기계적으로 생성해주는 토큰 문자열이다. 현실적인 이유에서 그러해야 한다.&lt;/p&gt;
+</content>
+      
+    </entry>
+  
+    <entry>
+      
+        
+          <title>프로토콜이 간단하다는 말의 의미</title>
+        
+        <id>https://blog.hongminhee.org/2016/03/16/141092530227/</id>
+        <link rel="alternate" type="text/html" hreflang="ko"
+              href="https://blog.hongminhee.org/2016/03/16/141092530227/" />
+        <published>2016-03-16T00:40:02+09:00</published>
+        <updated>2016-03-16T00:40:02+09:00</updated>
+        <author>
+          <name>홍민희</name>
+          <uri>https://hongminhee.org/</uri>
+          <email>&#104;ongmin&#104;ee&#64;member&#46;fsf&#46;org</email>
+        </author>
+        <content type="html">&lt;h1 id=&#34;프로토콜이-간단하다는-말의-의미&#34;&gt;프로토콜이 간단하다는 말의 의미&lt;/h1&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;a href=&#34;https://medium.com/@paulcolomiets/the-future-of-asynchronous-io-in-python-ce200536d847&#34;&gt;The HTTP must not be used for internal messaging as it’s easy, but not simple, quite the contrary it’s complicated protocol with 5 RFCs describing only basics. And misunderstanding smallest part of spec may lead to a security vulnerability.&lt;/a&gt; (via &lt;a href=&#34;http://blog.materialistic.kr/post/141087802693&#34;&gt;Materialistic&lt;/a&gt;)&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;어떤 표준 명세가 길고 복잡하다는 것과, 그 표준이 &lt;em&gt;활용하기에&lt;/em&gt; 복잡하다는 것은 실무에서 꽤나 분리된 이야기다. HTTP를 바닥부터 구현하려면 할 게 매우 많다는 것은 자명하다. 하지만 HTTP를 활용하기 위해 HTTP를 직접 구현할 사람이 얼마나 되겠는가?&lt;/p&gt;
+&lt;p&gt;구조의 복잡함이란 구조를 위해 우리가 갖추고 있는 재료(primitives)에 상대적으로 평가되는 것이다. &lt;a href=&#34;https://blog.hongminhee.org/2012/04/13/capabilities-primitives-and-levels/&#34;&gt;예전에 썼던 글&lt;/a&gt;을 끌고 오자면,&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;관계형 데이터베이스가 고수준이라는 것은 우리가 현대에 사용하고 있는 전자 컴퓨터가 제공하는 프리미티브 위에서 복잡하게 구현해야 한다는 것을 뜻한다. 전자 컴퓨터가 제공하는 프리미티브는 우리가 수준&lt;a href=&#34;#fn1&#34; class=&#34;footnoteRef&#34; id=&#34;fnref1&#34;&gt;&lt;sup&gt;1&lt;/sup&gt;&lt;/a&gt;을 얘기할 때 생략되지만 암시적으로 가리키는 것이다. CSS 렌더링 엔진은 Linux보다 고수준이다. 하지만 JavaScript 프로그래머 입장에서는 CSS 렌더링은 프리미티브에 한없이 가까운 저수준이며 &lt;a href=&#34;http://bellard.org/jslinux/&#34;&gt;jslinux&lt;/a&gt;는 매우 고수준의 달성 과제이다. 전자 컴퓨터 위에서 구현하는 간단한 트리는 관계형 데이터베이스보다 훨씬 저수준이지만, 당연히 관계형 데이터베이스 위에서 nested set model로 구현하는 트리는 아무 것도 하지 않아도 이미 그 자리에 있는 관계형 데이터베이스에 비해 고수준이다.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;HTTP는 클라우드 시대의 TCP가 되어버렸고, 현대의 프로그래밍 언어들은 HTTP 통신을 마치 파일 입출력 다음으로 흔한 것처럼 대우해준다. 요즈음 실무에서 네트워크 프로그래밍을 하려는데 HTTP만큼 프리미티브로 취급되는 빌딩 블럭도 소켓을 제외하면 찾기 힘들 것이다.&lt;/p&gt;
+&lt;p&gt;HTTP의 RFC 명세가 길고 복잡한데도 간단하다고 말하는 것은, IBM 호환 PC가 복잡한 물리적 구성요소로 이루어져 있음에도 구성하기에 간단하다고 하는 것과 비슷한 표현이다.&lt;/p&gt;
+&lt;section class=&#34;footnotes&#34;&gt;
+&lt;hr /&gt;
+&lt;ol&gt;
+&lt;li id=&#34;fn1&#34;&gt;&lt;p&gt;고수준이다 혹은 저수준이다 말할 때의 수준을 뜻한다.&lt;a href=&#34;#fnref1&#34;&gt;↩&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/section&gt;
+</content>
+      
+    </entry>
+  
+    <entry>
+      
+        
+          <title>2015년 12월 13일</title>
+        
+        <id>https://blog.hongminhee.org/2015/12/13/135096412217/</id>
+        <link rel="alternate" type="text/html" hreflang="ko"
+              href="https://blog.hongminhee.org/2015/12/13/135096412217/" />
+        <published>2015-12-13T15:01:36+09:00</published>
+        <updated>2015-12-13T15:01:36+09:00</updated>
+        <author>
+          <name>홍민희</name>
+          <uri>https://hongminhee.org/</uri>
+          <email>&#104;ongmin&#104;ee&#64;member&#46;fsf&#46;org</email>
+        </author>
+        <content type="html">&lt;p&gt;&lt;img src=&#34;https://41.media.tumblr.com/595c0a6304234f04874fb7563c0db767/tumblr_nza8qotT3P1qz6t91o1_1280.jpg&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;오늘도 프로그래밍과 아무 관계 없는 얘기를 써본다.&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.soylent.com/&#34;&gt;Soylent&lt;/a&gt;로 점심을 때운지 두 달 남짓 됐다. Soylent는 이른바 &lt;a href=&#34;https://en.wikipedia.org/wiki/Meal_replacement&#34;&gt;식사를 대체&lt;/a&gt;하는 것을 목표로 한 제품으로, 그런 종류의 제품 중에서 가장 먼저 널리 알려진 것이다. (앞서 Premist 님이 썼던 리뷰 &lt;q&gt;&lt;a href=&#34;http://si.mpli.st/review/soylent-week-1.html&#34;&gt;Soylent 1주일 후기&lt;/a&gt;&lt;/q&gt;도 읽어볼 것을 권한다.) 쉽게 얘기해서 그것만 먹고 살아도 영양 불균형으로 인해 병이 나거나 죽을 걱정을 하지 않아도 되는 식품을 목표로 한다고 보면 된다.&lt;/p&gt;
+&lt;p&gt;내가 먹어본 버전은 1.5와 2.0 두 개인데, 1.5는 Soylent 첫 버전부터 꾸준히 발전해온 분말 유형이고 봉투에 담겨서 온다. 2.0은 최근에 새로 나온 것인데 이미 음료 형태로 완성이 된 상태로 병에 담겨서 온다.&lt;/p&gt;
+&lt;p&gt;처음에는 2.0의 맛이 더 깔끔하고 군더더기가 없어서 선호했으나, 번갈아 먹다보니 몇일 지나지 않아 식사라는 느낌을 조금이나마 더 주는 1.5를 선호하게 됐다. 2.0에 비해 1.5는 호두 냄새 같은 게 더 나고, 살짝 건더기 느낌도 난다. 1.5는 &lt;q&gt;먹는&lt;/q&gt; 느낌이 좀 나는데, 2.0는 &lt;q&gt;마시는&lt;/q&gt; 느낌이다. 게다가 2.0은 정량이 정해져 있는데, 그 양이 내게는 좀 부족한 정도였다. 점심을 2.0으로 때우면 5시쯤에는 벌써 심하게 배가 고파진다. 1.5는 분말을 통에 담고 물을 직접 섞어서 먹어야 하므로, 양은 자신이 원하는대로 정할 수 있다.&lt;/p&gt;
+&lt;p&gt;물론 빠르고 편하게 먹자는 이유로 Soylent를 먹는 것도 있는데, 그런 관점에서 보면 1.5는 2.0에 비해 손색이 있다. 은근히 통에 정량대로 가루를 담고 물 넣어서 흔드는 것도 일이다. 별 것 아닌 설거지도 귀찮다.&lt;/p&gt;
+&lt;p&gt;그런 경험이 누적되어, 특별히 규칙을 정한 건 아니지만 대체로 1.5과 2.0 중 어떤 것을 먹을지 정하는 기준 같은 게 생기긴 했다. 지각했을 때, 지금 당장 회의 들어가야 하는데 식사 못 했을 때, 아침에 일어나서 입맛이 하나도 없는데 배가 비어 뭐라도 먹어야 할 때, 자정에 배가 고픈데 2시간 안에 잘 것 같을 때는 2.0을 마신다. 자정에 2.0을 뜯는 이유는 양이 적고 밤에 설거지하기 귀찮기 때문이다. 그 외에는 보통 1.5를 먹는다.&lt;/p&gt;
+&lt;p&gt;맛에 관해서는, 나는 어떤 음식이 맛있는 음식인지 잘 모르지만, 먹을만 했다. 앞서 얘기했듯 2.0이 더 깔끔해서 처음 먹을 때는 거부감이 들지 않는다. 1.5는 처음 먹으면 살짝 거부감이 드는데, 익숙해지면 오히려 거부감을 주었던 그 향이 더 식사 같은 느낌을 줘서 선호하게 되는 듯하다. 어쨌든 둘 다 똥맛은 아니다. 직장 동료는 1.5가 똥맛은 아니지만 흙맛이 난다는 얘기는 했던 것 같다.&lt;/p&gt;
+&lt;p&gt;다만 모든 식사를 Soylent로 때우기에는 나도 아직 미래인이 될 준비가 되지 못했다. 처음 시도할 때는 연속으로 다섯 끼니 정도를 Soylent로 해결하기도 했지만, 나는 누구보다 짠맛과 MSG의 감칠맛를 사랑하기 때문에 그러한 자극적인 느낌이 그리워졌던 것이다. 그래서 주말에 집구석에 박혀서 식사는 대충 때우고 싶을 때, 점심은 Soylent로 때우고 저녁은 라면이나 스팸에 밥만 먹기도 한다.&lt;/p&gt;
+&lt;p&gt;이러한 식사 대체품으로는 Soylent 외의 여러 대안 제품들이 나오고 있다. 국내에도 벌서 여러 종류가 나와 있다. 회사에서 이러한 식사 대체품(회사 안에서는 &lt;q&gt;미래 식량&lt;/q&gt;이라고 불리고 있고 Slack 채널이 따로 있다)에 대한 유행이 생겨서, 다들 이것 저것 서베이하고 도전해보았다. 나도 동료가 주문한 &lt;a href=&#34;http://labnosh.com/&#34;&gt;랩노쉬&lt;/a&gt;라는 국산 제품을 시도해 보았는데, 초콜렛 맛과 구운 오징어 냄새가 섞여있는 느낌을 참을 수 없어서 한 통을 다 비우지 못했다. 물론 이는 전적으로 개인적인 경험으로, 동료들 중에서는 오히려 Soylent보다 랩노쉬가 낫다면서 만족한 사람도 여럿 있다.&lt;/p&gt;
+&lt;p&gt;Soylent는 한국에서 가격적인 디메리트가 있다. 배송 대행을 거쳐야 하기 때문이다. 관세도 적지 않고, 특히 2.0은 무게가 나가기 때문에 배송비가 많이 나간다. 이런 점 때문에 국산을 찾는 동료가 많았다. 나 같은 경우 2.0은 가격이 부담되기 때문에 더이상 주문하지 않고 1.5만 주문하려고 한다.&lt;/p&gt;
+&lt;p&gt;의도하지 않았던 장점도 하나 더 있었다. 내게만 해당될 듯하지만, 원체 소화 불량이 심해서 적어도 보름에 1번은 체하는 경우가 있었는데, Soylent로 점심을 먹고 나서는 체하는 경우가 아직 없었다. 뭐, 이걸 먹어서 체한 게 사라진 건 아닐 수도 있지만.&lt;/p&gt;
+</content>
+      
+    </entry>
+  
+    <entry>
+      
+        
+          <title>텀블러 같은 나라</title>
+        
+        <id>https://blog.hongminhee.org/2015/11/08/132783105357/</id>
+        <link rel="alternate" type="text/html" hreflang="ko"
+              href="https://blog.hongminhee.org/2015/11/08/132783105357/" />
+        <published>2015-11-08T16:14:18+09:00</published>
+        <updated>2015-11-08T16:14:18+09:00</updated>
+        <author>
+          <name>홍민희</name>
+          <uri>https://hongminhee.org/</uri>
+          <email>&#104;ongmin&#104;ee&#64;member&#46;fsf&#46;org</email>
+        </author>
+        <content type="html">&lt;h1 id=&#34;텀블러-같은-나라&#34;&gt;텀블러 같은 나라&lt;/h1&gt;
+&lt;p&gt;작년인가 재작년인가, 트위터에서 누군가 이런 얘기를 했던 걸 본 적이 있다. 한국은 텀블러 같은 나라라고. 나는 그 얘기가 무척 와닿고 정말 그렇다고 여겼다.&lt;/p&gt;
+&lt;p&gt;요즘 자주 돌아다니는 짤방 중에 경주와 교토를 비교한 짤방이 있다.&lt;a href=&#34;#fn1&#34; class=&#34;footnoteRef&#34; id=&#34;fnref1&#34;&gt;&lt;sup&gt;1&lt;/sup&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://plus.google.com/photos/+KevinKelly/albums/6079085228418710065/6079085263509683266?pid=6079085263509683266&amp;amp;oid=116416314233992548280&#34;&gt;&lt;img src=&#34;https://lh6.googleusercontent.com/-q2XxmdD9vhg/VF0_1rrOfEI/AAAAAAAAYQw/Nv94qIViloQ/w3891-h2918/P1420249.jpg&#34; alt=&#34;Japan’s Nakasendo Walk&#34; /&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.flickr.com/photos/mambo1935/1951225952/&#34;&gt;&lt;img src=&#34;https://c1.staticflickr.com/3/2027/1951225952_bbea033904_o_d.jpg&#34; alt=&#34;慶州市 — Gyeongju City, Korea&#34; /&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;http://larca.egloos.com/4099397&#34;&gt;정확히는 경주 사진은 10년 전 모습이라고 하고, 일본 사진도 교토가 아닌 나라이라는 동네라고 한다.&lt;/a&gt; 한쪽은 10년 전 사진이고, 한쪽은 교토도 아니라고 하지만, 사람들의 한국과 일본에 대한 이미지를 극적으로 대비시키기 때문에 다들 퍼나르는 것이라고 생각한다. 즉, 사실은 아니지만 저 대비 구도는 일정 부분 진실된 점이 있다는 것이다.&lt;/p&gt;
+&lt;p&gt;이번에는 거리가 아닌 일상의 휴대전화 사용을 떠올려 보자. 다음은 구글에서 &lt;q&gt;스마트폰 알림&lt;/q&gt;으로 검색해서 나온 이미지이다.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://i.imgur.com/OtTAFZJ.jpg&#34; alt=&#34;검색어: 스마트폰 알림&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;또 &lt;q&gt;smartphone notifications screen&lt;/q&gt;으로도 검색해 보았다.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://i.imgur.com/fguqnEl.png&#34; alt=&#34;검색어: smartphone notifications screen&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;전부터 느꼈던 것이지만, 우리나라의 양식 전반에 걸쳐서 자주 나타나는 특징 같은 게 있다고 여겨진다. 트위터에서는 누군가 그것을 &lt;q&gt;텀블러 같다&lt;/q&gt;고 표현했는데, 텀블러에 로그인하면 나오는 대시보드 역시 포스트 사이의 연속성, 일관성이 매우 결여되어 있기 때문이다. 대신 그 포스트 하나하나는 매우 특색이 있고 강렬하다는 특징도 있다.&lt;/p&gt;
+&lt;p&gt;나는 그게 일종의 자기 완전성 같은 것이라고 느낀다. 무언가를 만듦에 있어, 결과물은 어떤 맥락에서도 뛰어나야 한다. 그렇기 때문에 &lt;em&gt;주변 맥락으로부터 독립적&lt;/em&gt;이어야 한다. 우리가 만들어낸 결과가 어떤 자리에 놓일지보다, 결과 자체의 완전성이 더 중요해진다.&lt;/p&gt;
+&lt;p&gt;한국에서 자기 완전성은 예전부터 중요했고, 이는 사람에게도 적용되고, 사업에도 적용된다. 그렇지만 나는 한국의 이런 경향이 필연적인 것이라고는 생각하지 않는다. 매사에 자기 완전성과 개별의 뛰어남이 중요하게 여겨지는 이유는 거의 모든 결과에 대한 (실패했을 때의) 책임과 (성공했을 때의) 혜택이 개인에게 한정되는 사회 분위기가 강하기 때문이다. &lt;q&gt;서로 조화를 이뤄야 한다&lt;/q&gt; 같은 협력적 가치보다는 &lt;q&gt;가장 돋보여야 한다&lt;/q&gt; 같은 경쟁적 가치가 중요하게 여겨지는 것도 책임/혜택을 개인에게 한정시키는 문화와 밀접한 연관이 있다고 느낀다.&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://en.wikipedia.org/wiki/Culture_of_honor_%28Southern_United_States%29&#34;&gt;명예 문화&lt;/a&gt;(culture of honor)라는 용어가 있다. 오랜 기간 공공 치안이 떨어졌던 곳에서는 개인의 명예를 중요시하는 문화가 강해진다는 것이다. 그리하여 개인이 당한 부당한 일에 대해 개인 스스로가 단호하게 보복하는 전통까지 생긴다. 이는 치안이 없는 사회에서 그러한 부당한 일이, 적어도 보복을 한 그 개인이나 집에 대해서는, 지속적으로 일어나지 않게 방지해주는 효과가 있다. 하지만 반대로 얘기하면 공공 치안이 뛰어나다면 그런 야만적인 문화는 점차 억제된다고 볼 수 있다.&lt;/p&gt;
+&lt;p&gt;나는 비슷하게 한국의 이러한 분위기도 일종의 자기 완전성 문화라고 불러보고 싶고, 협력/조화보다 경쟁을 중요시하는 분위기가 완화되면 그와 연관된 자기 완정성의 문화도 점차 줄 수 있지 않을까 하는 생각이 든다.&lt;/p&gt;
+&lt;section class=&#34;footnotes&#34;&gt;
+&lt;hr /&gt;
+&lt;ol&gt;
+&lt;li id=&#34;fn1&#34;&gt;&lt;p&gt;원본 출처가 없이 돌아다니길래 출처를 열심히 찾았다. 사진에 걸린 링크를 누르면 사진을 처음 올린 곳이 나온다.&lt;a href=&#34;#fnref1&#34;&gt;↩&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/section&gt;
+</content>
+      
+    </entry>
+  
+    <entry>
+      
+        
+          <title>“한글”은 이제 한국어를 포함한다</title>
+        
+        <id>https://blog.hongminhee.org/2015/10/09/130798016527/</id>
+        <link rel="alternate" type="text/html" hreflang="ko"
+              href="https://blog.hongminhee.org/2015/10/09/130798016527/" />
+        <published>2015-10-09T14:42:40+09:00</published>
+        <updated>2015-10-09T14:42:40+09:00</updated>
+        <author>
+          <name>홍민희</name>
+          <uri>https://hongminhee.org/</uri>
+          <email>&#104;ongmin&#104;ee&#64;member&#46;fsf&#46;org</email>
+        </author>
+        <content type="html">&lt;h1 id=&#34;한글은-이제-한국어를-포함한다&#34;&gt;&lt;q&gt;한글&lt;/q&gt;은 이제 한국어를 포함한다&lt;/h1&gt;
+&lt;p&gt;해마다 한글날이 되면 &lt;q&gt;한글과 한국어는 다른 것이다&lt;/q&gt;라는 말을 하는 것도 이제 지겹다. 매해 그런 주장을 트위터나 페이스북에 써오다, 이제는 생각을 바꾸게 되었다.&lt;/p&gt;
+&lt;p&gt;사람들은 정말로 문자와 입말의 개념을 혼동해서 한국어를 한글이라고 부르는 것이 아니다. 모호성을 제거하기 위해 &lt;q&gt;한글 글자&lt;/q&gt;, &lt;q&gt;한글 문자&lt;/q&gt;라 지칭하면 사람들은 곧바로 그것이 입말이 아닌 문자를 뜻한다는 것을 알아본다. 반대로 &lt;q&gt;한국말&lt;/q&gt;, 혹은 좀더 명확하게 &lt;q&gt;입으로 하는 한국말&lt;/q&gt;이라고 해도 역시 사람들은 그것이 문자가 아닌 입말을 뜻한다는 것을 잘 알아듣는다.&lt;/p&gt;
+&lt;p&gt;요는 &lt;q&gt;한글&lt;/q&gt;이라는 낱말에 대한 혼동은 아주 표면적인 수준의 혼동일 뿐, 실제 개념상의 혼동으로 볼 수는 없다는 것이다. 비슷하게 사람들은 영어 등의 유럽 언어를 표기하기 위해 쓰이는 &lt;q&gt;로마자&lt;/q&gt;와 &lt;q&gt;영어&lt;/q&gt;를 혼동하는데, 이는 정말로 사람들이 프랑스어나 독일어에서는 영어와 전혀 다른 문자를 쓴다고 믿어서 그런 것은 아니다. 단지 &lt;q&gt;로마자&lt;/q&gt;라는—주로 언어학적 엄밀성이 요구되는 맥락이 아니면 쓰일 일 없는—유용한 낱말을 아직 마주한 적 없거나 생소하기 때문에 그렇게 표현하지 못하는 것이다.&lt;/p&gt;
+&lt;p&gt;그러면 문자 한글을 가리키기 위해서 우리는 어떤 말을 써야 할까? 위에서 힌트를 주었지만, 내게는 두 가지 생각이 떠오른다.&lt;/p&gt;
+&lt;p&gt;첫번째 생각은 아주 나이브하다. 대부분의 맥락에서 우리는 언어학적 엄밀성을 요구하지 않는다. 따라서 대부분은 모호하더라도 &lt;q&gt;한글&lt;/q&gt;이 한국어를 뜻하는지 한글 문자를 뜻하는지 명확히 가리지 않아도 괜찮다. 사실은 &lt;q&gt;한글&lt;/q&gt;과 &lt;q&gt;한국어&lt;/q&gt;를 아주 명확하게 구분하는 사람들이 매해 한글날 마다 &lt;q&gt;한글은 문자 체계지 언어가 아니다&lt;/q&gt;라고 지적할 수 있다는 것 자체가, 사람들이 편하게 한국어를 &lt;q&gt;한글&lt;/q&gt;이라고 지칭하는 것에 대해 아무 문제 없이 이해할 수 있기 때문에 가능한 것이다. 지적하는 사람들은 한국어를 가리키는데 &lt;q&gt;한글&lt;/q&gt;이라는 말을 쓰면 정말 혼란스럽고 언어 생활이 불편하기 때문에 그런 지적을 하는 것이 아니다. 그냥 사람들이 &lt;q&gt;한글&lt;/q&gt;을 좀더 넓은 뜻으로 쓰이는 것을 알고도 받아들이지 않는 것이다. 이 블로그에서 두 관점의 대립에 대해서는 여러 차례 언급했지만, 다시 언급하자면, &lt;q&gt;한글&lt;/q&gt;의 사전적 정의가 먼저 존재하고 이를 사람들이 따라야 한다는 관점을 &lt;a href=&#34;https://en.wikipedia.org/wiki/Linguistic_prescription&#34;&gt;prescriptivism&lt;/a&gt;이라고 한다. 한편 사람들이 이미 &lt;q&gt;한글&lt;/q&gt;이라는 말을 어떤 뜻으로 쓰고 있고, 그것이 그 말의 사전적 정의가 되어야 한다는 관점을 &lt;a href=&#34;https://en.wikipedia.org/wiki/Linguistic_description&#34;&gt;descriptivism&lt;/a&gt;이라고 한다. 양 관점의 중간에서 현명한 줄타기를 해야겠으나, 나는 &lt;q&gt;한글&lt;/q&gt;의 의미에 대한 갈등은 언중(言衆)을 바꾸려는 노력을 하기 보다는 사전적 정의를 현실에 맞게 고치는 것이 더 낫다고 믿는다.&lt;/p&gt;
+&lt;p&gt;두번째 아이디어는 언어의 아주 유용한 특성인 redundancy를 활용하는 것이다. 어려운 말을 썼지만, 같은 뜻의 다른 말을 겹치면 된다는 얘기이다. &lt;q&gt;한글 글자&lt;/q&gt;, &lt;q&gt;한글 문자&lt;/q&gt; 정도로 표현해도 아주 충분하다. 물론 이를 두고 사람들은 &lt;q&gt;역전(驛前)앞&lt;/q&gt;&lt;a href=&#34;#fn1&#34; class=&#34;footnoteRef&#34; id=&#34;fnref1&#34;&gt;&lt;sup&gt;1&lt;/sup&gt;&lt;/a&gt;이나 &lt;q&gt;에스페란토어&lt;/q&gt;&lt;a href=&#34;#fn2&#34; class=&#34;footnoteRef&#34; id=&#34;fnref2&#34;&gt;&lt;sup&gt;2&lt;/sup&gt;&lt;/a&gt;, &lt;q&gt;PIN 번호&lt;/q&gt;&lt;a href=&#34;#fn3&#34; class=&#34;footnoteRef&#34; id=&#34;fnref3&#34;&gt;&lt;sup&gt;3&lt;/sup&gt;&lt;/a&gt;와 같이 같은 뜻의 말을 두 번이나 중복해서 쓴다며 지적하거나 비웃을 것이다. 하지만 이는 비웃을 일이 전혀 아니며 언어의 아주 유용한 특성을 잘 활용한 것이다.&lt;/p&gt;
+&lt;p&gt;현대 한국인은 한자 교육을 잘 받지 못하므로 &lt;q&gt;역전&lt;/q&gt;으로부터 한자 驛前을 분해하지 못한다. 한국인이 쓰는 한자어는 분명 분해되는 규칙이 있고, 이는 한문으로부터 유래했으므로 한자와 같은 식으로 분해될 경우가 많다. 하지만 일본어 &lt;q&gt;마에&lt;/q&gt;(&lt;ruby&gt;前&lt;rp&gt;(&lt;/rp&gt;&lt;rt&gt;まえ&lt;/rt&gt;&lt;rp&gt;)&lt;/rp&gt;&lt;/ruby&gt;)가 공간적/시간적 앞을 모두 뜻하는 것과 다르게, 한국어 &lt;q&gt;전&lt;/q&gt;(前)은 시간적 앞을 가리키는 뜻만 남아 더이상 공간적 앞을 뜻하는 식으로는 쓰이지 않는다. 그렇기 때문에 사람들은 대개 &lt;q&gt;역전&lt;/q&gt;의 &lt;q&gt;전&lt;/q&gt;이 공간적 앞을 뜻한다고 생각하지 않는 것이다. 뜻이 통하기 위해 뒤에 &lt;q&gt;앞&lt;/q&gt;을 붙이는 것은 매우 유용한 언어 활용이다.&lt;/p&gt;
+&lt;p&gt;마찬가지로 대부분의 사람들은 에스페란토를 전혀 모른다. 에스페란토라는 말이 에스페란토로 민족이나 국가가 아닌 언어 자체를 뜻한다는 것은 대부분의 한국어 화자 입장에서는 알 수 없는 사실이다. 그러므로 &lt;q&gt;에스페란토어&lt;/q&gt;라고 뒤에 &lt;q&gt;어&lt;/q&gt;(語)를 붙여 이게 어디서 쓰이는 말인지는 몰라도, 하여간 어떤 언어를 뜻한다는 것을 명확히하는 것은 도움이 되는 것이다.&lt;/p&gt;
+&lt;p&gt;사실 이러한 redundancy는 문법적인 수준에서도 많이 등장하는데, 우리는 &lt;q&gt;학교 간다&lt;/q&gt;라고만 말해도 알아듣지만 문어적으로는 모호성을 줄이기 위해 일부러 중복되는 뜻의 말인 &lt;q&gt;나는&lt;/q&gt;이나 격 조사 &lt;q&gt;에&lt;/q&gt;를 붙여서 &lt;q&gt;나는 학교에 간다&lt;/q&gt;라는 식으로 문장을 구성한다. 하지만 입말을 쓰더라도 시끄러운 장소 등에서 전달이 어려울 때는, 다시 한번 말할 때 저러한 조사를 붙이거나 중복되는 의미를 연달아 말해서 redundancy를 높인다. 언어의 redundancy는 여러 상황에서 실제로 유용하기 때문에 추가된 것이고 모든 언어에서 보편적으로 관찰된다.&lt;/p&gt;
+&lt;p&gt;딴소리를 너무 많이 했다. 돌아와서 세종대왕이 한글을 창제한 이유를 떠올려보자. 세종은 글조차 모르는 백성이 실제로 쓰고 있는 말을 위한 글을 만들고, 정음(正音)이라 하였다. 나는 이렇게 받아들인다. 똑바른 말이란 사람들이 실제로 널리 쓰는 말이다. 한글은 &lt;q&gt;한국어&lt;/q&gt;라는 뜻으로도 이미 널리 쓰이고 있다. 한글의 뜻이 무엇인지는 이제 분명해진다.&lt;/p&gt;
+&lt;p&gt;덧. 다니는 회사에서 한글날을 기념해 &lt;a href=&#34;http://www.spoqa-han-sans.com/&#34;&gt;스포카 한 산스&lt;/a&gt;라는 서체를 무료로 배포하게 되었다. 오픈 폰트 라이센스이므로 사용 뿐만 아니라 수정도 자유롭다. 아무쪼록 유용하게 쓰였으면 하는 바람이다.&lt;/p&gt;
+&lt;section class=&#34;footnotes&#34;&gt;
+&lt;hr /&gt;
+&lt;ol&gt;
+&lt;li id=&#34;fn1&#34;&gt;&lt;p&gt;어떤 사람들은 &lt;q&gt;역전앞&lt;/q&gt;의 전(前)이 &lt;q&gt;앞&lt;/q&gt;이라는 뜻이므로 뜻이 중복되어 바른 말이 아니라는 얘기를 한다.&lt;a href=&#34;#fnref1&#34;&gt;↩&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;li id=&#34;fn2&#34;&gt;&lt;p&gt;어떤 사람들은 &lt;q&gt;에스페란토&lt;/q&gt;라는 말 자체가 언어를 가리키므로 &lt;q&gt;어&lt;/q&gt;를 붙이면 뜻이 중복된다는 얘기를 한다.&lt;a href=&#34;#fnref2&#34;&gt;↩&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;li id=&#34;fn3&#34;&gt;&lt;p&gt;어떤 사람들은 &lt;q&gt;PIN&lt;/q&gt;이 &lt;q&gt;개인 식별 번호&lt;/q&gt;(personal identification number)의 약자이므로 뒤에 &lt;q&gt;번호&lt;/q&gt;를 붙이면 뜻이 중복된다는 얘기를 한다.&lt;a href=&#34;#fnref3&#34;&gt;↩&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/section&gt;
+</content>
+      
+    </entry>
+  
+    <entry>
+      
+        
+          <title>Metaprogramming and static analysis</title>
+        
+        <id>https://blog.hongminhee.org/2015/09/29/metaprogramming-and-static-analysis/</id>
+        <link rel="alternate" type="text/html" hreflang="ko"
+              href="https://blog.hongminhee.org/2015/09/29/metaprogramming-and-static-analysis/" />
+        <published>2015-09-29T18:22:21+09:00</published>
+        <updated>2015-09-29T18:22:21+09:00</updated>
+        <author>
+          <name>홍민희</name>
+          <uri>https://hongminhee.org/</uri>
+          <email>&#104;ongmin&#104;ee&#64;member&#46;fsf&#46;org</email>
+        </author>
+        <content type="html">&lt;h1 id=&#34;metaprogramming-and-static-analysis&#34;&gt;Metaprogramming and static analysis&lt;/h1&gt;
+&lt;p&gt;Lisp으로 대표되는 동적 언어들의 강력함에는 프로그래머가 코딩을 매우 잘하며, 실수를 잘 하지 않는다는 낙관적인 가정이 필요하다. 반면 ML로 대표되는 정적 강타입 언어들의 엄밀함은, 분명 인간은 언제나 실수한다는 비관적인 가정이 깔려 있다.&lt;/p&gt;
+&lt;p&gt;이른바 해커 스타일의 프로그래머들은 정적 분석을 좋아하지 않는다. 이들에게는 정적 분석은 &lt;a href=&#34;http://eschew.wordpress.com/2009/08/31/sound-and-complete/&#34;&gt;맞는 코드를 자꾸 틀리다고&lt;/a&gt;(incomplete) 시끄럽게 구는 도구일 뿐이다. 해커들은 혼자 알아서 잘 하기 때문에, 정적 분석과 같이 실수를 줄여주는 기술보다는 메타프로그래밍 같이 반복 작업을 줄이고 생산성을 높여주는 기술을 선호한다.&lt;/p&gt;
+&lt;p&gt;그러고 보면 정적 분석과 메타프로그래밍은 실세계 프로그래밍에서 두 방향의 욕구를 각각 대표한다.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;정적 분석&lt;/strong&gt;은 프로그래머를 &lt;em&gt;늘릴&lt;/em&gt; 수 있게 해준다.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;메타프로그래밍&lt;/strong&gt;은 프로그래머를 &lt;em&gt;줄일&lt;/em&gt; 수 있게 해준다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;가장 이상적인 것은 양쪽 모두를 충분히 취하는 것일 것이다.&lt;/p&gt;
+&lt;p&gt;예전에 썼던, 관련 있는 내용: &lt;a href=&#34;http://ask.fm/hongminhee/answer/27733312415&#34;&gt;노동 집약적 소프트웨어 개발과 기술 집약적 소프트웨어 개발&lt;/a&gt;.&lt;/p&gt;
+</content>
+      
+    </entry>
+  
+    <entry>
+      
+        
+          <title>2015년 9월 24일</title>
+        
+        <id>https://blog.hongminhee.org/2015/09/24/129771467407/</id>
+        <link rel="alternate" type="text/html" hreflang="ko"
+              href="https://blog.hongminhee.org/2015/09/24/129771467407/" />
+        <published>2015-09-24T19:34:51+09:00</published>
+        <updated>2015-09-24T19:34:51+09:00</updated>
+        <author>
+          <name>홍민희</name>
+          <uri>https://hongminhee.org/</uri>
+          <email>&#104;ongmin&#104;ee&#64;member&#46;fsf&#46;org</email>
+        </author>
+        <content type="html">&lt;p&gt;텀블러에 글 처음 쓴 게 2010년 2월이니까 이제 만으로는 4년, 5년째 여기다 글을 쓰고 있다. 어쩌다 글 쓴 기록을 쭉 보니까 이제는 거의 달마다 하나 정도 쓰고 있지만, 예전에 일을 전혀 안 할 때는 한달에 5개 정도씩 올리던 때도 있고 그랬다.&lt;/p&gt;
+&lt;p&gt;블로깅은 고등학교 졸업 전부터 썼으니까, 그게 아마 2006년 말 정도인 것 같다. 그러면 이제 만으로 9년 정도 썼고, 조금 있으면 10년이다.&lt;/p&gt;
+&lt;p&gt;살면서 뭔가 꾸준하게 해온 게 얼마 없는데, 블로깅이 그 중 하나인 것 같다. 의무감이 있었다면 아마 블로깅을 꾸준히 못했을 것이다. 아무런 책임감 없이 오히려 방만하게 블로깅을 했기 때문에 더 오랫동안 써올 수 있었던 것 같다.&lt;/p&gt;
+&lt;p&gt;내가 하는 일 치고는 드물게 &lt;q&gt;이제부터 블로깅을 해야지! 그럼 어디 블로그 소프트웨어를 만들어볼까?&lt;/q&gt;라거나 &lt;q&gt;어떤 블로그 서비스가 제일 괜찮을까?&lt;/q&gt;(그리고 5년째 블로그 서비스 비교만 했다고 한다) 같은 yak shaving의 흐름에 빠지지 않았던 것도 좋았다.&lt;/p&gt;
+&lt;p&gt;결국 아이러니하게도 처음 시작할 때부터 지금 이때까지도, 블로깅이 쓸모 없는 일이라고 하찮게 생각하고 있어서 꾸준히 하게 되는 것 같다.&lt;/p&gt;
+</content>
+      
+    </entry>
+  
+</feed>

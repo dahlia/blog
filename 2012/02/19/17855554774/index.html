@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8">
+    
+  
+    
+      <link rel="canonical" href="https://blog.hongminhee.org/2012/02/19/17855554774/">
+      <meta property="og:url" content="https://blog.hongminhee.org/2012/02/19/17855554774/">
+    
+  
+  
+  <meta name="description" value="">
+  <meta name="twitter:card" content="summary">
+  <meta property="og:locale" content="ko_KR">
+  <meta property="og:site_name" content="洪民憙 블로그">
+  <meta property="og:type" content="article">
+  
+  <meta name="twitter:description" content="크로스플랫폼 소프트웨어의 사용자 인터페이스를 설계하는 데 있어서 크게 두 가지 전략이 있다. …">
+  <meta property="og:description" content="크로스플랫폼 소프트웨어의 사용자 인터페이스를 설계하는 데 있어서 크게 두 가지 전략이 있다. …">
+  <meta property="og:updated_time"
+        content="2012-02-19T10:27:40+09:00">
+  
+      <title>2012년 2월 19일 &mdash; 洪民憙 블로그</title>
+      <link rel="alternate" type="application/atom+xml" title="洪民憙 블로그"
+            href="https://blog.hongminhee.org/feed.xml">
+      <meta name="author" content="홍민희">
+      <link rel="stylesheet" media="screen"
+            href="https://blog.hongminhee.org/static/style.css">
+      <link rel="stylesheet" type="text/css"
+        href="https://spoqa.github.io/spoqa-han-sans/css/SpoqaHanSans-kr.css">
+      <link rel="stylesheet" type="text/css"
+        href="https://spoqa.github.io/spoqa-han-sans/css/SpoqaHanSans-jp.css">
+      <meta name="viewport" content="width=device-width, user-scalable=no">
+      <meta name="twitter:creator" content="@hongminhee">
+      <meta name="twitter:site" content="@hongminhee">
+      <meta property="article:author"
+            content="https://www.facebook.com/hongminhee">
+    
+
+  </head>
+  <body class=" post-page outdated">
+    
+  
+      <header>
+        
+          <a href="https://blog.hongminhee.org/index.html" class="site-name">
+              <ruby>洪民憙 <rp>(</rp><rt>홍민희</rt><rp>)</rp></ruby>
+              블로그
+            </a>
+          <nav>
+            <a href="https://hongminhee.org/" rel="author me">본인 소개</a>
+            <div class="archive">
+              아카이브:
+              <ul>
+                
+                  <li><a href="https://blog.hongminhee.org/2017/">2017</a></li>
+                
+                  <li><a href="https://blog.hongminhee.org/2016/">2016</a></li>
+                
+                  <li><a href="https://blog.hongminhee.org/2015/">2015</a></li>
+                
+                  <li><a href="https://blog.hongminhee.org/2014/">2014</a></li>
+                
+                  <li><a href="https://blog.hongminhee.org/2013/">2013</a></li>
+                
+              </ul>
+            </div>
+          </nav>
+        
+      </header>
+
+      <ul class="disclaimer">
+        <li>글을 썼을 당시의 주장에 제 스스로가 더이상 동의하지 못하는
+            경우도 있습니다.</li>
+        <li>심지어 몇몇 글은 이제 정 반대의 의견을 가지고 있기도 합니다.</li>
+        <li>지금까지 여러 주제에 대한 의견이 꾸준히 달라졌습니다.
+            앞으로도 그럴 것입니다.</li>
+        <li>따라서 제 생각을 바꾸기 위한 설득도 환영합니다.
+            저는 의견을 바꿀 의향이 있습니다.</li>
+      </ul>
+    
+
+  <article>
+    
+      <h1><time datetime="2012-02-19T10:27:40+09:00">2012년 2월 19일</time></h1>
+    
+
+    
+      
+  <p class="outdate-disclaimer">
+    이하의 글은 2012년에 쓴 것입니다. 오래된 글인 만큼, 현재의
+    생각과 전혀 다른 내용도 많이 포함되어 있고, 당시와는 상황이 많이 달라진
+    점도 있습니다. 또한, 그 당시에 잘못 알려졌던 정보도 포함되어 있을 수
+    있습니다. <em>어찌됐든 저는 제 오래된 글이 회자되는 것을 저어합니다.</em>
+    읽기에 앞서 양해를 부탁드립니다.
+  <p>
+        <p>크로스플랫폼 소프트웨어의 사용자 인터페이스를 설계하는 데 있어서 크게 두 가지 전략이 있다.</p>
+<p>첫번째 전략은 해당 소프트웨어의 다른 플랫폼 버전들을 쓸 때와 같은 경험을 하도록 통일시키는 것이다. 주로 비디오 게임 소프트웨어가 여기에 해당하는 전략을 쓴다. 최근 10년간의 비디오 게임은 네트워크를 통한 멀티플레이가 많아졌기 때문에, <q>동일한 경험</q>은 게임의 형평성 차원에서 중요해진다. 같은 게임을 Mac에서 한다고 특별히 더 불리하거나 유리하면 게이머들에게 원성을 살 것이다. 또 Apple의 몇몇 소프트웨어가 이렇다. 예를 들어 Windows용 iTunes나 Safari는 Mac 버전의 모양새를 최대한 가져왔다. 그래서 Windows의 다른 앱과 비교했을 때 이질적인 느낌이 난다. 또 Google의 데스크탑용 Picasa 애플리케이션도 그런 식이다. 모바일 앱 세계로 가면 이런 전략은 좀 더 많이 쓰이는 것 같다. 예를 들어 Path나 미투데이, Facebook 앱이 그런 식이다. 사실 대부분의 앱들은 사용자 경험을 통일시키겠다는 의도로 이런 전략을 쓰지 것이 아니다. 그냥 중간 플랫폼을 사용해서 여러 플랫폼에서 돌아가는 앱을 찍어내는 식으로 개발 비용을 절감하고자 하다보니 어쩌다가 모든 플랫폼에서 비슷하게 생긴 인터페이스가 나오게 되는 것이다. 사실 이런 것은 사용자 인터페이스 설계의 전략은 아니고 구현 전략이라고 본다.</p>
+<p>또다른 전략은 해당 플랫폼의 다른 소프트웨들을 쓸 때와 같은 경험을 하도록 통일시키는 것이다. 이런 소프트웨어는 해당 플랫폼의 사용자 인터페이스 가이드라인을 잘 따르는 편이고, 그 플랫폼에 기본적으로 내장되어 있는 앱들의 디자인을 참조하여 개발하게 된다. 이런 전략을 쓰는 예시로는 크로스플랫폼 토런트 소프트웨어인 <a href="http://www.transmissionbt.com/">Transmission</a> 같은 것들이 있다. 사실 이 전략은 매우 비용이 크게 들기 때문에 자주 쓰이지 않고, 예로 들만한 것들도 그렇게 많지는 않다. 모바일 앱 세계에서는 그래도 주요 플랫폼이 iOS와 Android 둘밖에 없기 때문에 조금 더 쉽게 찾을 수 있다. 서울버스 앱 같은 것들이 플랫폼 별로 상이한 인터페이스를 제공한다. 이런 소프트웨어들은 플랫폼별 버전마다 다른 모양을 보여주긴 하지만, 실제로는 같은 기능을 제공한다.</p>
+<p>개발, 구현 비용을 생각하지 않는다면 어떤 전략이 좀더 좋을까? 상황에 따라 다르지만, 대부분 사용자는 한 가지 플랫폼만 사용한다는 점을 기억하면 좋을 것 같다. 대부분의 사용자에게는 하나의 앱을 iOS, Android, Mac, Windows 등의 여러 플랫폼에서 사용하기 경우보다는, 하나의 iPhone 안에서 Facebook, Safari, 서울버스 등의 여러 앱을 사용하는 경우가 훨씬 많다. 사용자가 전환하는 것들 사이의 이질감이 적은 것이 좋다는 것에 동의한다면 첫번째 전략(하나의 앱을 여러 플랫폼에 걸쳐 일관되게 보여주는 것)보다는 두번째 전략(각 플랫폼에 알맞게 보여주는 것)이 좀더 좋다고 볼 수 있을 것이다. 게임은 아주 예외적인 분야인 것이다.</p>
+<p>그리고 주제와 달라지는 얘기지만, 실제 세계에서는 위의 두 전략 말고도 다른 두 가지 전략을 더 발견할 수 있다.</p>
+<p>세번째 전략은 무전략이다. 서로 다른 플랫폼 버전 사이에 통일성이 있는 것도 아니면서 플랫폼의 가이드라인을 따르지도 않는다. 예를 들자면 알집이 그렇다. 다들 알다시피 Windows용 알집은 Windows를 오래 쓰더라도 쉽게 보기 힘든 요상하지만 고유한 자신만의 모양새를 과시한다. 그런데 Mac용 알집은 또 다르게 생겼다. Mac용 알집이 그렇다고 다른 Mac 소프트웨어와 모양새가 비슷한 것도 아니다.</p>
+<p>네번째 전략은 가장 이상적이다. 서로 다른 플랫폼 버전 사이에 통일성을 유지하면서도 각 플랫폼의 가이드라인을 최대한 따르는 것이다. 이게 가능하려면 사용자 인터페이스 요소를 최소한으로 유지해야 한다. 디테일이 많아질수록 플랫폼마다 가이드라인이 달라지는 것들이 많기 때문이다. 매우 공통적인 요소들은 여러 플랫폼에 걸쳐서 가이드라인이 유사하거나 같다. 이런 종류의 소프트웨어로는 Google Chrome이 있다. 사실 이조차도 완벽하지는 않다. 예를 들어 Google Chrome은 북마크 바를 꺼내놓으면 Mac에서 모양이 좀 이상해진다. Windows에서도 버전에 따라 조금씩 다른 모습을 보여주는데, Windows XP에서의 모양새는 알집 못지않게 고유한 모양을 뽐낸다. Windows Vista 이후에서 사용할 경우에야 다른 Windows 소프트웨어들과 비슷한 모양새로 보이게 된다.</p>
+<p>이런 네 가지 전략 말고, 그냥 하나의 플랫폼만 지원하는 세상의 대부분을 차지하는 소프트웨어들도 있다는 사실은 언급 정도만 하고 글을 마치도록 하자.</p>
+
+        <script>
+        (function () {
+          var ps = document.getElementsByClassName('outdate-disclaimer');
+          if (ps.length < 1) {
+            return;
+          }
+          var p = ps[0], t = document.createElement('span');
+          t.addEventListener('click', function () {
+            this.parentNode.removeChild(this);
+            var gs = document.getElementsByClassName('outdate-gray-out');
+            for (var i = gs.length - 1; i >= 0; --i) {
+              gs[i].className = gs[i].className.replace(
+                /(^|\s)outdate-gray-out(\s|$)/g, '');
+            }
+          });
+          t.className = 'toggler';
+          t.innerText = '읽기';
+          p.appendChild(t);
+          var e = p.nextSibling;
+          while (e !== null && e !== undefined) {
+            if (e.nodeType === 1) {
+              e.className += ' outdate-gray-out';
+            }
+            e = e.nextSibling;
+          }
+        })();
+        </script>
+      
+    
+  </article>
+
+
+    <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-54324071-2', 'auto');
+    ga('send', 'pageview');
+    </script>
+  </body>
+</html>
+
+
+

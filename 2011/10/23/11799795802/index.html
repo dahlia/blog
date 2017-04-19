@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8">
+    
+  
+    
+      <link rel="canonical" href="https://blog.hongminhee.org/2011/10/23/11799795802/">
+      <meta property="og:url" content="https://blog.hongminhee.org/2011/10/23/11799795802/">
+    
+  
+  
+  <meta name="description" value="">
+  <meta name="twitter:card" content="summary">
+  <meta property="og:locale" content="ko_KR">
+  <meta property="og:site_name" content="洪民憙 블로그">
+  <meta property="og:type" content="article">
+  
+    <meta name="twitter:title" content="신생 언어로 웹 프레임워크를 만들 때 짜야할 것들">
+    <meta property="og:title" content="신생 언어로 웹 프레임워크를 만들 때 짜야할 것들">
+  
+  <meta name="twitter:description" content="아예 새로 나온 언어 X에서 웹 프레임워크를 만드려면 짜야할 것들이 뭐가 있을까? 기반 라이브러리가 거의 없을테니 구현해야할 것이 많다. 개인적으로 나중에 쓰려고 만들어본 체크리스트. …">
+  <meta property="og:description" content="아예 새로 나온 언어 X에서 웹 프레임워크를 만드려면 짜야할 것들이 뭐가 있을까? 기반 라이브러리가 거의 없을테니 구현해야할 것이 많다. 개인적으로 나중에 쓰려고 만들어본 체크리스트. …">
+  <meta property="og:updated_time"
+        content="2011-10-23T11:02:10+09:00">
+  
+      <title>신생 언어로 웹 프레임워크를 만들 때 짜야할 것들 &mdash; 洪民憙 블로그</title>
+      <link rel="alternate" type="application/atom+xml" title="洪民憙 블로그"
+            href="https://blog.hongminhee.org/feed.xml">
+      <meta name="author" content="홍민희">
+      <link rel="stylesheet" media="screen"
+            href="https://blog.hongminhee.org/static/style.css">
+      <link rel="stylesheet" type="text/css"
+        href="https://spoqa.github.io/spoqa-han-sans/css/SpoqaHanSans-kr.css">
+      <link rel="stylesheet" type="text/css"
+        href="https://spoqa.github.io/spoqa-han-sans/css/SpoqaHanSans-jp.css">
+      <meta name="viewport" content="width=device-width, user-scalable=no">
+      <meta name="twitter:creator" content="@hongminhee">
+      <meta name="twitter:site" content="@hongminhee">
+      <meta property="article:author"
+            content="https://www.facebook.com/hongminhee">
+    
+
+  </head>
+  <body class=" post-page outdated">
+    
+  
+      <header>
+        
+          <a href="https://blog.hongminhee.org/index.html" class="site-name">
+              <ruby>洪民憙 <rp>(</rp><rt>홍민희</rt><rp>)</rp></ruby>
+              블로그
+            </a>
+          <nav>
+            <a href="https://hongminhee.org/" rel="author me">본인 소개</a>
+            <div class="archive">
+              아카이브:
+              <ul>
+                
+                  <li><a href="https://blog.hongminhee.org/2017/">2017</a></li>
+                
+                  <li><a href="https://blog.hongminhee.org/2016/">2016</a></li>
+                
+                  <li><a href="https://blog.hongminhee.org/2015/">2015</a></li>
+                
+                  <li><a href="https://blog.hongminhee.org/2014/">2014</a></li>
+                
+                  <li><a href="https://blog.hongminhee.org/2013/">2013</a></li>
+                
+              </ul>
+            </div>
+          </nav>
+        
+      </header>
+
+      <ul class="disclaimer">
+        <li>글을 썼을 당시의 주장에 제 스스로가 더이상 동의하지 못하는
+            경우도 있습니다.</li>
+        <li>심지어 몇몇 글은 이제 정 반대의 의견을 가지고 있기도 합니다.</li>
+        <li>지금까지 여러 주제에 대한 의견이 꾸준히 달라졌습니다.
+            앞으로도 그럴 것입니다.</li>
+        <li>따라서 제 생각을 바꾸기 위한 설득도 환영합니다.
+            저는 의견을 바꿀 의향이 있습니다.</li>
+      </ul>
+    
+
+  <article>
+    
+      <time datetime="2011-10-23T11:02:10+09:00">2011년 10월 23일</time>
+    
+
+    
+      
+  <p class="outdate-disclaimer">
+    이하의 글은 2011년에 쓴 것입니다. 오래된 글인 만큼, 현재의
+    생각과 전혀 다른 내용도 많이 포함되어 있고, 당시와는 상황이 많이 달라진
+    점도 있습니다. 또한, 그 당시에 잘못 알려졌던 정보도 포함되어 있을 수
+    있습니다. <em>어찌됐든 저는 제 오래된 글이 회자되는 것을 저어합니다.</em>
+    읽기에 앞서 양해를 부탁드립니다.
+  <p>
+        <h1 id="신생-언어로-웹-프레임워크를-만들-때-짜야할-것들">신생 언어로 웹 프레임워크를 만들 때 짜야할 것들</h1>
+<p>아예 새로 나온 언어 X에서 웹 프레임워크를 만드려면 짜야할 것들이 뭐가 있을까? 기반 라이브러리가 거의 없을테니 구현해야할 것이 많다. 개인적으로 나중에 쓰려고 만들어본 체크리스트.</p>
+<ul>
+<li><p>웹 서버 게이트웨이 인터페이스</p>
+<p>Python의 WSGI, Java의 Servlet, Ruby의 Rack 참고. 놓치면 안될 것은, WSGI는 그 자체로 사용자가 직접 쓰기 위한 인터페이스가 아니라, 웹 프레임워크와 웹 서버 사이의 통신을 위한 로우 레벨 인터페이스라는 것이다. 이걸 구현하기 위해 언어 기본 타입 이외의 자료 구조/클래스 따위가 필요하다면 별로 좋은 디자인이 아니다. 사용성을 고려하지 말고 이식성과 여러 웹 서버 디자인에 agnostic한 일반성을 중요하게 고려할 것. 세상 모든 웹 서버가 Apache prefork 같다고 가정하면 디자인에 실패한다.</p></li>
+<li><p>비동기 I/O, 이벤티드 I/O 멀티플렉서 바인딩</p>
+<p>모두 직접 짤 필요도 없고 그럴 수도 없다(OS 지원이 필요한 부분이므로). libev/libevent 같은 것을 바인딩해도 되고 epoll/kqueue/IOCP를 바로 붙여도 된다(후자는 레이어 인터페이스를 같이 디자인해야함).</p>
+<p>단, 중요한 것은 node.js처럼 만들면 안된다는 것이다. 언어에 컨티뉴에이션이나 코루틴이 있어야 한다. 없으면 node.js 꼴이 난다. 논리적으로는 직렬 루틴인데 블럭킹 막으려고 콜백에 클로져 넘기는 식으로 짜게 될텐데 node.js 보면 알겠지만 뭘 조금만 하려고 해도 들여쓰기가 깊어져서 뇌에 상처 입기 십상이다. 코루틴이 있으면 이딴 짓 안하고 직렬 루틴 자체는 일반 코드처럼 쓸 수 있다. 이 부분은 Go와 gevent를 참고하면 좋다(gevent의 멍키패칭이 유용하긴 하지만 그건 참고하지 말자).</p>
+<p>코루틴이 없는 언어면 웹 프레임워크 만들지 말자(농담 반 진담 반).</p></li>
+<li>HTTP 메세지
+<ul>
+<li>헤더 파서</li>
+<li>쿠키 파서 (<code>Cookie</code>)</li>
+<li>폼 파서</li>
+<li><code>application/x-www-form-urlencoded</code></li>
+<li><code>multipart/form-data</code></li>
+<li><p><code>application/json</code></p></li>
+<li><p>내용 협상</p></li>
+</ul>
+<p>WebOb, Werkzeug 참고. <a href="http://werkzeug.pocoo.org/docs/datastructures/#werkzeug.datastructures.Accept"><code>werkzeug.datastructures.Accept</code></a> 타입이 잘 구현하고 있으니 참고하자.</p></li>
+<li><p>URL 라우터</p>
+<p>Werkzeug 참고. 라우팅 자체는 쉽게 짤 수 있다. 중요한 것은 라우팅 테이블을 참고하여 URL을 생성해주는 부분이다. 이게 없다면 URL 라우터 만드는 의미가 없다.</p></li>
+<li><p>템플릿 엔진</p>
+<p>Haml, Jinja2, Mako 참고. <a href="https://blog.hongminhee.org/2011/09/03/9716842234/">내가 예전에 썼던 관련 글</a>도 참고. HTML은 결국에는 문자열로 <q>인코딩된</q> 트리라는 것을 인식하면 좋은 디자인이 나오리라 생각한다. 문자열을 잘 다루려고 하지말고, 더 본질에 가까운 트리를 잘 다루려고 하는 편이 디자인에 성공할 가능성이 높다.</p></li>
+<li><p>폼 생성기 및 유효성 검사기</p>
+<p>FormEncode, WTForms 참고. 특히 FormEncode의 아이디어는 매우 가치가 높다. 대부분의 현업에서 폼 HTML은 이미 누군가에 의해 만들어진 상태일 가능성이 높기 때문이다. 이미 있는 폼 HTML에 폼 데이터를 삽입할 수 있어야 한다.</p>
+<p>유효성 검사기에 대해서는 예전부터 가지고 있던 아이디어가 하나 있다. 유효성 검사기의 타입은 서버쪽과 클라이언트쪽 모두에서 쓸 수 있도록 JavaScript 코드도 함께 제공할 수 있어야 한다. 구현하는 방법은 나이브한 어프로치와 제대로 구현하는 어프로치가 있는데, 여기서 설명하긴 너무 길고 짧게 쓰자면 나이브한 어프로치는 JavaScript 코드를 문자열로 다루는 것이고, 제대로 구현하는 어프로치는 컴파일러를 만드는 것이다. 타협 가능한 수준이 있으리라 본다. 이를테면 AST 수준으로 다룰 수도 있다(SQLAlchemy의 <a href="http://www.sqlalchemy.org/docs/core/tutorial.html">expression language</a>와 <a href="http://www.sqlalchemy.org/docs/orm/extensions/hybrid.html"><code>sqlalchemy.ext.hybrid</code></a> 참고).</p></li>
+<li><p>JSON 파서</p>
+<p>simplejson 참고.</p></li>
+<li><p>로거</p>
+<p>이왕이면 언어 표준적인 로깅 시스템을 만들어두는 게 좋다. 웹 프레임워크가 쓰는 로깅 시스템과 의존하는 라이브러리의 로깅 시스템이 다르면 골치아파진다. Python 표준 라이브러리에 있는 <code>logging</code>과 Java에 난립하는 로깅 시스템들을 보면 이쪽은 디자인보다는 표준의 확고함 자체가 더 중요한 필드라는 생각이 든다. 디자인을 잘 하려고 하지 말고 빨리 표준을 세우는 것을 먼저 고민해야 한다. 모두가 표준을 따르고 있으면 디자인은 점진적으로 개선 가능하다.</p></li>
+<li><p>디버거</p>
+<p><a href="http://werkzeug.pocoo.org/docs/debug/">Werkzeug 디버거</a>가 매우 잘 구현하고 있고 그래서 유명하기도 하다. Python 웹 개발쪽을 보면 Werkzeug 자체는 안 쓰지만 디버거 때문에 다들 Werkzeug을 의존성에 넣는 것을 볼 수 있다. 에러가 나는 순간의 스택 프레임을 잡고서 웹에서 REPL로 상황 판단 가능하게 해줘야 한다. 이게 없으면 PHP 개발처럼 코드 한번씩 고쳐보면서 브라우저 리프레시를 해야 한다.</p></li>
+<li><p>모델</p>
+<p>웹 프레임워크가 관여할 부분이 아니다. 이 사람이 관계형 데이터베이스를 쓸지, 그래프 데이터베이스를 쓸지, 아니면 그냥 심플한 키-값 해시 테이블을 쓸지, 아니면 아예 영속 데이터를 다루지 않고 계산 위주의 애플리케이션일지도 모르고, 규모가 크거나 해서 SOA로 되어 있기 때문에 다른 서비스에 RPC를 날리는 식으로 써야 할지 전혀 알 수 없다. 관계형 데이터베이스를 쓴다고 해도 ORM을 쓸 수도 있고 SQL을 직접 다룰 수도 있다.</p></li>
+</ul>
+<p>이 글은 시간이 지나면서 계속 업데이트될 수도 있다.</p>
+
+        <script>
+        (function () {
+          var ps = document.getElementsByClassName('outdate-disclaimer');
+          if (ps.length < 1) {
+            return;
+          }
+          var p = ps[0], t = document.createElement('span');
+          t.addEventListener('click', function () {
+            this.parentNode.removeChild(this);
+            var gs = document.getElementsByClassName('outdate-gray-out');
+            for (var i = gs.length - 1; i >= 0; --i) {
+              gs[i].className = gs[i].className.replace(
+                /(^|\s)outdate-gray-out(\s|$)/g, '');
+            }
+          });
+          t.className = 'toggler';
+          t.innerText = '읽기';
+          p.appendChild(t);
+          var e = p.nextSibling;
+          while (e !== null && e !== undefined) {
+            if (e.nodeType === 1) {
+              e.className += ' outdate-gray-out';
+            }
+            e = e.nextSibling;
+          }
+        })();
+        </script>
+      
+    
+  </article>
+
+
+    <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-54324071-2', 'auto');
+    ga('send', 'pageview');
+    </script>
+  </body>
+</html>
+
+
+

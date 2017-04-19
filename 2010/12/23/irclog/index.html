@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8">
+    
+  
+    
+      <link rel="canonical" href="https://blog.hongminhee.org/2010/12/23/irclog/">
+      <meta property="og:url" content="https://blog.hongminhee.org/2010/12/23/irclog/">
+    
+  
+  
+  <meta name="description" value="">
+  <meta name="twitter:card" content="summary">
+  <meta property="og:locale" content="ko_KR">
+  <meta property="og:site_name" content="洪民憙 블로그">
+  <meta property="og:type" content="article">
+  
+    <meta name="twitter:title" content="irclog">
+    <meta property="og:title" content="irclog">
+  
+  <meta name="twitter:description" content="만들어서 혼자 쓰기만 하고 있던 irclog를 PyPI에 올렸다. irssi 로그를 웹에서 볼 수 있게 해준다. easy_install이나 pip로 설치할 수 있다. …">
+  <meta property="og:description" content="만들어서 혼자 쓰기만 하고 있던 irclog를 PyPI에 올렸다. irssi 로그를 웹에서 볼 수 있게 해준다. easy_install이나 pip로 설치할 수 있다. …">
+  <meta property="og:updated_time"
+        content="2010-12-23T23:45:00+09:00">
+  
+      <title>irclog &mdash; 洪民憙 블로그</title>
+      <link rel="alternate" type="application/atom+xml" title="洪民憙 블로그"
+            href="https://blog.hongminhee.org/feed.xml">
+      <meta name="author" content="홍민희">
+      <link rel="stylesheet" media="screen"
+            href="https://blog.hongminhee.org/static/style.css">
+      <link rel="stylesheet" type="text/css"
+        href="https://spoqa.github.io/spoqa-han-sans/css/SpoqaHanSans-kr.css">
+      <link rel="stylesheet" type="text/css"
+        href="https://spoqa.github.io/spoqa-han-sans/css/SpoqaHanSans-jp.css">
+      <meta name="viewport" content="width=device-width, user-scalable=no">
+      <meta name="twitter:creator" content="@hongminhee">
+      <meta name="twitter:site" content="@hongminhee">
+      <meta property="article:author"
+            content="https://www.facebook.com/hongminhee">
+    
+
+  </head>
+  <body class=" post-page outdated">
+    
+  
+      <header>
+        
+          <a href="https://blog.hongminhee.org/index.html" class="site-name">
+              <ruby>洪民憙 <rp>(</rp><rt>홍민희</rt><rp>)</rp></ruby>
+              블로그
+            </a>
+          <nav>
+            <a href="https://hongminhee.org/" rel="author me">본인 소개</a>
+            <div class="archive">
+              아카이브:
+              <ul>
+                
+                  <li><a href="https://blog.hongminhee.org/2017/">2017</a></li>
+                
+                  <li><a href="https://blog.hongminhee.org/2016/">2016</a></li>
+                
+                  <li><a href="https://blog.hongminhee.org/2015/">2015</a></li>
+                
+                  <li><a href="https://blog.hongminhee.org/2014/">2014</a></li>
+                
+                  <li><a href="https://blog.hongminhee.org/2013/">2013</a></li>
+                
+              </ul>
+            </div>
+          </nav>
+        
+      </header>
+
+      <ul class="disclaimer">
+        <li>글을 썼을 당시의 주장에 제 스스로가 더이상 동의하지 못하는
+            경우도 있습니다.</li>
+        <li>심지어 몇몇 글은 이제 정 반대의 의견을 가지고 있기도 합니다.</li>
+        <li>지금까지 여러 주제에 대한 의견이 꾸준히 달라졌습니다.
+            앞으로도 그럴 것입니다.</li>
+        <li>따라서 제 생각을 바꾸기 위한 설득도 환영합니다.
+            저는 의견을 바꿀 의향이 있습니다.</li>
+      </ul>
+    
+
+  <article>
+    
+      <time datetime="2010-12-23T23:45:00+09:00">2010년 12월 23일</time>
+    
+
+    
+      
+  <p class="outdate-disclaimer">
+    이하의 글은 2010년에 쓴 것입니다. 오래된 글인 만큼, 현재의
+    생각과 전혀 다른 내용도 많이 포함되어 있고, 당시와는 상황이 많이 달라진
+    점도 있습니다. 또한, 그 당시에 잘못 알려졌던 정보도 포함되어 있을 수
+    있습니다. <em>어찌됐든 저는 제 오래된 글이 회자되는 것을 저어합니다.</em>
+    읽기에 앞서 양해를 부탁드립니다.
+  <p>
+        <h1 id="irclogsource"><a href="http://packages.python.org/irclog/">irclog</a></h1>
+<p>만들어서 혼자 쓰기만 하고 있던 irclog를 <a href="http://pypi.python.org/pypi/irclog">PyPI에 올렸다.</a> irssi 로그를 웹에서 볼 수 있게 해준다. easy_install이나 pip로 설치할 수 있다.</p>
+<pre><code>$ pip install irclog</code></pre>
+<p>설치한 다음에는 아래처럼 웹 서버를 띄울 수 있다. (<code>&lt;server&gt;</code>, <code>&lt;channel&gt;</code> 등은 저장 경로 패턴.)</p>
+<pre><code>$ python -m irclog.web.server --port 80 \
+  $HOME&#39;/.irssi/log/&lt;server&gt;/&lt;channel&gt;/&lt;date:%Y-%m-%d.log&gt;&#39;</code></pre>
+<p>자신이 쓰고 싶은 WSGI 서버가 따로 있으면 그걸 써도 된다. WSGI 애플리케이션은 <a href="http://packages.python.org/irclog/irclog/web.html#irclog.web.Application"><code>irclog.web.Application</code></a> 클래스의 인스턴스를 만들어서 쓰면 된다.</p>
+<p><a href="http://packages.python.org/irclog/" class="uri">http://packages.python.org/irclog/</a></p>
+
+        <script>
+        (function () {
+          var ps = document.getElementsByClassName('outdate-disclaimer');
+          if (ps.length < 1) {
+            return;
+          }
+          var p = ps[0], t = document.createElement('span');
+          t.addEventListener('click', function () {
+            this.parentNode.removeChild(this);
+            var gs = document.getElementsByClassName('outdate-gray-out');
+            for (var i = gs.length - 1; i >= 0; --i) {
+              gs[i].className = gs[i].className.replace(
+                /(^|\s)outdate-gray-out(\s|$)/g, '');
+            }
+          });
+          t.className = 'toggler';
+          t.innerText = '읽기';
+          p.appendChild(t);
+          var e = p.nextSibling;
+          while (e !== null && e !== undefined) {
+            if (e.nodeType === 1) {
+              e.className += ' outdate-gray-out';
+            }
+            e = e.nextSibling;
+          }
+        })();
+        </script>
+      
+    
+  </article>
+
+
+    <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-54324071-2', 'auto');
+    ga('send', 'pageview');
+    </script>
+  </body>
+</html>
+
+
+

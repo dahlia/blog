@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8">
+    
+  
+    
+      <link rel="canonical" href="https://blog.hongminhee.org/2012/06/23/25703663629/">
+      <meta property="og:url" content="https://blog.hongminhee.org/2012/06/23/25703663629/">
+    
+  
+  
+  <meta name="description" value="">
+  <meta name="twitter:card" content="summary">
+  <meta property="og:locale" content="ko_KR">
+  <meta property="og:site_name" content="洪民憙 블로그">
+  <meta property="og:type" content="article">
+  
+    <meta name="twitter:title" content="온고지신 (溫故之新)">
+    <meta property="og:title" content="온고지신 (溫故之新)">
+  
+  <meta name="twitter:description" content="(화두는 Python 커뮤니티의 상황과 일련의 글로부터 얻었지만 일반적인 이야기. Python 커뮤니티에 국한된 이야기 아님.) …">
+  <meta property="og:description" content="(화두는 Python 커뮤니티의 상황과 일련의 글로부터 얻었지만 일반적인 이야기. Python 커뮤니티에 국한된 이야기 아님.) …">
+  <meta property="og:updated_time"
+        content="2012-06-23T15:55:00+09:00">
+  
+      <title>온고지신 (溫故之新) &mdash; 洪民憙 블로그</title>
+      <link rel="alternate" type="application/atom+xml" title="洪民憙 블로그"
+            href="https://blog.hongminhee.org/feed.xml">
+      <meta name="author" content="홍민희">
+      <link rel="stylesheet" media="screen"
+            href="https://blog.hongminhee.org/static/style.css">
+      <link rel="stylesheet" type="text/css"
+        href="https://spoqa.github.io/spoqa-han-sans/css/SpoqaHanSans-kr.css">
+      <link rel="stylesheet" type="text/css"
+        href="https://spoqa.github.io/spoqa-han-sans/css/SpoqaHanSans-jp.css">
+      <meta name="viewport" content="width=device-width, user-scalable=no">
+      <meta name="twitter:creator" content="@hongminhee">
+      <meta name="twitter:site" content="@hongminhee">
+      <meta property="article:author"
+            content="https://www.facebook.com/hongminhee">
+    
+
+  </head>
+  <body class=" post-page">
+    
+  
+      <header>
+        
+          <a href="https://blog.hongminhee.org/index.html" class="site-name">
+              <ruby>洪民憙 <rp>(</rp><rt>홍민희</rt><rp>)</rp></ruby>
+              블로그
+            </a>
+          <nav>
+            <a href="https://hongminhee.org/" rel="author me">본인 소개</a>
+            <div class="archive">
+              아카이브:
+              <ul>
+                
+                  <li><a href="https://blog.hongminhee.org/2017/">2017</a></li>
+                
+                  <li><a href="https://blog.hongminhee.org/2016/">2016</a></li>
+                
+                  <li><a href="https://blog.hongminhee.org/2015/">2015</a></li>
+                
+                  <li><a href="https://blog.hongminhee.org/2014/">2014</a></li>
+                
+                  <li><a href="https://blog.hongminhee.org/2013/">2013</a></li>
+                
+              </ul>
+            </div>
+          </nav>
+        
+      </header>
+
+      <ul class="disclaimer">
+        <li>글을 썼을 당시의 주장에 제 스스로가 더이상 동의하지 못하는
+            경우도 있습니다.</li>
+        <li>심지어 몇몇 글은 이제 정 반대의 의견을 가지고 있기도 합니다.</li>
+        <li>지금까지 여러 주제에 대한 의견이 꾸준히 달라졌습니다.
+            앞으로도 그럴 것입니다.</li>
+        <li>따라서 제 생각을 바꾸기 위한 설득도 환영합니다.
+            저는 의견을 바꿀 의향이 있습니다.</li>
+      </ul>
+    
+
+  <article>
+    
+      <time datetime="2012-06-23T15:55:00+09:00">2012년 6월 23일</time>
+    
+
+    
+      <h1 id="온고지신-溫故之新">온고지신 (溫故之新)</h1>
+<p>(화두는 Python 커뮤니티의 상황과 일련의 글로부터 얻었지만 일반적인 이야기. Python 커뮤니티에 국한된 이야기 아님.)</p>
+<p>최근, 곧 릴리즈될 Python 3.3에 들어갈 예정이던 <code>packaging</code> (표준화 합의 이전에는 <code>distutils2</code>라는 이름의 서드파티 프로젝트였음) 기능이 들어가지 못할 것 같다는 <a href="http://mail.python.org/pipermail/python-dev/2012-June/120430.html">소식</a>이 python-dev 메일링리스트에 올라와 커뮤니티 전체에 Python 패키징 시스템 전국시대에 대한 이야기가 많았다. Python을 잘 모르는 사람들을 위해 부연하자면, <a href="https://blog.hongminhee.org/2010/07/26/distribute-pip/">내가 1년 전쯤 언급했다시피</a> 현재 Python의 패키징 시스템은 다양한 방식들이 각각 일부씩 호환되는 형태로 난립하고 있는 상황이다. 하루이틀의 일은 아니다.</p>
+<p>그리고 이 현상에 대한 Armin Ronacher의 글이 올라왔다: <a href="http://lucumr.pocoo.org/2012/6/22/hate-hate-hate-everywhere/">Python Packaging: Hate, hate, hate everywhere</a>. 글 내용의 대부분은 결론을 제외하면 Python 패키징 생태계의 역사적인 부분, 디자인 결정들에 대해 논하고 있다. <code>pip</code> + Distribute가 <code>easy_install</code> + <code>setuptools</code>를 대체하려고 하지만, 실상은 <code>pip</code>는 <code>setuptools</code>가 해결하려고 했던 문제 중 일부만을 해결하고 있을 뿐이고, <code>setuptools</code>의 디자인 결정에 대해서도 아무런 생각이 없었다는 내용이다.</p>
+<p>세부적인 내용들은 Python 커뮤니티의 상황이고, 나는 저 글에서 일반적인 내용들만을 발췌해볼까 한다.</p>
+<blockquote>
+<p>이 모든 것으로부터 우리가 배울 수 있는 점은, 대체하려고 하는 프로젝트의 모든 디자인을 배워야 한다는 것이라고 본다.</p>
+<p>I think what can be learned from all that is that it’s a better idea to learn all of the design of a project first before attempting to replace it.</p>
+<p>대부분 문제는 너무 복잡하고 바닥부터 다시 시작하려고 할 때는 무언가 놓치기 십상이다.</p>
+<p>All in all, the issue is just too complex and it’s easy to miss things when starting from scratch again.</p>
+</blockquote>
+<p>즉, 온고지신(溫故之新)이 중요하다는 이야기이다. 이런 주장을 보니까 비슷한 다른 경우들도 많이 있었다는 생각이 든다. 당장 생각나는 예는 Twisted(정확히는 <code>twisted.web</code>)를 대체하려고 했던 Tornado: <a href="http://glyph.twistedmatrix.com/2009/09/what-i-wish-tornado-were.html">What I Wish Tornado Were</a>라는 글 참고.</p>
+<p>또, 온고지신하니까 떠오르는 #langdev 채널에서 최근 했던 대화:</p>
+<blockquote>
+<p><strong>sanxiyn</strong>: hongminhee, <a href="https://twitter.com/hongminhee/status/212824088895434752">은거기인 초고수 지망생 얘기</a>를 하셨는데요<br />
+<strong>hongminhee</strong>: 네<br />
+<strong>hongminhee</strong>: 그냥 막연히 <q>저는 끈기가 있어서 유리하다고 생각한다</q>는 얘기를 제일 많이 들은 것 같네요.<br />
+<strong>sanxiyn</strong>: 아 물론 끈기가 있으면 유리하지만…<br />
+<strong>hongminhee</strong>: 그러니까 끈기가 있으니까 남들보다 열심히 한우물 팔 수 있다고…<br />
+<strong>hongminhee</strong>: 근데 우물이 안좋은 것 같았음 다들<br />
+<strong>sanxiyn</strong>: 한우물 파고 안파고 문제가 아니라 온고지신이 중요<br />
+<strong>hongminhee</strong>: sanxiyn, 그런듯<br />
+<strong>sanxiyn</strong>: 음 요는 내가 아무리 천재고 끈기가 있어도<br />
+<strong>sanxiyn</strong>: 1950년 이래의 전산학을 뭔가 쓸모 있는 일을 할 수 있는 수준으로 다 재발명할 수 있느냐<br />
+<strong>sanxiyn</strong>: 할 수 있어도 그게 현명한 일이냐 뭐 이런 얘기<br />
+<strong>sanxiyn</strong>: 아예 새로운 분야를 하면 온고지신 안해도 되는 경우도 있는데<br />
+<strong>sanxiyn</strong>: 그건 Claude Shannon이 아무 것도 없는 상태에서 information theory를 완성된 상태로 만들었다거나<br />
+<strong>sanxiyn</strong>: 이런 경우에나 해당되는 거지<br />
+<strong>sanxiyn</strong>: …</p>
+</blockquote>
+
+    
+  </article>
+
+
+    <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-54324071-2', 'auto');
+    ga('send', 'pageview');
+    </script>
+  </body>
+</html>
+
+
+

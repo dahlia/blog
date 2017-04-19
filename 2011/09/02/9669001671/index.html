@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8">
+    
+  
+    
+      <link rel="canonical" href="https://blog.hongminhee.org/2011/09/02/9669001671/">
+      <meta property="og:url" content="https://blog.hongminhee.org/2011/09/02/9669001671/">
+    
+  
+  
+  <meta name="description" value="">
+  <meta name="twitter:card" content="summary">
+  <meta property="og:locale" content="ko_KR">
+  <meta property="og:site_name" content="洪民憙 블로그">
+  <meta property="og:type" content="article">
+  
+  <meta name="twitter:description" content="WTForms는 입력 폼을 만들어주는 라이브러리이다. 폼을 선언적인 스타일로 정의하면 HTML도 만들어주고 유효성 검사도 해주는 식이다. 이걸 써서 회원 정보 수정 양식을 만들었는데, 일부 사용자가 이메일 필드에 &#39;  hong@minhee.com  &#39;과 같이 끝에 공백을 실수로 입력하는 일이 일어났다. 입력 받은 문자열을 trim하는 방법을 찾아봤지만 현재로서는 그런 옵션이 없는 것 같다. 그래서 필드 타입을 ad-hoc하게 확장하는 함수를 만들었다. …">
+  <meta property="og:description" content="WTForms는 입력 폼을 만들어주는 라이브러리이다. 폼을 선언적인 스타일로 정의하면 HTML도 만들어주고 유효성 검사도 해주는 식이다. 이걸 써서 회원 정보 수정 양식을 만들었는데, 일부 사용자가 이메일 필드에 &#39;  hong@minhee.com  &#39;과 같이 끝에 공백을 실수로 입력하는 일이 일어났다. 입력 받은 문자열을 trim하는 방법을 찾아봤지만 현재로서는 그런 옵션이 없는 것 같다. 그래서 필드 타입을 ad-hoc하게 확장하는 함수를 만들었다. …">
+  <meta property="og:updated_time"
+        content="2011-09-02T01:19:33+09:00">
+  
+      <title>2011년 9월 2일 &mdash; 洪民憙 블로그</title>
+      <link rel="alternate" type="application/atom+xml" title="洪民憙 블로그"
+            href="https://blog.hongminhee.org/feed.xml">
+      <meta name="author" content="홍민희">
+      <link rel="stylesheet" media="screen"
+            href="https://blog.hongminhee.org/static/style.css">
+      <link rel="stylesheet" type="text/css"
+        href="https://spoqa.github.io/spoqa-han-sans/css/SpoqaHanSans-kr.css">
+      <link rel="stylesheet" type="text/css"
+        href="https://spoqa.github.io/spoqa-han-sans/css/SpoqaHanSans-jp.css">
+      <meta name="viewport" content="width=device-width, user-scalable=no">
+      <meta name="twitter:creator" content="@hongminhee">
+      <meta name="twitter:site" content="@hongminhee">
+      <meta property="article:author"
+            content="https://www.facebook.com/hongminhee">
+    
+
+  </head>
+  <body class=" post-page outdated">
+    
+  
+      <header>
+        
+          <a href="https://blog.hongminhee.org/index.html" class="site-name">
+              <ruby>洪民憙 <rp>(</rp><rt>홍민희</rt><rp>)</rp></ruby>
+              블로그
+            </a>
+          <nav>
+            <a href="https://hongminhee.org/" rel="author me">본인 소개</a>
+            <div class="archive">
+              아카이브:
+              <ul>
+                
+                  <li><a href="https://blog.hongminhee.org/2017/">2017</a></li>
+                
+                  <li><a href="https://blog.hongminhee.org/2016/">2016</a></li>
+                
+                  <li><a href="https://blog.hongminhee.org/2015/">2015</a></li>
+                
+                  <li><a href="https://blog.hongminhee.org/2014/">2014</a></li>
+                
+                  <li><a href="https://blog.hongminhee.org/2013/">2013</a></li>
+                
+              </ul>
+            </div>
+          </nav>
+        
+      </header>
+
+      <ul class="disclaimer">
+        <li>글을 썼을 당시의 주장에 제 스스로가 더이상 동의하지 못하는
+            경우도 있습니다.</li>
+        <li>심지어 몇몇 글은 이제 정 반대의 의견을 가지고 있기도 합니다.</li>
+        <li>지금까지 여러 주제에 대한 의견이 꾸준히 달라졌습니다.
+            앞으로도 그럴 것입니다.</li>
+        <li>따라서 제 생각을 바꾸기 위한 설득도 환영합니다.
+            저는 의견을 바꿀 의향이 있습니다.</li>
+      </ul>
+    
+
+  <article>
+    
+      <h1><time datetime="2011-09-02T01:19:33+09:00">2011년 9월 2일</time></h1>
+    
+
+    
+      
+  <p class="outdate-disclaimer">
+    이하의 글은 2011년에 쓴 것입니다. 오래된 글인 만큼, 현재의
+    생각과 전혀 다른 내용도 많이 포함되어 있고, 당시와는 상황이 많이 달라진
+    점도 있습니다. 또한, 그 당시에 잘못 알려졌던 정보도 포함되어 있을 수
+    있습니다. <em>어찌됐든 저는 제 오래된 글이 회자되는 것을 저어합니다.</em>
+    읽기에 앞서 양해를 부탁드립니다.
+  <p>
+        <p><a href="http://wtforms.simplecodes.com/">WTForms</a>는 입력 폼을 만들어주는 라이브러리이다. 폼을 선언적인 스타일로 정의하면 HTML도 만들어주고 유효성 검사도 해주는 식이다. 이걸 써서 회원 정보 수정 양식을 만들었는데, 일부 사용자가 이메일 필드에 <code>'  hong@minhee.com  '</code>과 같이 끝에 공백을 실수로 입력하는 일이 일어났다. 입력 받은 문자열을 trim하는 방법을 찾아봤지만 현재로서는 그런 옵션이 없는 것 같다. 그래서 필드 타입을 ad-hoc하게 확장하는 함수를 만들었다.</p>
+<pre><code>import wtforms.fields
+
+
+def Trimming(field_cls):
+    &quot;&quot;&quot;Makes a subclass of the given ``field_cls``, must be a subtype
+    of :class:`wtforms.field.Field`, that trims form data. ::
+
+        TrimmingEmailField = Trimming(flaskext.wtf.html5.EmailField)
+
+    :param field_cls: a field type to subclass
+    :type field_cls: :class:`type`
+    :returns: a new subclass that trims form data
+    :rtype: :class:`type`
+
+    &quot;&quot;&quot;
+    if not isinstance(field_cls, type):
+        raise TypeError(&#39;field_cls must be a type, not instance&#39;)
+    elif not issubclass(field_cls, wtforms.fields.Field):
+        raise TypeError(&#39;field_cls must be a subtype of wtforms.fields.Field&#39;)
+    class TrimmingField(field_cls):
+        def process_formdata(self, valuelist):
+            field_cls.process_formdata(self, [v.strip() for v in valuelist])
+    if hasattr(field_cls, &#39;__name__&#39;):
+        TrimmingField.__name__ = &#39;Trimming&#39; + field_cls.__name__
+    return TrimmingField</code></pre>
+
+        <script>
+        (function () {
+          var ps = document.getElementsByClassName('outdate-disclaimer');
+          if (ps.length < 1) {
+            return;
+          }
+          var p = ps[0], t = document.createElement('span');
+          t.addEventListener('click', function () {
+            this.parentNode.removeChild(this);
+            var gs = document.getElementsByClassName('outdate-gray-out');
+            for (var i = gs.length - 1; i >= 0; --i) {
+              gs[i].className = gs[i].className.replace(
+                /(^|\s)outdate-gray-out(\s|$)/g, '');
+            }
+          });
+          t.className = 'toggler';
+          t.innerText = '읽기';
+          p.appendChild(t);
+          var e = p.nextSibling;
+          while (e !== null && e !== undefined) {
+            if (e.nodeType === 1) {
+              e.className += ' outdate-gray-out';
+            }
+            e = e.nextSibling;
+          }
+        })();
+        </script>
+      
+    
+  </article>
+
+
+    <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-54324071-2', 'auto');
+    ga('send', 'pageview');
+    </script>
+  </body>
+</html>
+
+
+

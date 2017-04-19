@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8">
+    
+  
+    
+      <link rel="canonical" href="https://blog.hongminhee.org/2012/02/26/18300740247/">
+      <meta property="og:url" content="https://blog.hongminhee.org/2012/02/26/18300740247/">
+    
+  
+  
+  <meta name="description" value="">
+  <meta name="twitter:card" content="summary">
+  <meta property="og:locale" content="ko_KR">
+  <meta property="og:site_name" content="洪民憙 블로그">
+  <meta property="og:type" content="article">
+  
+    <meta name="twitter:title" content="">
+    <meta property="og:title" content="">
+  
+  <meta name="twitter:description" content="나도 node.js가 하잎에 비해서 형편 없다고 생각하지만, 이런 식의 반박은 제대로 된 이유가 되지 못한다고 본다. (누누히 얘기했지만 내가 생각하는 node.js의 단점은 직렬 루틴에서도 CPS를 강제한다는 점 뿐이다.) …">
+  <meta property="og:description" content="나도 node.js가 하잎에 비해서 형편 없다고 생각하지만, 이런 식의 반박은 제대로 된 이유가 되지 못한다고 본다. (누누히 얘기했지만 내가 생각하는 node.js의 단점은 직렬 루틴에서도 CPS를 강제한다는 점 뿐이다.) …">
+  <meta property="og:updated_time"
+        content="2012-02-26T15:02:51+09:00">
+  
+      <title> &mdash; 洪民憙 블로그</title>
+      <link rel="alternate" type="application/atom+xml" title="洪民憙 블로그"
+            href="https://blog.hongminhee.org/feed.xml">
+      <meta name="author" content="홍민희">
+      <link rel="stylesheet" media="screen"
+            href="https://blog.hongminhee.org/static/style.css">
+      <link rel="stylesheet" type="text/css"
+        href="https://spoqa.github.io/spoqa-han-sans/css/SpoqaHanSans-kr.css">
+      <link rel="stylesheet" type="text/css"
+        href="https://spoqa.github.io/spoqa-han-sans/css/SpoqaHanSans-jp.css">
+      <meta name="viewport" content="width=device-width, user-scalable=no">
+      <meta name="twitter:creator" content="@hongminhee">
+      <meta name="twitter:site" content="@hongminhee">
+      <meta property="article:author"
+            content="https://www.facebook.com/hongminhee">
+    
+
+  </head>
+  <body class=" post-page outdated">
+    
+  
+      <header>
+        
+          <a href="https://blog.hongminhee.org/index.html" class="site-name">
+              <ruby>洪民憙 <rp>(</rp><rt>홍민희</rt><rp>)</rp></ruby>
+              블로그
+            </a>
+          <nav>
+            <a href="https://hongminhee.org/" rel="author me">본인 소개</a>
+            <div class="archive">
+              아카이브:
+              <ul>
+                
+                  <li><a href="https://blog.hongminhee.org/2017/">2017</a></li>
+                
+                  <li><a href="https://blog.hongminhee.org/2016/">2016</a></li>
+                
+                  <li><a href="https://blog.hongminhee.org/2015/">2015</a></li>
+                
+                  <li><a href="https://blog.hongminhee.org/2014/">2014</a></li>
+                
+                  <li><a href="https://blog.hongminhee.org/2013/">2013</a></li>
+                
+              </ul>
+            </div>
+          </nav>
+        
+      </header>
+
+      <ul class="disclaimer">
+        <li>글을 썼을 당시의 주장에 제 스스로가 더이상 동의하지 못하는
+            경우도 있습니다.</li>
+        <li>심지어 몇몇 글은 이제 정 반대의 의견을 가지고 있기도 합니다.</li>
+        <li>지금까지 여러 주제에 대한 의견이 꾸준히 달라졌습니다.
+            앞으로도 그럴 것입니다.</li>
+        <li>따라서 제 생각을 바꾸기 위한 설득도 환영합니다.
+            저는 의견을 바꿀 의향이 있습니다.</li>
+      </ul>
+    
+
+  <article>
+    
+      <time datetime="2012-02-26T15:02:51+09:00">2012년 2월 26일</time>
+    
+
+    
+      
+  <p class="outdate-disclaimer">
+    이하의 글은 2012년에 쓴 것입니다. 오래된 글인 만큼, 현재의
+    생각과 전혀 다른 내용도 많이 포함되어 있고, 당시와는 상황이 많이 달라진
+    점도 있습니다. 또한, 그 당시에 잘못 알려졌던 정보도 포함되어 있을 수
+    있습니다. <em>어찌됐든 저는 제 오래된 글이 회자되는 것을 저어합니다.</em>
+    읽기에 앞서 양해를 부탁드립니다.
+  <p>
+        <h1 id="source"><a href="http://himskim.egloos.com/3810574"></a></h1>
+<p>나도 node.js가 하잎에 비해서 형편 없다고 생각하지만, 이런 식의 반박은 제대로 된 이유가 되지 못한다고 본다. (누누히 얘기했지만 내가 생각하는 node.js의 단점은 직렬 루틴에서도 CPS를 강제한다는 점 뿐이다.)</p>
+<p>node.js가 20년 전 GUI 프로그래밍에서 쓰이던 이벤트 루프와 다른 점은 복잡도를 얼마나 제어하느냐에 있다.</p>
+<p>그 때는 렉시컬 스코핑(lexical scoping)과 람다(lambda)는 Lisp이나 Smalltalk 같은 언어에서야 들리던 용어였고 C/C++에서는 비동기 I/O 프로그래밍을 할 때 중지된 문맥을 복구하는 것을 직접 구현해야 했다. 이 부분은 렉시컬 스코핑이 되는 람다를 콜백으로 던지면 이전 문맥이 바깥쪽 스코프에 있으므로 문맥을 메모리 어딘가에 저장하는 것을 프로그래머가 직접 구현할 필요가 없어진다. (코루틴을 쓰면 복잡도는 더욱 내려간다.)</p>
+<p>node.js의 동시성이란 I/O에 대해서만 이뤄진다. 연산보다는 I/O에 바운드되는 대부분의 네트워크 프로그래밍에 있어서는 굳이 쓰레드를 쓸 필요가 없다. 그리고 OS에서 제공하는 쓰레드는 대체로 더 비싸다.</p>
+<blockquote>
+<p>효율적인 알고리즘을 사용한다면 처리속도와 메모리와 같은 저장소의 효율 상에는 항시 반비례 관계를 가지게 된다. 처리속도를 높이려면 더 많은 메모리를 사용하면 되고, 메모리를 적게 쓰려면 처리 속도를 희생하면 된다.</p>
+</blockquote>
+<p>맞는 얘기 같지만 I/O에 대해서는 틀리다. I/O의 특징은 대부분의 시간이 아무 것도 하지 않고 대기를 한다는 점에 있다. (요청을 했는데 서버에서 응답을 1분 뒤에야 주는 상황, 표준 입력에서 읽으려고 하는데 사용자 입력이 없어서 한없이 기다려야 되는 상황 등을 생각해보자.) 당연히 연산과 메모리는 대체로 교환 가능한 지표이지만, 다른 것을 할 수 있는데 I/O 응답이 없다고 기다리는 것은 그냥 낭비다. 교환 없이 성능을 올릴 수 있다.</p>
+<p>마지막으로 꼭 node.js 뿐만이 아니라 현대적인 네트워크 프로그래밍 플랫폼이면 다들 갖추고 있는 부분이지만, epoll이나 kqueue, IOCP 등의 API를 직접 쓰는 대신 플랫폼 중립적인 이벤트 API를 다룰 수 있다는 점도 20년 전과는 매우 큰 차이라고 볼 수 있다.</p>
+<p>이렇게 node.js 실드쳐주는 것으로 훈훈한 마무리를 할 수도 있겠지만, 그래도 역시 node.js는 그 CPS 강제하는 것은 코루틴 도입해서 어떻게 좀 없애놔야 한다고 본다.</p>
+
+        <script>
+        (function () {
+          var ps = document.getElementsByClassName('outdate-disclaimer');
+          if (ps.length < 1) {
+            return;
+          }
+          var p = ps[0], t = document.createElement('span');
+          t.addEventListener('click', function () {
+            this.parentNode.removeChild(this);
+            var gs = document.getElementsByClassName('outdate-gray-out');
+            for (var i = gs.length - 1; i >= 0; --i) {
+              gs[i].className = gs[i].className.replace(
+                /(^|\s)outdate-gray-out(\s|$)/g, '');
+            }
+          });
+          t.className = 'toggler';
+          t.innerText = '읽기';
+          p.appendChild(t);
+          var e = p.nextSibling;
+          while (e !== null && e !== undefined) {
+            if (e.nodeType === 1) {
+              e.className += ' outdate-gray-out';
+            }
+            e = e.nextSibling;
+          }
+        })();
+        </script>
+      
+    
+  </article>
+
+
+    <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-54324071-2', 'auto');
+    ga('send', 'pageview');
+    </script>
+  </body>
+</html>
+
+
+

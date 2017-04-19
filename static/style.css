@@ -1,0 +1,356 @@
+body {
+  max-width: 800px;
+  margin: 0;
+  padding: 1.5em;
+  line-height: 1.5;
+  font-family: 'Spoqa Han Sans', sans-serif;
+  color: #555;
+  font-size: 16px;
+}
+
+@media (max-width: 500px) {
+  body { font-size: 15px; }
+}
+
+header a.site-name {
+  color: #333;
+  font-size: 34px;
+  font-weight: 200;
+  text-decoration: none;
+  border-bottom: none;
+}
+
+header a.site-name:hover, header a.site-name:hover rt { color: #18709c; }
+header a.site-name:visited:hover,
+header a.site-name:visited:hover rt { color: #474072; }
+header a.site-name:active, header a.site-name:active rt { color: #b53b67; }
+
+@media (max-width: 500px) {
+  header a.site-name { font-size: 30px; }
+}
+
+header h1 { display: inline; }
+
+header h1 a.site-name {
+  color: black;
+  font-size: 40px;
+}
+
+@media (max-width: 500px) {
+  header h1 a.site-name { font-size: 34px; }
+}
+
+a {
+  text-decoration: none;
+  border-bottom: 1px solid;
+  color: #18709c;
+}
+
+a:visited {
+  color: #474072;
+}
+
+a:active {
+  color: #b53b67;
+}
+
+ruby { font-family: 'Spoqa Han Sans JP', sans-serif; }
+rp, rt { font-family: 'Spoqa Han Sans', sans-serif; }
+rt { letter-spacing: 1em; padding-left: 0.6em; color: gray; }
+
+ul { padding-left: 1em; }
+ul li { list-style: '\2219' outside; padding-left: 1em; }
+
+pre, code, tt {
+  font-family: 'Source Code Pro', 'Consolas', 'Courier New', monospace;
+  font-weight: 300;
+}
+
+nav {
+  float: right;
+  text-align: right;
+  font-size: 14px;
+}
+
+@media (max-width: 650px) {
+  nav { float: none; text-align: left; }
+}
+
+h1 + nav {
+  font-size: 16px;
+}
+
+@media (max-width: 500px) {
+  nav, h1 + nav { font-size: 13px; }
+}
+
+nav .archive {
+  font-weight: bolder;
+}
+
+nav ul {
+  display: inline;
+  padding: 0;
+  margin: 0;
+}
+
+nav ul li {
+  display: inline;
+  font-weight: normal;
+  padding-left: 0;
+}
+nav ul li:before {
+  content: '\b7';
+  color: gray;
+  padding-right: 2px;
+}
+nav ul li:first-child:before {
+  content: '';
+}
+
+body > .disclaimer {
+  display: block;
+  clear: both;
+  padding: 0;
+  color: gray;
+  font-size: 14px;
+  border-left: 6px solid #eee;
+}
+
+body.outdated > .disclaimer {
+  color: #333;
+}
+
+.outdate-disclaimer {
+  color: maroon;
+}
+
+.outdate-disclaimer em {
+  background-color: transparent;
+  color: red;
+  font-style: normal;
+}
+
+.outdate-disclaimer .toggler {
+  cursor: pointer;
+  border-bottom: 1px solid;
+  font-weight: bolder;
+}
+
+.outdate-disclaimer .toggler:after {
+  content: '\1f53b';
+}
+
+.outdate-gray-out {
+  opacity: 0.25;
+}
+
+@media (max-width: 500px) {
+  body > .disclaimer { font-size: 13px; }
+}
+
+body > .disclaimer li {
+  display: block;
+}
+
+article {
+  margin-top: 3em;
+  text-align: justify;
+}
+
+article > time:first-child {
+  color: black;
+  font-size: 15px;
+}
+
+article h1 {
+  margin-top: 0;
+  font-size: 36px;
+  font-weight: 200;
+  color: black;
+  text-align: left;
+}
+
+@media (max-width: 500px) {
+  article h1 { letter-spacing: -1px; }
+}
+
+article h1 > a { clear: left; }
+
+article h1 > a:before {
+  display: block;
+  border: 4px solid;
+  margin: 0 0 0 -1.3em;
+  border-radius: 30px;
+  width: 30px;
+  height: 30px;
+  font-size: 30px;
+  font-weight: bold;
+  float: left;
+  content: '\2197';
+  color: silver;
+}
+
+article h1 > a:hover:before { color: #18709c; }
+article h1 > a:visited:hover:before { color: #474072; }
+article h1 > a:active:before { color: #b53b67; }
+
+article h2 {
+  margin-top: 1.5em;
+  font-size: 24px;
+  font-weight: normal;
+  color: black;
+}
+
+article h3 {
+  margin-top: 1.5em;
+  font-size: 20px;
+  font-weight: normal;
+  color: black;
+}
+
+@media (max-width: 500px) {
+  article h1 { font-size: 30px; }
+}
+
+article img {
+  max-width: 100%;
+}
+
+article a.footnoteRef {
+  border-bottom: none;
+  font-weight: 700;
+}
+
+article section.footnotes hr {
+  margin-left: 0;
+  width: 25%;
+  border: none;
+  border-top: 1px solid silver;
+}
+
+article em {
+  background-color: #eee;
+  font-style: normal;
+  color: black;
+}
+
+article strong {
+  background-color: #eee;
+  font-weight: 700;
+  color: black;
+}
+
+article ins {
+  color: black;
+  text-decoration: none;
+  border-bottom: 1px dashed silver;
+}
+
+article ins[datetime]:before, article del[datetime]:before {
+  display: inline-block;
+  content: '+|' attr(datetime);
+  word-break: keep-all;
+  font-family: 'Courier New', monospace;
+  font-size: x-small;
+  font-weight: bolder;
+  color: white;
+  background-color: silver;
+  border-radius: 0.5em;
+  padding: 0.05em 0.15em;
+  margin: 0 0.3em;
+  vertical-align: top;
+  width: 7.1em;
+  overflow-x: hidden;
+  transition: background-color 0.5s, width 5s ease-in;
+}
+
+article del[datetime]:before {
+  content: '-|' attr(datetime);
+}
+
+article ins[datetime]:hover:before, article del[datetime]:hover:before {
+  background-color: gray;
+  width: 16.1em;
+}
+
+article del {
+  color: gray;
+}
+
+article code {
+  background-color: #eee;
+  padding: 0 3px;
+}
+
+article a code {
+  border-bottom: 1px solid;
+}
+
+article pre {
+  background-color: #eee;
+  margin-left: -1.5em;
+  padding: 1em 1em 1em 1.5em;
+  word-break: break-word;
+  white-space: pre-wrap;
+}
+
+article pre code {
+  padding: 0;
+}
+
+article blockquote {
+  border-left: 0.8em solid #333;
+  margin-left: -1.5em;
+  padding-left: 2.5em;
+}
+
+article blockquote blockquote {
+  margin-left: -2.5em;
+  padding-left: 2.5em;
+  border-left: 1em solid #666;
+}
+
+article blockquote blockquote blockquote {
+  border-left-color: #999;
+}
+
+article blockquote blockquote blockquote blockquote {
+  border-left-color: #bbb;
+}
+
+article blockquote blockquote blockquote blockquote blockquote {
+  border-left-color: #eee;
+}
+
+article a > img:only-child {
+  padding-bottom: 0px;
+  margin-bottom: -3px;  /* to make border-bottom invisible */
+}
+
+.recent-posts h2, .archive h2 {
+  font-size: 34px;
+  font-weight: 200;
+  color: black;
+}
+
+.post-list ul {
+  margin: 0;
+  padding: 0;
+}
+
+.post-list ul > li {
+  display: block;
+  margin: 0;
+  padding: 0;
+}
+
+body.outdated .post-list > * {
+  opacity: 0.5;
+}
+
+body.outdated .post-list > h2,
+body.outdated .post-list > .outdate-disclaimer
+{
+  opacity: 1 !important;
+}

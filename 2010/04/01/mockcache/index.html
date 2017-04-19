@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8">
+    
+  
+    
+      <link rel="canonical" href="https://blog.hongminhee.org/2010/04/01/mockcache/">
+      <meta property="og:url" content="https://blog.hongminhee.org/2010/04/01/mockcache/">
+    
+  
+  
+  <meta name="description" value="">
+  <meta name="twitter:card" content="summary">
+  <meta property="og:locale" content="ko_KR">
+  <meta property="og:site_name" content="洪民憙 블로그">
+  <meta property="og:type" content="article">
+  
+    <meta name="twitter:title" content="mockcache">
+    <meta property="og:title" content="mockcache">
+  
+  <meta name="twitter:description" content="요즘에 memcached 쓸 일이 많은데, 로컬에서 작업할 때 memcached 설치하기 참 귀찮다. 어차피 memcached는 실제 배포했을 때만 작동하면 된다. 그래서 mockcache라는 것을 만들었다. 테스트 용도로 써도 되는데, 꼭 그런 용도는 아니고 memcached 클라이언트 라이브러리가 하나도 없을 때 이걸 쓰도록 fallback을 구성할 때도 좋다. …">
+  <meta property="og:description" content="요즘에 memcached 쓸 일이 많은데, 로컬에서 작업할 때 memcached 설치하기 참 귀찮다. 어차피 memcached는 실제 배포했을 때만 작동하면 된다. 그래서 mockcache라는 것을 만들었다. 테스트 용도로 써도 되는데, 꼭 그런 용도는 아니고 memcached 클라이언트 라이브러리가 하나도 없을 때 이걸 쓰도록 fallback을 구성할 때도 좋다. …">
+  <meta property="og:updated_time"
+        content="2010-04-01T18:53:00+09:00">
+  
+      <title>mockcache &mdash; 洪民憙 블로그</title>
+      <link rel="alternate" type="application/atom+xml" title="洪民憙 블로그"
+            href="https://blog.hongminhee.org/feed.xml">
+      <meta name="author" content="홍민희">
+      <link rel="stylesheet" media="screen"
+            href="https://blog.hongminhee.org/static/style.css">
+      <link rel="stylesheet" type="text/css"
+        href="https://spoqa.github.io/spoqa-han-sans/css/SpoqaHanSans-kr.css">
+      <link rel="stylesheet" type="text/css"
+        href="https://spoqa.github.io/spoqa-han-sans/css/SpoqaHanSans-jp.css">
+      <meta name="viewport" content="width=device-width, user-scalable=no">
+      <meta name="twitter:creator" content="@hongminhee">
+      <meta name="twitter:site" content="@hongminhee">
+      <meta property="article:author"
+            content="https://www.facebook.com/hongminhee">
+    
+
+  </head>
+  <body class=" post-page outdated">
+    
+  
+      <header>
+        
+          <a href="https://blog.hongminhee.org/index.html" class="site-name">
+              <ruby>洪民憙 <rp>(</rp><rt>홍민희</rt><rp>)</rp></ruby>
+              블로그
+            </a>
+          <nav>
+            <a href="https://hongminhee.org/" rel="author me">본인 소개</a>
+            <div class="archive">
+              아카이브:
+              <ul>
+                
+                  <li><a href="https://blog.hongminhee.org/2017/">2017</a></li>
+                
+                  <li><a href="https://blog.hongminhee.org/2016/">2016</a></li>
+                
+                  <li><a href="https://blog.hongminhee.org/2015/">2015</a></li>
+                
+                  <li><a href="https://blog.hongminhee.org/2014/">2014</a></li>
+                
+                  <li><a href="https://blog.hongminhee.org/2013/">2013</a></li>
+                
+              </ul>
+            </div>
+          </nav>
+        
+      </header>
+
+      <ul class="disclaimer">
+        <li>글을 썼을 당시의 주장에 제 스스로가 더이상 동의하지 못하는
+            경우도 있습니다.</li>
+        <li>심지어 몇몇 글은 이제 정 반대의 의견을 가지고 있기도 합니다.</li>
+        <li>지금까지 여러 주제에 대한 의견이 꾸준히 달라졌습니다.
+            앞으로도 그럴 것입니다.</li>
+        <li>따라서 제 생각을 바꾸기 위한 설득도 환영합니다.
+            저는 의견을 바꿀 의향이 있습니다.</li>
+      </ul>
+    
+
+  <article>
+    
+      <time datetime="2010-04-01T18:53:00+09:00">2010년 4월 1일</time>
+    
+
+    
+      
+  <p class="outdate-disclaimer">
+    이하의 글은 2010년에 쓴 것입니다. 오래된 글인 만큼, 현재의
+    생각과 전혀 다른 내용도 많이 포함되어 있고, 당시와는 상황이 많이 달라진
+    점도 있습니다. 또한, 그 당시에 잘못 알려졌던 정보도 포함되어 있을 수
+    있습니다. <em>어찌됐든 저는 제 오래된 글이 회자되는 것을 저어합니다.</em>
+    읽기에 앞서 양해를 부탁드립니다.
+  <p>
+        <h1 id="mockcachesource"><a href="http://pypi.python.org/pypi/mockcache">mockcache</a></h1>
+<p>요즘에 memcached 쓸 일이 많은데, 로컬에서 작업할 때 memcached 설치하기 참 귀찮다. 어차피 memcached는 실제 배포했을 때만 작동하면 된다. 그래서 <a href="http://pypi.python.org/pypi/mockcache">mockcache</a>라는 것을 만들었다. 테스트 용도로 써도 되는데, 꼭 그런 용도는 아니고 memcached 클라이언트 라이브러리가 하나도 없을 때 이걸 쓰도록 fallback을 구성할 때도 좋다.</p>
+<pre><code>try:
+    import memcache
+except ImportError:
+    import warnings
+    import mockcache as memcache
+    warnings.warn(&quot;imported mockcache instead of memcache; cannot find &quot;
+                  &quot;memcache module&quot;)
+
+mc = memcache.Client([&quot;127.0.0.1:11211&quot;])</code></pre>
+<p>Python에서 쓸 수 있는 memcached 클라이언트 구현이 여럿 있는데, Python 특유의 낙관적인 인터페이스 문화 덕분에 별 표준이 있는 것도 아닌데도 다들 거의 동일한 인터페이스를 제공한다.<a href="#fn1" class="footnoteRef" id="fnref1"><sup>1</sup></a> 그것에 착안해서 만든 것이라 mockcache 역시 그 인터페이스를 따른다.</p>
+<p>내부적으로는 그냥 <code>dict</code> 객체를 하나 생성해서 그걸로 상태를 관리하는 식이다. 그래도 expiration 같은 것도 구현은 했다.</p>
+<p>PyPI에 올렸으니 <code>easy_install</code> 등으로 설치가 가능할 것이다. (관리자 권한으로 실행해야 한다.)</p>
+<pre><code>$ easy_install mockcache</code></pre>
+<p>Bitbucket에 소스 코드를 올렸다. MIT 라이센스다. <a href="http://bitbucket.org/lunant/mockcache/" class="uri">http://bitbucket.org/lunant/mockcache/</a> Mercurial로 클론할 수 있다.</p>
+<pre><code>$ hg clone http://bitbucket.org/lunant/mockcache/</code></pre>
+<p>버그 등의 이슈는 <a href="http://bitbucket.org/lunant/mockcache/issues/new/">Bitbucket에서 제공하는 이슈트래커</a>에 올려주시라.</p>
+<section class="footnotes">
+<hr />
+<ol>
+<li id="fn1"><p>그래서 보통 <code>import</code> 문만 수정하면 어떻게든 비슷하게 쓸 수 있는 것이다. 모듈 단위의 폴리모피즘(polymorphism)이랄까.<a href="#fnref1">↩</a></p></li>
+</ol>
+</section>
+
+        <script>
+        (function () {
+          var ps = document.getElementsByClassName('outdate-disclaimer');
+          if (ps.length < 1) {
+            return;
+          }
+          var p = ps[0], t = document.createElement('span');
+          t.addEventListener('click', function () {
+            this.parentNode.removeChild(this);
+            var gs = document.getElementsByClassName('outdate-gray-out');
+            for (var i = gs.length - 1; i >= 0; --i) {
+              gs[i].className = gs[i].className.replace(
+                /(^|\s)outdate-gray-out(\s|$)/g, '');
+            }
+          });
+          t.className = 'toggler';
+          t.innerText = '읽기';
+          p.appendChild(t);
+          var e = p.nextSibling;
+          while (e !== null && e !== undefined) {
+            if (e.nodeType === 1) {
+              e.className += ' outdate-gray-out';
+            }
+            e = e.nextSibling;
+          }
+        })();
+        </script>
+      
+    
+  </article>
+
+
+    <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-54324071-2', 'auto');
+    ga('send', 'pageview');
+    </script>
+  </body>
+</html>
+
+
+

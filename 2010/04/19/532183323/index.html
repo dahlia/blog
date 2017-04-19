@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8">
+    
+  
+    
+      <link rel="canonical" href="https://blog.hongminhee.org/2010/04/19/532183323/">
+      <meta property="og:url" content="https://blog.hongminhee.org/2010/04/19/532183323/">
+    
+  
+  
+  <meta name="description" value="">
+  <meta name="twitter:card" content="summary">
+  <meta property="og:locale" content="ko_KR">
+  <meta property="og:site_name" content="洪民憙 블로그">
+  <meta property="og:type" content="article">
+  
+  <meta name="twitter:description" content="모바일 앱 개발에 대한 얘기가 들리지 않는 날이 없다. 대개 iPhone의 성공을 단일 플랫폼과 적절한 통제에 기인한다고들 말하는데, 맞는 말이긴 하다. 해상도나 장비에 포함된 기능 집합까지 똑같거나 거의 같기 때문에 배포할 때 곯머리도 안 썩고 만들 때도 편한 것이다. …">
+  <meta property="og:description" content="모바일 앱 개발에 대한 얘기가 들리지 않는 날이 없다. 대개 iPhone의 성공을 단일 플랫폼과 적절한 통제에 기인한다고들 말하는데, 맞는 말이긴 하다. 해상도나 장비에 포함된 기능 집합까지 똑같거나 거의 같기 때문에 배포할 때 곯머리도 안 썩고 만들 때도 편한 것이다. …">
+  <meta property="og:updated_time"
+        content="2010-04-19T11:38:00+09:00">
+  
+      <title>2010년 4월 19일 &mdash; 洪民憙 블로그</title>
+      <link rel="alternate" type="application/atom+xml" title="洪民憙 블로그"
+            href="https://blog.hongminhee.org/feed.xml">
+      <meta name="author" content="홍민희">
+      <link rel="stylesheet" media="screen"
+            href="https://blog.hongminhee.org/static/style.css">
+      <link rel="stylesheet" type="text/css"
+        href="https://spoqa.github.io/spoqa-han-sans/css/SpoqaHanSans-kr.css">
+      <link rel="stylesheet" type="text/css"
+        href="https://spoqa.github.io/spoqa-han-sans/css/SpoqaHanSans-jp.css">
+      <meta name="viewport" content="width=device-width, user-scalable=no">
+      <meta name="twitter:creator" content="@hongminhee">
+      <meta name="twitter:site" content="@hongminhee">
+      <meta property="article:author"
+            content="https://www.facebook.com/hongminhee">
+    
+
+  </head>
+  <body class=" post-page outdated">
+    
+  
+      <header>
+        
+          <a href="https://blog.hongminhee.org/index.html" class="site-name">
+              <ruby>洪民憙 <rp>(</rp><rt>홍민희</rt><rp>)</rp></ruby>
+              블로그
+            </a>
+          <nav>
+            <a href="https://hongminhee.org/" rel="author me">본인 소개</a>
+            <div class="archive">
+              아카이브:
+              <ul>
+                
+                  <li><a href="https://blog.hongminhee.org/2017/">2017</a></li>
+                
+                  <li><a href="https://blog.hongminhee.org/2016/">2016</a></li>
+                
+                  <li><a href="https://blog.hongminhee.org/2015/">2015</a></li>
+                
+                  <li><a href="https://blog.hongminhee.org/2014/">2014</a></li>
+                
+                  <li><a href="https://blog.hongminhee.org/2013/">2013</a></li>
+                
+              </ul>
+            </div>
+          </nav>
+        
+      </header>
+
+      <ul class="disclaimer">
+        <li>글을 썼을 당시의 주장에 제 스스로가 더이상 동의하지 못하는
+            경우도 있습니다.</li>
+        <li>심지어 몇몇 글은 이제 정 반대의 의견을 가지고 있기도 합니다.</li>
+        <li>지금까지 여러 주제에 대한 의견이 꾸준히 달라졌습니다.
+            앞으로도 그럴 것입니다.</li>
+        <li>따라서 제 생각을 바꾸기 위한 설득도 환영합니다.
+            저는 의견을 바꿀 의향이 있습니다.</li>
+      </ul>
+    
+
+  <article>
+    
+      <h1><time datetime="2010-04-19T11:38:00+09:00">2010년 4월 19일</time></h1>
+    
+
+    
+      
+  <p class="outdate-disclaimer">
+    이하의 글은 2010년에 쓴 것입니다. 오래된 글인 만큼, 현재의
+    생각과 전혀 다른 내용도 많이 포함되어 있고, 당시와는 상황이 많이 달라진
+    점도 있습니다. 또한, 그 당시에 잘못 알려졌던 정보도 포함되어 있을 수
+    있습니다. <em>어찌됐든 저는 제 오래된 글이 회자되는 것을 저어합니다.</em>
+    읽기에 앞서 양해를 부탁드립니다.
+  <p>
+        <p>모바일 앱 개발에 대한 얘기가 들리지 않는 날이 없다. 대개 iPhone의 성공을 단일 플랫폼과 적절한 통제에 기인한다고들 말하는데, 맞는 말이긴 하다. 해상도나 장비에 포함된 기능 집합까지 똑같거나 거의 같기 때문에 배포할 때 곯머리도 안 썩고 만들 때도 편한 것이다.</p>
+<p>하지만 그것과 별개로 나는 여러 환경에 대한 고려가 좀더 나은 디자인을 만든다고 믿는 사람이다. 여러 환경을 고려하다보면 결국 적절한 추상화를 하게 되는데, 객체 지향 프로그래밍이라면 다형성을 적절히 쓸 것이고, 함수형 프로그래밍이라면 특수화를 잘 쓸 것이다.</p>
+<p>단위 테스트가 있는 코드가 대개 없는 코드보다 디자인이 나은 경우가 많다. 왜 그렇냐면 단위 테스트 자체가 클라이언트 코드를 두 개 이상으로 만드는 효과를 주기 때문이다. 클라이언트 코드가 두 개 있는 것과 세 개 있는 것은 별 차이가 없지만, 하나 있는 것과 여럿 있는 것은 꽤 크게 차이가 난다. 클라이언트 코드라면 호출하는 쪽, 사용하는 쪽을 얘기하는데 결국 클라이언트 코드 자체가 환경이라는 말이다.</p>
+<p>하지만 모바일 앱을 만드는데는 이런건 부질 없는 이야기다. 모바일 앱은 대체로</p>
+<ul>
+<li>적은 비용으로</li>
+<li>짧은 기간에</li>
+<li>적당한 완성도로</li>
+</ul>
+<p>마무리 짓는게 관건<a href="#fn1" class="footnoteRef" id="fnref1"><sup>1</sup></a>인데, 여러 환경 고려하며 품질 높고 좋은 디자인의 코드를 만들어 내다간 반쯤 농담으로 대작 MMORPG 만드는 비용이 들어가게 된다. 후 하고 불면 불꽃이 흔들리는 앱 하나 만들겠다고 그런 비용을 지불하려는 사람은 별로 없을 것이다.</p>
+<p>결론: Apple은 사악하고 Android는 갈 길이 멀다.</p>
+<section class="footnotes">
+<hr />
+<ol>
+<li id="fn1"><p>사실 그렇다기 보다는 트렌드.<a href="#fnref1">↩</a></p></li>
+</ol>
+</section>
+
+        <script>
+        (function () {
+          var ps = document.getElementsByClassName('outdate-disclaimer');
+          if (ps.length < 1) {
+            return;
+          }
+          var p = ps[0], t = document.createElement('span');
+          t.addEventListener('click', function () {
+            this.parentNode.removeChild(this);
+            var gs = document.getElementsByClassName('outdate-gray-out');
+            for (var i = gs.length - 1; i >= 0; --i) {
+              gs[i].className = gs[i].className.replace(
+                /(^|\s)outdate-gray-out(\s|$)/g, '');
+            }
+          });
+          t.className = 'toggler';
+          t.innerText = '읽기';
+          p.appendChild(t);
+          var e = p.nextSibling;
+          while (e !== null && e !== undefined) {
+            if (e.nodeType === 1) {
+              e.className += ' outdate-gray-out';
+            }
+            e = e.nextSibling;
+          }
+        })();
+        </script>
+      
+    
+  </article>
+
+
+    <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-54324071-2', 'auto');
+    ga('send', 'pageview');
+    </script>
+  </body>
+</html>
+
+
+

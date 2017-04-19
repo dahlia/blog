@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8">
+    
+  
+    
+      <link rel="canonical" href="https://blog.hongminhee.org/2011/09/03/9716842234/">
+      <meta property="og:url" content="https://blog.hongminhee.org/2011/09/03/9716842234/">
+    
+  
+  
+  <meta name="description" value="">
+  <meta name="twitter:card" content="summary">
+  <meta property="og:locale" content="ko_KR">
+  <meta property="og:site_name" content="洪民憙 블로그">
+  <meta property="og:type" content="article">
+  
+  <meta name="twitter:description" content="개인적으로 템플릿 엔진 역사상 큰 전환점을 가져다 주었다고 꼽는 아이디어가 두 개 있다. …">
+  <meta property="og:description" content="개인적으로 템플릿 엔진 역사상 큰 전환점을 가져다 주었다고 꼽는 아이디어가 두 개 있다. …">
+  <meta property="og:updated_time"
+        content="2011-09-03T05:42:36+09:00">
+  
+      <title>2011년 9월 3일 &mdash; 洪民憙 블로그</title>
+      <link rel="alternate" type="application/atom+xml" title="洪民憙 블로그"
+            href="https://blog.hongminhee.org/feed.xml">
+      <meta name="author" content="홍민희">
+      <link rel="stylesheet" media="screen"
+            href="https://blog.hongminhee.org/static/style.css">
+      <link rel="stylesheet" type="text/css"
+        href="https://spoqa.github.io/spoqa-han-sans/css/SpoqaHanSans-kr.css">
+      <link rel="stylesheet" type="text/css"
+        href="https://spoqa.github.io/spoqa-han-sans/css/SpoqaHanSans-jp.css">
+      <meta name="viewport" content="width=device-width, user-scalable=no">
+      <meta name="twitter:creator" content="@hongminhee">
+      <meta name="twitter:site" content="@hongminhee">
+      <meta property="article:author"
+            content="https://www.facebook.com/hongminhee">
+    
+
+  </head>
+  <body class=" post-page outdated">
+    
+  
+      <header>
+        
+          <a href="https://blog.hongminhee.org/index.html" class="site-name">
+              <ruby>洪民憙 <rp>(</rp><rt>홍민희</rt><rp>)</rp></ruby>
+              블로그
+            </a>
+          <nav>
+            <a href="https://hongminhee.org/" rel="author me">본인 소개</a>
+            <div class="archive">
+              아카이브:
+              <ul>
+                
+                  <li><a href="https://blog.hongminhee.org/2017/">2017</a></li>
+                
+                  <li><a href="https://blog.hongminhee.org/2016/">2016</a></li>
+                
+                  <li><a href="https://blog.hongminhee.org/2015/">2015</a></li>
+                
+                  <li><a href="https://blog.hongminhee.org/2014/">2014</a></li>
+                
+                  <li><a href="https://blog.hongminhee.org/2013/">2013</a></li>
+                
+              </ul>
+            </div>
+          </nav>
+        
+      </header>
+
+      <ul class="disclaimer">
+        <li>글을 썼을 당시의 주장에 제 스스로가 더이상 동의하지 못하는
+            경우도 있습니다.</li>
+        <li>심지어 몇몇 글은 이제 정 반대의 의견을 가지고 있기도 합니다.</li>
+        <li>지금까지 여러 주제에 대한 의견이 꾸준히 달라졌습니다.
+            앞으로도 그럴 것입니다.</li>
+        <li>따라서 제 생각을 바꾸기 위한 설득도 환영합니다.
+            저는 의견을 바꿀 의향이 있습니다.</li>
+      </ul>
+    
+
+  <article>
+    
+      <h1><time datetime="2011-09-03T05:42:36+09:00">2011년 9월 3일</time></h1>
+    
+
+    
+      
+  <p class="outdate-disclaimer">
+    이하의 글은 2011년에 쓴 것입니다. 오래된 글인 만큼, 현재의
+    생각과 전혀 다른 내용도 많이 포함되어 있고, 당시와는 상황이 많이 달라진
+    점도 있습니다. 또한, 그 당시에 잘못 알려졌던 정보도 포함되어 있을 수
+    있습니다. <em>어찌됐든 저는 제 오래된 글이 회자되는 것을 저어합니다.</em>
+    읽기에 앞서 양해를 부탁드립니다.
+  <p>
+        <p>개인적으로 템플릿 엔진 역사상 큰 전환점을 가져다 주었다고 꼽는 아이디어가 두 개 있다.</p>
+<p>첫번째는 <a href="http://www.kid-templating.org/">Kid</a><a href="#fn1" class="footnoteRef" id="fnref1"><sup>1</sup></a>가 제안한 <strong>템플릿 상속</strong> 및 <strong>블럭</strong> 개념. 그 전까지 웹 개발의 템플릿 작업은 어떻게 잘 템플릿을 쪼개서 인클루드할 것이가, 정도의 개념에서 벗어나지 못하고 있었는데, Kid가 제안한 템플릿 상속 아이디어는 템플릿 엔진 설계에 있어서 IoC에 해당하는 것이었다. 결국 Kid 자체는 XML 기반이라는 불편함과<a href="#fn2" class="footnoteRef" id="fnref2"><sup>2</sup></a> 썩 빠르지 않은 구현 덕분에 망했지만, 템플릿 상속이라는 아이디어 자체는 워낙 훌륭해서 Django 템플릿에도 이어지게 되고, Django가 성공하면서 최근의 템플릿 엔진은 모두 상속 기능을 지니게 되었다.</p>
+<p>두번째는 <strong>문자열 치환을 잘 하자</strong>는 기존의 모든 템플릿 엔진이 고수하던 근본적인 방식을 집어던지고 <a href="http://haml-lang.com/">Haml</a>이 제안한 <strong>트리(tree) 자체를 다루자</strong>는 획기적인 방식. 어쨌든 출력 결과가 XML/(X)HTML이고, 사람이 볼 데이터가 아니라 다른 <strong>소프트웨어가 볼 데이터</strong>라면 문자열을 직접 다룰 이유가 없다는 것이다! 대부분 사람들은 Haml이 Python과 같은 들여쓰기 문법을 채택했다는 점을 특징으로 보는데, 사실 들여쓰기 문법을 트리(tree)를 표현하기 좋은 방식으로서 선택된 부수적인 결정이지, 핵심적인 디자인 결정은 결국 <strong>문자열 대신 트리를 다루자</strong>는 관점이다.</p>
+<p>템플릿 상속은 아이디어가 나온지 10년 가까이 된 현재 이미 널리 퍼진 상태고, 문자열 치환 대신 트리 자체를 다루자는 아이디어는 나온지 5년 정도 되었으니, 나머지 5년 안에는 널리 퍼졌으면 하는 바램이다.</p>
+<section class="footnotes">
+<hr />
+<ol>
+<li id="fn1"><p>사이트가 망했는지 접속이 안된다. PyPI 패키지 이름은 <a href="http://pypi.python.org/pypi/kid"><code>kid</code></a>이다.<a href="#fnref1">↩</a></p></li>
+<li id="fn2"><p>Kid 설계자가 딱히 XML 취향이라 그랬던 것은 아니고, 그 당시까지 Python 템플릿 엔진들은 죄다 XML 기반이었고 그게 대세였기 때문에 <q>무난하고 익숙한 방식</q>을 따르겠다는 디자인 의도였던 것 같다.<a href="#fnref2">↩</a></p></li>
+</ol>
+</section>
+
+        <script>
+        (function () {
+          var ps = document.getElementsByClassName('outdate-disclaimer');
+          if (ps.length < 1) {
+            return;
+          }
+          var p = ps[0], t = document.createElement('span');
+          t.addEventListener('click', function () {
+            this.parentNode.removeChild(this);
+            var gs = document.getElementsByClassName('outdate-gray-out');
+            for (var i = gs.length - 1; i >= 0; --i) {
+              gs[i].className = gs[i].className.replace(
+                /(^|\s)outdate-gray-out(\s|$)/g, '');
+            }
+          });
+          t.className = 'toggler';
+          t.innerText = '읽기';
+          p.appendChild(t);
+          var e = p.nextSibling;
+          while (e !== null && e !== undefined) {
+            if (e.nodeType === 1) {
+              e.className += ' outdate-gray-out';
+            }
+            e = e.nextSibling;
+          }
+        })();
+        </script>
+      
+    
+  </article>
+
+
+    <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-54324071-2', 'auto');
+    ga('send', 'pageview');
+    </script>
+  </body>
+</html>
+
+
+

@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8">
+    
+  
+    
+      <link rel="canonical" href="https://blog.hongminhee.org/2012/02/23/subroutines-coroutines-fibers-threads-and/">
+      <meta property="og:url" content="https://blog.hongminhee.org/2012/02/23/subroutines-coroutines-fibers-threads-and/">
+    
+  
+  
+  <meta name="description" value="">
+  <meta name="twitter:card" content="summary">
+  <meta property="og:locale" content="ko_KR">
+  <meta property="og:site_name" content="洪民憙 블로그">
+  <meta property="og:type" content="article">
+  
+    <meta name="twitter:title" content="Subroutines, coroutines, fibers, threads and continuations">
+    <meta property="og:title" content="Subroutines, coroutines, fibers, threads and continuations">
+  
+  <meta name="twitter:description" content="LangDev 등에서 자주 나오는 질문이기도 하고, 나도 예전에 매우 헷갈렸었고, 내 후배들 역시 매우 잘못된 지식을 가지고 있는 것들이라 용어 정리를 간단하게 해보겠다. …">
+  <meta property="og:description" content="LangDev 등에서 자주 나오는 질문이기도 하고, 나도 예전에 매우 헷갈렸었고, 내 후배들 역시 매우 잘못된 지식을 가지고 있는 것들이라 용어 정리를 간단하게 해보겠다. …">
+  <meta property="og:updated_time"
+        content="2012-02-23T09:43:00+09:00">
+  
+      <title>Subroutines, coroutines, fibers, threads and continuations &mdash; 洪民憙 블로그</title>
+      <link rel="alternate" type="application/atom+xml" title="洪民憙 블로그"
+            href="https://blog.hongminhee.org/feed.xml">
+      <meta name="author" content="홍민희">
+      <link rel="stylesheet" media="screen"
+            href="https://blog.hongminhee.org/static/style.css">
+      <link rel="stylesheet" type="text/css"
+        href="https://spoqa.github.io/spoqa-han-sans/css/SpoqaHanSans-kr.css">
+      <link rel="stylesheet" type="text/css"
+        href="https://spoqa.github.io/spoqa-han-sans/css/SpoqaHanSans-jp.css">
+      <meta name="viewport" content="width=device-width, user-scalable=no">
+      <meta name="twitter:creator" content="@hongminhee">
+      <meta name="twitter:site" content="@hongminhee">
+      <meta property="article:author"
+            content="https://www.facebook.com/hongminhee">
+    
+
+  </head>
+  <body class=" post-page outdated">
+    
+  
+      <header>
+        
+          <a href="https://blog.hongminhee.org/index.html" class="site-name">
+              <ruby>洪民憙 <rp>(</rp><rt>홍민희</rt><rp>)</rp></ruby>
+              블로그
+            </a>
+          <nav>
+            <a href="https://hongminhee.org/" rel="author me">본인 소개</a>
+            <div class="archive">
+              아카이브:
+              <ul>
+                
+                  <li><a href="https://blog.hongminhee.org/2017/">2017</a></li>
+                
+                  <li><a href="https://blog.hongminhee.org/2016/">2016</a></li>
+                
+                  <li><a href="https://blog.hongminhee.org/2015/">2015</a></li>
+                
+                  <li><a href="https://blog.hongminhee.org/2014/">2014</a></li>
+                
+                  <li><a href="https://blog.hongminhee.org/2013/">2013</a></li>
+                
+              </ul>
+            </div>
+          </nav>
+        
+      </header>
+
+      <ul class="disclaimer">
+        <li>글을 썼을 당시의 주장에 제 스스로가 더이상 동의하지 못하는
+            경우도 있습니다.</li>
+        <li>심지어 몇몇 글은 이제 정 반대의 의견을 가지고 있기도 합니다.</li>
+        <li>지금까지 여러 주제에 대한 의견이 꾸준히 달라졌습니다.
+            앞으로도 그럴 것입니다.</li>
+        <li>따라서 제 생각을 바꾸기 위한 설득도 환영합니다.
+            저는 의견을 바꿀 의향이 있습니다.</li>
+      </ul>
+    
+
+  <article>
+    
+      <time datetime="2012-02-23T09:43:00+09:00">2012년 2월 23일</time>
+    
+
+    
+      
+  <p class="outdate-disclaimer">
+    이하의 글은 2012년에 쓴 것입니다. 오래된 글인 만큼, 현재의
+    생각과 전혀 다른 내용도 많이 포함되어 있고, 당시와는 상황이 많이 달라진
+    점도 있습니다. 또한, 그 당시에 잘못 알려졌던 정보도 포함되어 있을 수
+    있습니다. <em>어찌됐든 저는 제 오래된 글이 회자되는 것을 저어합니다.</em>
+    읽기에 앞서 양해를 부탁드립니다.
+  <p>
+        <h1 id="subroutines-coroutines-fibers-threads-and-continuations">Subroutines, coroutines, fibers, threads and continuations</h1>
+<p>LangDev 등에서 자주 나오는 질문이기도 하고, 나도 예전에 매우 헷갈렸었고, 내 후배들 역시 매우 잘못된 지식을 가지고 있는 것들이라 용어 정리를 간단하게 해보겠다.</p>
+<h3 id="subroutines">Subroutines</h3>
+<p><dfn>서브루틴</dfn>은 말 그대로 하위 루틴을 뜻한다. 서브루틴의 가장 핵심적인 기능은 서브루틴이 끝난 뒤에, 서브루틴을 호출했던 위치로 되돌아가 그 시점의 변수 상태들이 저장된 <dfn>프레임</dfn>(frame)을 복구한다는 점이다. 그리고 원래 위치로 되돌아가는 이러한 성질은 재귀적으로 작동한다. 따라서 어딘가에 되돌아갈 위치와 그 때의 프레임을 겹겹으로 쌓아두는 자료구조가 필요해지는데 이것이 <dfn>스택</dfn>(stack)이다.</p>
+<p>또, 서브루틴이 인자를 받을 수 있으면 <dfn>프로시져</dfn>(procedure)라고 한다. 프로시져가 끝난 시점에 결과값을 돌려줄 수 있으면 <dfn>함수</dfn>(function)라고 한다. 하지만 대개는 서브루틴, 프로시져, 함수 세 용어를 동의어로 본다.</p>
+<h3 id="coroutines">Coroutines</h3>
+<p><dfn>코루틴</dfn>은 서브루틴과 달리 실행이 끝나도 원래 있던 코루틴으로 자동적으로 되돌아가지 않는다. 그냥 냅두면 코루틴이 끝날 때 프로그램이 끝난다. 코루틴은 다른 코루틴을 호출하더라도 그 때까지의 변수 상태들(프레임)이 보존되며, 같은 코루틴을 다시 호출하면 멈췄던 곳에서 계속 진행한다.</p>
+<p>앞서 서브루틴은 프로그램이 끝난 뒤에 되돌아갈 <q>위치’와 ‘프레임’을 ‘겹겹으로</q> (강조한 세가지가 서브루틴의 핵심 특성이다) 저장할 스택이 필요하다고 했는데, 코루틴은 저 중에서 <q>프레임</q> 하나만 저장하면 된다. 따라서 스택이 필요 없고 각 코루틴마다 각각의 프레임만 저장하면 된다. 쉽게 생각해서 코루틴 안에서 쓰이는 상태는 C 함수에서 <code>static</code> 붙은 변수처럼 저장된다고 생각하면 된다.</p>
+<p>일반적으로 코루틴을 지원하는 현대적인 언어들은 코루틴 안에서 서브루틴을 사용할 수 있고, 그 반대도 된다. 그래서 서브루틴 스택이 겹겹으로 쌓여 있는 상태에서 코루틴을 호출하고, 그 코루틴에서 다시 서브루틴을 겹겹으로 호출했다가 원래 맨 처음 코루틴으로 되돌아가게 되면 프레임 뿐만 아니라 원래 쌓아뒀던 서브루틴 스택도 다시 복구해야 한다. 그래서 이 둘을 같이 지원하는 언어는 코루틴 호출이 일어날 때마다 별도의 스택 인스턴스를 생성해야 한다. 반면 코루틴 없이 서브루틴만 지원하는 언어는 전역적인 하나의 스택만 있어도 된다.</p>
+<h3 id="fibers">Fibers</h3>
+<p>코루틴과 똑같다. 다만 코루틴은 언어에서 제공되는 기능이고 <dfn>파이버</dfn>는 운영체제에서 제공되는 기능이다.</p>
+<h3 id="threads">Threads</h3>
+<p>서브루틴과 코루틴이 함께 있는 언어에서의 코루틴과 비슷하다. <dfn>쓰레드</dfn>로 특정 루틴을 실행하면, 그 루틴은 별도의 스택을 가지게 된다. 코루틴과의 차이점만 기억하면 이해하기 쉽다. 코루틴은 <strong>동시에 둘 이상의 스택 프레임을 유지하되 한번에 하나씩만 진행하는 것</strong>이다. 쓰레드는 <strong>동시에 둘 이상의 스택 프레임을 유지하며 동시에 진행하는 것</strong>이다. 비유하자면 코루틴은 사람이 혼자 있어서 여러 사무실에 파견 근무하는데 근무처마다 일의 진행 상황이 따로 보존되는 것으로 볼 수 있고, 쓰레드는 그냥 여러 사람이 동시에 각자의 근무지에서 각자의 진행 상황에 따라 일을 하는 것으로 볼 수 있다.</p>
+<p>사실 쓰레드는 운영체제에서는 다른 정의를 갖지만, 여기서는 언어 수준에서 의미적으로 <q>동시에</q> 실행되는 무언가라고 가정하고 설명했다.</p>
+<h3 id="continuations">Continuations</h3>
+<p>서브루틴은 전역적인 하나의 스택을 가정한다. 서브루틴 호출은 암시적으로 스택에 변화를 가하는 것이다. <dfn>컨티뉴에이션</dfn> 호출은 명시적으로 스택을 다루는 것으로 보면 된다. 스택은 무엇을 담는가? 바로 돌아갈 위치와 돌아갔을 때의 상태이다. 서브루틴을 호출할 때 언어는 암시적으로 ‘일이 끝나고 나서 되돌아올 위치와 상태 정보’를 매번 전달한다. 컨티뉴에이션 호출은 이 정보를 값으로 받는다(정말 인자로 들어온다).</p>
+<p>예를 들어 간단한 JavaScript 함수를 가정해보자.</p>
+<pre><code>function add(a, b) {
+    return a + b;
+}</code></pre>
+<p>위 함수에서 <code>return</code>은 JavaScript의 예약어다. 만약 저런 예약어가 없고, <code>return</code>이라는 함수가 따로 있어서 이걸 명시적으로 받는다면 어떨까?</p>
+<pre><code>function add(a, b, return) {
+    return(a + b);
+}</code></pre>
+<p>실제로 <code>call/cc</code>는 위 예제에서의 <code>return</code>과 같은 식으로 컨티뉴에이션 값을 전달한다. 그럼 컨티뉴에이션이 있으면 뭐가 가능할까? 일단 값을 반환하거나 되돌아가지 않을 수도 있다. 받은 컨티뉴에이션 값을 무시하고 쓰지 않으면 된다. 아니면 컨티뉴에이션 값을 어딘가에 저장해놓고 여러번 쓸 수도 있다. 그러면 원래는 한번만 일어나야 할 일이 여러번 일어나게 된다. 미래가 여러 갈래가 되는 것이다. 그래서 컨티뉴에이션을 <strong>미래에 일어날 모든 일들의 스냅샷</strong>이라고 하는 알 수 없는 설명을 하기도 한다.</p>
+<p>컨티뉴에이션 값은 기본적으로 스택이 될 필요는 없다. 하지만 서브루틴이 없는 언어에서도 컨티뉴에이션만으로 서브루틴을 구현할 수 있다. 컨티뉴에이션 값 안에 이전으로부터 받은 컨티뉴에이션을 겹겹으로 쌓으면 된다. 그럼 본질적으로 스택과 같은 자료구조가 된다. 마찬가지로 컨티뉴에이션으로 코루틴을 구현할 수도 있다.</p>
+<p>컨티뉴에이션의 일부 구현으로 <dfn>원샷 컨티뉴에이션</dfn>(one-shot continuation)도 있다. 컨티뉴에이션 값을 한번 쓰면 더이상 쓸 수 없게 하는 것을 원샷 컨티뉴에이션이라고 한다. 컨티뉴에이션을 모두 구현하기 힘들거나 그럴 필요가 없을 때는 원샷 컨티뉴에이션만 구현하기도 한다. 원샷 컨티뉴에이션만 있어도 코루틴 정도는 그 위에서 구현이 가능하다. 예를 들어 PyPy도 원샷 컨티뉴에이션을 제공한다.</p>
+
+        <script>
+        (function () {
+          var ps = document.getElementsByClassName('outdate-disclaimer');
+          if (ps.length < 1) {
+            return;
+          }
+          var p = ps[0], t = document.createElement('span');
+          t.addEventListener('click', function () {
+            this.parentNode.removeChild(this);
+            var gs = document.getElementsByClassName('outdate-gray-out');
+            for (var i = gs.length - 1; i >= 0; --i) {
+              gs[i].className = gs[i].className.replace(
+                /(^|\s)outdate-gray-out(\s|$)/g, '');
+            }
+          });
+          t.className = 'toggler';
+          t.innerText = '읽기';
+          p.appendChild(t);
+          var e = p.nextSibling;
+          while (e !== null && e !== undefined) {
+            if (e.nodeType === 1) {
+              e.className += ' outdate-gray-out';
+            }
+            e = e.nextSibling;
+          }
+        })();
+        </script>
+      
+    
+  </article>
+
+
+    <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-54324071-2', 'auto');
+    ga('send', 'pageview');
+    </script>
+  </body>
+</html>
+
+
+

@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8">
+    
+  
+    
+      <link rel="canonical" href="https://blog.hongminhee.org/2010/12/07/2128778779/">
+      <meta property="og:url" content="https://blog.hongminhee.org/2010/12/07/2128778779/">
+    
+  
+  
+  <meta name="description" value="">
+  <meta name="twitter:card" content="summary">
+  <meta property="og:locale" content="ko_KR">
+  <meta property="og:site_name" content="洪民憙 블로그">
+  <meta property="og:type" content="article">
+  
+    <meta name="twitter:title" content="Fexpr, 매크로 그리고 고차 함수">
+    <meta property="og:title" content="Fexpr, 매크로 그리고 고차 함수">
+  
+  <meta name="twitter:description" content="내 주변 사람들은 알 수도 있지만, 나는 Io와 Lisp 랭귀지를 상당히 좋아하는 편이고, 그보다는 정확히 말해 프로그래밍 랭귀지 전반에 관심이 많고 직접 만들고 있는 것도 있다. 그리고 내가 만드는 언어는 당연히 좋아하는 언어들로부터 영향을 받을 수밖에 없었다. 그중 하나가 Io로부터 영향을 받은 기능인 fexpr이다. (Io 언어를 몰라도 Lisp을 써봤다면 이해하는데 문제가 없겠지만, 잘 이해가 가지 않는다면 내가 IBM developerWorks에 썼던 Io의 homoiconicity에 대한 설명을 참고하면 좋을 것이다.) …">
+  <meta property="og:description" content="내 주변 사람들은 알 수도 있지만, 나는 Io와 Lisp 랭귀지를 상당히 좋아하는 편이고, 그보다는 정확히 말해 프로그래밍 랭귀지 전반에 관심이 많고 직접 만들고 있는 것도 있다. 그리고 내가 만드는 언어는 당연히 좋아하는 언어들로부터 영향을 받을 수밖에 없었다. 그중 하나가 Io로부터 영향을 받은 기능인 fexpr이다. (Io 언어를 몰라도 Lisp을 써봤다면 이해하는데 문제가 없겠지만, 잘 이해가 가지 않는다면 내가 IBM developerWorks에 썼던 Io의 homoiconicity에 대한 설명을 참고하면 좋을 것이다.) …">
+  <meta property="og:updated_time"
+        content="2010-12-07T13:11:00+09:00">
+  
+      <title>Fexpr, 매크로 그리고 고차 함수 &mdash; 洪民憙 블로그</title>
+      <link rel="alternate" type="application/atom+xml" title="洪民憙 블로그"
+            href="https://blog.hongminhee.org/feed.xml">
+      <meta name="author" content="홍민희">
+      <link rel="stylesheet" media="screen"
+            href="https://blog.hongminhee.org/static/style.css">
+      <link rel="stylesheet" type="text/css"
+        href="https://spoqa.github.io/spoqa-han-sans/css/SpoqaHanSans-kr.css">
+      <link rel="stylesheet" type="text/css"
+        href="https://spoqa.github.io/spoqa-han-sans/css/SpoqaHanSans-jp.css">
+      <meta name="viewport" content="width=device-width, user-scalable=no">
+      <meta name="twitter:creator" content="@hongminhee">
+      <meta name="twitter:site" content="@hongminhee">
+      <meta property="article:author"
+            content="https://www.facebook.com/hongminhee">
+    
+
+  </head>
+  <body class=" post-page outdated">
+    
+  
+      <header>
+        
+          <a href="https://blog.hongminhee.org/index.html" class="site-name">
+              <ruby>洪民憙 <rp>(</rp><rt>홍민희</rt><rp>)</rp></ruby>
+              블로그
+            </a>
+          <nav>
+            <a href="https://hongminhee.org/" rel="author me">본인 소개</a>
+            <div class="archive">
+              아카이브:
+              <ul>
+                
+                  <li><a href="https://blog.hongminhee.org/2017/">2017</a></li>
+                
+                  <li><a href="https://blog.hongminhee.org/2016/">2016</a></li>
+                
+                  <li><a href="https://blog.hongminhee.org/2015/">2015</a></li>
+                
+                  <li><a href="https://blog.hongminhee.org/2014/">2014</a></li>
+                
+                  <li><a href="https://blog.hongminhee.org/2013/">2013</a></li>
+                
+              </ul>
+            </div>
+          </nav>
+        
+      </header>
+
+      <ul class="disclaimer">
+        <li>글을 썼을 당시의 주장에 제 스스로가 더이상 동의하지 못하는
+            경우도 있습니다.</li>
+        <li>심지어 몇몇 글은 이제 정 반대의 의견을 가지고 있기도 합니다.</li>
+        <li>지금까지 여러 주제에 대한 의견이 꾸준히 달라졌습니다.
+            앞으로도 그럴 것입니다.</li>
+        <li>따라서 제 생각을 바꾸기 위한 설득도 환영합니다.
+            저는 의견을 바꿀 의향이 있습니다.</li>
+      </ul>
+    
+
+  <article>
+    
+      <time datetime="2010-12-07T13:11:00+09:00">2010년 12월 7일</time>
+    
+
+    
+      
+  <p class="outdate-disclaimer">
+    이하의 글은 2010년에 쓴 것입니다. 오래된 글인 만큼, 현재의
+    생각과 전혀 다른 내용도 많이 포함되어 있고, 당시와는 상황이 많이 달라진
+    점도 있습니다. 또한, 그 당시에 잘못 알려졌던 정보도 포함되어 있을 수
+    있습니다. <em>어찌됐든 저는 제 오래된 글이 회자되는 것을 저어합니다.</em>
+    읽기에 앞서 양해를 부탁드립니다.
+  <p>
+        <h1 id="fexpr-매크로-그리고-고차-함수">Fexpr, 매크로 그리고 고차 함수</h1>
+<p>내 주변 사람들은 알 수도 있지만, 나는 Io와 Lisp 랭귀지를 상당히 좋아하는 편이고, 그보다는 정확히 말해 프로그래밍 랭귀지 전반에 관심이 많고 직접 만들고 있는 것도 있다. 그리고 내가 만드는 언어는 당연히 좋아하는 언어들로부터 영향을 받을 수밖에 없었다. 그중 하나가 <a href="http://www.iolanguage.com/">Io</a>로부터 영향을 받은 기능인 <a href="https://blog.hongminhee.org/2010/10/12/fexpr/">fexpr</a>이다. (Io 언어를 몰라도 Lisp을 써봤다면 이해하는데 문제가 없겠지만, 잘 이해가 가지 않는다면 내가 IBM developerWorks에 썼던 <a href="https://www.ibm.com/developerworks/mydeveloperworks/blogs/9e635b49-09e9-4c23-8999-a4d461aeace2/entry/220">Io의 homoiconicity에 대한 설명</a>을 참고하면 좋을 것이다.)</p>
+<p>Io를 디자인한 <a href="http://dekorte.com/">Steve Dekorte</a>가 무슨 생각으로 Io에 fexpr<a href="#fn1" class="footnoteRef" id="fnref1"><sup>1</sup></a>을 집어넣었는지 정확히 알 수는 없다. 아마도 언어 구조와 일반 함수(메서드) 모두를 일반적으로 다루고 싶어서일 것이다. 언어에 fexpr이 있다면 함수를 지원하지 않아도, fexpr 안쪽에서 인자로 받은 quotes forms<a href="#fn2" class="footnoteRef" id="fnref2"><sup>2</sup></a>를 applicative order로 평가하게끔 구현하는 것으로 언어 자체를 고치지 않고 함수를 만들어 낼 수 있다. 실제로 Io의 메서드는 이름만 그렇지 결국 fexpr이고, applicative order로 평가하는 것을 쉽게 만드는 syntactic sugar가 제공되는 정도다.</p>
+<p>예를 들어 다음과 같은 Io 메서드 <code>a</code>와 <code>b</code>는 완전히 같은 일을 한다:</p>
+<pre><code>a := method(call arguments at(0) doInContext(call sender) + 1)
+b := method(x, x + 1)</code></pre>
+<p>다만 <code>a</code> 메서드는 fexpr이라는 것이 명확히 드러난 것이고, <code>b</code>는 <code>a</code>와 같은 fexpr을 만들어주는 syntactic sugar를 사용하여 더 읽고 쓰기 쉬워졌을 뿐이다. 언어 구조와 같은 것을 만들어내기 위해 인자들을 normal order로 평가해야 하는 경우가 아닌 이상, 대부분의 메서드는 applcative order로 평가되어야 하므로 저런 syntactic sugar는 실제로 코딩하기 위해서는 필요할 수밖에 없다. 다만 저런 syntactic sugar가 언어 차원에서 제공되지 않더라도 언어 사용자가 fexpr을 통해 얼마든지 syntactic sugar를 만들어낼 수 있다는 점이 중요하다.</p>
+<p>보통 현대적인 Lisp은 fexpr보다는 매크로를 선호하는 편이고, 찾아보면 fexpr을 제공하는 언어는 생각보다 드물다. 그 이유는 아마 매크로가 대부분의 경우 더 가독성도 높고 편한데다, 할 수 있는 것이 조금 줄어드는 대신 매크로 호출(macro expansion)을 인라이닝(inlining)하는 컴파일 최적화를 구현하는데도 까다롭지 않기 때문일 것이다. 아니, 정확히 말하자면 매크로는 ‘apply’하거나 ‘call’한다고 표현하지 않고 ‘expand’한다고 표현하는 걸 감안하면, 인라이닝은 최적화가 아니라 꼭 그렇게 되어야 하는 것으로 보는게 맞겠다. 실제로 Lisp 매크로란 결국 quoted forms를 받아서 치환될 quoted forms를 반환하는 것이니 인라이닝되라고 그렇게 디자인된 것이 맞는 것 같다.</p>
+<p>반면 fexpr을 언어에 추가한다고 하면 당장 조금만 생각해봐도 컴파일 타임에 <em>모든</em> fexpr 호출을 인라이닝하기가 불가능하거나 적어도 쉽지 않으리라는 것을 알 수 있다. 하지만 앞서 말한대로 fexpr의 가장 큰 장점은 언어 구조와 함수, 그리고 매크로까지 모두 일반적으로 다룰 수 있다는 점일 것이다. 매크로 역시 (비록 항상 인라이닝이 되지는 않겠지만) fexpr으로 구현이 가능하다. 하지만 그 역은 성립하지 않는다.</p>
+<p>언어를 디자인할 때부터 최적화 등을 고려할 수도 있지만, 나는 그러기 보다는 표현력을 높이는 데에 우선하는 대신 최적화는 구현 시에 구현자의 형편껏 할 수 있는 데까지만 해줘도 좋다고 생각하는 편이다. 스펙상으로는 fexpr를 primitive로 제공하고 함수는 fexpr을 통한 구현으로 설명하는 대신, 실제 구현에서는 둘을 다르게 만들고 함수가 fexpr의 서브타입(subtype)이 되게 해도 된다. 인라이닝 최적화는 컴파일 타임에 할 수 있는 부분까지만 하고,<a href="#fn3" class="footnoteRef" id="fnref3"><sup>3</sup></a> 그렇지 않은 경우 인자로 전달된 quoted forms를 런타임에 평가하도록 다소 비효율적이지만 완전히 의도대로 작동하게 할 수 있다. 어차피 최적화는 되면 좋지만 안되도 상관은 없는 투명한 처리이기 때문이다.</p>
+<p>매크로에서는 ‘그렇게 작동해야 하는 <em>기능</em>’인 인라이닝이 fexpr에게는 ‘하면 좋은데 안해도 괜찮은 <em>최적화</em>’인 것이 큰 차이다. 그렇다면 매크로의 장점을 고려하여, fexpr와 일반 함수, 매크로 셋 모두를 언어에서 제공하되, 매크로를 fexpr의 서브타입으로 만들 수도 있을 듯하다. 다만 실제로 사용할 컴파일러 구현에서는 매크로는 항상 인라이닝되도록 하면 된다. 이렇게 되면 fexpr을 도입한 가장 큰 이유인 일반성을 잃지 않으면서도, fexpr을 사용할 수 있는 대부분의 경우에 매크로를 대신 사용하도록 권고하여 좀더 나은 성능을 기대하게 할 수도 있다. (Fexpr를 인라이닝 최적화 없이 호출한다면 인자의 평가가 런타임에 이뤄지므로, 즉 그 부분은 컴파일되는 것이 아니라 런타임이 되어서야 인터프리터에 의해 실행될테니 확실히 훨씬 비효율적이긴 할 것이다. 매크로 인라이닝도 어떻게 보면 code bloat이라고 할 수도 있겠지만.)</p>
+<p>반면 나는 Io로부터 일부러 가져오지 않은 부분도 있는데, 언어 API를 설계할 때 블럭을 받기 위해 fexpr을 그대로 사용하는 관습이 바로 그것이다. Io의 API는 대부분 고차 함수(higher-order function) 대신 fexpr을 쓰게 되어있는데, 다음과 같은 식으로 쓰이게 된다.</p>
+<pre><code>myList foreach(x, x println)</code></pre>
+<p>위 API는 첫번째 인자로 평가되지 않을 변수명을 받고<a href="#fn4" class="footnoteRef" id="fnref4"><sup>4</sup></a>, 루프를 돌 때마다 매번 새로운 임시 environment<a href="#fn5" class="footnoteRef" id="fnref5"><sup>5</sup></a>를 만들어내고 해당 environment에 첫번째 인자를 통해 받은 변수명을 정의한 뒤, 루프에서 해당 순서의 리스트(여기서는 <code>myList</code>) 원소를 할당한 다음, 두번째 인자로 전달받은 평가되지 않은 표현식(즉, 루프 몸통)을 임시 environment에서 평가하는 방식으로 구현되어 있다. 내가 설계했다면 저렇게 fexpr을 쓰는 대신 좀더 vebose하더라도 함수를 받는 형태의 고차 함수로 아래와 같이 쓰도록 설계했을 것이다:</p>
+<pre><code>mylist foreach(block(x, x println))</code></pre>
+<p>그 이유는 두 가지가 있다. 첫번째로 fexpr을 구현하는 것보다 고차 함수를 구현하는 것이 훨씬 직관적이며 읽고 쓰기 쉽기 때문이다. Io의 원래 API처럼 <code>foreach</code> 메서드를 구현하려면 다음과 같이 해야 한다:</p>
+<pre><code>List foreach := method(
+    argName := call argAt(0) name
+    loopBody := call argAt(1)
+    parentContext := call sender
+    for(i, 0, self size - 1,
+        context := parentContext clone
+        context setSlot(argName, self at(i))
+        loopBody doInContext(context)
+    )
+)</code></pre>
+<p>Io를 잘 모르더라도 이건 좀 너저분하다는 인상을 받을 수 있을 것이다. 반면 같은 Io 코드라고 해도 내가 제안한 것처럼 고차 함수로 디자인했다면 <code>foreach</code> 메서드는 아래와 같이 비교적 간결하게 구현 가능하다.</p>
+<pre><code>List foreach := method(f,
+    for(i, 0, self size - 1, f call(self at(i)))
+)</code></pre>
+<p>두번째 문제는 코드를 읽는 입장에서 어떤 인자가 applicative order로 평가되고 어떤 인자가 normal order로 평가되는지 예측하기 힘들어진다는 점이다. 예를 들어 이름을 의미 없게 만든 다음 코드를 보고 <code>a</code>, <code>b</code>, <code>c + d</code> 중 어떤 인자가 얼마나 평가될지 예측할 수는 없다:</p>
+<pre><code>f(a, b, c + d)</code></pre>
+<p>이 문제는 fexpr든 매크로든 normal order로 평가되는 함수 호출(혹은 그와 같은 문법으로 가능한 것)이 있는 언어에서는 근본적으로 해결하기 힘들긴 하다. 하지만 언어 API에서 최대한 fexpr을 지양하고 고차 함수를 사용하여, 언어 사용자는 대부분의 호출이 applicative order로 평가될 것이라고 믿을 수 있을 것이다. 더불어 나는 내가 설계한 언어에서는 fexpr 호출과 그렇지 않은 함수의 호출에 대해 다른 코딩 스타일을 사용하도록 유도할 생각이다. 전자는 <code>fexpr (args)</code>처럼 여는 괄호 왼쪽에 공백을 주고, 후자는 <code>func(args)</code>처럼 공백을 없애도록 하면 읽는 사람 입장에서는 구분이 좀더 편할 것이다.<a href="#fn6" class="footnoteRef" id="fnref6"><sup>6</sup></a></p>
+<section class="footnotes">
+<hr />
+<ol>
+<li id="fn1"><p>Io 언어 안에서는 그냥 메서드(method)라고 부른다.<a href="#fnref1">↩</a></p></li>
+<li id="fn2"><p><q>quote’나 ‘form</q> 같은 표현은 Lisp 용어이고, Io 용어로 말하면 <code>Message</code> 객체.<a href="#fnref2">↩</a></p></li>
+<li id="fn3"><p>제대로 고민해본 것은 아니지만, 일단 지금 생각으로는 fexpr을 호출하는 모든 코드에 대해 인자 폼(argument forms)을 넘겨서 컴파일 타임에 fexpr 몸통을 평가해보는 것으로 많은 fexpr 호출을 인라이닝할 수 있을 것 같다. S-expression으로 예를 들자면 (<code>vau</code>가 <code>lambda</code>의 fexpr 버전이며 <code>env</code>가 호출하는 쪽의 environment라고 가정하고) 아래와 같은 fexpr을 정의했을 때:</p>
+<pre><code>(define fexpr (vau (a b) env (+ (eval a env) (eval b env))))</code></pre>
+<p>다음과 같은 fexpr 호출은:</p>
+<pre><code>(fexpr a (+ b c))</code></pre>
+<p>다음과 같이 인라이닝되는 것이다:</p>
+<pre><code>(+ a (+ b c))</code></pre>
+<p>평가는 인자로 주어진 quoted forms가 <code>eval</code> 함수에 적용되기 전까지만 하면 된다.<a href="#fnref3">↩</a></p></li>
+<li id="fn4"><p>따라서 위 코드에서는 <code>x</code> 변수가 정의되어 있지 않지만 변수가 없다는 오류가 발생하지 않는다.<a href="#fnref4">↩</a></p></li>
+<li id="fn5"><p>Environment는 Lisp에서 쓰는 얘기고, Io에서는 context라고 말하는 모양이다.<a href="#fnref5">↩</a></p></li>
+<li id="fn6"><p>Fexpr을 제공하는 Lisp 방언인 <a href="http://en.wikipedia.org/wiki/Kernel_(programming_language)">Kernel</a> 같은 경우도 fexpr에 대해서는 <code>$</code> 접두어를 붙이는 컨벤션을 사용하여 일반 함수와 fexpr을 구분한다.<a href="#fnref6">↩</a></p></li>
+</ol>
+</section>
+
+        <script>
+        (function () {
+          var ps = document.getElementsByClassName('outdate-disclaimer');
+          if (ps.length < 1) {
+            return;
+          }
+          var p = ps[0], t = document.createElement('span');
+          t.addEventListener('click', function () {
+            this.parentNode.removeChild(this);
+            var gs = document.getElementsByClassName('outdate-gray-out');
+            for (var i = gs.length - 1; i >= 0; --i) {
+              gs[i].className = gs[i].className.replace(
+                /(^|\s)outdate-gray-out(\s|$)/g, '');
+            }
+          });
+          t.className = 'toggler';
+          t.innerText = '읽기';
+          p.appendChild(t);
+          var e = p.nextSibling;
+          while (e !== null && e !== undefined) {
+            if (e.nodeType === 1) {
+              e.className += ' outdate-gray-out';
+            }
+            e = e.nextSibling;
+          }
+        })();
+        </script>
+      
+    
+  </article>
+
+
+    <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-54324071-2', 'auto');
+    ga('send', 'pageview');
+    </script>
+  </body>
+</html>
+
+
+

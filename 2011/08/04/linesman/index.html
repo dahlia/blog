@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8">
+    
+  
+    
+      <link rel="canonical" href="https://blog.hongminhee.org/2011/08/04/linesman/">
+      <meta property="og:url" content="https://blog.hongminhee.org/2011/08/04/linesman/">
+    
+  
+  
+  <meta name="description" value="">
+  <meta name="twitter:card" content="summary">
+  <meta property="og:locale" content="ko_KR">
+  <meta property="og:site_name" content="洪民憙 블로그">
+  <meta property="og:type" content="article">
+  
+    <meta name="twitter:title" content="Linesman">
+    <meta property="og:title" content="Linesman">
+  
+  <meta name="twitter:description" content="Linesman은 WSGI 프로파일러 미들웨어다. 일반적인 WSGI 미들웨어처럼 사용하면 된다. 만약 Flask를 쓰고 있다면, …">
+  <meta property="og:description" content="Linesman은 WSGI 프로파일러 미들웨어다. 일반적인 WSGI 미들웨어처럼 사용하면 된다. 만약 Flask를 쓰고 있다면, …">
+  <meta property="og:updated_time"
+        content="2011-08-04T07:43:35+09:00">
+  
+      <title>Linesman &mdash; 洪民憙 블로그</title>
+      <link rel="alternate" type="application/atom+xml" title="洪民憙 블로그"
+            href="https://blog.hongminhee.org/feed.xml">
+      <meta name="author" content="홍민희">
+      <link rel="stylesheet" media="screen"
+            href="https://blog.hongminhee.org/static/style.css">
+      <link rel="stylesheet" type="text/css"
+        href="https://spoqa.github.io/spoqa-han-sans/css/SpoqaHanSans-kr.css">
+      <link rel="stylesheet" type="text/css"
+        href="https://spoqa.github.io/spoqa-han-sans/css/SpoqaHanSans-jp.css">
+      <meta name="viewport" content="width=device-width, user-scalable=no">
+      <meta name="twitter:creator" content="@hongminhee">
+      <meta name="twitter:site" content="@hongminhee">
+      <meta property="article:author"
+            content="https://www.facebook.com/hongminhee">
+    
+
+  </head>
+  <body class=" post-page outdated">
+    
+  
+      <header>
+        
+          <a href="https://blog.hongminhee.org/index.html" class="site-name">
+              <ruby>洪民憙 <rp>(</rp><rt>홍민희</rt><rp>)</rp></ruby>
+              블로그
+            </a>
+          <nav>
+            <a href="https://hongminhee.org/" rel="author me">본인 소개</a>
+            <div class="archive">
+              아카이브:
+              <ul>
+                
+                  <li><a href="https://blog.hongminhee.org/2017/">2017</a></li>
+                
+                  <li><a href="https://blog.hongminhee.org/2016/">2016</a></li>
+                
+                  <li><a href="https://blog.hongminhee.org/2015/">2015</a></li>
+                
+                  <li><a href="https://blog.hongminhee.org/2014/">2014</a></li>
+                
+                  <li><a href="https://blog.hongminhee.org/2013/">2013</a></li>
+                
+              </ul>
+            </div>
+          </nav>
+        
+      </header>
+
+      <ul class="disclaimer">
+        <li>글을 썼을 당시의 주장에 제 스스로가 더이상 동의하지 못하는
+            경우도 있습니다.</li>
+        <li>심지어 몇몇 글은 이제 정 반대의 의견을 가지고 있기도 합니다.</li>
+        <li>지금까지 여러 주제에 대한 의견이 꾸준히 달라졌습니다.
+            앞으로도 그럴 것입니다.</li>
+        <li>따라서 제 생각을 바꾸기 위한 설득도 환영합니다.
+            저는 의견을 바꿀 의향이 있습니다.</li>
+      </ul>
+    
+
+  <article>
+    
+      <time datetime="2011-08-04T07:43:35+09:00">2011년 8월 4일</time>
+    
+
+    
+      
+  <p class="outdate-disclaimer">
+    이하의 글은 2011년에 쓴 것입니다. 오래된 글인 만큼, 현재의
+    생각과 전혀 다른 내용도 많이 포함되어 있고, 당시와는 상황이 많이 달라진
+    점도 있습니다. 또한, 그 당시에 잘못 알려졌던 정보도 포함되어 있을 수
+    있습니다. <em>어찌됐든 저는 제 오래된 글이 회자되는 것을 저어합니다.</em>
+    읽기에 앞서 양해를 부탁드립니다.
+  <p>
+        <h1 id="linesmansource"><a href="http://pypi.python.org/pypi/linesman">Linesman</a></h1>
+<p><a href="http://pypi.python.org/pypi/linesman">Linesman</a>은 WSGI 프로파일러 미들웨어다. 일반적인 WSGI 미들웨어처럼 사용하면 된다. 만약 Flask를 쓰고 있다면,</p>
+<pre><code>from linesman.middleware import make_linesman_middleware
+app.wsgi_app = make_linesman_middleware(app.wsgi_app)</code></pre>
+<p>같이 쓰면 된다.</p>
+<p>프로파일러는 <code>/__profiler__</code>에 접근하면 볼 수 있는데, 이 경로 자체는 미들웨어에서 다음과 같이 설정이 가능하다.</p>
+<pre><code>app.wsgi_app = make_linesman_middleware(app.wsgi_app, profiler_path=&#39;/linesman&#39;)</code></pre>
+<p>Linesman은 호출 그래프도 보여주는데, 내부적으로 Graphviz의 <code>dot</code> 명령어를 사용하므로, Graphviz가 설치되어 있지 않으면 그래프 이미지가 나오지 않는다. 아무런 메세지 없이 그냥 그래프가 나오지 않기 때문에 실제로 소스코드를 열어보지 않으면 왜 안나오는지 짐작하기 힘든데, 그래프가 안 나오면 Graphviz가 설치되어 있는지 확인해보면 된다. (다르게 생각하면 Google App Engine 같은 제한된 환경에서는 그래프를 절대 볼 수 없다는 얘기도 된다.)</p>
+
+        <script>
+        (function () {
+          var ps = document.getElementsByClassName('outdate-disclaimer');
+          if (ps.length < 1) {
+            return;
+          }
+          var p = ps[0], t = document.createElement('span');
+          t.addEventListener('click', function () {
+            this.parentNode.removeChild(this);
+            var gs = document.getElementsByClassName('outdate-gray-out');
+            for (var i = gs.length - 1; i >= 0; --i) {
+              gs[i].className = gs[i].className.replace(
+                /(^|\s)outdate-gray-out(\s|$)/g, '');
+            }
+          });
+          t.className = 'toggler';
+          t.innerText = '읽기';
+          p.appendChild(t);
+          var e = p.nextSibling;
+          while (e !== null && e !== undefined) {
+            if (e.nodeType === 1) {
+              e.className += ' outdate-gray-out';
+            }
+            e = e.nextSibling;
+          }
+        })();
+        </script>
+      
+    
+  </article>
+
+
+    <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-54324071-2', 'auto');
+    ga('send', 'pageview');
+    </script>
+  </body>
+</html>
+
+
+

@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8">
+    
+  
+    
+      <link rel="canonical" href="https://blog.hongminhee.org/2013/04/07/47304464713/">
+      <meta property="og:url" content="https://blog.hongminhee.org/2013/04/07/47304464713/">
+    
+  
+  
+  <meta name="description" value="">
+  <meta name="twitter:card" content="summary">
+  <meta property="og:locale" content="ko_KR">
+  <meta property="og:site_name" content="洪民憙 블로그">
+  <meta property="og:type" content="article">
+  
+    <meta name="twitter:title" content="실험으로부터 분리된 이론은 과학이 될 수 없는가">
+    <meta property="og:title" content="실험으로부터 분리된 이론은 과학이 될 수 없는가">
+  
+  <meta name="twitter:description" content="이 글은 IRC #langdev 채널에서 나와 서상현 님, 아이추판다 님(그 외에도 몇몇 분들이 더 계셨으나 주로 이렇게 셋)이 대화한 내용을 바탕으로 정리한 내용이다. 나 혼자만의 생각은 아니지만, 이 대화를 통해 나는 여러 부분에서 설득당하고 생각이 달라졌으므로 이제는 내 생각이라고 봐도 괜찮을 것이다. …">
+  <meta property="og:description" content="이 글은 IRC #langdev 채널에서 나와 서상현 님, 아이추판다 님(그 외에도 몇몇 분들이 더 계셨으나 주로 이렇게 셋)이 대화한 내용을 바탕으로 정리한 내용이다. 나 혼자만의 생각은 아니지만, 이 대화를 통해 나는 여러 부분에서 설득당하고 생각이 달라졌으므로 이제는 내 생각이라고 봐도 괜찮을 것이다. …">
+  <meta property="og:updated_time"
+        content="2013-04-07T05:55:00+09:00">
+  
+      <title>실험으로부터 분리된 이론은 과학이 될 수 없는가 &mdash; 洪民憙 블로그</title>
+      <link rel="alternate" type="application/atom+xml" title="洪民憙 블로그"
+            href="https://blog.hongminhee.org/feed.xml">
+      <meta name="author" content="홍민희">
+      <link rel="stylesheet" media="screen"
+            href="https://blog.hongminhee.org/static/style.css">
+      <link rel="stylesheet" type="text/css"
+        href="https://spoqa.github.io/spoqa-han-sans/css/SpoqaHanSans-kr.css">
+      <link rel="stylesheet" type="text/css"
+        href="https://spoqa.github.io/spoqa-han-sans/css/SpoqaHanSans-jp.css">
+      <meta name="viewport" content="width=device-width, user-scalable=no">
+      <meta name="twitter:creator" content="@hongminhee">
+      <meta name="twitter:site" content="@hongminhee">
+      <meta property="article:author"
+            content="https://www.facebook.com/hongminhee">
+    
+
+  </head>
+  <body class=" post-page">
+    
+  
+      <header>
+        
+          <a href="https://blog.hongminhee.org/index.html" class="site-name">
+              <ruby>洪民憙 <rp>(</rp><rt>홍민희</rt><rp>)</rp></ruby>
+              블로그
+            </a>
+          <nav>
+            <a href="https://hongminhee.org/" rel="author me">본인 소개</a>
+            <div class="archive">
+              아카이브:
+              <ul>
+                
+                  <li><a href="https://blog.hongminhee.org/2017/">2017</a></li>
+                
+                  <li><a href="https://blog.hongminhee.org/2016/">2016</a></li>
+                
+                  <li><a href="https://blog.hongminhee.org/2015/">2015</a></li>
+                
+                  <li><a href="https://blog.hongminhee.org/2014/">2014</a></li>
+                
+                  <li><a href="https://blog.hongminhee.org/2013/">2013</a></li>
+                
+              </ul>
+            </div>
+          </nav>
+        
+      </header>
+
+      <ul class="disclaimer">
+        <li>글을 썼을 당시의 주장에 제 스스로가 더이상 동의하지 못하는
+            경우도 있습니다.</li>
+        <li>심지어 몇몇 글은 이제 정 반대의 의견을 가지고 있기도 합니다.</li>
+        <li>지금까지 여러 주제에 대한 의견이 꾸준히 달라졌습니다.
+            앞으로도 그럴 것입니다.</li>
+        <li>따라서 제 생각을 바꾸기 위한 설득도 환영합니다.
+            저는 의견을 바꿀 의향이 있습니다.</li>
+      </ul>
+    
+
+  <article>
+    
+      <time datetime="2013-04-07T05:55:00+09:00">2013년 4월 7일</time>
+    
+
+    
+      <h1 id="실험으로부터-분리된-이론은-과학이-될-수-없는가">실험으로부터 분리된 이론은 과학이 될 수 없는가</h1>
+<p>이 글은 IRC #langdev 채널에서 나와 <a href="http://gplus.to/sanxiyn">서상현</a> 님, <a href="http://nullmodel.egloos.com/">아이추판다</a> 님(그 외에도 몇몇 분들이 더 계셨으나 주로 이렇게 셋)이 대화한 내용을 바탕으로 정리한 내용이다.<a href="#fn1" class="footnoteRef" id="fnref1"><sup>1</sup></a> 나 혼자만의 생각은 아니지만, 이 대화를 통해 나는 여러 부분에서 설득당하고 생각이 달라졌으므로 <em>이제는</em> 내 생각이라고 봐도 괜찮을 것이다.</p>
+<p>이 글은 애초에 이덕하 씨와 Bayesian 님 사이에 오간 논쟁을 보고 생긴 동기로 쓴 글이다. 따라서 이 글이 어쩌다 나온 것인지 알기 위해서는 오간 글들을 보면 이해하기 좋다. 하지만 나는 내가 이 글에서 쓰려는 내용이 논쟁과 독립적으로 생각해볼 가치가 있다고 여겼고, 그래서 되도록 그 논쟁의 맥락으로부터 독립적으로 쓰고자 하였다. 게다가 그 논쟁은 이미 <a href="http://bayes.egloos.com/3028945">일단락</a>이 된 듯하다.<a href="#fn2" class="footnoteRef" id="fnref2"><sup>2</sup></a></p>
+<p>곰곰히 살펴보니 이번 논쟁에는 두 가지 이슈가 섞여있었다는 것을 알 수 있었고, 그래서 글 역시 두 개의 포스팅으로 나눠서 하려고 한다. 이 첫번째 글에서 내가 주장하고 싶은 바는 이렇다: <strong>과학의 연구 방법은 분과마다 차이를 보이는데, 이는 해당 학문의 특성과 성숙도에 기인하며, 어떤 과학은 심지어 이론과 실험이 분리되기도 한다.</strong></p>
+<h3 id="이덕하의-글은-그-방법론으로-볼-때-과학으로-보기-어려운가">이덕하의 글은 그 방법론으로 볼 때 과학으로 보기 어려운가</h3>
+<p>이 논의에 참여한 사람들은 대체로 <q>증거를 제시하지 않았다면 과학으로 보기 힘들다</q>는 데에 동의하는 듯하다. 지뇽뇽 님은 <a href="http://jinpark.egloos.com/1295891">심리학이라는 학문에 대한 접근 방식</a>에서 상관 계수의 예를 들며 과학적 증거란 응당 <em>그러해야</em> 한다고 주장한다. 그렇다면 상관 계수가 아닌 것은 과학적 증거로 부적합한가? <em>그러한</em> 것은 무엇까지 포함하는가?</p>
+<p>지뇽뇽 님의 글을 요약하자면 과학적 증거가 상관 계수나 데이터여야 한다는 주장은 곧, 과학적 증거가 과학적인 한 요소는 정량적이라는 것이다, 라고 해석할 수 있다. 즉, 어떤 숫자가 나와야 한다. 그렇다면 과학에 정량성이 중요한 까닭은 무엇인가?</p>
+<p>정량성은 재현 가능성의 문제로 볼 수 있다. 누군가 <q>내가 해봤을 때는 그랬어</q>라고 해도 그 경험을 들은 다른 동료 과학자가 언제나 그것을 재현해볼 수 있는 것은 아니기 때문이다. 과학이 실험 과학인 이유는 바로 이러한 재현 가능성의 문제 때문인데, 이렇게 표현할 수 있다:</p>
+<ul>
+<li>내가 됐으면 너도 돼야 한다.</li>
+<li>여기서 됐으면 저기서도 돼야 한다.</li>
+<li>오늘 됐으면 내일도 돼야 한다.</li>
+</ul>
+<p>그리고 이러한 것이 바로 실험이라고 할 수 있다.</p>
+<h3 id="가설의-수립도-과학이-될-수-있다">가설의 수립도 과학이 될 수 있다</h3>
+<p>그런데 우리는 여기서 한 가지 의문을 떠올려 볼 수 있다. 과연 실험적 증거만이 과학적 증거가 되는가? 원리로부터의 가설이나 논리적 추론은 과학적 증거가 될 수 없는가? 이번 논의에 참여했던 강규영 씨는 <a href="http://akngs.tumblr.com/post/47169752231">직관, 근거, 논리</a>에서 이러한 의심을 좀더 파고든다:</p>
+<blockquote>
+<p>내 생각을 부연하자면 너무 근거(경험 근거)만 강조할 필요는 없다는 것이다. 특히 직접 실험을 하기 어려운 환경에 있는 사람들이 학문에 기여할 수 있는 좋은 방법으로 논리(주로 연역추론을 통한 사고의 전개)를 활용하여 새로운 가설을 제시하거나 기존 경험 데이터에 대한 새로운 해석을 제시하는 일 등을 생각해볼 수 있다.</p>
+<p>재미있는 것은 통제된 실험을 하기 시작한 역사가 얼마 안되는 분야에서 공부하는 분들이 과도하게 경험주의 쪽으로 치우치는 것 같다. 아마 일종의 반작용 같은 것이 아닐까 생각해본다. 이를테면 조폭들이 <q>착하게 살자</q>라고 하는 거랑 비슷한 느낌이랄까.</p>
+</blockquote>
+<p>수많은 이론 물리학자들은 과학자로 불릴 자격이 없는가? 서상현 님은 <a href="https://plus.google.com/106439241099941939090/posts/7j7kRDTWX66">연역추론에 의한 가설의 제시는 과학이 아닌가?</a>라고 말을 꺼내며 다음과 같이 주장한다:</p>
+<blockquote>
+<p>과학의 특징으로 보통 실험을 들지만, 과학이 실험만으로 이루어지는 것은 아니다. 과학은 순수하게 귀납적인 학문이 아니다. 연역적인 이론만들기(theorizing)도 어엿한 과학의 한 부분이다.</p>
+<p>구체적인 예로 <a href="https://ko.wikipedia.org/wiki/%ED%94%84%EB%9E%9C%EC%8B%9C%EC%8A%A4_%ED%81%AC%EB%A6%AD">Francis Crick</a>의 <q>단백질 합성에 대하여(On Protein Synthesis)</q>를 들고 싶다. 이 1958년 논문은 어댑터 가설(adaptor hypothesis)을 처음으로 제기한 논문으로, 이것이 훌륭한 과학의 예라는 데는 아마도 이견이 없을 것이다. 그러나 크릭이 논문에서 수많은 실험을 인용하기는 하지만, 어댑터 가설에 대한 근거는 실험적인 것이 아니며 대담한 직관의 도약을 통해 얻은 가설이 많은 사실을 설명할 수 있다는 이야기일 뿐이다. 대가의 작품과 초등학생의 그림과 같은 차이가 있을지는 모르나 과학철학적으로 크게 볼 때 이것은 위 블로그에서 말하는 <q>소설</q>과 그렇게 다른 것이 아니다.</p>
+<p>다만 일반적으로 말해서 과학은 이론만들기보다는 실험으로 발전하고, 위와 같은 예외적인 경우도 있지만 수많은 이론만들기보다는 잘 된 실험 하나가 값진 것은 맞다. 하지만 <q>소설</q>을 쓴다고 과학이 아니라고 하는 것은 옳지 않다.</p>
+</blockquote>
+<p>Francis Crick은 그 기념비적인 논문에서 DNA가 단백질을 생성하는데 RNA가 개입된다고 주장했다. 그런데 이 주장에 대한 증거는 거의 논리적 추론이고 실험적 증거를 거의 제시하지 못했다. 실험이 매우 어려웠기 때문이다. (그 당시 tRNA를 추출하는 실험은 매우 난이도가 높았다.) 다행히 실험적 증거는 논문이 출판된 뒤에 다른 사람이 발견한다. 그렇다고 해도 우리가 Francis Crick의 그 논문이 과학이라고 할 수 없느냐고 한다면 매우 황당한 소리가 된다.</p>
+<p>그 외에도 물리학 같은 학문을 들자면 실험 없는 이론뿐인 훌륭한 과학의 예는 세기 힘들 정도로 많아지게 된다. 이론 물리학자들이 실험 물리학을 꿰고 있을 수 있다면 정말 이상적인 이야기겠지만, 실상은 이론 물리학을 하다보면 현재 실험 기술 수준으로 도대체 어디까지 실험이 가능하고 어떤 실험이 불가능한지조차 알 수 없는 게 현실이다. 실험 설계는 둘째 치고서라도. 예를 들어 우주 배경 복사는 실제 발견됐을 때보다 10년은 더 일찍 발견됐을 수도 있었으나 이론을 세운 사람들이 이런 실험은 불가능할 거라고 지레짐작하여 실험 물리학자들에게 찾아보라고 하지 않아서 못 찾은 것이다.</p>
+<p>사례를 열거해보면 소위 <q>소설</q> 쓰기(정말 과학 소설을 쓴다는 얘기는 물론 아니다)도 과학이 될 수 있는 듯하다. 따라서, 이덕하는 과학이 서툴다고 할 수 있을지 몰라도, Bayesian 님이 주장처럼 아예 <a href="http://bayes.egloos.com/3028773">이덕하는 과학을 하는 것이 아니다</a>라고 주장하긴 힘들다. 그림이 많이 서툴면 그림이 아니라 낙서 아니냐는 식으로 생각해볼 수도 있다. 이에 관한 문제는 <a href="https://blog.hongminhee.org/2013/04/07/47304560922/">후속 글</a>에서 다루기로 하고, 이제는 Bayesian 님의 주장을 이해해볼 필요가 있다.</p>
+<h3 id="적용-범위-domain-of-applicability">적용 범위 (domain of applicability)</h3>
+<p>논의가 계속 되어감에 따라, 우리는 Bayesian 님이 칭하는 <q>과학</q>이 사실은 <q>심리학</q>을 가리키는 게 아닐까 하는 의심을 지울 수 없다. 예를 들어 다음과 같은 트윗을 보자:</p>
+<blockquote class="twitter-tweet"><p>@<a href="https://twitter.com/nevillekim">nevillekim</a> 1종오류는 영가설이 맞는데 기각하는 경우, 즉 연구가설이 틀렸는데 맞다고 하는 오류고, 2종오류는 반대로 연구가설이 맞는데 틀렸다고 하는 경우입니다. 과학자들은 보통 1종오류를 줄이는 데 더 관심이 있죠.</p>   <div><a href="https://twitter.com/bayescog/status/320072373548224512">April 5, 2013</a></div></blockquote>
+<blockquote class="twitter-tweet"><p>@<a href="https://twitter.com/knauer0x">knauer0x</a> 당연하신 말씀이죠. 과학자들은 1종오류에 극도로 민감한 사람들 아니었나요.</p>   <div><a href="https://twitter.com/bayescog/status/319842628193640449">April 4, 2013</a></div></blockquote>
+<p>Bayesian 님은 <q>과학자들은 틀린 가설을 맞다고 주장하는데 극도로 민감하다</q>고 주장하지만 실제로는 그렇지 않다. 가령 물리학이나 생물학에서는 틀릴 가능성이 높은 가설이 난무한다. 암흑 물질에 대한 수많은 모델들을 떠올려보자. 그 가설 대부분은 틀린 것으로 밝혀질 것이다.</p>
+<p>과학 철학에서는 과학의 본질은 반증가능성에 있다고 한다. 만약 그렇다면 오히려 틀릴 수 있는 가설을 마구 제기해야 더 과학적인 것이다.</p>
+<p>Bayesian 님은 심리학자이고, 우리는 Bayesian 님이 <q>과학</q>이라고 할 때 많은 경우 그것이 <q>심리학</q>의 일반화라는 것도 짐작할 수 있다. 만약 Bayesian 님의 주장에서 <q>과학</q>을 마음속에서 <q>심리학</q>으로 치환해서 받아들인다고 해서 손해볼 것은 없을 것이다. 그렇게 본다면 Bayesian 님의 심리학은 어떠해야 한다는 주장은 모두 수긍할만한 것이다.</p>
+<p>그리고 Bayesian 님은 또 이러한 트윗도 했다:</p>
+<blockquote class="twitter-tweet"><p>그리고 소설을 쓰더라도 그럴듯하게 써야 한다. 사실 많은 심리학자들이 진화심리학의 가설 생성 방식 자체를 불편하게 생각하는 것 같다.</p>   <div><a href="https://twitter.com/bayescog/status/320174475196915713">April 5, 2013</a></div></blockquote>
+<p>심리학자가 아닌 사람으로서 해볼 수 있는 짐작 중 하나는, 유전자의 몫이 얼마나 큰지에 관한 불일치가 있다는 것이다. 유전자의 몫이 실제로 어떤지는 아무도 알 수 없고, 참값을 모르는 상태에서는 그 <q>소설</q>이 그럴듯한가는 결국 prior에 의존하게 된다. 문제는 그 prior가 진화심리학자들과 심리학자들 사이에서 상이한 차이를 보인다는 것이다.</p>
+<p>하지만 저 추측은 아마도 틀리거나 결정적인 이유가 되지 못하는 것 같다. 갈등을 더 잘 해석하는 설명은 이렇다.</p>
+<p>심리학자들이 진화심리학의 가설 생성(theorizing) 방식을 불편하게 여기는 이유는, 심리학에서는 이론이 가리키는 범위를 실험이 보여주기 때문이다. 심리학 이론의 <strong>적용 범위</strong>는 두 가지 측면에서 <q>좁다</q>고 할 수 있는데, 하나는 일반화 가능성이라는 점에서고 다른 하나는 현상 그 자체에서도 매우 부분적인 설명이라는 것이다. 이것은 심리학계 전반에 걸쳐 암묵적으로 공유되고 있는 관점이라고 할 수 있는데 진화심리학적 설명은 그 이론의 <strong>적용 범위</strong>가 심리학에서 가정하고 있는 것보다 훨씬 넓다.</p>
+<p>과학 철학에서 <strong>적용 범위</strong>(domain of applicability)란 이런 뜻이다. 과학에는 적용 범위가 광범위한, 만능에 가까운 상대성 이론, 양자 역학, 진화론 같은 이론이 있는 학문이 있고, 그렇지 못한 학문이 있다. 가령 포괄적응도 이론을 적용한다고 하면, 이 이론은 적용 범위가 매우 넓으므로 적용을 할 때마다 매번 <q>이 이론은 애초에 진사회성 동물에서 실험으로 검증 되었으며…</q> 같은 얘기를 할 필요가 없어진다. <em>그냥</em> 이론을 적용하면 되는 것이지, 흰개미 얘기를 굳이 언급할 필요가 없다.</p>
+<p>반면 심리학자들은 비유하자면 마치 컴퓨터 수리공과도 같아서 어떤 적은 수의 넓은 이론으로부터 연역적으로 인간을 이해하고 있는 것이 아니라, 메모리나 입력 장치와 같은 각종 부품에 대해 잡다한 지식들을 쌓아놓고 있는 것이다. 앞서 말했듯 심리학 이론은 적용 범위가 협소한 확률적 진술이기 때문에, 여러 이론의 조합이 쉽게 되지 않는다. 아이추판다 님은 심리학자로서 이와 관련해 트윗을 하기도 했다:</p>
+<blockquote class="twitter-tweet"><p>심리학자들은 논문이건 대중서건 일반적으로 이론에서 이론으로 이어지는 방식으로 글을 잘 안 쓴다. 한 마디하고 몇 년도에 누가 실험했는데 블라블라, 한 마디하고 실험 얘기 블라블라. 이게 사실은 근거를 대야한다는 이유말고 다른 더 중요한 이유가 있는데</p>   <div><a href="https://twitter.com/aichupanda/status/320041158770307072">April 5, 2013</a></div></blockquote>
+<p>(내용이 잘려서 후속 트윗이 있어야 할 것 같으나 아직 올라오지 않았다.)</p>
+<p>이론의 조합이 힘들다는 것은 결국 연역적 추론이 통하지 않는다는 것이다. 이러니 심리학자들이 진화심리학에서 하는 연역적 추론을 통한 가설 생성에 불편할 수밖에 없다.</p>
+<p>반면 진화론이라는 만능 이론에 매료되어 있는 진화심리학자들은 그러한 심리학에 큰 불만을 가지고 있고, 심리학을 진화 원리 위에서 다시 쓰고 싶어한다. 하지만 기존 심리학자들에게 그러한 접근법을 제시하는 것은 마치 컴퓨터 수리공에게 보편 튜링 기계나 옴의 법칙 운운하는 것과 같으니 당연히 시큰둥할 수밖에 없다. 컴퓨터를 털고 재부팅하거나 포맷하고 OS를 설치한다는 식의 경험적 지식에 비해 그러한 <q>일반적인</q> 지식이 컴퓨터 수리 방법에 대해 당장 더 알려주는 것이 없기 때문이다. 옴의 법칙으로 트랜지스터 10억개의 샌디브리지 CPU를 설명할 수도 있겠지만 그다지 유용한 접근은 아니다.</p>
+<h3 id="얼치기를-변호하기">얼치기를 변호하기</h3>
+<p>결국 이덕하 식의 이론 만들기는 어설픈 과학, 미성숙한 과학이라고 볼 수는 있지만 결코 과학이 아니라고까지 주장할 수는 없다. 그럼에도 불구하고 여전히 이런 생각이 들 수 있다. 과연 이렇게까지 해서 이덕하 같은 얼치기를 변호해야 하는가? 이덕하가 예전에 쓴 글에는 오류도 많은데, 이제는 입문서까지 쓰겠다고 나선다. 과연 이게 용납될 수 있는 활동인가?</p>
+<p>이에 관해서는 <a href="https://blog.hongminhee.org/2013/04/07/47304560922/">이어지는 글</a>에서 집중적으로 다루려고 한다.</p>
+<script src="//platform.twitter.com/widgets.js" charset="utf-8" type="text/javascript"></script>
+<section class="footnotes">
+<hr />
+<ol>
+<li id="fn1"><p>대화는 2013-04-05T20:14:02+09:00–2013-04-06T00:43:04+09:00에 한 차례 있었고, 2013-04-06T12:38:52+09:00–2013-04-06T14:50:48+09:00에 또 한 차례 있었다. 실제 대화 기록이 궁금하고 해당 채널 로그에 접근할 수 있는 사람들은 로그를 찾아보면 된다. 참고로 곁가지가 훨씬 많다.<a href="#fnref1">↩</a></p></li>
+<li id="fn2"><p>요약하자면 이렇다. 이덕하는 많은 회원수를 보유한 <a href="http://cafe.daum.net/Psychoanalyse">진화심리학 팬카페</a>와 검색엔진에서 잘 걸리는 <a href="http://sf1856.egloos.com/">진화심리학 블로그</a>를 운영하고 있는데, 이전부터 심리학을 공부하지 않은 어린 학생들에게 자신의 글을 많이 노출시키고 있었다. 이에 관해 Bayesian 님은 <a href="http://bayes.egloos.com/3028773">이덕하가 과학에 필수적이라고 할 수 있는 경험적 증거를 제시하지 못한채 가설 생성만 하고 있으므로 비과학적이라는 비판</a>을 했다. 또한 이덕하가 결코 진화심리학의 전문가라 할 수 없다고 평하며, 따라서 <a href="http://bayes.egloos.com/3028817">입문서를 쓰는 것도 반대</a>했다. Bayesian 님이 강조하는 전문 과학자의 요건은 동료 과학자로부터의 학술지 논문 심사(peer review)인데, 이덕하는 동료 과학자의 리뷰도 없이 틀릴 수도 있는 내용들을 버젓이 유포하고 있다는 것이다. 이덕하는 이에 관해 자신이 학위 등이 없기 때문에 <a href="http://bayes.egloos.com/3028945#1942866">그럴 수 있는 기회가 주어져 있지 않다</a>고 변론했다. Bayesian 님은 <a href="http://bayes.egloos.com/3028953">인터넷 상의 블로그 포스팅에는 잘못된 내용이 있더라도 전문가의 <q>혹독한 비평</q> 같은 것은 받을 수 없을 것</a>이라고 주장한다.<a href="#fnref2">↩</a></p></li>
+</ol>
+</section>
+
+    
+  </article>
+
+
+    <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-54324071-2', 'auto');
+    ga('send', 'pageview');
+    </script>
+  </body>
+</html>
+
+
+

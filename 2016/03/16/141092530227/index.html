@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8">
+    
+  
+    
+      <link rel="canonical" href="https://blog.hongminhee.org/2016/03/16/141092530227/">
+      <meta property="og:url" content="https://blog.hongminhee.org/2016/03/16/141092530227/">
+    
+  
+  
+  <meta name="description" value="">
+  <meta name="twitter:card" content="summary">
+  <meta property="og:locale" content="ko_KR">
+  <meta property="og:site_name" content="洪民憙 블로그">
+  <meta property="og:type" content="article">
+  
+    <meta name="twitter:title" content="프로토콜이 간단하다는 말의 의미">
+    <meta property="og:title" content="프로토콜이 간단하다는 말의 의미">
+  
+  <meta name="twitter:description" content="어떤 표준 명세가 길고 복잡하다는 것과, 그 표준이 활용하기에 복잡하다는 것은 실무에서 꽤나 분리된 이야기다. HTTP를 바닥부터 구현하려면 할 게 매우 많다는 것은 자명하다. 하지만 HTTP를 활용하기 위해 HTTP를 직접 구현할 사람이 얼마나 되겠는가? …">
+  <meta property="og:description" content="어떤 표준 명세가 길고 복잡하다는 것과, 그 표준이 활용하기에 복잡하다는 것은 실무에서 꽤나 분리된 이야기다. HTTP를 바닥부터 구현하려면 할 게 매우 많다는 것은 자명하다. 하지만 HTTP를 활용하기 위해 HTTP를 직접 구현할 사람이 얼마나 되겠는가? …">
+  <meta property="og:updated_time"
+        content="2016-03-16T00:40:02+09:00">
+  
+      <title>프로토콜이 간단하다는 말의 의미 &mdash; 洪民憙 블로그</title>
+      <link rel="alternate" type="application/atom+xml" title="洪民憙 블로그"
+            href="https://blog.hongminhee.org/feed.xml">
+      <meta name="author" content="홍민희">
+      <link rel="stylesheet" media="screen"
+            href="https://blog.hongminhee.org/static/style.css">
+      <link rel="stylesheet" type="text/css"
+        href="https://spoqa.github.io/spoqa-han-sans/css/SpoqaHanSans-kr.css">
+      <link rel="stylesheet" type="text/css"
+        href="https://spoqa.github.io/spoqa-han-sans/css/SpoqaHanSans-jp.css">
+      <meta name="viewport" content="width=device-width, user-scalable=no">
+      <meta name="twitter:creator" content="@hongminhee">
+      <meta name="twitter:site" content="@hongminhee">
+      <meta property="article:author"
+            content="https://www.facebook.com/hongminhee">
+    
+
+  </head>
+  <body class=" post-page">
+    
+  
+      <header>
+        
+          <a href="https://blog.hongminhee.org/index.html" class="site-name">
+              <ruby>洪民憙 <rp>(</rp><rt>홍민희</rt><rp>)</rp></ruby>
+              블로그
+            </a>
+          <nav>
+            <a href="https://hongminhee.org/" rel="author me">본인 소개</a>
+            <div class="archive">
+              아카이브:
+              <ul>
+                
+                  <li><a href="https://blog.hongminhee.org/2017/">2017</a></li>
+                
+                  <li><a href="https://blog.hongminhee.org/2016/">2016</a></li>
+                
+                  <li><a href="https://blog.hongminhee.org/2015/">2015</a></li>
+                
+                  <li><a href="https://blog.hongminhee.org/2014/">2014</a></li>
+                
+                  <li><a href="https://blog.hongminhee.org/2013/">2013</a></li>
+                
+              </ul>
+            </div>
+          </nav>
+        
+      </header>
+
+      <ul class="disclaimer">
+        <li>글을 썼을 당시의 주장에 제 스스로가 더이상 동의하지 못하는
+            경우도 있습니다.</li>
+        <li>심지어 몇몇 글은 이제 정 반대의 의견을 가지고 있기도 합니다.</li>
+        <li>지금까지 여러 주제에 대한 의견이 꾸준히 달라졌습니다.
+            앞으로도 그럴 것입니다.</li>
+        <li>따라서 제 생각을 바꾸기 위한 설득도 환영합니다.
+            저는 의견을 바꿀 의향이 있습니다.</li>
+      </ul>
+    
+
+  <article>
+    
+      <time datetime="2016-03-16T00:40:02+09:00">2016년 3월 16일</time>
+    
+
+    
+      <h1 id="프로토콜이-간단하다는-말의-의미">프로토콜이 간단하다는 말의 의미</h1>
+<blockquote>
+<p><a href="https://medium.com/@paulcolomiets/the-future-of-asynchronous-io-in-python-ce200536d847">The HTTP must not be used for internal messaging as it’s easy, but not simple, quite the contrary it’s complicated protocol with 5 RFCs describing only basics. And misunderstanding smallest part of spec may lead to a security vulnerability.</a> (via <a href="http://blog.materialistic.kr/post/141087802693">Materialistic</a>)</p>
+</blockquote>
+<p>어떤 표준 명세가 길고 복잡하다는 것과, 그 표준이 <em>활용하기에</em> 복잡하다는 것은 실무에서 꽤나 분리된 이야기다. HTTP를 바닥부터 구현하려면 할 게 매우 많다는 것은 자명하다. 하지만 HTTP를 활용하기 위해 HTTP를 직접 구현할 사람이 얼마나 되겠는가?</p>
+<p>구조의 복잡함이란 구조를 위해 우리가 갖추고 있는 재료(primitives)에 상대적으로 평가되는 것이다. <a href="https://blog.hongminhee.org/2012/04/13/capabilities-primitives-and-levels/">예전에 썼던 글</a>을 끌고 오자면,</p>
+<blockquote>
+<p>관계형 데이터베이스가 고수준이라는 것은 우리가 현대에 사용하고 있는 전자 컴퓨터가 제공하는 프리미티브 위에서 복잡하게 구현해야 한다는 것을 뜻한다. 전자 컴퓨터가 제공하는 프리미티브는 우리가 수준<a href="#fn1" class="footnoteRef" id="fnref1"><sup>1</sup></a>을 얘기할 때 생략되지만 암시적으로 가리키는 것이다. CSS 렌더링 엔진은 Linux보다 고수준이다. 하지만 JavaScript 프로그래머 입장에서는 CSS 렌더링은 프리미티브에 한없이 가까운 저수준이며 <a href="http://bellard.org/jslinux/">jslinux</a>는 매우 고수준의 달성 과제이다. 전자 컴퓨터 위에서 구현하는 간단한 트리는 관계형 데이터베이스보다 훨씬 저수준이지만, 당연히 관계형 데이터베이스 위에서 nested set model로 구현하는 트리는 아무 것도 하지 않아도 이미 그 자리에 있는 관계형 데이터베이스에 비해 고수준이다.</p>
+</blockquote>
+<p>HTTP는 클라우드 시대의 TCP가 되어버렸고, 현대의 프로그래밍 언어들은 HTTP 통신을 마치 파일 입출력 다음으로 흔한 것처럼 대우해준다. 요즈음 실무에서 네트워크 프로그래밍을 하려는데 HTTP만큼 프리미티브로 취급되는 빌딩 블럭도 소켓을 제외하면 찾기 힘들 것이다.</p>
+<p>HTTP의 RFC 명세가 길고 복잡한데도 간단하다고 말하는 것은, IBM 호환 PC가 복잡한 물리적 구성요소로 이루어져 있음에도 구성하기에 간단하다고 하는 것과 비슷한 표현이다.</p>
+<section class="footnotes">
+<hr />
+<ol>
+<li id="fn1"><p>고수준이다 혹은 저수준이다 말할 때의 수준을 뜻한다.<a href="#fnref1">↩</a></p></li>
+</ol>
+</section>
+
+    
+  </article>
+
+
+    <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-54324071-2', 'auto');
+    ga('send', 'pageview');
+    </script>
+  </body>
+</html>
+
+
+

@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8">
+    
+  
+    
+      <link rel="canonical" href="https://blog.hongminhee.org/2012/01/03/15224896667/">
+      <meta property="og:url" content="https://blog.hongminhee.org/2012/01/03/15224896667/">
+    
+  
+  
+  <meta name="description" value="">
+  <meta name="twitter:card" content="summary">
+  <meta property="og:locale" content="ko_KR">
+  <meta property="og:site_name" content="洪民憙 블로그">
+  <meta property="og:type" content="article">
+  
+    <meta name="twitter:title" content="비동기 I/O 라이브러리 아이디어">
+    <meta property="og:title" content="비동기 I/O 라이브러리 아이디어">
+  
+  <meta name="twitter:description" content="요즘 gevent 등의 비동기 I/O 라이브러리들을 쓰면서 생각하고 있는 새 비동기 I/O 라이브러리 디자인 아이디어들이 있다. 일단 크게 두 라이브러리로부터 영감을 얻었다. …">
+  <meta property="og:description" content="요즘 gevent 등의 비동기 I/O 라이브러리들을 쓰면서 생각하고 있는 새 비동기 I/O 라이브러리 디자인 아이디어들이 있다. 일단 크게 두 라이브러리로부터 영감을 얻었다. …">
+  <meta property="og:updated_time"
+        content="2012-01-03T13:35:00+09:00">
+  
+      <title>비동기 I/O 라이브러리 아이디어 &mdash; 洪民憙 블로그</title>
+      <link rel="alternate" type="application/atom+xml" title="洪民憙 블로그"
+            href="https://blog.hongminhee.org/feed.xml">
+      <meta name="author" content="홍민희">
+      <link rel="stylesheet" media="screen"
+            href="https://blog.hongminhee.org/static/style.css">
+      <link rel="stylesheet" type="text/css"
+        href="https://spoqa.github.io/spoqa-han-sans/css/SpoqaHanSans-kr.css">
+      <link rel="stylesheet" type="text/css"
+        href="https://spoqa.github.io/spoqa-han-sans/css/SpoqaHanSans-jp.css">
+      <meta name="viewport" content="width=device-width, user-scalable=no">
+      <meta name="twitter:creator" content="@hongminhee">
+      <meta name="twitter:site" content="@hongminhee">
+      <meta property="article:author"
+            content="https://www.facebook.com/hongminhee">
+    
+
+  </head>
+  <body class=" post-page outdated">
+    
+  
+      <header>
+        
+          <a href="https://blog.hongminhee.org/index.html" class="site-name">
+              <ruby>洪民憙 <rp>(</rp><rt>홍민희</rt><rp>)</rp></ruby>
+              블로그
+            </a>
+          <nav>
+            <a href="https://hongminhee.org/" rel="author me">본인 소개</a>
+            <div class="archive">
+              아카이브:
+              <ul>
+                
+                  <li><a href="https://blog.hongminhee.org/2017/">2017</a></li>
+                
+                  <li><a href="https://blog.hongminhee.org/2016/">2016</a></li>
+                
+                  <li><a href="https://blog.hongminhee.org/2015/">2015</a></li>
+                
+                  <li><a href="https://blog.hongminhee.org/2014/">2014</a></li>
+                
+                  <li><a href="https://blog.hongminhee.org/2013/">2013</a></li>
+                
+              </ul>
+            </div>
+          </nav>
+        
+      </header>
+
+      <ul class="disclaimer">
+        <li>글을 썼을 당시의 주장에 제 스스로가 더이상 동의하지 못하는
+            경우도 있습니다.</li>
+        <li>심지어 몇몇 글은 이제 정 반대의 의견을 가지고 있기도 합니다.</li>
+        <li>지금까지 여러 주제에 대한 의견이 꾸준히 달라졌습니다.
+            앞으로도 그럴 것입니다.</li>
+        <li>따라서 제 생각을 바꾸기 위한 설득도 환영합니다.
+            저는 의견을 바꿀 의향이 있습니다.</li>
+      </ul>
+    
+
+  <article>
+    
+      <time datetime="2012-01-03T13:35:00+09:00">2012년 1월 3일</time>
+    
+
+    
+      
+  <p class="outdate-disclaimer">
+    이하의 글은 2012년에 쓴 것입니다. 오래된 글인 만큼, 현재의
+    생각과 전혀 다른 내용도 많이 포함되어 있고, 당시와는 상황이 많이 달라진
+    점도 있습니다. 또한, 그 당시에 잘못 알려졌던 정보도 포함되어 있을 수
+    있습니다. <em>어찌됐든 저는 제 오래된 글이 회자되는 것을 저어합니다.</em>
+    읽기에 앞서 양해를 부탁드립니다.
+  <p>
+        <h1 id="비동기-io-라이브러리-아이디어">비동기 I/O 라이브러리 아이디어</h1>
+<p>요즘 <a href="http://gevent.org/"><code>gevent</code></a> 등의 비동기 I/O 라이브러리들을 쓰면서 생각하고 있는 새 비동기 I/O 라이브러리 디자인 아이디어들이 있다. 일단 크게 두 라이브러리로부터 영감을 얻었다.</p>
+<dl>
+<dt><strong><a href="http://twistedmatrix.com/">Twisted</a></strong></dt>
+<dd>Twisted가 오래됐는데도 불구하고 여러 부분에서 봤을 때 가장 잘 디자인되어 있다. Twisted가 다 잘해둔 것들을 오히려 나중에 가서 그보다 못하게 리엔지니어링하면 안된다.
+</dd>
+<dt><strong><a href="http://gevent.org/"><code>gevent</code></a></strong></dt>
+<dd>코루틴을 이용하여 직렬적인 루틴은 CPS 없이 자연스럽게 쓸 수 있어야 한다. node.js처럼 하면 안된다.
+</dd>
+</dl>
+<p>이미 있던 것들과 전체적으로는 비슷하고, 중요한 부분만 적자면:</p>
+<ul>
+<li><p>… <del datetime="2012-01-04T00:09:40+09:00">Python 2.5에서 들어온 <a href="http://www.python.org/dev/peps/pep-0342/">강화된 제너레이터</a>(enchanged generators)는 사실 코루틴이다. CPython, PyPy, Jython 등의 여러 구현체에서 모두 쓸 수 있도록 <a href="http://pypi.python.org/pypi/greenlet">Greenlet</a> 같은 것을 쓰지 말고 강화된 제너레이터를 사용한다.</del> 그런데 좀 생각해보니 제너레이터는 다 좋은데 <code>yield</code>를 항상 써야 해서 맨 아래 항목에서 언급할 멍키패쳐를 구현할 수 없다. 대신 CPython에서는 <a href="http://pypi.python.org/pypi/greenlet">Greenlet</a>를 쓰고 Stackless Python과 PyPy에서는 <code>stackless</code> 모듈을 쓰는 방향으로 가야할 것 같다.</p></li>
+<li><p>Twisted가 세상에 존재하는 리액터/IO 루프의 공통적인 부분을 찾아서 일반적인 인터페이스를 정의한 뒤, 그 인터페이스의 다양한 구현을 포함한 것은 매우 훌륭한 결정이라고 생각한다. Twisted는 <code>select</code>, 쓰레드 <code>select</code>, IOCP, kqueue, epoll 등 뿐만 아니라 심지어 GTK, GTK 2, Qt 메인루프까지 일반 인터페이스 아래 죄다 구현해뒀다. GTK 등은 사실 GUI 애플리케이션에서 비동기 I/O를 구현하기 위해 필요한 것으로 서버 구현에서는 필요 없겠지만, 일반적인 인터페이스가 있다면 저런 것도 구현이 가능한 것이다. 그리고 라이브러리를 사용한 애플리케이션 코드는 플랫폼 이식성이 매우 높아진다.</p></li>
+<li><p>그런 가운데 <code>gevent</code>가 하듯 표준 라이브러리의 I/O 모듈을 갈아치우는 멍키패쳐를 제공해야 한다. 안 그러면 아무리 코루틴을 써도 이미 존재하는 거의 모든 라이브러리에서 블럭이 되기 때문에 자동으로 모든 코드가 동기화되어버린다.</p></li>
+</ul>
+<p>요는 Twisted의 이식성과 <code>gevent</code>의 사용성 모두가 필요하다는 것. 아직 아이디어 수준이고 실제로 구현하게 될지는 아직 모르겠다.</p>
+
+        <script>
+        (function () {
+          var ps = document.getElementsByClassName('outdate-disclaimer');
+          if (ps.length < 1) {
+            return;
+          }
+          var p = ps[0], t = document.createElement('span');
+          t.addEventListener('click', function () {
+            this.parentNode.removeChild(this);
+            var gs = document.getElementsByClassName('outdate-gray-out');
+            for (var i = gs.length - 1; i >= 0; --i) {
+              gs[i].className = gs[i].className.replace(
+                /(^|\s)outdate-gray-out(\s|$)/g, '');
+            }
+          });
+          t.className = 'toggler';
+          t.innerText = '읽기';
+          p.appendChild(t);
+          var e = p.nextSibling;
+          while (e !== null && e !== undefined) {
+            if (e.nodeType === 1) {
+              e.className += ' outdate-gray-out';
+            }
+            e = e.nextSibling;
+          }
+        })();
+        </script>
+      
+    
+  </article>
+
+
+    <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', 'UA-54324071-2', 'auto');
+    ga('send', 'pageview');
+    </script>
+  </body>
+</html>
+
+
+
